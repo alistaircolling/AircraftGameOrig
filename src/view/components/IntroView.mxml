@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:s="library://ns.adobe.com/flex/spark">
+		<s:VGroup width="100%" height="100%" 
+				  paddingTop="20"
+				  paddingBottom="20"
+				  paddingRight="20"
+				  paddingLeft="20"
+				  horizontalAlign="center">
+			<s:Label text="I AM THE INTRO VIEW TITLE" id="textA"/>
+			<s:Label text="I am the product name" />
+			<s:TextArea id="introText" width="300" height="200"
+						text="This is the introduction instructions..........Morbi non erat non ipsum pharetra tempus. Donec orci. Proin in ante. Pellentesque sit amet purus. Cras egestas diam sed ante. Etiam imperdiet urna sit amet risus. Donec ornare arcu id erat. Aliquam ultrices scelerisque sem. In elit nulla, molestie vel, ornare sit amet, interdum vel, mauris. Etiam dignissim imperdiet metus."/>
+			<s:Button id="start" label="Start"/>
+		</s:VGroup>
+</mx:Canvas>

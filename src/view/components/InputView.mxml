@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" xmlns:components="view.components.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import model.vo.InputDataVO;
+			
+			
+			public function setData( vo:InputDataVO ):void{
+				
+				budgetIndicator.budget = Number(vo.budget);
+				inputPanel.budget = Number(vo.budget);
+				inputPanel.sparesBottom = Number(vo.sparesMin);
+				inputPanel.sparesInc = Number(vo.sparesInc);
+				inputPanel.sparesInit = 0;
+				
+				//todo make a numeric stepper custom component that is passed the vector of input objects and adjusts its own display
+				//and also stores the cost of the current value
+			}
+			
+		]]>
+	</fx:Script>
+	<s:Group width="100%" height="100%">
+		<components:BudgetIndicator id="budgetIndicator" left="10" bottom="10"/>
+		<components:InputPanel id="inputPanel" bottom="10" horizontalCenter="0"/>
+	</s:Group>
+</s:Group>

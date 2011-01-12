@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600"
+			   xmlns:components="view.components.*" xmlns:local="*">
+
+
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			public var msg:String;
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<local:ProjectContext contextView="{this}"/>
+	</fx:Declarations>
+	
+	<s:VGroup>
+		<s:Panel>
+				<s:HGroup>
+					<s:Label id="lbl" text="{msg}"/>
+					<s:TextInput id="tIn" text="enter text here"/>
+					<s:Button id="btn" label="click me"/>
+				</s:HGroup>
+		</s:Panel>
+		<components:IntroView id="exampleComponent"/>
+	</s:VGroup>
+</s:Application>

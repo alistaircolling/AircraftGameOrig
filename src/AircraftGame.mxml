@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*" xmlns:local="*"
+					   creationComplete="windowedapplication1_creationCompleteHandler(event)"
+					   width="800" height="600"
+					   >
+	<fx:Style source="AircraftGame.css"/>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import signals.ChangeState;
+
+			private var context:ProjectContext;
+			
+			protected function windowedapplication1_creationCompleteHandler(event:FlexEvent):void
+			{
+				context = new ProjectContext(this, true);
+				updateState(ChangeState.INTRO_SCREEN);
+			}
+			
+			
+			public function updateState( s:String ):void{
+				
+				currentState = s;
+				
+			}
+
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- <local:ProjectContext contextView="{this}"/> -->
+	</fx:Declarations>
+	<s:states>
+		<s:State name="intro" />
+		<s:State name="enter" />
+		<s:State name="results" />
+		<s:State name="final" />
+	</s:states>
+	<components:InputView id="inputView" includeIn="enter, intro"/>
+	<components:IntroView id="introView" includeIn="intro"/>
+	
+	<components:LeaderBoard id="leaderBoard"
+							includeIn="intro, enter, results, final"
+							visible="false"
+							right="30"
+							top="30"
+							/>
+	<s:Label id="statusLabel" fontSize="20" fontWeight="bold" bottom="5" right="5" backgroundColor="0xcccccc" />
+</s:WindowedApplication>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="70" height="200">
+	<fx:Script>
+		<![CDATA[
+			
+			[Bindable]
+			public var budget:Number = 0;
+			
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	<s:Graphic width="50" height="150">
+		<s:Rect >
+			<s:fill>
+				<s:SolidColor color="0xE2BD29"/>
+			</s:fill>
+		</s:Rect>
+	</s:Graphic>
+	<s:Label id="label" text="£{budget}" fontSize="18" fontWeight="bold" horizontalCenter="0"/>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+</s:Group>
