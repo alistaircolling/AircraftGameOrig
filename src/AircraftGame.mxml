@@ -39,7 +39,7 @@
 		<s:State name="results" />
 		<s:State name="final" />
 	</s:states>
-	<components:InputView id="inputView" includeIn="enter, intro"/>
+	<components:InputView id="inputView" includeIn="enter, intro"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
 	<components:IntroView id="introView" includeIn="intro"/>
 	
 	<components:LeaderBoard id="leaderBoard"

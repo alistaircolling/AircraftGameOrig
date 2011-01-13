@@ -7,10 +7,10 @@ package model.vo
 		public var budget:Number;
 		public var iteration:int;
 		
-		public var currentReliability:Number;
+		public var currentReliability:InputObjectVO;
 		public var currentSpares:Number;
-		public var currentTuranaround:Number;
-		public var currentNFF:Number;
+		public var currentTuranaround:InputObjectVO;
+		public var currentNFF:InputObjectVO;
 		
 		public var sparesMin:Number;
 		public var sparesInc:Number;

@@ -19,7 +19,7 @@ package services
 		[Inject]
 		public var statusUpdate:StatusUpdate;
 		
-		var _timer:Timer;   //todo remove timer as this is for testing only
+		private var _timer:Timer;   //todo remove timer as this is for testing only
 		
 		public function requestInitialData():void{
 			statusUpdate.dispatch("black box requesting initial data.....");
@@ -34,6 +34,19 @@ package services
 			
 		}
 		
+		private function getVOFromVector( n:Number, vector:Vector.<InputObjectVO> ):InputObjectVO{
+			var retVO:InputObjectVO;
+			var inputObjVO:InputObjectVO;
+			for each(inputObjVO in vector){
+				if (inputObjVO.value == n){
+					retVO = inputObjVO;					
+				}
+			}
+			if (retVO ==null){
+				trace("NO VALUE MATCHES !!!!!! error in blackboxservice");
+			}
+			return retVO;
+		}
 		
 		private function dataReceived():void{
 			statusUpdate.dispatch("black box data received");
@@ -43,39 +56,47 @@ package services
 			
 			vo.budget = 100000;
 			vo.iteration = 0;
-			vo.currentReliability = 43;
-			vo.currentTuranaround = 24;
-			vo.currentNFF = 5.6;
-			vo.currentSpares = 100;
+			
 			vo.sparesInc = .4;
 			vo.sparesMin = 0;
+			
 			
 			//iterate through the values 
 			var reliability:Vector.<InputObjectVO> = new Vector.<InputObjectVO>();
 			for (var i:uint = 0; i<5; i++){
 				var obj:InputObjectVO = new InputObjectVO();
-				obj.cost = i*2;
-				obj.value = i*9;
+				obj.cost = i*10;
+				obj.value = i;
+				obj.theIndex = i;
 				reliability.push(obj);
 			}
 
 			var nff:Vector.<InputObjectVO> = new Vector.<InputObjectVO>();
 			for (i = 0; i<5; i++){
-				obj = new InputObjectVO();
-				obj.cost = i*1;
-				obj.value = i*8;
-				nff.push(obj);
+				var nffObj:InputObjectVO = new InputObjectVO();
+				nffObj.cost = i*10;
+				nffObj.value = i;
+				nffObj.theIndex = i;
+				nff.push(nffObj);
 				
 			}
 			
 			var turnaround:Vector.<InputObjectVO> = new Vector.<InputObjectVO>();
 			for (i=0; i<5; i++){
-				obj = new InputObjectVO();
-				obj.cost = i*3;
-				obj.value = i*11;
-				turnaround.push(obj);				
+				var ipvo:InputObjectVO = new InputObjectVO();
+				ipvo = new InputObjectVO();
+				ipvo.cost = i*10;
+				ipvo.value = i;
+				ipvo.theIndex = i;
+				turnaround.push(ipvo);				
 			}
 			
+			vo.currentReliability = getVOFromVector(1, reliability);
+			vo.currentTuranaround = getVOFromVector(2, turnaround);
+			vo.currentNFF = getVOFromVector(3, nff);
+			vo.currentSpares = 100;
+			
+			//set the vectors
 			vo.nff = nff;
 			vo.reliability = reliability;
 			vo.turnaround = turnaround;

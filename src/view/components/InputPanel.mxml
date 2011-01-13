@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="450" height="300">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="450" height="300" xmlns:components="view.components.*">
 	<s:layout>
 		<s:VerticalLayout/>
 	</s:layout>
@@ -9,13 +9,33 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import model.vo.InputObjectVO;
 			
 			[Bindable]
-			public var sparesInit:Number;
+			public var sparesInit:Number = -1;
 			[Bindable]
 			public var sparesInc:Number = .5;
 			[Bindable]
-			public var sparesBottom:Number = 0;
+			public var sparesBottom:Number = -1;
+			[Bindable]
+			public var reliablityVal:InputObjectVO;
+			[Bindable]
+			public var sparesVal:InputObjectVO;
+			//current values
+			[Bindable]
+			public var nffVal:InputObjectVO;
+			[Bindable]
+			public var turnaroundVal:InputObjectVO;
+			
+			//vectors for lookup tables
+			[Bindable]
+			public var reliabilityValues:Vector.<InputObjectVO>;
+			[Bindable]
+			public var nffValues:Vector.<InputObjectVO>;
+			[Bindable]
+			public var turnaroundValues:Vector.<InputObjectVO>;
+			
+			//TODO add function to calculate spares based on the minimum and max value (based on budget)
 			
 			public var budget:Number;
 			
@@ -37,36 +57,9 @@
 		<s:VGroup width="380" height="100%" >
 			<s:Label id="title" text="Support Options" fontWeight="bold" left="10" top="10"/>
 			<mx:Spacer height="10"/>
-			<s:Group width="380" height="40">
-				<s:HGroup>
-					<s:Label text="Spares"/>
-					<s:Label text="No" fontStyle="italic"/>
-				</s:HGroup>
-				<s:NumericStepper id="spares" right="0" stepSize="{sparesInc}" minimum="{sparesBottom}" value="{sparesInit}" click="spares_clickHandler(event)"/>
-			</s:Group>
-			<s:Group width="380" height="40">
-				<s:HGroup>
-					<s:Label text="Reduce NFF"/>
-					<s:Label text="%" fontStyle="italic"/>
-				</s:HGroup>
-				<s:NumericStepper id="nff" right="0"/>
-			</s:Group>
-			<s:Group width="380" height="40">
-				<s:HGroup>
-					<s:Label text="Improve Reliability MTBF"/>
-					<s:Label text="No" fontStyle="italic"/>
-				</s:HGroup>
-				<s:NumericStepper id="reliability" right="0"/>
-			</s:Group>
-			<s:Group width="380" height="40">
-				<s:HGroup>
-					<s:Label text="Reduce Repair Turnaround Time"/>
-					<s:Label text="Days" fontStyle="italic"/>
-				</s:HGroup>
-				<s:NumericStepper id="turnaround" right="0"/>
-			</s:Group>
-			<mx:Spacer height="20"/>
-			<s:Button id="go" label="Go" click="go_clickHandler(event)"/>
+			
+			<components:CustomStepper id="nff" title="nff" currVal="{nffVal}" values="{nffValues}" />
+			
 		</s:VGroup>
 		
 	</s:SkinnableContainer>

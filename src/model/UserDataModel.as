@@ -17,6 +17,7 @@ package model
 		[Inject]
 		public var changeState:ChangeState;
 		
+		
 		private var _vo:InputDataVO;
 		private var _stage:int; /* -1 intro, 
 									0 entering first round, 1 showing first round, 
@@ -44,7 +45,7 @@ package model
 		public function set vo(value:InputDataVO):void
 		{
 			_vo = value;
-			changeState.dispatch(ChangeState.ENTER_SCREEN);
+			changeState.dispatch(ChangeState.ENTER_SCREEN); 
 			//dispatch after so the mediator is instantiated
 			userDataSet.dispatch(_vo);
 			

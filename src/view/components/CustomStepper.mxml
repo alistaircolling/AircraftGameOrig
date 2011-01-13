@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="380" height="40">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import events.NumberEvent;
+			
+			import model.vo.InputObjectVO;
+			
+			private var _currVal:InputObjectVO;
+			[Bindable]
+			public var title:String;
+			[Bindable]
+			public var values:Vector.<InputObjectVO>;
+			
+			
+			private var _currIndex:uint; //used to store the index of the stepper
+			
+			private var _currBalance:Number;
+			
+			
+			public function get currVal():InputObjectVO
+			{
+				return _currVal;
+			}
+
+			public function set currVal(value:InputObjectVO):void
+			{
+				_currVal = value;
+				//set the value
+				valLabel.text = _currVal.value.toString();
+				//set the index
+				_currIndex = value.theIndex;
+			}
+			
+			protected function down_clickHandler(event:MouseEvent):void
+			{
+				var oldCost:Number = (values[_currIndex] as InputObjectVO).cost;
+				if (_currIndex>0){
+					_currIndex--;
+					currVal = values[_currIndex];
+				}
+				var newCost:Number = (values[_currIndex] as InputObjectVO).cost;
+				updateBalance(oldCost - newCost);
+			}
+			
+			private function updateBalance( n:Number ):void{
+				if (n!=0){
+					var e:NumberEvent = new NumberEvent(NumberEvent.BALANCE_UPDATE,	n);
+				}
+			}
+			
+			private function getCurrentVal():String{
+				
+				return currVal.value.toString()
+			}
+			
+			protected function up_clickHandler(event:MouseEvent):void
+			{
+				var oldCost:Number = (values[_currIndex] as InputObjectVO).cost;
+				if (_currIndex<values.length){
+					_currIndex++;
+					currVal = values[_currIndex];
+				}
+				var newCost:Number = (values[_currIndex] as InputObjectVO).cost;
+				updateBalance(oldCost-newCost);
+			}
+			
+		]]>
+	</fx:Script>
+	<s:HGroup>
+		<s:Label text="{title}"/>
+		<s:Label text="%" fontStyle="italic"/>
+		<s:Label id="valLabel" text="---"/>
+		<s:Button id="down" label="down" click="down_clickHandler(event)"/>
+		<s:Button id="up" label="up" click="up_clickHandler(event)"/>
+	</s:HGroup>
+	
+	
+</s:Group>

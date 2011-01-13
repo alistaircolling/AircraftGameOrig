@@ -12,11 +12,17 @@
 			
 			public function setData( vo:InputDataVO ):void{
 				
-				budgetIndicator.budget = Number(vo.budget);
-				inputPanel.budget = Number(vo.budget);
-				inputPanel.sparesBottom = Number(vo.sparesMin);
-				inputPanel.sparesInc = Number(vo.sparesInc);
+				budgetIndicator.budget = vo.budget;
+				inputPanel.budget = vo.budget;
+				inputPanel.sparesBottom = vo.sparesMin;
+				inputPanel.sparesInc = vo.sparesInc;
 				inputPanel.sparesInit = 0;
+				inputPanel.reliablityVal = vo.currentReliability;
+				inputPanel.turnaroundVal = vo.currentTuranaround;
+				inputPanel.nffVal = vo.currentNFF;
+				inputPanel.reliabilityValues = vo.reliability;
+				inputPanel.turnaroundValues = vo.turnaround;
+				inputPanel.nffValues = vo.nff;
 				
 				//todo make a numeric stepper custom component that is passed the vector of input objects and adjusts its own display
 				//and also stores the cost of the current value

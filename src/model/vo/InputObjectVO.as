@@ -5,6 +5,7 @@ package model.vo
 		//used for user input iterations
 		public var value:Number;
 		public var cost:Number;
+		public var theIndex:uint;
 		
 	}
 }

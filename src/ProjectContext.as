@@ -30,6 +30,7 @@ package
 	import signals.StartClicked;
 	import signals.StatusUpdate;
 	import signals.TextSetOnModel;
+	import signals.UpdateBalance;
 	import signals.UserDataSet;
 	
 	import view.components.InputView;
@@ -69,6 +70,7 @@ package
 			injector.mapSingleton(ChangeState);
 			injector.mapSingleton(UserDataSet);
 			injector.mapSingleton(StatusUpdate);
+			injector.mapSingleton(UpdateBalance);
 			
 			
 			//map services
