@@ -18,6 +18,7 @@
 			[Bindable]
 			public var values:Vector.<InputObjectVO>;
 			
+			//TODO check how values work e.g. what is the value that is displayed in the stepper? if it is the current value is that then duplicated as the expected amount the user will have again and automaticaly deducted from the budget- surely the blackbox would have done this already, if so what should the default setting be on the stepper?
 			
 			private var _currIndex:uint; //used to store the index of the stepper
 			
@@ -52,6 +53,7 @@
 			private function updateBalance( n:Number ):void{
 				if (n!=0){
 					var e:NumberEvent = new NumberEvent(NumberEvent.BALANCE_UPDATE,	n);
+					dispatchEvent(e);
 				}
 			}
 			
@@ -63,7 +65,7 @@
 			protected function up_clickHandler(event:MouseEvent):void
 			{
 				var oldCost:Number = (values[_currIndex] as InputObjectVO).cost;
-				if (_currIndex<values.length){
+				if (_currIndex<values.length-1){
 					_currIndex++;
 					currVal = values[_currIndex];
 				}

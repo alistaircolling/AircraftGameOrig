@@ -28,6 +28,12 @@
 				//and also stores the cost of the current value
 			}
 			
+			public function showBalance( n:Number ):void{
+				
+				budgetIndicator.budget = n;
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<s:Group width="100%" height="100%">

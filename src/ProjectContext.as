@@ -4,6 +4,7 @@ package
 	import controllers.ServiceSetCommand;
 	import controllers.StartClickedCommand;
 	import controllers.StoreSettingsXMLCommand;
+	import controllers.UpdateBalanceCommand;
 	
 	import flash.display.DisplayObjectContainer;
 	
@@ -20,6 +21,7 @@ package
 	import services.CompiledXMLService;
 	import services.LeaderBoardService;
 	
+	import signals.BalanceSet;
 	import signals.ChangeState;
 	import signals.ErrorReceived;
 	import signals.LeaderBoardSet;
@@ -71,6 +73,7 @@ package
 			injector.mapSingleton(UserDataSet);
 			injector.mapSingleton(StatusUpdate);
 			injector.mapSingleton(UpdateBalance);
+			injector.mapSingleton(BalanceSet);
 			
 			
 			//map services
@@ -81,6 +84,7 @@ package
 			signalCommandMap.mapSignalClass(SettingsXMLLoaded, StoreSettingsXMLCommand);
 			signalCommandMap.mapSignalClass(SettingsUpdated, ServiceSetCommand);
 			signalCommandMap.mapSignalClass(StartClicked, StartClickedCommand);
+			signalCommandMap.mapSignalClass(UpdateBalance, UpdateBalanceCommand);
 			
 			
 			//map mediators

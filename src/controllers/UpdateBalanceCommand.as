@@ -13,7 +13,7 @@ package controllers
 		
 		override public function execute():void{
 			
-			userDataModel.vo.budget += balanceChange;
+			userDataModel.updateBalance(balanceChange);
 			
 		}
 	}

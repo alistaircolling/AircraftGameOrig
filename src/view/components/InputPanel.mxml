@@ -6,6 +6,16 @@
 		<s:VerticalLayout/>
 	</s:layout>
 	
+
+	<fx:Script>
+		<![CDATA[
+			protected function submit_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+			}
+		]]>
+	</fx:Script>
+
 	
 	<fx:Script>
 		<![CDATA[
@@ -59,7 +69,9 @@
 			<mx:Spacer height="10"/>
 			
 			<components:CustomStepper id="nff" title="nff" currVal="{nffVal}" values="{nffValues}" />
-			
+			<components:CustomStepper id="turnaround" title="turnaround" currVal="{turnaroundVal}" values="{turnaroundValues}" />
+			<components:CustomStepper id="reliability" title="reliability" currVal="{reliablityVal}" values="{reliabilityValues}" />
+			<s:Button id="submit" label="go>>>" click="submit_clickHandler(event)"/>
 		</s:VGroup>
 		
 	</s:SkinnableContainer>

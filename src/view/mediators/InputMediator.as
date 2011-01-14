@@ -6,6 +6,7 @@ package view.mediators
 	
 	import org.robotlegs.mvcs.Mediator;
 	
+	import signals.BalanceSet;
 	import signals.UpdateBalance;
 	import signals.UserDataSet;
 	
@@ -18,15 +19,25 @@ package view.mediators
 		[Inject]
 		public var userDataSet:UserDataSet;
 		[Inject]
-		public var updateBal:UpdateBalance;
+		public var updateBal:UpdateBalance;//updated by user
+		[Inject]
+		public var balanceSet:BalanceSet;//set in the model
 		
 		override public function onRegister():void{
 			trace("Input Mediator Registered");
 			userDataSet.add(setData);	
+			balanceSet.add(showBalance);
 			inputView.addEventListener(NumberEvent.BALANCE_UPDATE, updateBalance);
 			
 		}
 		
+		private function showBalance( n:Number ):void{
+			
+			inputView.showBalance(n);
+		}
+		
+		
+		//user has updated the balance
 		private function updateBalance( n:NumberEvent ):void{
 			
 			updateBal.dispatch(n.value);

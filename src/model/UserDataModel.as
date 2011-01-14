@@ -4,9 +4,12 @@ package model
 	
 	import org.robotlegs.mvcs.Actor;
 	
+	import signals.BalanceSet;
 	import signals.ChangeState;
 	import signals.StageSet;
 	import signals.UserDataSet;
+	
+	import spark.components.mediaClasses.VolumeBar;
 	
 	public class UserDataModel extends Actor
 	{
@@ -16,7 +19,9 @@ package model
 		public var stageSet:StageSet;
 		[Inject]
 		public var changeState:ChangeState;
-		
+		[Inject]
+		public var balanceSet:BalanceSet;
+
 		
 		private var _vo:InputDataVO;
 		private var _stage:int; /* -1 intro, 
@@ -31,6 +36,14 @@ package model
 			return _stage;
 		}
 
+		public function updateBalance( n:Number ):void{
+			
+			vo.budget += n;
+			balanceSet.dispatch(vo.budget);
+			
+		}
+		
+		
 		public function set stage(value:int):void
 		{
 			_stage = value;
