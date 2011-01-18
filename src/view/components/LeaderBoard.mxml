@@ -10,14 +10,24 @@
 			import model.vo.LeaderBoardVO;
 			
 			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
 			
 			[Bindable]
 			public var dp:ArrayCollection; 
 			
+
+
+
+			protected function list_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				var t:Number = 10;
+			}
+
 		]]>
 	</fx:Script>
 	<s:VGroup>
 		<s:Label text="Leader Board"/>
-		<s:List id="list" width="100%" height="100%" dataProvider="{dp}"/>
+		<s:List id="list" width="100%" height="100%" dataProvider="{dp}"  click="list_clickHandler(event)"/>
 	</s:VGroup>
 </s:Group>

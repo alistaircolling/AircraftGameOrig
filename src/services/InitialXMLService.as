@@ -84,9 +84,9 @@ package services
 			
 			//minimum values will be set on view components that the user is unable to go below and so are not referenced in the model
 			
+			userModel.iteration = 1;
 			userModel.vo = vo;
 			userModel.budget = Number(xml.currentBudget);
-			userModel.iteration = 1;
 			
 		}
 		

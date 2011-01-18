@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:s="library://ns.adobe.com/flex/spark">
-		<s:VGroup width="100%" height="100%" 
-				  paddingTop="20"
-				  paddingBottom="20"
-				  paddingRight="20"
-				  paddingLeft="20"
-				  horizontalAlign="center">
-			<s:Label text="Welcome" id="textA"/>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:components="view.components.*">
+	<s:Panel width="570" height="340" horizontalCenter="0" verticalCenter="0"
+			 title="Welcome">
+		
+		<s:VGroup horizontalAlign="center" horizontalCenter="0" verticalCenter="0">
 			
-			
-			<s:TextArea id="introText" width="300" height="200"
+			<s:TextArea id="introText" width="300" height="200" horizontalCenter="0"
 						text="-You manage a fleet of aircraft&#13;-You can control 4 variables&#13;-You have 3 turns"></s:TextArea>
-			<s:Button id="start" label="Go"/>
+			<s:Button id="start" label="Go" left="10" bottom="10"/>
 		</s:VGroup>
+		<components:LeaderBoard id="leaderboardIntro" right="-60" top="10" />
+	</s:Panel>
 </mx:Canvas>

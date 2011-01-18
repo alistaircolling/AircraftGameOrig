@@ -2,8 +2,14 @@ package view.mediators
 {
 	import flash.events.MouseEvent;
 	
+	import model.vo.LeaderBoardVO;
+	import model.vo.UserVO;
+	
+	import mx.collections.ArrayCollection;
+	
 	import org.robotlegs.mvcs.Mediator;
 	
+	import signals.LeaderBoardSet;
 	import signals.StartClicked;
 	import signals.TextSetOnModel;
 	
@@ -17,6 +23,8 @@ package view.mediators
 		public var startClicked:StartClicked;
 		[Inject]
 		public var textSetOnModel:TextSetOnModel;
+		[Inject]
+		public var leaderBoardSet:LeaderBoardSet;
 		
 		
 		override public function onRegister():void{
@@ -31,12 +39,19 @@ package view.mediators
 			
 			//add listener for signal
 			textSetOnModel.add(onModelChanged);
+			leaderBoardSet.add(updateLeaderBoard);
+		}
+		
+		private function updateLeaderBoard( vo:LeaderBoardVO ):void{
+			
+			introView.leaderboardIntro.dp = vo.winners;
+			
 		}
 		
 		//be sure to pass the corect data type of the signal
 		public function onModelChanged(__s:String):void{
 			
-			(viewComponent as IntroView).textA.text = __s;
+		//	(viewComponent as IntroView).textA.text = __s;
 			
 		}
 		
@@ -44,7 +59,7 @@ package view.mediators
 			
 			//get data from this box
 			
-			var __s:String = (viewComponent as IntroView).textA.text 	
+		//	var __s:String = (viewComponent as IntroView).textA.text 	
 			
 			//send signal
 			startClicked.dispatch();

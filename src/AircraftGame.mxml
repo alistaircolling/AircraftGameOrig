@@ -24,6 +24,17 @@
 			public function updateState( s:String ):void{
 				
 				currentState = s;
+				//add any additional logic here
+				switch(currentState){
+					case "enter":
+						inputView.visible = true;
+						break
+					default:
+						
+						break
+					
+				}
+				
 				
 			}
 
@@ -39,14 +50,8 @@
 		<s:State name="results" />
 		<s:State name="final" />
 	</s:states>
-	<components:InputView id="inputView" includeIn="enter, intro"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
+	<components:InputView id="inputView" includeIn="enter, intro" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
 	<components:IntroView id="introView" includeIn="intro"/>
 	
-	<components:LeaderBoard id="leaderBoard"
-							includeIn="intro, enter, results, final"
-							visible="false"
-							right="30"
-							top="30"
-							/>
 	<s:Label id="statusLabel" fontSize="20" fontWeight="bold" bottom="5" right="5" backgroundColor="0xcccccc" />
 </s:WindowedApplication>

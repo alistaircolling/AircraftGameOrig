@@ -6,6 +6,7 @@ package model
 	
 	import signals.BalanceSet;
 	import signals.ChangeState;
+	import signals.IterationChange;
 	import signals.StageSet;
 	import signals.UserDataSet;
 	
@@ -21,7 +22,9 @@ package model
 		public var changeState:ChangeState;
 		[Inject]
 		public var balanceSet:BalanceSet;
-
+		[Inject]
+		public var iterationChange:IterationChange;
+		
 		public var gameID:String = "12345";//TODO set the game ID somehow and store it externally
 		
 		
@@ -94,6 +97,7 @@ package model
 		public function set iteration(value:int):void
 		{
 			_iteration = value;
+			iterationChange.dispatch(_iteration);
 		}
 
 

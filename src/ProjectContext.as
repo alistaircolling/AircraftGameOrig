@@ -26,6 +26,7 @@ package
 	import signals.ChangeState;
 	import signals.DataSubmitted;
 	import signals.ErrorReceived;
+	import signals.IterationChange;
 	import signals.LeaderBoardSet;
 	import signals.LoadXML;
 	import signals.SettingsUpdated;
@@ -76,6 +77,7 @@ package
 			injector.mapSingleton(StatusUpdate);
 			injector.mapSingleton(UpdateBalance);
 			injector.mapSingleton(BalanceSet);
+			injector.mapSingleton(IterationChange);
 			
 			
 			
@@ -94,11 +96,12 @@ package
 			//map mediators
 			mediatorMap.mapView(AircraftGame, ProjectMediator);
 			mediatorMap.mapView(IntroView, IntroMediator);
-			mediatorMap.mapView(LeaderBoard, LeaderBoardMediator);
+		//no longer used as leaderboard appears multiple places	mediatorMap.mapView(LeaderBoard, LeaderBoardMediator);
 			mediatorMap.mapView(InputView, InputMediator);
 			
-		//	var lbModel:LeaderBoardService = injector.getInstance(LeaderBoardService) as LeaderBoardService;
-		//	lbModel.requestData();
+			//resuest the leaderboard
+			var lbModel:LeaderBoardService = injector.getInstance(LeaderBoardService) as LeaderBoardService;
+			lbModel.requestData();
 			
 		}
 	}

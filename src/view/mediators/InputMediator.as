@@ -5,11 +5,16 @@ package view.mediators
 	import flash.events.MouseEvent;
 	
 	import model.vo.InputVO;
+	import model.vo.LeaderBoardVO;
 	import model.vo.ReceivedDataVO;
+	
+	import mx.collections.ArrayCollection;
 	
 	import org.robotlegs.mvcs.Mediator;
 	
 	import signals.BalanceSet;
+	import signals.IterationChange;
+	import signals.LeaderBoardSet;
 	import signals.UpdateBalance;
 	import signals.UserDataSet;
 	
@@ -25,13 +30,19 @@ package view.mediators
 		public var updateBal:UpdateBalance;//updated by user
 		[Inject]
 		public var balanceSet:BalanceSet;//set in the model
+		[Inject]
+		public var leaderboardSet:LeaderBoardSet;
+		[Inject]
+		public var iterationChange:IterationChange;
 		
 		
 		override public function onRegister():void{
 			trace("Input Mediator Registered");
 			userDataSet.add(setData);	
 			balanceSet.add(showBalance);
-			inputView.addEventListener(NumberEvent.BALANCE_UPDATE, updateBalance);
+			iterationChange.add(updateIteration);
+			leaderboardSet.add(updateLeaderBoard);
+			inputView.addEventListener(NumberEvent.BALANCE_UPDATE, updateBalance);//event triggered by steppers
 			inputView.inputPanel.submit.addEventListener(MouseEvent.CLICK, goClicked);
 			
 		}
@@ -48,6 +59,19 @@ package view.mediators
 			
 		}
 		
+		private function updateIteration( n:uint ):void{
+			
+			inputView.inputPanel.turn.text = "(Turn "+n.toString()+" of 3)";
+		}
+		
+		private function updateLeaderBoard( vo:LeaderBoardVO ):void{
+			
+			var top3:Array = vo.winners.source.slice(0,3);
+			var ac:ArrayCollection = new ArrayCollection(top3);
+			inputView.leaderBoard.dp = ac;
+			
+		}
+		
 		private function showBalance( n:Number ):void{
 			
 			inputView.showBalance(n);
@@ -57,7 +81,10 @@ package view.mediators
 		//user has updated the balance
 		private function updateBalance( n:NumberEvent ):void{
 			
-			updateBal.dispatch(n.value);
+			//updateBal.dispatch(n.value);  only updates the view component now
+			var currBal:Number = inputView.inputPanel.budget;
+			var newBal:Number = currBal+n.value;
+			inputView.inputPanel.budget = Math.round(newBal*100)/100;
 			
 		}
 		
