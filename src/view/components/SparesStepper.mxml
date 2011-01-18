@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="380" height="40">
+	<fx:Script>
+		<![CDATA[
+			import events.NumberEvent;
+			
+			[Bindable]
+			public var title:String;
+			
+			public var sparesInc:Number;
+			public var costInc:Number;
+			private var _sparesCurr:Number; 
+			private var _sparesInit:Number; //value passed at the start of each turn
+			private var _budget:Number; 
+			
+			
+			
+			protected function down_clickHandler(event:MouseEvent):void{
+				//check that the value is not going below min
+				if(sparesCurr - sparesInc >= sparesInit){
+					
+					sparesCurr -= sparesInc;
+					
+				}else{
+					
+					trace("at the bottom value");
+				}
+				
+			}
+			
+			
+			protected function up_clickHandler(event:MouseEvent):void{
+				//check the upper limit of the budget
+				var maxSpares:uint = Math.floor(budget/costInc);
+				//if there is some budget left for spares increase the number
+				if (maxSpares>0){
+					
+					sparesCurr += sparesInc;
+				}else{
+					
+					trace("no budget left for spares");
+				}
+				
+				
+			}
+			
+			public function get budget():Number
+			{
+				return _budget;
+			}
+			
+			public function set budget(value:Number):void
+			{
+				_budget = value;
+				//every time the budget is set regenerate the vector for the stepper  --budget should be set after the vo
+				
+			}
+			
+			public function get sparesInit():Number
+			{
+				return _sparesInit;
+			}
+			
+			
+			public function set sparesInit(value:Number):void
+			{
+				_sparesInit = value;
+			}
+			
+			public function get sparesCurr():Number
+			{
+				return _sparesCurr;
+			}
+			
+			public function set sparesCurr(value:Number):void
+			{
+				//update the budget
+				var diff:Number = _sparesCurr - value;
+				trace("spares diff:"+diff);
+				_sparesCurr = value;
+				valLabel.text = value.toString();
+				updateBalance(diff*costInc);
+			}
+			
+			private function updateBalance( n:Number ):void{
+				if (n!=0){
+					var e:NumberEvent = new NumberEvent(NumberEvent.BALANCE_UPDATE,	n);
+					dispatchEvent(e);
+				}
+			}
+			
+			
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Group width="380">
+		<s:HGroup>
+			<s:Label text="{title}"/>
+			<s:Label text="%" fontStyle="italic"/>
+			<s:Label id="valLabel" text="---"/>
+		</s:HGroup>
+		<s:HGroup right="0">
+			<s:Button id="down" label="down" click="down_clickHandler(event)"/>
+			<s:Button id="up" label="up"  click="up_clickHandler(event)"/>
+		</s:HGroup>
+	</s:Group>
+</s:Group>

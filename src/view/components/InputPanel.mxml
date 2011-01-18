@@ -8,12 +8,7 @@
 	
 
 	<fx:Script>
-		<![CDATA[
-			protected function submit_clickHandler(event:MouseEvent):void
-			{
-				// TODO Auto-generated method stub
-			}
-		]]>
+		
 	</fx:Script>
 
 	
@@ -68,10 +63,11 @@
 			<s:Label id="title" text="Support Options" fontWeight="bold" left="10" top="10"/>
 			<mx:Spacer height="10"/>
 			
-			<components:CustomStepper id="nff" title="nff" currVal="{nffVal}" values="{nffValues}" />
+			<components:SparesStepper id="spares" title="spares" width="380"/>
+			<components:CustomStepper id="nff" title="nff" currVal="{nffVal}" values="{nffValues}" width="380"/>
 			<components:CustomStepper id="turnaround" title="turnaround" currVal="{turnaroundVal}" values="{turnaroundValues}" />
 			<components:CustomStepper id="reliability" title="reliability" currVal="{reliablityVal}" values="{reliabilityValues}" />
-			<s:Button id="submit" label="go>>>" click="submit_clickHandler(event)"/>
+			<s:Button id="submit" label="go>>>" />
 		</s:VGroup>
 		
 	</s:SkinnableContainer>

@@ -6,10 +6,11 @@
 				  paddingRight="20"
 				  paddingLeft="20"
 				  horizontalAlign="center">
-			<s:Label text="I AM THE INTRO VIEW TITLE" id="textA"/>
-			<s:Label text="I am the product name" />
+			<s:Label text="Welcome" id="textA"/>
+			
+			
 			<s:TextArea id="introText" width="300" height="200"
-						text="This is the introduction instructions..........Morbi non erat non ipsum pharetra tempus. Donec orci. Proin in ante. Pellentesque sit amet purus. Cras egestas diam sed ante. Etiam imperdiet urna sit amet risus. Donec ornare arcu id erat. Aliquam ultrices scelerisque sem. In elit nulla, molestie vel, ornare sit amet, interdum vel, mauris. Etiam dignissim imperdiet metus."/>
-			<s:Button id="start" label="Start"/>
+						text="-You manage a fleet of aircraft&#13;-You can control 4 variables&#13;-You have 3 turns"></s:TextArea>
+			<s:Button id="start" label="Go"/>
 		</s:VGroup>
 </mx:Canvas>

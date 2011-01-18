@@ -4,8 +4,9 @@ package services
 	import flash.utils.Timer;
 	
 	import model.UserDataModel;
-	import model.vo.InputDataVO;
 	import model.vo.InputObjectVO;
+	import model.vo.InputVO;
+	import model.vo.ReceivedDataVO;
 	
 	import org.robotlegs.mvcs.Actor;
 	
@@ -34,6 +35,15 @@ package services
 			
 		}
 		
+		public function sendData( vo:InputVO ):void{
+			
+			//create xml   TODO add socket connectivity
+			
+			//push to socket
+			
+			
+		}
+		
 		private function getVOFromVector( n:Number, vector:Vector.<InputObjectVO> ):InputObjectVO{
 			var retVO:InputObjectVO;
 			var inputObjVO:InputObjectVO;
@@ -52,14 +62,9 @@ package services
 			statusUpdate.dispatch("black box data received");
 			//todo  add xml parsing to populate the vo
 			
-			var vo:InputDataVO = new InputDataVO();
-			
-			vo.budget = 100000;
-			vo.iteration = 0;
-			
-			vo.sparesInc = .4;
-			vo.sparesMin = 0;
-			
+			var vo:ReceivedDataVO = new ReceivedDataVO();
+
+			vo.sparesCostInc = .4;
 			
 			//iterate through the values 
 			var reliability:Vector.<InputObjectVO> = new Vector.<InputObjectVO>();

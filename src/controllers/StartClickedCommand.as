@@ -6,6 +6,7 @@ package controllers
 	import org.robotlegs.mvcs.SignalCommand;
 	
 	import services.BlackBoxService;
+	import services.InitialXMLService;
 	import services.LeaderBoardService;
 	
 	import signals.ChangeState;
@@ -13,21 +14,23 @@ package controllers
 	public class StartClickedCommand extends SignalCommand
 	{
 	
-		[Inject]
-		public var blackBoxService:BlackBoxService;
+		//[Inject]
+		//public var blackBoxService:BlackBoxService;
 		[Inject]
 		public var leaderBoardService:LeaderBoardService;
 		[Inject]
 		public var changeState:ChangeState;
+		[Inject]
+		public var initXMLService:InitialXMLService;
 		
 		
 		
 		override public function execute():void{
 			
-			trace("start clicked command, requesting intial data from services.....");
-			blackBoxService.requestInitialData();
+			trace("start clicked command, loading intial XML.....");
+		//	blackBoxService.requestInitialData();
 			leaderBoardService.requestData();
-			
+			initXMLService.loadXML("data/initParams.xml");
 		
 		}
 		

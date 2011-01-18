@@ -1,6 +1,6 @@
 package signals
 {
-	import model.vo.InputDataVO;
+	import model.vo.ReceivedDataVO;
 	
 	import org.osflash.signals.Signal;
 	
@@ -9,7 +9,7 @@ package signals
 	public class UserDataSet extends Signal
 	{
 		public function UserDataSet(){
-			super(InputDataVO);
+			super(ReceivedDataVO);
 		}
 	
 		

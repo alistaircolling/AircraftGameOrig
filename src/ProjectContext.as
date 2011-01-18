@@ -19,10 +19,12 @@ package
 	
 	import services.BlackBoxService;
 	import services.CompiledXMLService;
+	import services.InitialXMLService;
 	import services.LeaderBoardService;
 	
 	import signals.BalanceSet;
 	import signals.ChangeState;
+	import signals.DataSubmitted;
 	import signals.ErrorReceived;
 	import signals.LeaderBoardSet;
 	import signals.LoadXML;
@@ -76,8 +78,10 @@ package
 			injector.mapSingleton(BalanceSet);
 			
 			
+			
 			//map services
 			injector.mapSingleton(CompiledXMLService);
+			injector.mapSingleton(InitialXMLService);
 			
 			//map signals   -maps signals to commands
 			signalCommandMap.mapSignalClass(LoadXML, LoadSettingsXMLCommand);

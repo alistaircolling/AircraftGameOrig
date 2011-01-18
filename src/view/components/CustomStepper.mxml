@@ -12,19 +12,18 @@
 			
 			import model.vo.InputObjectVO;
 			
-			private var _currVal:InputObjectVO;
+			public var _currVal:InputObjectVO;
 			[Bindable]
 			public var title:String;
 			[Bindable]
 			public var values:Vector.<InputObjectVO>;
 			
+			private var _switchDirection:Boolean;
 			//TODO check how values work e.g. what is the value that is displayed in the stepper? if it is the current value is that then duplicated as the expected amount the user will have again and automaticaly deducted from the budget- surely the blackbox would have done this already, if so what should the default setting be on the stepper?
 			
 			private var _currIndex:uint; //used to store the index of the stepper
 			
-			private var _currBalance:Number;
-			
-			
+			//used when the user presses go to send to the black box
 			public function get currVal():InputObjectVO
 			{
 				return _currVal;
@@ -72,16 +71,41 @@
 				var newCost:Number = (values[_currIndex] as InputObjectVO).cost;
 				updateBalance(oldCost-newCost);
 			}
+
+			public function get switchDirection():Boolean
+			{
+				return _switchDirection;
+			}
+			
+			//used to switch the direction of increments for negative steppers
+			public function set switchDirection(value:Boolean):void
+			{
+				_switchDirection = value;
+				if (_switchDirection){
+					down.addEventListener(MouseEvent.CLICK, up_clickHandler);
+					up.addEventListener(MouseEvent.CLICK, down_clickHandler);
+				}else{
+					down.addEventListener(MouseEvent.CLICK, down_clickHandler);
+					up.addEventListener(MouseEvent.CLICK, up_clickHandler);
+				}
+			}
+
 			
 		]]>
 	</fx:Script>
-	<s:HGroup>
+	<s:Group width="380">
+		<s:HGroup>
+			
 		<s:Label text="{title}"/>
 		<s:Label text="%" fontStyle="italic"/>
 		<s:Label id="valLabel" text="---"/>
-		<s:Button id="down" label="down" click="down_clickHandler(event)"/>
-		<s:Button id="up" label="up" click="up_clickHandler(event)"/>
-	</s:HGroup>
+		</s:HGroup>
+		<s:HGroup right="0">
+			
+		<s:Button id="down" label="down" />
+		<s:Button id="up" label="up" />
+		</s:HGroup>
+	</s:Group>
 	
 	
 </s:Group>
