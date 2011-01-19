@@ -27,7 +27,6 @@ package model
 		
 		public var gameID:String = "12345";//TODO set the game ID somehow and store it externally
 		
-		
 		private var _budget:Number;
 		private var _iteration:int;
 		

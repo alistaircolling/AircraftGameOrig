@@ -13,6 +13,7 @@ package view.mediators
 	import org.robotlegs.mvcs.Mediator;
 	
 	import signals.BalanceSet;
+	import signals.DataSubmitted;
 	import signals.IterationChange;
 	import signals.LeaderBoardSet;
 	import signals.UpdateBalance;
@@ -34,7 +35,8 @@ package view.mediators
 		public var leaderboardSet:LeaderBoardSet;
 		[Inject]
 		public var iterationChange:IterationChange;
-		
+		[Inject]
+		public var dataSubmitted:DataSubmitted;
 		
 		override public function onRegister():void{
 			trace("Input Mediator Registered");
@@ -51,11 +53,12 @@ package view.mediators
 			
 			//create a new VO
 			var vo:InputVO = new InputVO();
-			vo.nff = inputView.inputPanel.nff.currVal.theIndex;
+			vo.nff = inputView.inputPanel.nff.currVal.theIndex.toString();
 			//vo.spares = inputView.inputPanel.spares.currVal.theIndex;
-			vo.turnaround = inputView.inputPanel.turnaround.currVal.theIndex;
-			vo.reliability = inputView.inputPanel.reliability.currVal.theIndex;
-			vo.spares = inputView.inputPanel.spares.sparesCurr - inputView.inputPanel.spares.sparesInit; 
+			vo.turnaround = inputView.inputPanel.turnaround.currVal.theIndex.toString();
+			vo.reliability = inputView.inputPanel.reliability.currVal.theIndex.toString();
+			vo.spares = (inputView.inputPanel.spares.sparesCurr - inputView.inputPanel.spares.sparesInit).toString();
+			dataSubmitted.dispatch(vo);
 			
 		}
 		

@@ -19,9 +19,8 @@ package controllers
 		override public function execute():void{
 			
 			//add the iteration and game ID
-			vo.iteration = userModel.iteration;
+			vo.iteration = userModel.iteration.toString();
 			vo.gameID = userModel.gameID;
-			
 			blackBox.sendData(vo);
 			
 		}

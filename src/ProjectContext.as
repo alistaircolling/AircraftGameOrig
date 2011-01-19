@@ -1,9 +1,11 @@
 package 
 {
+	import controllers.BlackBoxDataReceivedCommand;
 	import controllers.LoadSettingsXMLCommand;
 	import controllers.ServiceSetCommand;
 	import controllers.StartClickedCommand;
 	import controllers.StoreSettingsXMLCommand;
+	import controllers.SubmitData;
 	import controllers.UpdateBalanceCommand;
 	
 	import flash.display.DisplayObjectContainer;
@@ -23,6 +25,7 @@ package
 	import services.LeaderBoardService;
 	
 	import signals.BalanceSet;
+	import signals.BlackBoxDataReceived;
 	import signals.ChangeState;
 	import signals.DataSubmitted;
 	import signals.ErrorReceived;
@@ -91,6 +94,8 @@ package
 			signalCommandMap.mapSignalClass(SettingsUpdated, ServiceSetCommand);
 			signalCommandMap.mapSignalClass(StartClicked, StartClickedCommand);
 			signalCommandMap.mapSignalClass(UpdateBalance, UpdateBalanceCommand);
+			signalCommandMap.mapSignalClass(DataSubmitted, SubmitData);
+			signalCommandMap.mapSignalClass(BlackBoxDataReceived, BlackBoxDataReceivedCommand);
 			
 			
 			//map mediators

@@ -2,14 +2,16 @@ package services
 {
 	import model.UserDataModel;
 	import model.vo.ErrorVO;
-	import model.vo.ReceivedDataVO;
 	import model.vo.InputObjectVO;
+	import model.vo.ReceivedDataVO;
 	
 	import mx.rpc.AsyncToken;
 	import mx.rpc.Responder;
 	import mx.rpc.http.HTTPService;
 	
 	import signals.ErrorReceived;
+	
+	import utils.DataUtils;
 
 	public class InitialXMLService implements IXMLService
 	{
@@ -29,36 +31,7 @@ package services
 			token.addResponder(responder);
 		}
 		
-		private function returnVectorFromList( xmlList:XML, initValue:Number ):Vector.<InputObjectVO>{
-			
-			//generate lookup tables
-			var retVector:Vector.<InputObjectVO> = new Vector.<InputObjectVO>();
-			var currRel:Number = initValue;//used to calculate the tables
-			for (var i:uint = 0; i<xmlList.children().length(); i++){
-				var obj:InputObjectVO = new InputObjectVO();
-				obj.cost = Number(xmlList.children()[i].@cost);
-				obj.value = currRel+Number(xmlList.children()[i].@value); //
-				obj.theIndex = i;
-				retVector.push(obj);
-			}
-			return retVector;
-		}
 		
-		
-		//returns the correct vo for the corresponding value
-		private function getObjectForValue( vector:Vector.<InputObjectVO>, n:Number ):InputObjectVO {
-			
-			var retObj:InputObjectVO;
-			for (var i:uint = 0; i<vector.length; i++){
-				
-				var obj:InputObjectVO = vector[i];
-				if (obj.value == n){
-					
-					retObj = obj;
-				}
-			}
-			return retObj;
-		}
 		
 		private function handleServiceResult(event:Object):void{
 			trace("initialise xml received");
@@ -67,20 +40,20 @@ package services
 			
 			//set lookup tables
 			var reliabList:XMLList = xml.reliability;
-			vo.reliability = returnVectorFromList( reliabList[0], Number(xml.currentReliability) );
+			vo.reliability = DataUtils.returnVectorFromList( reliabList[0], Number(xml.currentReliability) );
 			var nffList:XMLList = xml.nff;
-			vo.nff = returnVectorFromList( nffList[0], Number(xml.currentNFF) );
+			vo.nff = DataUtils.returnVectorFromList( nffList[0], Number(xml.currentNFF) );
 			var turnList:XMLList = xml.turnaround;
-			vo.turnaround = returnVectorFromList( turnList[0], Number(xml.currentTurnaround) );
+			vo.turnaround = DataUtils.returnVectorFromList( turnList[0], Number(xml.currentTurnaround) );
 			
 			vo.sparesCostInc = Number(xml..sparesCost_ea);
 			
 			//set current
 			vo.currentSpares = Number(xml.currentSpares);//used to store the current value
 			
-			vo.currentReliability = getObjectForValue( vo.reliability, Number(xml.currentReliability));
-			vo.currentNFF = getObjectForValue( vo.nff, Number(xml.currentNFF));
-			vo.currentTuranaround = getObjectForValue( vo.turnaround, Number(xml.currentTurnaround));
+			vo.currentReliability = DataUtils.getObjectForValue( vo.reliability, Number(xml.currentReliability));
+			vo.currentNFF = DataUtils.getObjectForValue( vo.nff, Number(xml.currentNFF));
+			vo.currentTuranaround = DataUtils.getObjectForValue( vo.turnaround, Number(xml.currentTurnaround));
 			
 			//minimum values will be set on view components that the user is unable to go below and so are not referenced in the model
 			
