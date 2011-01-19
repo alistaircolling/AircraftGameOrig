@@ -18,5 +18,8 @@ package model.vo
 		public var nff:Vector.<InputObjectVO>;
 		//could remove lower values from 
 		
+		//tells us if this is the initial set of data or fmor black box (dictates which screen we go to )
+		public var initialData:Boolean;
+		
 	}
 }

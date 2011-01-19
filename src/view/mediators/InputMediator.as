@@ -4,6 +4,7 @@ package view.mediators
 	
 	import flash.events.MouseEvent;
 	
+	import model.UserDataModel;
 	import model.vo.InputVO;
 	import model.vo.LeaderBoardVO;
 	import model.vo.ReceivedDataVO;
@@ -37,6 +38,8 @@ package view.mediators
 		public var iterationChange:IterationChange;
 		[Inject]
 		public var dataSubmitted:DataSubmitted;
+		[Inject]
+		public var userModel:UserDataModel;//used only to get the current iteration for submission in vo
 		
 		override public function onRegister():void{
 			trace("Input Mediator Registered");
@@ -51,6 +54,9 @@ package view.mediators
 		
 		private function goClicked( m:MouseEvent ):void{
 			
+			//increase iteration first so it is correct for submission
+			
+			
 			//create a new VO
 			var vo:InputVO = new InputVO();
 			vo.nff = inputView.inputPanel.nff.currVal.theIndex.toString();
@@ -58,6 +64,7 @@ package view.mediators
 			vo.turnaround = inputView.inputPanel.turnaround.currVal.theIndex.toString();
 			vo.reliability = inputView.inputPanel.reliability.currVal.theIndex.toString();
 			vo.spares = (inputView.inputPanel.spares.sparesCurr - inputView.inputPanel.spares.sparesInit).toString();
+			vo.iteration = (Number(userModel.iteration++)).toString();
 			dataSubmitted.dispatch(vo);
 			
 		}

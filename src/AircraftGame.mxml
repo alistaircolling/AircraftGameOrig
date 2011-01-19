@@ -53,5 +53,5 @@
 	<components:InputView id="inputView" includeIn="enter, intro" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
 	<components:IntroView id="introView" includeIn="intro"/>
 	
-	<s:Label id="statusLabel" fontSize="20" fontWeight="bold" bottom="5" right="5" backgroundColor="0xcccccc" />
+	<s:TextArea id="statusLabel" fontSize="12" bottom="5" right="5"  height="100" width="400"/>
 </s:WindowedApplication>

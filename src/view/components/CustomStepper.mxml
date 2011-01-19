@@ -35,7 +35,7 @@
 				//set the value
 				valLabel.text = _currVal.value.toString();
 				//set the index
-				_currIndex = value.theIndex;
+				//_currIndex = value.theIndex;  dont updtae the index as it should be set to 0 and is updated on clicks
 			}
 			
 			protected function down_clickHandler(event:MouseEvent):void
@@ -88,6 +88,16 @@
 					down.addEventListener(MouseEvent.CLICK, down_clickHandler);
 					up.addEventListener(MouseEvent.CLICK, up_clickHandler);
 				}
+			}
+
+			public function get currIndex():uint
+			{
+				return _currIndex;
+			}
+
+			public function set currIndex(value:uint):void
+			{
+				_currIndex = value;
 			}
 
 			

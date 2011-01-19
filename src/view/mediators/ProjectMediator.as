@@ -49,7 +49,7 @@ package view.mediators
 		
 		private function showStatus( s:String ):void{
 			
-			viewComp.statusLabel.text = s;
+			viewComp.statusLabel.text += "\n--------------\n"+s;
 		}
 		
 		private function updateState( s:String ):void{

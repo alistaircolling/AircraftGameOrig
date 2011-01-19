@@ -47,13 +47,7 @@ package model
 			
 			var newBudget:Number = budget +n;
 			budget = Math.round(newBudget*100)/100;
-			
-			//budget += n;
-			//16.2
-			
-			
-			//balanceSet.dispatch(budget);
-			
+
 		}
 		
 		
@@ -71,7 +65,15 @@ package model
 		public function set vo(value:ReceivedDataVO):void
 		{
 			_vo = value;
-			changeState.dispatch(ChangeState.ENTER_SCREEN); 
+			if (vo.initialData){
+				
+				changeState.dispatch(ChangeState.ENTER_SCREEN); //
+				
+			}else{
+				
+				changeState.dispatch(ChangeState.ENTER_SCREEN); //todo remove this as for testing to see if vals are correct
+				//changeState.dispatch(ChangeState.RESULTS_SCREEN); //testing
+			}
 			//dispatch after so the mediator is instantiated
 			userDataSet.dispatch(_vo);
 			

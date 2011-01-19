@@ -19,9 +19,16 @@
 				inputPanel.reliablityVal = vo.currentReliability;
 				inputPanel.turnaroundVal = vo.currentTuranaround;
 				inputPanel.nffVal = vo.currentNFF;
+				
+				//set new vectors
 				inputPanel.reliabilityValues = vo.reliability;
 				inputPanel.turnaroundValues = vo.turnaround;
 				inputPanel.nffValues = vo.nff;
+				//resetn current indices to 0
+				
+				inputPanel.nff.currIndex = 0;
+				inputPanel.turnaround.currIndex = 0;
+				inputPanel.reliability.currIndex = 0;
 				
 				inputPanel.nff.switchDirection = true;
 				inputPanel.turnaround.switchDirection = true;

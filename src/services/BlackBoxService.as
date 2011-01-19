@@ -69,7 +69,7 @@ package services
 		}
 		
 		private function dataReceived( s:String ):void{
-			statusUpdate.dispatch("black box data received");
+			statusUpdate.dispatch("black box data received:  \n"+s);
 			//todo  add xml parsing to populate the vo
 			var xml:XML = new XML(s);
 			bBDataReceived.dispatch(xml);
