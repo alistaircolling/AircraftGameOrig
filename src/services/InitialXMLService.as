@@ -1,5 +1,9 @@
 package services
 {
+	import flash.filesystem.File;
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
+	
 	import model.UserDataModel;
 	import model.vo.ErrorVO;
 	import model.vo.InputObjectVO;
@@ -19,23 +23,33 @@ package services
 		public var userModel:UserDataModel;
 		[Inject]
 		public var errorReceived:ErrorReceived;
+		private var _data:String;
 		
 		public function loadXML(__s:String=null):void
 		{
+			
+			var dataFile:File = File.applicationDirectory.resolvePath(__s);
+			var stream:FileStream = new FileStream();
+			stream.open(dataFile, FileMode.READ);
+			_data = stream.readUTFBytes(stream.bytesAvailable);
+			stream.close();
+			handleServiceResult(_data);
+			
+			/*
 			var service:HTTPService = new HTTPService();
 			var responder:mx.rpc.Responder = new Responder(handleServiceResult, handleServiceFault);
 			var token:AsyncToken;
 			service.resultFormat = "e4x";
 			service.url = __s;
 			token = service.send();
-			token.addResponder(responder);
+			token.addResponder(responder);*/
 		}
 		
 		
 		
-		private function handleServiceResult(event:Object):void{
+		private function handleServiceResult(s:String):void{
 			trace("initialise xml received");
-			var xml:XML = event.result as XML;
+			var xml:XML = new XML(s);
 			var vo:ReceivedDataVO = new ReceivedDataVO();
 			
 			//set lookup tables

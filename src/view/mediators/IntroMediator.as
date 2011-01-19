@@ -10,7 +10,9 @@ package view.mediators
 	import org.robotlegs.mvcs.Mediator;
 	
 	import signals.LeaderBoardSet;
+	import signals.LoadXML;
 	import signals.StartClicked;
+	import signals.StatusUpdate;
 	import signals.TextSetOnModel;
 	
 	import view.components.IntroView;
@@ -25,16 +27,22 @@ package view.mediators
 		public var textSetOnModel:TextSetOnModel;
 		[Inject]
 		public var leaderBoardSet:LeaderBoardSet;
-		
+		[Inject]
+		public var loadXML:LoadXML;
+		[Inject]
+		public var update:StatusUpdate;
 		
 		override public function onRegister():void{
 			trace("Intro Mediator registered");
+			update.dispatch("Intro mediator registered");
 			//register listeners 
 			addListeners();
+			//
+			loadXML.dispatch();
 		}
 		
 		private function addListeners():void{
-			
+			trace("add intro mediator listeners");
 			introView.start.addEventListener(MouseEvent.CLICK, buttonClickedListener);
 			
 			//add listener for signal

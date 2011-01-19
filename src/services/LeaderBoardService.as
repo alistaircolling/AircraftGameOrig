@@ -2,6 +2,11 @@ package services
 {
 	
 	
+	import flash.events.Event;
+	import flash.filesystem.File;
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
+	
 	import model.LeaderBoardModel;
 	import model.vo.ErrorVO;
 	import model.vo.LeaderBoardVO;
@@ -16,6 +21,7 @@ package services
 	import org.robotlegs.mvcs.Actor;
 	
 	import signals.ErrorReceived;
+	import signals.StatusUpdate;
 	
 	public class LeaderBoardService extends Actor
 	{
@@ -23,28 +29,43 @@ package services
 		public var lbModel:LeaderBoardModel;
 		[Inject]
 		public var errorReceived:ErrorReceived;
+		[Inject]
+		public var statusUpdate:StatusUpdate;
 		
 		private var _xmlFile:String = "data/winners.xml";
-		
+		private var _data:String;
 		
 		public function requestData():void
 		{
 			//todo swap out to use flash vars instead
-			trace("loading leaderboard....");
 			//loads xml
+			var dataFile:File = File.applicationDirectory.resolvePath(_xmlFile);
+			
+			statusUpdate.dispatch("loading leaderboard from:"+dataFile.url);
+			var stream:FileStream = new FileStream();
+			stream.open(dataFile, FileMode.READ);
+			
+			_data = stream.readUTFBytes(stream.bytesAvailable);
+			statusUpdate.dispatch("data read yet?:"+_data);
+			stream.close();
+			statusUpdate.dispatch("closed stream: data read yet?:"+_data);
+			handleServiceResult(_data);
+			/*
 			var service:HTTPService = new HTTPService();
 			var responder:mx.rpc.Responder = new Responder(handleServiceResult, handleServiceFault);
 			var token:AsyncToken;
 			service.resultFormat = "e4x";
 			service.url = _xmlFile;
 			token = service.send();
-			token.addResponder(responder);
+			token.addResponder(responder);*/
 		}
 		
-		private function handleServiceResult(event:Object):void{
+	
+		
+		private function handleServiceResult(s:String):void{
 			trace("leader board data received");
-			
-			var xml:XML = event.result as XML;
+			statusUpdate.dispatch("leader board xml loaded");
+			var xml:XML = new XML(s);//event.result as XML;
 			var winnersList:XMLList = xml.user;
 			var vo:LeaderBoardVO = new LeaderBoardVO();
 			var winners:Array = [];

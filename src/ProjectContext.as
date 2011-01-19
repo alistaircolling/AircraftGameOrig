@@ -1,7 +1,7 @@
 package 
 {
 	import controllers.BlackBoxDataReceivedCommand;
-	import controllers.LoadSettingsXMLCommand;
+	import controllers.LoadLeaderBoardXML;
 	import controllers.ServiceSetCommand;
 	import controllers.StartClickedCommand;
 	import controllers.StoreSettingsXMLCommand;
@@ -89,7 +89,7 @@ package
 			injector.mapSingleton(InitialXMLService);
 			
 			//map signals   -maps signals to commands
-			signalCommandMap.mapSignalClass(LoadXML, LoadSettingsXMLCommand);
+			signalCommandMap.mapSignalClass(LoadXML, LoadLeaderBoardXML);
 			signalCommandMap.mapSignalClass(SettingsXMLLoaded, StoreSettingsXMLCommand);
 			signalCommandMap.mapSignalClass(SettingsUpdated, ServiceSetCommand);
 			signalCommandMap.mapSignalClass(StartClicked, StartClickedCommand);
@@ -104,9 +104,8 @@ package
 		//no longer used as leaderboard appears multiple places	mediatorMap.mapView(LeaderBoard, LeaderBoardMediator);
 			mediatorMap.mapView(InputView, InputMediator);
 			
-			//resuest the leaderboard
-			var lbModel:LeaderBoardService = injector.getInstance(LeaderBoardService) as LeaderBoardService;
-			lbModel.requestData();
+			
+			
 			
 		}
 	}
