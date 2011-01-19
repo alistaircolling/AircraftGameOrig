@@ -34,6 +34,16 @@ package utils
 			
 		}
 		
+		public static function convertArrayToVector( a:Array ):Vector.<Number>{
+			
+			var retV:Vector.<Number> = new Vector.<Number>();
+			
+			for(var i:uint = 0; i<a.length; i++){
+				retV.push(a[i]);
+			}
+			return retV;
+		}
+		
 		//returns the correct vo for the corresponding value --todo nice - should be abstracted to a utils class
 		public static function getObjectForValue( vector:Vector.<InputObjectVO>, n:Number ):InputObjectVO {
 			

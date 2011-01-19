@@ -8,6 +8,8 @@
 	<fx:Style source="AircraftGame.css"/>
 	<fx:Script>
 		<![CDATA[
+			import flashx.textLayout.events.StatusChangeEvent;
+			
 			import mx.events.FlexEvent;
 			
 			import signals.ChangeState;
@@ -26,8 +28,11 @@
 				currentState = s;
 				//add any additional logic here
 				switch(currentState){
-					case "enter":
+					case ChangeState.ENTER_SCREEN:
 						inputView.visible = true;
+						break
+					case ChangeState.RESULTS_SCREEN:
+						resultsView.visible = true;
 						break
 					default:
 						
@@ -52,6 +57,6 @@
 	</s:states>
 	<components:InputView id="inputView" includeIn="enter, intro" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
 	<components:IntroView id="introView" includeIn="intro"/>
-	
+	<components:ResultsView id="resultsView" includeIn="results, enter" visible="false" />
 	<s:TextArea id="statusLabel" fontSize="12" bottom="5" right="5"  height="100" width="400"/>
 </s:WindowedApplication>

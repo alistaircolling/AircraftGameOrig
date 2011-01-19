@@ -1,10 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="700" height="300" xmlns:components="view.components.*">
+
+	<fx:Script>
+		<![CDATA[
+			import model.vo.GraphResultsVO;
+			
+			private var _iteration:uint;
+			
+			public function setData( vo:GraphResultsVO ):void{
+				
+				//set on the graph component
+				graph.setData(vo);
+				
+			}
+			
+			protected function continue_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+			}
+
+			public function get iteration():uint
+			{
+				return _iteration;
+			}
+
+			public function set iteration(value:uint):void
+			{
+				_iteration = value;
+				turn.text = "(Turn "+value.toString()+" of 3)"; 
+			}
+
+		]]>
+	</fx:Script>
+
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	<s:Button id="continueBtn" label="continue" click="continue_clickHandler(event)" right="10" top="10"/>
+	<s:VGroup width="615" height="280" horizontalAlign="center" bottom="30">
 	
+		<s:HGroup width="100%" height="55">
+			<s:Label text="Results Graph" />
+			<s:Label id="turn" text="Turn-------"/>
+			<s:Label text="Legend to go here"/>
+		</s:HGroup>
+		
+		<components:GraphComponent id="graph" />
+	</s:VGroup>
 	
 </s:Group>

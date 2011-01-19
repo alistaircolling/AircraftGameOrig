@@ -29,6 +29,7 @@ package
 	import signals.ChangeState;
 	import signals.DataSubmitted;
 	import signals.ErrorReceived;
+	import signals.GraphDataSet;
 	import signals.IterationChange;
 	import signals.LeaderBoardSet;
 	import signals.LoadXML;
@@ -44,10 +45,12 @@ package
 	import view.components.InputView;
 	import view.components.IntroView;
 	import view.components.LeaderBoard;
+	import view.components.ResultsView;
 	import view.mediators.InputMediator;
 	import view.mediators.IntroMediator;
 	import view.mediators.LeaderBoardMediator;
 	import view.mediators.ProjectMediator;
+	import view.mediators.ResultsMediator;
 	
 	public class ProjectContext extends SignalContext
 	{
@@ -81,6 +84,7 @@ package
 			injector.mapSingleton(UpdateBalance);
 			injector.mapSingleton(BalanceSet);
 			injector.mapSingleton(IterationChange);
+			injector.mapSingleton(GraphDataSet);
 			
 			
 			
@@ -103,6 +107,7 @@ package
 			mediatorMap.mapView(IntroView, IntroMediator);
 		//no longer used as leaderboard appears multiple places	mediatorMap.mapView(LeaderBoard, LeaderBoardMediator);
 			mediatorMap.mapView(InputView, InputMediator);
+			mediatorMap.mapView(ResultsView, ResultsMediator);
 			
 			
 			

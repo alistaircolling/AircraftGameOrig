@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<winners>
+	<user name="johnny1" score="10000" />
+	<user name="johnny2" score="9000" />
+	<user name="johnny3" score="8000" />
+	<user name="johnny4" score="7000" />
+	<user name="johnny5" score="6000" />
+	<user name="johnny6" score="5000" />
+	<user name="johnny7" score="4000" />
+	<user name="johnny8" score="3000" />
+	<user name="johnny9" score="2000" />
+	<user name="johnny10" score="1000" />
+</winners>

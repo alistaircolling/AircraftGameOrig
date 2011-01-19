@@ -1,6 +1,9 @@
 package controllers
 {
+	import flashx.textLayout.operations.SplitParagraphOperation;
+	
 	import model.UserDataModel;
+	import model.vo.GraphResultsVO;
 	import model.vo.ReceivedDataVO;
 	
 	import org.robotlegs.mvcs.SignalCommand;
@@ -43,9 +46,32 @@ package controllers
 			userModel.budget = Number(xml..currentBudget);//set the budget last otherwise it is updated in the intropanel when the vo.spares values are updated
 			
 			//create the graphresult vo
+			var graphVO:GraphResultsVO = new GraphResultsVO();
+			//create the vectors
+			var pcFlown:Vector.<Number>;
+			var pcVals:String = xml..percentFlown.valueOf();
+			var pc:Array = pcVals.split(",");
+			pcFlown = DataUtils.convertArrayToVector(pc);
+			var month:Vector.<Number>;
+			var monthVals:String = xml..monthTotal.valueOf();
+			var monthA:Array = monthVals.split(",");
+			month = DataUtils.convertArrayToVector(monthA);
+			var inAir:Vector.<Number>;
+			var inAirVals:String = xml..inAir.valueOf();
+			var inA:Array = inAirVals.split(",");
+			inAir = DataUtils.convertArrayToVector(inA);
+			var onGround:Vector.<Number>;
+			var onGVals:String = xml..onGround.valueOf();
+			var onG:Array = onGVals.split(",");
+			onGround = DataUtils.convertArrayToVector(onG);
 			
+			graphVO.inAir = inAir;
+			graphVO.monthTotal = month;
+			graphVO.onGround = onGround;
+			graphVO.percentFlown = pcFlown;
 			
-			
+			//set graph vo
+			userModel.graphVO = graphVO;
 			
 			
 		}

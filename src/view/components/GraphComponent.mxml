@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="510" height="150"
+		 creationComplete="group1_creationCompleteHandler(event)">
+	<fx:Declarations>
+		<mx:SolidColorStroke id = "s1" color="blue" weight="2" />
+		<mx:SolidColorStroke id = "s2" color="red" weight="2"/>
+		<mx:SolidColorStroke id = "s3" color="green" weight="2"/>
+		<mx:SolidColorStroke id = "blackStroke" color="black" weight="1" alpha=".4"/>
+		<mx:SolidColorStroke id = "whiteS" color="white" weight="0"/>
+		<s:SolidColor id="fill" color="white"/>
+		<s:Move id="myMove" easer="{noEase}" 
+				target="{rect}" duration="500" effectEnd="myMove_effectEndHandler(event)" />
+		<s:Power id="noEase"
+				 exponent="1"/>
+		
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import model.vo.GraphResultsVO;
+			
+			import mx.collections.ArrayCollection;
+			import mx.effects.easing.*;
+			import mx.events.EffectEvent;
+			import mx.events.FlexEvent;
+			
+			import spark.effects.easing.Linear;
+			import spark.primitives.Line;
+			
+			[Bindable]
+			private var chartData:ArrayCollection;
+			
+			[Bindable]
+			private var monthTData:ArrayCollection;
+			
+			private var _counter:uint;
+			
+			private function moveImage():void {
+				myMove.end();
+				myMove.xBy = 800/36;
+				myMove.play();
+			}
+			
+			public function setData( vo:GraphResultsVO ):void{
+				
+				//set the data 
+				trace("setting the data within the graph component");
+				addValuesToAC(vo);
+				
+			}
+			
+			private function drawLine( val:Number ):void{
+				
+				var line:Line = new Line();
+				line.stroke = blackStroke;
+				
+				var theX:Number = val;
+				
+				line.xFrom = theX;
+				line.xTo = theX;
+				line.yFrom = 0;
+				line.yTo = 600;
+				lines.addElement(line);
+				
+			}
+			
+			private function addValuesToAC( vo:GraphResultsVO ):void{
+				
+				// add the new values to the array collection then animate from the current position
+				
+				var startVal:uint = _counter;
+				var endVal:uint = vo.monthTotal.length;//values after this are set to a line
+				var topVal:uint = 12*6;// 6 years (come in 3 goes)
+				
+				var firstDate:Date = new Date();
+				firstDate.setDate(firstDate.getDate()-100);
+				
+				for (var i:uint = startVal; i<=topVal; i++){
+					
+					var j:uint = i; //used for the last value
+					if (j>=endVal){
+						j= endVal-1;
+					}
+					var percentTotal:Number = Number(vo.percentFlown[j]);
+					var monthTotal:Number = Number(vo.monthTotal[j]);
+					//only add these values 
+					if (i/4 == i%4){
+						trace("i is :"+i+"  adding quarterly amount");
+					}
+					//todo add the quarterly values every time and add them to the chartdata if this doesnt break anything
+					
+					var inAirTotal:Number = Number(vo.inAir[i%4]);
+					var onGroundTotal:Number = Number(vo.onGround[i%4]);
+					
+					chartData.addItemAt({month:i, percent:percentTotal, monthT:monthTotal}, i);
+					
+				}
+				trace("chart data populated");
+				//moveImage();
+				
+			}
+			
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				//intiialised
+				_counter = 0;
+				chartData = new ArrayCollection();
+			}
+			
+			
+			protected function myMove_effectEndHandler(event:EffectEvent):void
+			{
+				if (_counter<35){
+					_counter ++;
+					moveImage();
+				}
+				var visits:Number =  chartData[_counter].visits;
+				trace("Month:"+(_counter*2)+"  visits:"+visits);
+				drawLine( rect.x );
+			}
+			
+			
+			
+		]]>
+	</fx:Script>
+	
+	<!--	<s:Group id="chart" width="800" height="600" mask="{rect}">  -->
+	<s:Group id="chart" width="800" height="400" >
+		
+		<mx:LineChart id="linechart" color="0xffffff" height="100%" width="100%" backgroundElements="{[]}"
+					  showDataTips="true" dataProvider="{chartData}" fill="{fill}" >
+			<mx:seriesFilters>
+				<fx:Array/>
+			</mx:seriesFilters>
+			<mx:horizontalAxis>
+				<mx:CategoryAxis 
+					id="a1"
+					dataProvider="{chartData}" 
+					categoryField="Month" 
+					/>
+			</mx:horizontalAxis>
+			
+			<mx:horizontalAxisRenderers>
+				<mx:AxisRenderer axis="{a1}" minorTickPlacement="none" tickPlacement="none" labelGap="0" showLabels="false" showLine="false"/>
+			</mx:horizontalAxisRenderers>
+			
+			<mx:verticalAxisRenderers>
+				<mx:AxisRenderer axis="{pcAxis}" placement="right" minorTickPlacement="none" tickPlacement="none" labelGap="0" showLabels="false" showLine="false"/>
+				<mx:AxisRenderer axis="{monthAxis}" placement="left" minorTickPlacement="none" tickPlacement="none" labelGap="0" showLabels="false" showLine="false"/>
+			</mx:verticalAxisRenderers>
+			
+			<mx:series>
+				<mx:LineSeries yField="percent" displayName="Visits" lineStroke="{s1}" dataProvider="{chartData}">
+					<mx:verticalAxis>
+						<mx:LinearAxis id="pcAxis"/>
+					</mx:verticalAxis>
+				</mx:LineSeries>
+				<mx:LineSeries yField="monthT" displayName="Hits" lineStroke="{s2}" dataProvider="{chartData}" >
+					<mx:verticalAxis >
+						<mx:CategoryAxis id="monthAxis" categoryField="monthT" />
+					</mx:verticalAxis>
+				</mx:LineSeries>
+			</mx:series>
+			
+		</mx:LineChart>
+	</s:Group>
+	<s:Group id="rect">
+		<s:Rect width="800" height="600" x="-800">
+			<s:fill>
+				<s:SolidColor color="0xAA2FC9" alpha="0"/>
+			</s:fill>
+		</s:Rect>
+	</s:Group>
+	<s:Group id="lines" width="800" height="600"/>
+</s:Group>
