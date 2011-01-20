@@ -110,13 +110,13 @@
 				
 				_counter += j+1;//move to the next index
 				trace("counter set to:"+_counter);
-				if (_counter == 72){
+			//	if (_counter == 72){
 					
 					chartData.source = _usedArray;					
 					linechart.dataProvider = chartData;
 					linechart.executeBindings(true);
 					
-				}
+			//	}
 				//add array to used one
 				
 				//moveImage();
