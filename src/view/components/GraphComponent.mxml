@@ -24,6 +24,7 @@
 			import mx.effects.easing.*;
 			import mx.events.EffectEvent;
 			import mx.events.FlexEvent;
+			import mx.olap.aggregators.CountAggregator;
 			
 			import spark.effects.easing.Linear;
 			import spark.primitives.Line;
@@ -37,6 +38,9 @@
 			private var _counter:uint;
 			
 			private var _usedArray:Array;
+			
+			private var _monthTA:Array = [-7.5,-7.6,-7.5,-0.2,-0.0,-0.1,0.5,0.6,1.0,0.6,1.5,1.4,1.6,1.5,1.7,1.6,1.7,1.6,1.7,1.5,1.7,1.7,1.7,1.5,-7.9,-8.1,-8.0,-0.2,0.0,-0.0,0.1,0.0,0.1,-0.1,0.1,-0.0,0.1,0.1,2.5,2.3,2.5,2.4,2.6,2.4,2.5,2.4,2.6,2.3,1.4,1.3,1.3,1.6,1.7,1.5,1.7,1.5,1.7,1.4,1.7,1.4,1.7,1.6,1.7,1.6,1.7,1.6,1.7,1.6,1.7,1.5,1.7,1.6];
+			private var _percentA:Array = [67.3,65.9,67.3,66.6,68.6,67.3,74.5,74.8,79.9,77.5,84.5,82.4,87.5,83.3,85.8,84.1,86.7,83.2,87.5,82.4,86.7,85.8,85.8,82.4, 89.2,84.1,86.7,82.4,86.7,85.0,87.1,86.7,89.7,83.9,87.8,84.6,88.5,87.9,90.9,85.6,91.8,88.2,92.7,87.3,91.8,88.2,92.7,85.6,90.0,87.3,89.1,89.1,90.9,86.5,90.2,87.5,91.1,85.7,92.9,85.7,92.0,88.4,90.2,89.3,92.0,89.3,92.9,89.3,92.0,86.6,92.9,89.3];
 			
 			private function moveImage():void {
 				myMove.end();
@@ -102,15 +106,47 @@
 					//chartData.addItemAt({month:i, percent:percentTotal, monthT:monthTotal}, _counter+j);
 					
 				}
-				_counter += j;
+				
+				
+				_counter += j+1;//move to the next index
 				trace("counter set to:"+_counter);
+				if (_counter == 72){
+					
+					chartData.source = _usedArray;					
+					linechart.dataProvider = chartData;
+					linechart.executeBindings(true);
+					
+				}
 				//add array to used one
-				chartData.source = _usedArray;
 				
-				linechart.dataProvider = chartData;
-				linechart.executeBindings(true);
 				//moveImage();
+				traceAllMonthVals();
 				
+				
+			}
+			
+			private function traceAllMonthVals():void{
+				trace("trace all values ------------------------");
+				for (var i:uint = 0; i<chartData.length; i++){
+					
+					try{
+						//check if the month and percent values match the arrays
+						if (_monthTA[i] != chartData.getItemAt(i).monthT){
+							trace("the month does not match at:"+i);
+						}else{
+							trace("ALL MONTHS MATCH =========");
+						}
+						if (_percentA[i] != chartData.getItemAt(i).percent){
+							trace("the percent does not match at:"+i+"   array:"+_percentA[i]+"  chartData:"+chartData.getItemAt(i).percent);
+						}else{
+							
+							trace("ALL PERCENTS MATCH ==========");
+						}
+						
+					}catch(e:*){
+						trace("there has been an error at:"+i);
+					}
+				}
 			}
 			
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
@@ -142,7 +178,7 @@
 	<s:Group id="chart" width="100%" height="100%" >
 		
 		<mx:LineChart id="linechart" color="0xffffff" height="100%" width="100%" backgroundElements="{[]}"
-					  showDataTips="false" dataProvider="{chartData}" fill="{fill}" >
+					  showDataTips="true" dataProvider="{chartData}" fill="{fill}" >
 			<mx:seriesFilters>
 				<fx:Array/>
 			</mx:seriesFilters>
@@ -164,14 +200,14 @@
 			</mx:verticalAxisRenderers>
 			
 			<mx:series>
-				<mx:LineSeries yField="percent" displayName="Visits" lineStroke="{s1}" dataProvider="{chartData}">
+				<mx:LineSeries yField="percent" displayName="Percent" lineStroke="{s1}" dataProvider="{chartData}">
 					<mx:verticalAxis>
-						<mx:LinearAxis id="pcAxis"/>
+						<mx:LinearAxis id="pcAxis" minimum="60" maximum="100"/>
 					</mx:verticalAxis>
 				</mx:LineSeries>
-				<mx:LineSeries yField="monthT" displayName="Hits" lineStroke="{s2}" dataProvider="{chartData}" >
+				<mx:LineSeries yField="monthT" displayName="Month Total" lineStroke="{s2}" dataProvider="{chartData}" >
 					<mx:verticalAxis >
-						<mx:CategoryAxis id="monthAxis" categoryField="monthT" />
+						<mx:LinearAxis id="monthAxis" minimum="-25" maximum="10" />
 					</mx:verticalAxis>
 				</mx:LineSeries>
 			</mx:series>
