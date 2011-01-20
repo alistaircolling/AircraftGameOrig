@@ -26,20 +26,27 @@
 			public function updateState( s:String ):void{
 				
 				currentState = s;
+				trace("changing state to:"+s);
 				//add any additional logic here
 				switch(currentState){
 					case ChangeState.ENTER_SCREEN:
 						inputView.visible = true;
 						resultsView.visible = false;
+						
 						break
 					case ChangeState.RESULTS_SCREEN:
 						resultsView.visible = true;
 						inputView.visible = false;
+						finalView.visible = false;
+						break
+					case ChangeState.FINAL_SCREEN:
+						resultsView.visible = false;
+						inputView.visible = false;
+						finalView.visible = true;
 						break
 					default:
 						
 						break
-					
 				}
 				
 				
@@ -54,11 +61,13 @@
 	<s:states>
 		<s:State name="intro" />
 		<s:State name="enter" />
-		<s:State name="results" />
-		<s:State name="final" />
+		<s:State name="resultsScreen" />
+		<s:State name="finalScreen" />
+		<s:State name="exitScreen" />
 	</s:states>
-	<components:InputView id="inputView" includeIn="enter, intro, results" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
+	<components:InputView id="inputView" includeIn="enter, intro, resultsScreen" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
 	<components:IntroView id="introView" includeIn="intro"/>
-	<components:ResultsView id="resultsView" includeIn="results, enter" visible="false" horizontalCenter="0"/>
+	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen" visible="false" horizontalCenter="0"/>
+	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter" visible="false" horizontalCenter="0" verticalCenter="0"/>
 	<s:TextArea id="statusLabel" fontSize="12" bottom="5" right="5"  height="100" width="400"/>
 </s:WindowedApplication>

@@ -42,10 +42,12 @@ package
 	import signals.UpdateBalance;
 	import signals.UserDataSet;
 	
+	import view.components.FinalView;
 	import view.components.InputView;
 	import view.components.IntroView;
 	import view.components.LeaderBoard;
 	import view.components.ResultsView;
+	import view.mediators.FinalViewMediator;
 	import view.mediators.InputMediator;
 	import view.mediators.IntroMediator;
 	import view.mediators.LeaderBoardMediator;
@@ -108,6 +110,7 @@ package
 		//no longer used as leaderboard appears multiple places	mediatorMap.mapView(LeaderBoard, LeaderBoardMediator);
 			mediatorMap.mapView(InputView, InputMediator);
 			mediatorMap.mapView(ResultsView, ResultsMediator);
+			mediatorMap.mapView(FinalView, FinalViewMediator);
 			
 			
 			

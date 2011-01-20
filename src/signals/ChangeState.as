@@ -6,8 +6,9 @@ package signals
 	{
 		public static const INTRO_SCREEN:String = "intro";
 		public static const ENTER_SCREEN:String = "enter";
-		public static const RESULTS_SCREEN:String = "results"
-		public static const FINAL_SCREEN:String = "final";
+		public static const RESULTS_SCREEN:String = "resultsScreen"
+		public static const FINAL_SCREEN:String = "finalScreen";
+		public static const EXIT_SCREEN:String = "exitScreen";
 		
 		public function ChangeState():void{
 			

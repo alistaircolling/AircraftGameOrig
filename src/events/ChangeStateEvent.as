@@ -8,6 +8,7 @@ package events
 		
 		public function ChangeStateEvent(type:String)
 		{
+			state = type;
 			super(type, true, true);
 		}
 	}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" xmlns:components="view.components.*">
+	<fx:Declarations>
+		<s:SolidColorStroke id="greyStroke" color="0xcccccc" weight="2"/>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Panel horizontalCenter="0" verticalCenter="0" width="800" height="600">
+		<s:HGroup width="100%" height="100%">
+			<s:VGroup width="100%" height="100%">
+				<s:Label text="Your Score" fontWeight="bold" />
+				<mx:Spacer height="15"/>
+				<s:Line width="600" stroke="{greyStroke}" />
+				<mx:Spacer height="15"/>
+				<s:HGroup width="100%" height="100%">
+					<s:VGroup width="100%" height="100%">
+						<s:Label id="availability" text="Availability:-----"/>
+						<s:Label id="cost" text="Cost:-----"/>
+					</s:VGroup>
+					<s:TextArea id="message" text="Congratulations you made the leaderboard. Please enter your name below"/>
+				</s:HGroup>
+				<s:HGroup width="100%" height="100%">
+					<s:Button label="dummy"/>
+					<s:Button label="dummy"/>
+					<s:Button label="dummy"/>
+				</s:HGroup>
+				<s:Button label="continue>>>>" id="continueBtn"/>
+						  
+			</s:VGroup>
+			<components:LeaderBoard id="leaderBoard" width="200" height="100%"/>
+		</s:HGroup>
+		
+		
+	</s:Panel>
+</s:Group>

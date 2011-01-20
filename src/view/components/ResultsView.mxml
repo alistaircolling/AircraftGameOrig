@@ -13,6 +13,9 @@
 			
 			private var _iteration:uint;
 			
+			[Inject]
+			public var changeState
+			
 			public function setData( vo:GraphResultsVO ):void{
 				
 				//set on the graph component
@@ -20,12 +23,22 @@
 				
 			}
 			
+			
 			protected function continue_clickHandler(event:MouseEvent):void
 			{
 				//need to change the state to input
 				
-				var e:ChangeStateEvent = new ChangeStateEvent(ChangeState.ENTER_SCREEN);
-				dispatchEvent(e);
+				
+				if (_iteration <3){
+					var e:ChangeStateEvent = new ChangeStateEvent(ChangeState.ENTER_SCREEN);	
+					dispatchEvent(e);
+				}else{
+					var f:ChangeStateEvent = new ChangeStateEvent(ChangeState.ENTER_SCREEN);
+					f.state = "finalScreen";
+					
+					dispatchEvent(f);
+				}
+				
 			}
 			
 			public function get iteration():uint

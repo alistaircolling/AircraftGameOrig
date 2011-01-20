@@ -30,9 +30,14 @@ package view.mediators
 			resultsView.addEventListener(ChangeState.ENTER_SCREEN, changeState);
 		}
 		
+		override public function onRemove():void{
+			
+			trace("results mediator removed!!!");
+		}
+		
 		private function changeState( e:ChangeStateEvent ):void{
 			
-			changeStateSignal.dispatch(e.type);
+			changeStateSignal.dispatch(e.state);
 			
 		}
 		

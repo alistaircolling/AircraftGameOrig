@@ -81,7 +81,7 @@
 				
 				var firstDate:Date = new Date();
 				firstDate.setDate(firstDate.getDate()-100);
-				trace("counter starting round at:"+_counter);
+			//	trace("counter starting round at:"+_counter);
 				for (var i:uint = 0; i<=topVal; i++){
 					
 					var j:uint = i; //used for the last value
@@ -100,7 +100,7 @@
 					
 					var inAirTotal:Number = Number(vo.inAir[i%4]);
 					var onGroundTotal:Number = Number(vo.onGround[i%4]);
-					trace("i:"+i+" j:"+j+"   adding item at:"+(_counter+j)+"  percent:"+percentTotal+"  month:"+monthTotal);
+			//		trace("i:"+i+" j:"+j+"   adding item at:"+(_counter+j)+"  percent:"+percentTotal+"  month:"+monthTotal);
 					
 					_usedArray[_counter+j] = {month:i, percent:percentTotal, monthT:monthTotal};
 					//chartData.addItemAt({month:i, percent:percentTotal, monthT:monthTotal}, _counter+j);
@@ -109,7 +109,7 @@
 				
 				
 				_counter += j+1;//move to the next index
-				trace("counter set to:"+_counter);
+		//		trace("counter set to:"+_counter);
 			//	if (_counter == 72){
 					
 					chartData.source = _usedArray;					
@@ -120,7 +120,7 @@
 				//add array to used one
 				
 				//moveImage();
-				traceAllMonthVals();
+			//	traceAllMonthVals();
 				
 				
 			}
@@ -134,13 +134,13 @@
 						if (_monthTA[i] != chartData.getItemAt(i).monthT){
 							trace("the month does not match at:"+i);
 						}else{
-							trace("ALL MONTHS MATCH =========");
+						//	trace("ALL MONTHS MATCH =========");
 						}
 						if (_percentA[i] != chartData.getItemAt(i).percent){
 							trace("the percent does not match at:"+i+"   array:"+_percentA[i]+"  chartData:"+chartData.getItemAt(i).percent);
 						}else{
 							
-							trace("ALL PERCENTS MATCH ==========");
+						//	trace("ALL PERCENTS MATCH ==========");
 						}
 						
 					}catch(e:*){
