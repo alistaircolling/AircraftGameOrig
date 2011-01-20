@@ -70,7 +70,7 @@ package view.mediators
 		}
 		
 		private function updateIteration( n:uint ):void{
-			
+			n++;
 			inputView.inputPanel.turn.text = "(Turn "+n.toString()+" of 3)";
 		}
 		

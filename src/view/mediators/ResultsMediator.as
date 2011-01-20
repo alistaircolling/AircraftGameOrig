@@ -1,9 +1,12 @@
 package view.mediators
 {
+	import events.ChangeStateEvent;
+	
 	import model.vo.GraphResultsVO;
 	
 	import org.robotlegs.mvcs.Mediator;
 	
+	import signals.ChangeState;
 	import signals.GraphDataSet;
 	import signals.IterationChange;
 	
@@ -17,11 +20,20 @@ package view.mediators
 		public var graphDataSet:GraphDataSet;
 		[Inject]
 		public var iterationChange:IterationChange;
+		[Inject]
+		public var changeStateSignal:ChangeState;
 		
 		override public function onRegister():void{
 			
 			graphDataSet.add(setData);
 			iterationChange.add(setIteration);
+			resultsView.addEventListener(ChangeState.ENTER_SCREEN, changeState);
+		}
+		
+		private function changeState( e:ChangeStateEvent ):void{
+			
+			changeStateSignal.dispatch(e.type);
+			
 		}
 		
 		private function setIteration( n:uint ):void{

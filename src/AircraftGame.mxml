@@ -3,7 +3,7 @@
 					   xmlns:s="library://ns.adobe.com/flex/spark" 
 					   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*" xmlns:local="*"
 					   creationComplete="windowedapplication1_creationCompleteHandler(event)"
-					   width="800" height="600"
+					   width="1024" height="768"
 					   >
 	<fx:Style source="AircraftGame.css"/>
 	<fx:Script>
@@ -30,9 +30,11 @@
 				switch(currentState){
 					case ChangeState.ENTER_SCREEN:
 						inputView.visible = true;
+						resultsView.visible = false;
 						break
 					case ChangeState.RESULTS_SCREEN:
 						resultsView.visible = true;
+						inputView.visible = false;
 						break
 					default:
 						
@@ -55,8 +57,8 @@
 		<s:State name="results" />
 		<s:State name="final" />
 	</s:states>
-	<components:InputView id="inputView" includeIn="enter, intro" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
+	<components:InputView id="inputView" includeIn="enter, intro, results" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
 	<components:IntroView id="introView" includeIn="intro"/>
-	<components:ResultsView id="resultsView" includeIn="results, enter" visible="false" />
+	<components:ResultsView id="resultsView" includeIn="results, enter" visible="false" horizontalCenter="0"/>
 	<s:TextArea id="statusLabel" fontSize="12" bottom="5" right="5"  height="100" width="400"/>
 </s:WindowedApplication>

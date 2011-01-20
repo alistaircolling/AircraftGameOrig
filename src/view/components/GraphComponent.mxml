@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="510" height="150"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="700" height="450"
 		 creationComplete="group1_creationCompleteHandler(event)">
 	<fx:Declarations>
 		<mx:SolidColorStroke id = "s1" color="blue" weight="2" />
@@ -36,6 +36,8 @@
 			
 			private var _counter:uint;
 			
+			private var _usedArray:Array;
+			
 			private function moveImage():void {
 				myMove.end();
 				myMove.xBy = 800/36;
@@ -68,35 +70,45 @@
 			private function addValuesToAC( vo:GraphResultsVO ):void{
 				
 				// add the new values to the array collection then animate from the current position
+				var currArray:Array = [];
 				
-				var startVal:uint = _counter;
 				var endVal:uint = vo.monthTotal.length;//values after this are set to a line
 				var topVal:uint = 12*6;// 6 years (come in 3 goes)
 				
 				var firstDate:Date = new Date();
 				firstDate.setDate(firstDate.getDate()-100);
-				
-				for (var i:uint = startVal; i<=topVal; i++){
+				trace("counter starting round at:"+_counter);
+				for (var i:uint = 0; i<=topVal; i++){
 					
 					var j:uint = i; //used for the last value
 					if (j>=endVal){
 						j= endVal-1;
 					}
+					
+					
 					var percentTotal:Number = Number(vo.percentFlown[j]);
 					var monthTotal:Number = Number(vo.monthTotal[j]);
 					//only add these values 
 					if (i/4 == i%4){
-						trace("i is :"+i+"  adding quarterly amount");
+						//trace("i is :"+i+"  adding quarterly amount");
 					}
 					//todo add the quarterly values every time and add them to the chartdata if this doesnt break anything
 					
 					var inAirTotal:Number = Number(vo.inAir[i%4]);
 					var onGroundTotal:Number = Number(vo.onGround[i%4]);
+					trace("i:"+i+" j:"+j+"   adding item at:"+(_counter+j)+"  percent:"+percentTotal+"  month:"+monthTotal);
 					
-					chartData.addItemAt({month:i, percent:percentTotal, monthT:monthTotal}, i);
+					_usedArray[_counter+j] = {month:i, percent:percentTotal, monthT:monthTotal};
+					//chartData.addItemAt({month:i, percent:percentTotal, monthT:monthTotal}, _counter+j);
 					
 				}
-				trace("chart data populated");
+				_counter += j;
+				trace("counter set to:"+_counter);
+				//add array to used one
+				chartData.source = _usedArray;
+				
+				linechart.dataProvider = chartData;
+				linechart.executeBindings(true);
 				//moveImage();
 				
 			}
@@ -105,6 +117,7 @@
 			{
 				//intiialised
 				_counter = 0;
+				_usedArray = new Array(71);
 				chartData = new ArrayCollection();
 			}
 			
@@ -126,10 +139,10 @@
 	</fx:Script>
 	
 	<!--	<s:Group id="chart" width="800" height="600" mask="{rect}">  -->
-	<s:Group id="chart" width="800" height="400" >
+	<s:Group id="chart" width="100%" height="100%" >
 		
 		<mx:LineChart id="linechart" color="0xffffff" height="100%" width="100%" backgroundElements="{[]}"
-					  showDataTips="true" dataProvider="{chartData}" fill="{fill}" >
+					  showDataTips="false" dataProvider="{chartData}" fill="{fill}" >
 			<mx:seriesFilters>
 				<fx:Array/>
 			</mx:seriesFilters>
@@ -140,14 +153,14 @@
 					categoryField="Month" 
 					/>
 			</mx:horizontalAxis>
-			
+
 			<mx:horizontalAxisRenderers>
 				<mx:AxisRenderer axis="{a1}" minorTickPlacement="none" tickPlacement="none" labelGap="0" showLabels="false" showLine="false"/>
 			</mx:horizontalAxisRenderers>
 			
 			<mx:verticalAxisRenderers>
-				<mx:AxisRenderer axis="{pcAxis}" placement="right" minorTickPlacement="none" tickPlacement="none" labelGap="0" showLabels="false" showLine="false"/>
-				<mx:AxisRenderer axis="{monthAxis}" placement="left" minorTickPlacement="none" tickPlacement="none" labelGap="0" showLabels="false" showLine="false"/>
+				<mx:AxisRenderer axis="{pcAxis}" placement="right" />
+				<mx:AxisRenderer axis="{monthAxis}" placement="left" />
 			</mx:verticalAxisRenderers>
 			
 			<mx:series>
@@ -173,4 +186,4 @@
 		</s:Rect>
 	</s:Group>
 	<s:Group id="lines" width="800" height="600"/>
-</s:Group>
+</s:Panel>
