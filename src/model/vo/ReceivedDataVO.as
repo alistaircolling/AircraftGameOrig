@@ -10,6 +10,9 @@ package model.vo
 		public var currentTuranaround:InputObjectVO;
 		public var currentNFF:InputObjectVO;
 		
+		public var iteration:uint;//only used to check the last iteratoin by finalviewmediator
+		public var avAvailability:Number;//only used in final stage (3)
+		public var cost:Number;//only used on final stage ----check how it is set--using budget for now
 		
 		//params below are only used when passing data to update the view
 	//	public var spares:Vector.<InputObjectVO>;

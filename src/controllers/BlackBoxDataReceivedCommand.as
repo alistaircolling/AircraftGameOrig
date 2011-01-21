@@ -12,6 +12,8 @@ package controllers
 	
 	import utils.DataUtils;
 	
+	import view.components.BudgetIndicator;
+	
 	public class BlackBoxDataReceivedCommand extends SignalCommand
 	{
 		[Inject]
@@ -31,6 +33,11 @@ package controllers
 			vo.currentTuranaround = DataUtils.getObjectForValue(userModel.vo.turnaround, xml..currentTurnaround);
 			vo.currentSpares = Number(xml..currentSpares);
 			vo.sparesCostInc = userModel.vo.sparesCostInc;//already set and so retrieved
+			vo.iteration = Number(xml..iteration);
+			if (vo.iteration == 3){
+				vo.avAvailability = xml..averageAvailability;
+				vo.cost = Number(xml..currentBudget);
+			}
 			
 			//update vectors to start at minimum values
 			vo.reliability = DataUtils.getVectorFromStartingVO(userModel.vo.reliability, vo.currentReliability);

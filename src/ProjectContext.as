@@ -2,6 +2,7 @@ package
 {
 	import controllers.BlackBoxDataReceivedCommand;
 	import controllers.LoadLeaderBoardXML;
+	import controllers.RequestLeaderBoardCommand;
 	import controllers.RestartCommand;
 	import controllers.ServiceSetCommand;
 	import controllers.StartClickedCommand;
@@ -34,6 +35,7 @@ package
 	import signals.IterationChange;
 	import signals.LeaderBoardSet;
 	import signals.LoadXML;
+	import signals.RequestLeaderBoard;
 	import signals.RestartGame;
 	import signals.SettingsUpdated;
 	import signals.SettingsXMLLoaded;
@@ -108,6 +110,7 @@ package
 			signalCommandMap.mapSignalClass(DataSubmitted, SubmitData);
 			signalCommandMap.mapSignalClass(BlackBoxDataReceived, BlackBoxDataReceivedCommand);
 			signalCommandMap.mapSignalClass(RestartGame, RestartCommand);
+			signalCommandMap.mapSignalClass(RequestLeaderBoard, RequestLeaderBoardCommand);
 			
 			
 			//map mediators
