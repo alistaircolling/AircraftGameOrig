@@ -34,7 +34,7 @@ package services
 		
 		public function sendData( vo:InputVO ):void{
 			//only used in testing
-			
+			trace("Sending data for iteration:"+vo.iteration);
 			_iteration = Number(vo.iteration);
 			
 			//create xml   TODO add socket connectivity

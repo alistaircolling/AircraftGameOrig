@@ -80,7 +80,7 @@
 			{
 				//update the budget
 				var diff:Number = _sparesCurr - value;
-				trace("spares diff:"+diff);
+				//trace("spares diff:"+diff);
 				_sparesCurr = value;
 				valLabel.text = value.toString();
 				updateBalance(diff*costInc);

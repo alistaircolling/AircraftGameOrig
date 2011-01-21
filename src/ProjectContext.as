@@ -2,6 +2,7 @@ package
 {
 	import controllers.BlackBoxDataReceivedCommand;
 	import controllers.LoadLeaderBoardXML;
+	import controllers.RestartCommand;
 	import controllers.ServiceSetCommand;
 	import controllers.StartClickedCommand;
 	import controllers.StoreSettingsXMLCommand;
@@ -33,6 +34,7 @@ package
 	import signals.IterationChange;
 	import signals.LeaderBoardSet;
 	import signals.LoadXML;
+	import signals.RestartGame;
 	import signals.SettingsUpdated;
 	import signals.SettingsXMLLoaded;
 	import signals.StageSet;
@@ -42,11 +44,13 @@ package
 	import signals.UpdateBalance;
 	import signals.UserDataSet;
 	
+	import view.components.ExitView;
 	import view.components.FinalView;
 	import view.components.InputView;
 	import view.components.IntroView;
 	import view.components.LeaderBoard;
 	import view.components.ResultsView;
+	import view.mediators.ExitMediator;
 	import view.mediators.FinalViewMediator;
 	import view.mediators.InputMediator;
 	import view.mediators.IntroMediator;
@@ -87,6 +91,7 @@ package
 			injector.mapSingleton(BalanceSet);
 			injector.mapSingleton(IterationChange);
 			injector.mapSingleton(GraphDataSet);
+			injector.mapSingleton(RestartGame);
 			
 			
 			
@@ -102,6 +107,7 @@ package
 			signalCommandMap.mapSignalClass(UpdateBalance, UpdateBalanceCommand);
 			signalCommandMap.mapSignalClass(DataSubmitted, SubmitData);
 			signalCommandMap.mapSignalClass(BlackBoxDataReceived, BlackBoxDataReceivedCommand);
+			signalCommandMap.mapSignalClass(RestartGame, RestartCommand);
 			
 			
 			//map mediators
@@ -111,6 +117,7 @@ package
 			mediatorMap.mapView(InputView, InputMediator);
 			mediatorMap.mapView(ResultsView, ResultsMediator);
 			mediatorMap.mapView(FinalView, FinalViewMediator);
+			mediatorMap.mapView(ExitView, ExitMediator);
 			
 			
 			

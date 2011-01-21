@@ -52,6 +52,17 @@ package view.mediators
 			
 		}
 		
+		override public function onRemove():void{
+			
+			userDataSet.remove(setData);	
+			balanceSet.remove(showBalance);
+			iterationChange.remove(updateIteration);
+			leaderboardSet.remove(updateLeaderBoard);
+			inputView.removeEventListener(NumberEvent.BALANCE_UPDATE, updateBalance);//event triggered by steppers
+			inputView.inputPanel.submit.removeEventListener(MouseEvent.CLICK, goClicked);
+			
+		}
+		
 		private function goClicked( m:MouseEvent ):void{
 			
 			//increase iteration first so it is correct for submission

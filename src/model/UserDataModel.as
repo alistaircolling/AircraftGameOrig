@@ -70,6 +70,7 @@ package model
 
 		public function set vo(value:ReceivedDataVO):void
 		{
+			trace("received data vo set on model");
 			_vo = value;
 			if (vo.initialData){
 				
@@ -104,6 +105,7 @@ package model
 		public function set iteration(value:int):void
 		{
 			_iteration = value;
+			trace("----- ITERATION SET TO:"+value);
 			iterationChange.dispatch(_iteration);
 		}
 

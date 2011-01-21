@@ -26,13 +26,27 @@ package view.mediators
 		override public function onRegister():void{
 			
 			graphDataSet.add(setData);
+			resultsView.graph.reset();
 			iterationChange.add(setIteration);
 			resultsView.addEventListener(ChangeState.ENTER_SCREEN, changeState);
+			changeStateSignal.add(updateState);
+		}
+		
+
+		private function updateState( s:String ):void{
+			
+			//triggered when going back to the start --  clear  the graph
+			if (s == ChangeState.INTRO_SCREEN){
+				
+				resultsView.graph.reset();
+			}
 		}
 		
 		override public function onRemove():void{
-			
-			trace("results mediator removed!!!");
+			graphDataSet.remove(setData);
+			iterationChange.remove(setIteration);
+			resultsView.removeEventListener(ChangeState.ENTER_SCREEN, changeState);
+			changeStateSignal.remove(updateState);
 		}
 		
 		private function changeState( e:ChangeStateEvent ):void{

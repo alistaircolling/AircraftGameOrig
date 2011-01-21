@@ -41,6 +41,7 @@
 				
 			}
 			
+			
 			public function get iteration():uint
 			{
 				return _iteration;

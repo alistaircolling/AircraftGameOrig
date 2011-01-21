@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
+	
+	<fx:Script>
+		<![CDATA[
+			
+
+			protected function restartBtn_clickHandler(event:MouseEvent):void
+			{
+				trace("--restart clicked");
+				// TODO Auto-generated method stub
+				var e:Event = new Event("restartGame");
+				dispatchEvent(e);
+			}
+
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Panel width="800" height="100" title="Exit Slide Text">
+		
+		<s:VGroup bottom="20" top="50" width="80%">
+			
+			<s:Label width="100%" text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat."/>
+			<s:Button id="restartBtn" label="restart" click="restartBtn_clickHandler(event)"/>
+		</s:VGroup>
+		
+	</s:Panel>
+</s:Group>

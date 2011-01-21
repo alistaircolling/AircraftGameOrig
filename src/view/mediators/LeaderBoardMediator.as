@@ -21,6 +21,12 @@ package view.mediators
 			lbSet.add(dataSet);
 			
 		}
+
+		override public function onRemove():void{
+			
+			lbSet.remove(dataSet);
+			
+		}
 		
 		private function dataSet( vo:LeaderBoardVO ):void{
 			

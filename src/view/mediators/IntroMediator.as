@@ -41,8 +41,18 @@ package view.mediators
 			loadXML.dispatch();
 		}
 		
+		override public function onRemove():void{
+			
+			introView.start.removeEventListener(MouseEvent.CLICK, buttonClickedListener);
+			//add listener for signal
+			textSetOnModel.add(onModelChanged);
+			leaderBoardSet.add(updateLeaderBoard);
+			
+		}
+		
 		private function addListeners():void{
 			trace("add intro mediator listeners");
+			
 			introView.start.addEventListener(MouseEvent.CLICK, buttonClickedListener);
 			
 			//add listener for signal

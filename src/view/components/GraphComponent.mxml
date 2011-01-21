@@ -73,7 +73,7 @@
 			
 			private function addValuesToAC( vo:GraphResultsVO ):void{
 				
-				// add the new values to the array collection then animate from the current position
+				// add the new values to the array cllection then animate from the current position
 				var currArray:Array = [];
 				
 				var endVal:uint = vo.monthTotal.length;//values after this are set to a line
@@ -149,14 +149,21 @@
 				}
 			}
 			
-			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			protected function group1_creationCompleteHandler(event:FlexEvent = null):void
 			{
 				//intiialised
 				_counter = 0;
 				_usedArray = new Array(71);
 				chartData = new ArrayCollection();
+				
 			}
 			
+			public function reset():void{
+				
+				group1_creationCompleteHandler();
+				linechart.executeBindings(true);
+				//linechart.ini
+			}
 			
 			protected function myMove_effectEndHandler(event:EffectEvent):void
 			{

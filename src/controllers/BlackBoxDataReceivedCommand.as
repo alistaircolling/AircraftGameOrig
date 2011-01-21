@@ -24,7 +24,7 @@ package controllers
 		
 		override public function execute():void{
 			
-			
+			trace("black box data received command");
 			var vo:ReceivedDataVO = new ReceivedDataVO();
 			vo.currentReliability = DataUtils.getObjectForValue(userModel.vo.reliability, Number(xml..currentReliability));
 			vo.currentNFF = DataUtils.getObjectForValue(userModel.vo.nff, xml..currentNFF);
