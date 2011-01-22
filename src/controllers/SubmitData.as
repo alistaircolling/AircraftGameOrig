@@ -20,7 +20,7 @@ package controllers
 			
 			//add the iteration and game ID
 			vo.iteration = userModel.iteration.toString();
-			vo.gameID = userModel.gameID;
+			vo.gameID = userModel.gameID.toString();
 			blackBox.sendData(vo);
 			
 		}

@@ -36,7 +36,7 @@ package controllers
 			vo.iteration = Number(xml..iteration);
 			if (vo.iteration == 3){
 				vo.avAvailability = xml..averageAvailability;
-				vo.cost = Number(xml..currentBudget);
+				vo.finalScore = Number(xml..currentBudget);
 			}
 			
 			//update vectors to start at minimum values

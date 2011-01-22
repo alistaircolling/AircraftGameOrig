@@ -7,6 +7,7 @@ package model
 	
 	import signals.BalanceSet;
 	import signals.ChangeState;
+	import signals.GameIDSet;
 	import signals.GraphDataSet;
 	import signals.IterationChange;
 	import signals.StageSet;
@@ -28,8 +29,10 @@ package model
 		public var iterationChange:IterationChange;
 		[Inject]
 		public var graphDataSet:GraphDataSet;
+		[Inject]
+		public var gameIDSet:GameIDSet;
 		
-		public var gameID:String = "12345";//TODO set the game ID somehow and store it externally
+		private var _gameID:Number;
 		
 		private var _graphVO:GraphResultsVO;
 		
@@ -121,6 +124,18 @@ package model
 			changeState.dispatch(ChangeState.RESULTS_SCREEN);
 			graphDataSet.dispatch(_graphVO);
 			
+			
+		}
+
+		public function get gameID():Number
+		{
+			return _gameID;
+		}
+
+		public function set gameID(value:Number):void
+		{
+			_gameID = value;
+			gameIDSet.dispatch(_gameID);
 			
 		}
 

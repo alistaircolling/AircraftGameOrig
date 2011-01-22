@@ -17,14 +17,11 @@
 					<s:VGroup width="100%" height="100%">
 						<s:Label id="availability" text="Availability:-----"/>
 						<s:Label id="cost" text="Cost:-----"/>
+						<s:TextArea id="enterName" editable="true" width="40" height="20" /> 
 					</s:VGroup>
-					<s:TextArea id="message" text="Congratulations you made the leaderboard. Please enter your name below"/>
+					<s:TextArea id="message" text="-------------"/>
 				</s:HGroup>
-				<s:HGroup width="100%" height="100%">
-					<s:Button label="dummy"/>
-					<s:Button label="dummy"/>
-					<s:Button label="dummy"/>
-				</s:HGroup>
+			
 				<s:Button label="continue>>>>" id="continueBtn"/>
 						  
 			</s:VGroup>

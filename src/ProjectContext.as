@@ -1,7 +1,9 @@
 package 
 {
 	import controllers.BlackBoxDataReceivedCommand;
+	import controllers.EnterWinnerCommand;
 	import controllers.LoadLeaderBoardXML;
+	import controllers.RequestGameIDCommand;
 	import controllers.RequestLeaderBoardCommand;
 	import controllers.RestartCommand;
 	import controllers.ServiceSetCommand;
@@ -23,6 +25,7 @@ package
 	
 	import services.BlackBoxService;
 	import services.CompiledXMLService;
+	import services.GameIDService;
 	import services.InitialXMLService;
 	import services.LeaderBoardService;
 	
@@ -30,11 +33,14 @@ package
 	import signals.BlackBoxDataReceived;
 	import signals.ChangeState;
 	import signals.DataSubmitted;
+	import signals.EnterWinner;
 	import signals.ErrorReceived;
+	import signals.GameIDSet;
 	import signals.GraphDataSet;
 	import signals.IterationChange;
 	import signals.LeaderBoardSet;
 	import signals.LoadXML;
+	import signals.RequestGameID;
 	import signals.RequestLeaderBoard;
 	import signals.RestartGame;
 	import signals.SettingsUpdated;
@@ -75,9 +81,14 @@ package
 			injector.mapSingleton(SettingsModel);
 			injector.mapSingleton(ExampleModel);
 			injector.mapSingleton(LeaderBoardModel);
+			injector.mapSingleton(UserDataModel);
+			
+			//map services
 			injector.mapSingleton(BlackBoxService);
 			injector.mapSingleton(LeaderBoardService);
-			injector.mapSingleton(UserDataModel);
+			injector.mapSingleton(CompiledXMLService);
+			injector.mapSingleton(InitialXMLService);
+			injector.mapSingleton(GameIDService);
 			
 			//map signal singletons
 			injector.mapSingleton(SettingsUpdated);
@@ -94,12 +105,13 @@ package
 			injector.mapSingleton(IterationChange);
 			injector.mapSingleton(GraphDataSet);
 			injector.mapSingleton(RestartGame);
+			injector.mapSingleton(GameIDSet);
 			
 			
 			
-			//map services
-			injector.mapSingleton(CompiledXMLService);
-			injector.mapSingleton(InitialXMLService);
+			
+
+
 			
 			//map signals   -maps signals to commands
 			signalCommandMap.mapSignalClass(LoadXML, LoadLeaderBoardXML);
@@ -111,6 +123,8 @@ package
 			signalCommandMap.mapSignalClass(BlackBoxDataReceived, BlackBoxDataReceivedCommand);
 			signalCommandMap.mapSignalClass(RestartGame, RestartCommand);
 			signalCommandMap.mapSignalClass(RequestLeaderBoard, RequestLeaderBoardCommand);
+			signalCommandMap.mapSignalClass(EnterWinner, EnterWinnerCommand);
+			signalCommandMap.mapSignalClass(RequestGameID, RequestGameIDCommand);
 			
 			
 			//map mediators

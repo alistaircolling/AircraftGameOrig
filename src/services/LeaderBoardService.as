@@ -34,21 +34,26 @@ package services
 		
 		private var _xmlFile:String = "data/winners.xml";
 		private var _data:String;
+		private var _xml:XML;
+		private var _dataFile:File;
 		
 		public function requestData():void
 		{
 			//todo swap out to use flash vars instead
 			//loads xml
-			var dataFile:File = File.applicationDirectory.resolvePath(_xmlFile);
 			
-			statusUpdate.dispatch("loading leaderboard from:"+dataFile.url);
+			var directory:File = File.documentsDirectory;
+			_dataFile = directory.resolvePath("Selex"+File.separator+"winners.xml");
+			statusUpdate.dispatch("loading leaderboard from:"+_dataFile.url);
 			var stream:FileStream = new FileStream();
-			stream.open(dataFile, FileMode.READ);
-			
+			stream.open(_dataFile, FileMode.READ);
 			_data = stream.readUTFBytes(stream.bytesAvailable);
 			statusUpdate.dispatch("data read yet?:"+_data);
 			stream.close();
 			statusUpdate.dispatch("closed stream: data read yet?:"+_data);
+			
+			
+			
 			handleServiceResult(_data);
 			/*
 			var service:HTTPService = new HTTPService();
@@ -61,12 +66,28 @@ package services
 		}
 		
 	
+		public function writeToXML( vo:UserVO, position:uint ):void{
+			
+			var nodeString:String = '<user name="'+vo.label+'" score="'+vo.score.toString()+'" />';
+			var winner:XML =  new XML(nodeString);
+			 _xml.replace(position, winner);
+			 
+			var outputString:String  = '<?xml version="1.0" encoding="utf-8"?>\n';
+			outputString += _xml.toXMLString();
+			outputString = outputString.replace(/\n/g, File.lineEnding);
+			
+			var stream:FileStream = new FileStream();
+			stream.open(_dataFile, FileMode.WRITE);
+			stream.writeUTFBytes(outputString);
+		}
+		
+		
 		
 		private function handleServiceResult(s:String):void{
 			trace("leader board data received");
 			statusUpdate.dispatch("leader board xml loaded");
-			var xml:XML = new XML(s);//event.result as XML;
-			var winnersList:XMLList = xml.user;
+			_xml = new XML(s);//event.result as XML;
+			var winnersList:XMLList = _xml.user;
 			var vo:LeaderBoardVO = new LeaderBoardVO();
 			var winners:Array = [];
 			//TODO add params here

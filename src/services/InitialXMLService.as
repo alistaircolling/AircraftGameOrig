@@ -24,25 +24,37 @@ package services
 		[Inject]
 		public var errorReceived:ErrorReceived;
 		private var _data:String;
+		private var _dataFile:File;
+		private var _gameID:Number;
+		private var _gameXML:XML;
+		private var _gameFile:File;
 		
 		public function loadXML(__s:String=null):void
 		{
 			
-			var dataFile:File = File.applicationDirectory.resolvePath(__s);
+/*			var directory:File = File.documentsDirectory;
+			_dataFile = directory.resolvePath("Selex"+File.separator+"initParams.xml");
 			var stream:FileStream = new FileStream();
-			stream.open(dataFile, FileMode.READ);
-			_data = stream.readUTFBytes(stream.bytesAvailable);
-			stream.close();
-			handleServiceResult(_data);
+			stream.open(_dataFile, FileMode.READ);
+			*/
+			//load the game id first
+		
 			
-			/*
-			var service:HTTPService = new HTTPService();
-			var responder:mx.rpc.Responder = new Responder(handleServiceResult, handleServiceFault);
-			var token:AsyncToken;
-			service.resultFormat = "e4x";
-			service.url = __s;
-			token = service.send();
-			token.addResponder(responder);*/
+			//load inti params			
+			_data = xmlFile("Selex"+File.separator+"initParams.xml");
+			handleServiceResult(_data);
+		}
+		
+		private function xmlFile( path:String ):String{
+			
+			var directory:File = File.documentsDirectory;
+			_dataFile = directory.resolvePath(path);
+			var stream:FileStream = new FileStream();
+			stream.open(_dataFile, FileMode.READ);
+			var retS:String = stream.readUTFBytes(stream.bytesAvailable);
+			stream.close();
+			return retS;
+			
 		}
 		
 		

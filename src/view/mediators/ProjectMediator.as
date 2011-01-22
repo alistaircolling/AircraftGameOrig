@@ -11,6 +11,8 @@ package view.mediators
 	
 	import signals.ChangeState;
 	import signals.ErrorReceived;
+	import signals.GameIDSet;
+	import signals.RequestGameID;
 	import signals.StartClicked;
 	import signals.StatusUpdate;
 	import signals.TextSetOnModel;
@@ -29,6 +31,10 @@ package view.mediators
 		public var changeState:ChangeState;
 		[Inject]
 		public var statusUpdate:StatusUpdate;
+		[Inject]
+		public var gameIDSet:GameIDSet;
+		[Inject]
+		public var requestID:RequestGameID;
 		
 		override public function onRegister():void{
 			trace("Project Mediator registered");
@@ -41,10 +47,16 @@ package view.mediators
 			errorReceived.add(showError);
 			changeState.add(updateState);
 			statusUpdate.add(showStatus);
+			gameIDSet.add(setGameID);
+			requestID.dispatch();
 		//	mainViewComponent.btn.addEventListener(MouseEvent.CLICK, buttonClickedListener);
 			//add listener for signal
 		//	textSetOnModel.add(onModelChanged);
 			
+		}
+		
+		private function setGameID( n:Number ):void{
+			viewComp.gameID.text = "GAME ID:  "+n.toString();
 		}
 		
 		private function showStatus( s:String ):void{

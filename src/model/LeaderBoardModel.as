@@ -11,6 +11,8 @@ package model
 		[Inject]
 		public var leaderBoardSet:LeaderBoardSet;
 		
+		public var xml:XML;//used by final screen to write back to xml file
+		
 		private var lbVO:LeaderBoardVO;
 
 		public function get vo():LeaderBoardVO
