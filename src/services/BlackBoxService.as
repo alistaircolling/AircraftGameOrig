@@ -64,6 +64,7 @@ package services
 		
 		public function init():void{
 			
+			return //remove - only for testing TODO
 			statusUpdate.dispatch("connecting to socket on ip:"+_ip+"  port:"+_port);
 			_attempts = 0;
 			_timer = new Timer(2000, 1);
@@ -73,7 +74,7 @@ package services
 			_socket.addEventListener(_socket.CONNECTED, connectedListener);
 			_socket.addEventListener(_socket.DATA_RECEIVED, dataReceivedListener);
 			_socket.addEventListener(CustomEvent.SOCKET_CONNECT_ERROR, socketError);
-			_socket.connect();
+			_socket.connect();  
 			
 		}
 		

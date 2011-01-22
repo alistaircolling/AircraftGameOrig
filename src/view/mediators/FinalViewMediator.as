@@ -94,7 +94,7 @@ package view.mediators
 			
 			if(b){
 				finalView.message.text = "Congratulations, you made the leader board. Please enter you initial below";
-			 	finalView.enterName.visible = true;
+			 	finalView.enterName.visible = true;	
 			}else{
 				finalView.message.text = "";
 			 	finalView.enterName.visible = false;
@@ -105,8 +105,9 @@ package view.mediators
 	
 		private function continueClicked( m:MouseEvent ):void{
 			trace("-------continue clicked");
-			
-			enterWinner.dispatch(finalView.enterName.text, _boardPosition);
+			if (_boardPosition>-1){
+				enterWinner.dispatch(finalView.enterName.text, _boardPosition);
+			}
 			changeState.dispatch(ChangeState.EXIT_SCREEN);
 			
 		}

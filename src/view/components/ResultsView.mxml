@@ -72,7 +72,7 @@
 				<s:Button id="continueBtn" label="continue" click="continue_clickHandler(event)" right="10" />
 			</s:Group>
 			
-			<components:GraphComponent id="graph" horizontalCenter="0" bottom="20" verticalCenter="150"/>
+			<components:GraphComponent id="graph" horizontalCenter="0" verticalCenter="150"/>
 		</s:VGroup>
 	</s:Panel>
 	
