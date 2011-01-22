@@ -83,6 +83,6 @@
 	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen" visible="false" horizontalCenter="0"/>
 	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter" visible="false" horizontalCenter="0" verticalCenter="0"/>
 	<components:ExitView id="exitView" includeIn="finalScreen, exitScreen" visible="false" horizontalCenter="0" verticalCenter="0"/>
-	<s:TextArea id="statusLabel" fontSize="12" bottom="5" right="5"  height="100" width="400"/>
+	<s:TextArea id="statusLabel" fontSize="12" bottom="5" left="5"  height="100" width="400"/>
 	<s:Label id="gameID" text="GameID: --- " right="10" top="10" fontSize="20" fontWeight="bold" color="0xff0000"/>
 </s:WindowedApplication>

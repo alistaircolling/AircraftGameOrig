@@ -2,6 +2,7 @@ package
 {
 	import controllers.BlackBoxDataReceivedCommand;
 	import controllers.EnterWinnerCommand;
+	import controllers.InitSocketCommand;
 	import controllers.LoadLeaderBoardXML;
 	import controllers.RequestGameIDCommand;
 	import controllers.RequestLeaderBoardCommand;
@@ -37,6 +38,7 @@ package
 	import signals.ErrorReceived;
 	import signals.GameIDSet;
 	import signals.GraphDataSet;
+	import signals.InitSocket;
 	import signals.IterationChange;
 	import signals.LeaderBoardSet;
 	import signals.LoadXML;
@@ -108,9 +110,6 @@ package
 			injector.mapSingleton(GameIDSet);
 			
 			
-			
-			
-
 
 			
 			//map signals   -maps signals to commands
@@ -125,6 +124,7 @@ package
 			signalCommandMap.mapSignalClass(RequestLeaderBoard, RequestLeaderBoardCommand);
 			signalCommandMap.mapSignalClass(EnterWinner, EnterWinnerCommand);
 			signalCommandMap.mapSignalClass(RequestGameID, RequestGameIDCommand);
+			signalCommandMap.mapSignalClass(InitSocket, InitSocketCommand);
 			
 			
 			//map mediators

@@ -49,33 +49,26 @@
 			}
 			
 			public function setData( vo:GraphResultsVO ):void{
-				
 				//set the data 
 				trace("setting the data within the graph component");
 				addValuesToAC(vo);
-				
 			}
 			
 			private function drawLine( val:Number ):void{
-				
 				var line:Line = new Line();
 				line.stroke = blackStroke;
-				
 				var theX:Number = val;
-				
 				line.xFrom = theX;
 				line.xTo = theX;
 				line.yFrom = 0;
 				line.yTo = 600;
 				lines.addElement(line);
-				
 			}
 			
 			private function addValuesToAC( vo:GraphResultsVO ):void{
 				
 				// add the new values to the array cllection then animate from the current position
 				var currArray:Array = [];
-				
 				var endVal:uint = vo.monthTotal.length;//values after this are set to a line
 				var topVal:uint = 12*6;// 6 years (come in 3 goes)
 				
@@ -89,40 +82,21 @@
 						j= endVal-1;
 					}
 					
-					
 					var percentTotal:Number = Number(vo.percentFlown[j]);
 					var monthTotal:Number = Number(vo.monthTotal[j]);
 					//only add these values 
 					if (i/4 == i%4){
 						//trace("i is :"+i+"  adding quarterly amount");
 					}
-					//todo add the quarterly values every time and add them to the chartdata if this doesnt break anything
-					
 					var inAirTotal:Number = Number(vo.inAir[i%4]);
 					var onGroundTotal:Number = Number(vo.onGround[i%4]);
-			//		trace("i:"+i+" j:"+j+"   adding item at:"+(_counter+j)+"  percent:"+percentTotal+"  month:"+monthTotal);
-					
 					_usedArray[_counter+j] = {month:i, percent:percentTotal, monthT:monthTotal};
-					//chartData.addItemAt({month:i, percent:percentTotal, monthT:monthTotal}, _counter+j);
 					
 				}
-				
-				
 				_counter += j+1;//move to the next index
-		//		trace("counter set to:"+_counter);
-			//	if (_counter == 72){
-					
-					chartData.source = _usedArray;					
-					linechart.dataProvider = chartData;
-					linechart.executeBindings(true);
-					
-			//	}
-				//add array to used one
-				
-				//moveImage();
-			//	traceAllMonthVals();
-				
-				
+				chartData.source = _usedArray;					
+				linechart.dataProvider = chartData;
+				linechart.executeBindings(true);
 			}
 			
 			private function traceAllMonthVals():void{
@@ -155,11 +129,9 @@
 				_counter = 0;
 				_usedArray = new Array(71);
 				chartData = new ArrayCollection();
-				
 			}
 			
 			public function reset():void{
-				
 				group1_creationCompleteHandler();
 				linechart.executeBindings(true);
 				//linechart.ini

@@ -1,6 +1,7 @@
 
 package services
 {
+	import flash.events.Event;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	
@@ -11,8 +12,12 @@ package services
 	
 	import org.robotlegs.mvcs.Actor;
 	
+	import services.socketUtils.SocketConnector;
+	
 	import signals.BlackBoxDataReceived;
 	import signals.StatusUpdate;
+	
+	import utils.CustomEvent;
 	
 	public class BlackBoxService extends Actor
 	{
@@ -24,6 +29,12 @@ package services
 		[Inject]
 		public var bBDataReceived:BlackBoxDataReceived;
 		
+		
+		
+		private var _socket:SocketConnector;
+		private static const _port:String = "6780";
+		private var _ip:String;
+		
 		private var _timer:Timer;   //todo remove timer as this is for testing only
 		
 		private var _dummy1:String = ( <![CDATA[<?xml version="1.0" encoding="UTF-8" ?><resultParams><gameID>1234</gameID><iteration>1</iteration><currentReliability>15.6</currentReliability><currentNFF>40</currentNFF><currentTurnaround>21</currentTurnaround><currentSpares>125</currentSpares><currentBudget>19.1</currentBudget><percentFlown>67.3,65.9,67.3,66.6,68.6,67.3,74.5,74.8,79.9,77.5,84.5,82.4,87.5,83.3,85.8,84.1,86.7,83.2,87.5,82.4,86.7,85.8,85.8,82.4</percentFlown><monthTotal>-7.5,-7.6,-7.5,-0.2,-0.0,-0.1,0.5,0.6,1.0,0.6,1.5,1.4,1.6,1.5,1.7,1.6,1.7,1.6,1.7,1.5,1.7,1.7,1.7,1.5</monthTotal><inAir>7,7,8,8,9,8,9,8</inAir><onGround>3,3,2,2,1,2,1,2</onGround></resultParams>]]> ).toString();
@@ -32,7 +43,7 @@ package services
 		
 		private var _iteration:uint; //only used during dummy runs
 		
-		public function sendData( vo:InputVO ):void{
+		public function sendDataX( vo:InputVO ):void{
 			//only used in testing
 			trace("Sending data for iteration:"+vo.iteration);
 			_iteration = Number(vo.iteration);
@@ -46,6 +57,49 @@ package services
 			_timer.start();
 			
 		}
+		
+		public function init():void{
+			
+			_socket = new SocketConnector(_ip, Number(_port));
+			_socket.addEventListener(_socket.CONNECTED, connectedListener);
+			_socket.addEventListener(_socket.DATA_RECEIVED, dataReceivedListener);
+			_socket.addEventListener(CustomEvent.SOCKET_CONNECT_ERROR, socketError);
+			_socket.connect();
+			
+		}
+		
+		private function socketError( c:CustomEvent ):void{
+			
+			statusUpdate.dispatch("UNABLE TO CONNECT TO SOCKET");
+		}
+		
+		public function sendData( vo:InputVO ):void{
+			
+			_iteration = Number(vo.iteration);
+			
+			//create xml   TODO add socket connectivity
+			var xmlStr:String = "<?xml version='1.0' encoding='UTF-8' ?><requestParams><gameID>"+vo.gameID+"</gameID><iteration>"+vo.iteration+"</iteration><reliabilityStep>"+vo.reliability+"</reliabilityStep><nffStep>"+vo.nff+"</nffStep><turnaroundStep>"+vo.turnaround+"</turnaroundStep><sparesBought>"+vo.spares+"</sparesBought></requestParams>";
+			statusUpdate.dispatch("submitting to socket server......"+xmlStr);
+			_socket.send(xmlStr);
+			
+		}
+		
+		
+		private function connectedListener( e:Event ):void{
+			
+			statusUpdate.dispatch( "connected to the socket server");
+			
+		}
+		
+		private function dataReceivedListener( e:CustomEvent ):void{
+			statusUpdate.dispatch( "msg received");
+		}
+	
+		private function write(str:String):void {
+			statusUpdate.dispatch( "Attempting to write '"+str+"'to socket...");
+			_socket.send(str);
+		}
+		
 		
 		private function dummyComplete( t:TimerEvent ):void{
 			trace("dummy response");			
