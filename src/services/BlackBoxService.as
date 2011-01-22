@@ -45,7 +45,7 @@ package services
 		
 		private var _iteration:uint; //only used during dummy runs
 		
-		public function sendDataX( vo:InputVO ):void{
+		public function sendData( vo:InputVO ):void{
 			//only used in testing
 			trace("Sending data for iteration:"+vo.iteration);
 			_iteration = Number(vo.iteration);
@@ -53,6 +53,10 @@ package services
 			//create xml   TODO add socket connectivity
 			var xmlStr:String = "<?xml version='1.0' encoding='UTF-8' ?><requestParams><gameID>"+vo.gameID+"</gameID><iteration>"+vo.iteration+"</iteration><reliabilityStep>"+vo.reliability+"</reliabilityStep><nffStep>"+vo.nff+"</nffStep><turnaroundStep>"+vo.turnaround+"</turnaroundStep><sparesBought>"+vo.spares+"</sparesBought></requestParams>";
 			statusUpdate.dispatch("submitting to socket server......"+xmlStr);
+			
+			_timer = new Timer(400, 1);
+			_timer.addEventListener(TimerEvent.TIMER_COMPLETE, dummyComplete);
+			_timer.start();
 			
 			
 			
@@ -87,7 +91,7 @@ package services
 			_socket.connect();
 		}
 		
-		public function sendData( vo:InputVO ):void{
+		public function sendDataX( vo:InputVO ):void{
 			
 			_iteration = Number(vo.iteration);
 			

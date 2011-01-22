@@ -39,6 +39,12 @@
 			
 			private var _usedArray:Array;
 			
+			private var _inAir:Vector.<Number>;
+			private var _onGround:Vector.<Number>;
+			
+			private var _totalMonths:uint;//the total number of months to move to
+			
+			
 			private var _monthTA:Array = [-7.5,-7.6,-7.5,-0.2,-0.0,-0.1,0.5,0.6,1.0,0.6,1.5,1.4,1.6,1.5,1.7,1.6,1.7,1.6,1.7,1.5,1.7,1.7,1.7,1.5,-7.9,-8.1,-8.0,-0.2,0.0,-0.0,0.1,0.0,0.1,-0.1,0.1,-0.0,0.1,0.1,2.5,2.3,2.5,2.4,2.6,2.4,2.5,2.4,2.6,2.3,1.4,1.3,1.3,1.6,1.7,1.5,1.7,1.5,1.7,1.4,1.7,1.4,1.7,1.6,1.7,1.6,1.7,1.6,1.7,1.6,1.7,1.5,1.7,1.6];
 			private var _percentA:Array = [67.3,65.9,67.3,66.6,68.6,67.3,74.5,74.8,79.9,77.5,84.5,82.4,87.5,83.3,85.8,84.1,86.7,83.2,87.5,82.4,86.7,85.8,85.8,82.4, 89.2,84.1,86.7,82.4,86.7,85.0,87.1,86.7,89.7,83.9,87.8,84.6,88.5,87.9,90.9,85.6,91.8,88.2,92.7,87.3,91.8,88.2,92.7,85.6,90.0,87.3,89.1,89.1,90.9,86.5,90.2,87.5,91.1,85.7,92.9,85.7,92.0,88.4,90.2,89.3,92.0,89.3,92.9,89.3,92.0,86.6,92.9,89.3];
 			
@@ -74,6 +80,8 @@
 				
 				var firstDate:Date = new Date();
 				firstDate.setDate(firstDate.getDate()-100);
+				_totalMonths = _counter+endVal;
+				trace("totalMonths to move:"+_totalMonths);
 			//	trace("counter starting round at:"+_counter);
 				for (var i:uint = 0; i<=topVal; i++){
 					
@@ -88,15 +96,22 @@
 					if (i/4 == i%4){
 						//trace("i is :"+i+"  adding quarterly amount");
 					}
-					var inAirTotal:Number = Number(vo.inAir[i%4]);
-					var onGroundTotal:Number = Number(vo.onGround[i%4]);
+				//	var inAirTotal:Number = Number(vo.inAir[i%4]);
+				//	var onGroundTotal:Number = Number(vo.onGround[i%4]);
 					_usedArray[_counter+j] = {month:i, percent:percentTotal, monthT:monthTotal};
 					
 				}
+				
+				_inAir = vo.inAir;
+				_onGround = vo.onGround;
+				
 				_counter += j+1;//move to the next index
 				chartData.source = _usedArray;					
 				linechart.dataProvider = chartData;
 				linechart.executeBindings(true);
+				//animate the mask
+				moveImage();
+				
 			}
 			
 			private function traceAllMonthVals():void{
@@ -139,12 +154,12 @@
 			
 			protected function myMove_effectEndHandler(event:EffectEvent):void
 			{
-				if (_counter<35){
+				if (_counter<_totalMonths){
 					_counter ++;
 					moveImage();
 				}
-				var visits:Number =  chartData[_counter].visits;
-				trace("Month:"+(_counter*2)+"  visits:"+visits);
+		
+				trace("Month:"+(_counter*2));
 				drawLine( rect.x );
 			}
 			
@@ -196,7 +211,7 @@
 	<s:Group id="rect">
 		<s:Rect width="800" height="600" x="-800">
 			<s:fill>
-				<s:SolidColor color="0xAA2FC9" alpha="0"/>
+				<s:SolidColor color="0xAA2FC9" alpha="1"/>
 			</s:fill>
 		</s:Rect>
 	</s:Group>

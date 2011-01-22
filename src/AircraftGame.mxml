@@ -2,7 +2,7 @@
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
 					   xmlns:s="library://ns.adobe.com/flex/spark" 
 					   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*" xmlns:local="*"
-					   creationComplete="windowedapplication1_creationCompleteHandler(event)"
+					   addedToStage="windowedapplication1_creationCompleteHandler(event)"
 					   width="1024" height="768"
 					   >
 	<fx:Style source="AircraftGame.css"/>
@@ -18,8 +18,9 @@
 
 			private var context:ProjectContext;
 			
-			protected function windowedapplication1_creationCompleteHandler(event:FlexEvent):void
+			protected function windowedapplication1_creationCompleteHandler(event:Event):void
 			{
+			//	stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 				context = new ProjectContext(this, true);
 				updateState(ChangeState.INTRO_SCREEN);
 			}
@@ -57,12 +58,9 @@
 						finalView.visible = false;
 						introView.visible = false;
 						break
-					default:
-						
+					default:						
 						break
 				}
-				
-				
 			}
 
 		]]>
@@ -78,6 +76,7 @@
 		<s:State name="finalScreen" />
 		<s:State name="exitScreen" />
 	</s:states>
+	<mx:Image source="@Embed('../embed/selex-background.png')" />
 	<components:InputView id="inputView" includeIn="enter, intro, resultsScreen" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
 	<components:IntroView id="introView" includeIn="intro, exitScreen"/>
 	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen" visible="false" horizontalCenter="0"/>
