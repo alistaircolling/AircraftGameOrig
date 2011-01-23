@@ -2,7 +2,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 width="340" height="40">
+		 width="340" height="40" xmlns:components="view.components.*">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
@@ -16,6 +16,8 @@
 			[Bindable]
 			public var title:String;
 			[Bindable]
+			public var unit:String;
+			[Bindable]
 			public var values:Vector.<InputObjectVO>;
 			
 			private var _switchDirection:Boolean;
@@ -28,7 +30,7 @@
 			{
 				return _currVal;
 			}
-
+			
 			public function set currVal(value:InputObjectVO):void
 			{
 				_currVal = value;
@@ -71,7 +73,7 @@
 				var newCost:Number = (values[_currIndex] as InputObjectVO).cost;
 				updateBalance(oldCost-newCost);
 			}
-
+			
 			public function get switchDirection():Boolean
 			{
 				return _switchDirection;
@@ -89,31 +91,42 @@
 					up.addEventListener(MouseEvent.CLICK, up_clickHandler);
 				}
 			}
-
+			
 			public function get currIndex():uint
 			{
 				return _currIndex;
 			}
-
+			
 			public function set currIndex(value:uint):void
 			{
 				_currIndex = value;
 			}
-
+			
+			/* 	override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{
+			
+			graphics.clear();
+			graphics.lineStyle(1, 0xff0000);
+			graphics.drawRect(0,0,unscaledWidth, unscaledHeight);
+			super.updateDisplayList(unscaledWidth, unscaledHeight);
+			} */
+			
 			
 		]]>
+		
+		
+		
 	</fx:Script>
-	<s:Group width="100%">
-		<s:HGroup>
-			
-		<s:Label text="{title}"/>
-		<s:Label text="%" fontStyle="italic"/>
-		<s:Label id="valLabel" text="---"/>
+	<s:Group width="100%" verticalCenter="0" height="100%">
+		<s:Group x="365" height="100%" y="5" >
+			<s:Label id="valLabel" text="---" styleName="supportPanelCategoryNumber" textAlign="center" horizontalCenter="0" verticalCenter="0" verticalAlign="middle" />
+		</s:Group>
+		<s:HGroup verticalAlign="middle" height="100%" x="28" y="5">
+			<s:Label text="{title}" styleName="supportPanelCategory" verticalCenter="0" verticalAlign="middle" height="100%"/>
+			<s:Label id="unitLabel" text="{unit}" styleName="supportPanelCategoryItalic" verticalCenter="0" verticalAlign="middle"  height="100%"/>
 		</s:HGroup>
-		<s:HGroup right="0">
-			
-		<s:Button id="down" label="down" />
-		<s:Button id="up" label="up" />
+		<s:HGroup right="0" verticalAlign="middle" gap="0">
+			<components:DownArrowButton id="down" />
+			<components:UpArrowButton id="up" />
 		</s:HGroup>
 	</s:Group>
 	

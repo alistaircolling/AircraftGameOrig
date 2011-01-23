@@ -43,7 +43,7 @@ package view.mediators
 		
 		override public function onRemove():void{
 			
-			introView.start.removeEventListener(MouseEvent.CLICK, buttonClickedListener);
+			introView.startBtn.removeEventListener(MouseEvent.CLICK, buttonClickedListener);
 			//add listener for signal
 			textSetOnModel.add(onModelChanged);
 			leaderBoardSet.add(updateLeaderBoard);
@@ -53,7 +53,7 @@ package view.mediators
 		private function addListeners():void{
 			trace("add intro mediator listeners");
 			
-			introView.start.addEventListener(MouseEvent.CLICK, buttonClickedListener);
+			introView.startBtn.addEventListener(MouseEvent.CLICK, buttonClickedListener);
 			
 			//add listener for signal
 			textSetOnModel.add(onModelChanged);

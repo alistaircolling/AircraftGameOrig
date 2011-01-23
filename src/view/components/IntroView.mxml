@@ -1,31 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Group  width="100%" height="100%" 
-		   xmlns:fx="http://ns.adobe.com/mxml/2009"
-		   xmlns:s="library://ns.adobe.com/flex/spark" xmlns:components="view.components.*" xmlns:mx="library://ns.adobe.com/flex/mx">
+<s:Group width="1920" height="1080"
+		  xmlns:fx="http://ns.adobe.com/mxml/2009"
+		  xmlns:s="library://ns.adobe.com/flex/spark" xmlns:components="view.components.*" xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	
 	<fx:Declarations>
-		<fx:String id="htmlTextAsHTML"><![CDATA[The Supreme Commander of the Air Force is frustrated as the fleet of aircraft are only flying at 65% availability and this is providing insufficient combat readiness. The Commander has challenged you to manage the fleet support. You must demonstrate cost savings and increase aircraft availability to 75%. You have been allocated a budget which you may spend on four different support service improvements.<br>Buying more spares<br>Improving reliability<br>Reducing NFF (No Fault Found) Rates<br>Reducing RTRT (Repair Turn Around Time)<br>The following simulation will allow you 3 turns to attempt to meet the Commander’s objectives. Each turn will represent two years and you be able to select different spending on service improvements during each turn.<br>You will be rewarded with bonus payments for meeting the availability target of 75%. However, you will face financial penalties if you fail to meet this target!<br>Your success will be determined by the availability of combat ready aircraft to the Commander and how effective your management has been. You will be judged by the remaining funds you have after the 6 year period. This value will be displayed as your final score.<br>Good Luck]]></fx:String>
+		<fx:String id="htmlTextAsHTML"><![CDATA[The <b>Supreme Commander of the Air Force</b> is frustrated as the fleet of aircraft are only flying at 65% availability and this is providing insufficient combat readiness. The Commander has challenged you to manage the fleet support. You must demonstrate cost savings and increase aircraft availability to 75%. You have been allocated a budget which you may spend on four different support service improvements.<br>Buying more spares<br>Improving reliability<br>Reducing NFF (No Fault Found) Rates<br>Reducing RTRT (Repair Turn Around Time)<br>The following simulation will allow you 3 turns to attempt to meet the Commander’s objectives. Each turn will represent two years and you be able to select different spending on service improvements during each turn.<br>You will be rewarded with bonus payments for meeting the availability target of 75%. However, you will face financial penalties if you fail to meet this target!<br>Your success will be determined by the availability of combat ready aircraft to the Commander and how effective your management has been. You will be judged by the remaining funds you have after the 6 year period. This value will be displayed as your final score.<br>Good Luck]]></fx:String>
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
 			import flashx.textLayout.conversion.TextConverter;
+			
+			/* override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{
+				graphics.clear();
+				graphics.lineStyle(5, 0xff0000);
+				graphics.drawRect(0,0,unscaledWidth, unscaledHeight);
+				
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+			}  */
 		]]>
-
-	</fx:Script>
-	<s:HGroup>
-	
-	<s:Group horizontalCenter="0" verticalCenter="0" width="828" height="670">
-	<mx:Image source="@Embed('../embed/introPanel.png')" />
 		
-		<s:VGroup horizontalAlign="center" width="90%"  height="90%" horizontalCenter="0" verticalCenter="0">
-			<s:Label id="title" text="Welcome" fontSize="36" top=""/>
-			
-			<s:RichText id="introText" width="60%" height="80%" horizontalCenter="0"
-						textFlow="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}"/>
-			
-			<s:Button id="start" label="Go" left="10" bottom="10"/>
-		</s:VGroup>
+	</fx:Script>
+	
+	<s:Group id="panel" horizontalCenter="0" verticalCenter="0">
+		<mx:Image source="@Embed('../embed/introPanel.png')" smoothBitmapContent="true" />		
+		<s:HGroup x="55" y="50">
+			<s:VGroup  >
+				
+				<s:Label id="title" text="Welcome" width="300" styleName="panelTitle"/>
+				<mx:Spacer height="40"/>
+				<s:RichText id="introText" width="700" height="80%" horizontalCenter="0" styleName="panelBody" fontSize="18"
+							textFlow="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}"/>
+				
+				<components:CustomButton id="startBtn" label="" left="10" bottom="10"/>
+			</s:VGroup>
+			<mx:Spacer width="0"/>
+			<components:LeaderBoard id="leaderboardIntro" width="262" height="100%"/>
+		</s:HGroup>
 		
 	</s:Group>
-		<components:LeaderBoard id="leaderboardIntro" right="-60" top="10" />
-	</s:HGroup>
 </s:Group>

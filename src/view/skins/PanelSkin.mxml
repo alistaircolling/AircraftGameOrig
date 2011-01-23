@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<!-- host component -->
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="disabled" />
+	</s:states>
+	<fx:Metadata>
+		[HostComponent("view.components.CustomPanel")]
+	</fx:Metadata>
+	<s:Rect left="0" right="0" top="0" bottom="0" radiusX="15" radiusY="15">
+		<s:stroke>
+			<s:SolidColorStroke color="0xffffff" weight="3"/>
+		</s:stroke>
+		<s:fill>
+			<s:RadialGradient>
+				<s:GradientEntry color="0x0056FF" ratio="0" alpha=".5"/>
+				<s:GradientEntry color="0x00CC99" ratio=".33" alpha=".5"/>
+				<s:GradientEntry color="0xECEC21" ratio=".66" alpha=".5"/>
+			</s:RadialGradient>
+		</s:fill>
+	</s:Rect>
+	
+	<s:Group id="contentGroup" left="0" right="0" top="0" bottom="0" minWidth="0" minHeight="0">
+		<s:layout>
+			<s:BasicLayout/>
+		</s:layout>
+	</s:Group>
+</s:Skin>

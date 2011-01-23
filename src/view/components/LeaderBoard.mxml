@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="180" height="300">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 creationComplete="group1_creationCompleteHandler(event)">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	
 	<fx:Script>
 		<![CDATA[
+			import flash.text.engine.FontWeight;
+			
 			import model.vo.LeaderBoardVO;
 			
 			import mx.collections.ArrayCollection;
@@ -15,8 +19,20 @@
 			[Bindable]
 			public var dp:ArrayCollection; 
 			
+			[Embed(source="../embed/fonts/MyriadPro-Bold.otf",
+                    fontFamily="MyriadPro", fontWeight="bold",
+                    embedAsCFF="false")]
+			private const MyriadProEmbed:Class;
+			
 
-
+			
+		/* 	 override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{
+			graphics.clear();
+			graphics.lineStyle(5, 0xff0000);
+			graphics.drawRect(0,0,unscaledWidth, unscaledHeight);
+			
+			super.updateDisplayList(unscaledWidth, unscaledHeight);
+			}   */
 
 			protected function list_clickHandler(event:MouseEvent):void
 			{
@@ -24,10 +40,24 @@
 				var t:Number = 10;
 			}
 
+
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				list.setStyle("fontFamily", "MyriadPro");
+			}
+
 		]]>
 	</fx:Script>
-	<s:VGroup>
-		<s:Label text="Leader Board"/>
-		<s:List id="list" width="100%" height="100%" dataProvider="{dp}"  click="list_clickHandler(event)"/>
+	<s:VGroup height="100%" horizontalAlign="center" horizontalCenter="0" >
+			
+		<s:Label text="Top 10" styleName="panelTitle"/>
+		<mx:Spacer height="10"/>
+		<mx:DataGrid id="list"
+					 
+					 width="100%" height="100%" showHeaders="false" dataProvider="{dp}" contentBackgroundAlpha="0" alternatingItemColors="[]"
+					 rowHeight="45" fontSize="30" color="#174f73" borderAlpha="0" borderVisible="false" verticalGridLines="false"
+					 />
+		<!--<s:List id="list" width="100%" height="100%" dataProvider="{dp}"  click="list_clickHandler(event)"/>-->
 	</s:VGroup>
 </s:Group>

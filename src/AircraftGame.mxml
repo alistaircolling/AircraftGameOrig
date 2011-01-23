@@ -3,7 +3,8 @@
 					   xmlns:s="library://ns.adobe.com/flex/spark" 
 					   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*" xmlns:local="*"
 					   addedToStage="windowedapplication1_creationCompleteHandler(event)"
-					   width="1024" height="768"
+					   showStatusBar="false"
+					   width="1920" height="1080"
 					   >
 	<fx:Style source="AircraftGame.css"/>
 	<fx:Script>
@@ -12,6 +13,7 @@
 			
 			import flashx.textLayout.events.StatusChangeEvent;
 			
+			import mx.events.AIREvent;
 			import mx.events.FlexEvent;
 			
 			import signals.ChangeState;
@@ -64,6 +66,8 @@
 				}
 			}
 
+
+
 		]]>
 	</fx:Script>
 	
@@ -77,12 +81,12 @@
 		<s:State name="finalScreen" />
 		<s:State name="exitScreen" />
 	</s:states>
-	<mx:Image source="@Embed('../embed/selex-background.png')" />
+	<mx:Image source="@Embed('../embed/selex-background.png')" width="1920" height="1080" smoothBitmapContent="true" /> 
 	<components:InputView id="inputView" includeIn="enter, intro, resultsScreen" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
-	<components:IntroView id="introView" includeIn="intro, exitScreen"/>
 	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen" visible="false" horizontalCenter="0"/>
 	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter" visible="false" horizontalCenter="0" verticalCenter="0"/>
 	<components:ExitView id="exitView" includeIn="finalScreen, exitScreen" visible="false" horizontalCenter="0" verticalCenter="0"/>
-	<s:TextArea id="statusLabel" fontSize="12" bottom="5" left="5"  height="100" width="400"/>
+	<s:TextArea id="statusLabel" fontSize="12" bottom="-100" left="5"  height="100" width="400" visible="false"/>
 	<s:Label id="gameID" text="GameID: --- " right="10" top="10" fontSize="20" fontWeight="bold" color="0xff0000"/>
+	<components:IntroView id="introView" includeIn="intro, exitScreen"  />
 </s:WindowedApplication>

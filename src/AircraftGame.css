@@ -7,4 +7,147 @@ global
 {
 	content-background-color: #A0CEFF;
 }
+
+
+@font-face {
+	src: url("../embed/fonts/MyriadPro-Regular.otf");
+	fontFamily: MyriadPro;
+	fontStyle: normal;
+	fontWeight: normal;
+	advancedAntiAliasing: true;
+}
+
+@font-face {
+	src: url("../embed/fonts/MyriadPro-It.otf");
+	fontFamily: MyriadPro;
+	fontStyle: italic;
+	fontWeight: normal;
+	advancedAntiAliasing: true;
+}
+
+
+@font-face {
+	src: url("../embed/fonts/MyriadPro-Bold.otf");
+	fontFamily: MyriadPro;
+	fontStyle: normal;
+	fontWeight: bold;
+	advancedAntiAliasing: true;
+}
+@font-face {
+	src: url("../embed/fonts/MyriadPro-BoldIt.otf");
+	fontFamily: MyriadPro;
+	fontStyle: italic;
+	fontWeight: bold;
+	advancedAntiAliasing: true;
+}
+
+.panelTitle
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 46;
+	color:#4a4a4a;
+}
+
+
+.supportPanelTitle
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 26;
+	color:#4a4a4a;
+}
+
+.supportPanelTitleItalic
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontStyle:italic;
+	fontSize: 26;
+	color:#898989;
+}
+
+.supportPanelCategory
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 18;
+	color:#464646;
+}
+
+.supportPanelCategoryItalic
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontStyle:italic;
+	fontSize: 18;
+	color:#868686;
+}
+
+.supportPanelBudget
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 26;
+	color:#044047;
+}
+.supportPanelBudgetCopy
+{
+	fontFamily:MyriadPro;	
+	fontSize: 14;
+	color:#004f59;
+}
+
+.supportPanelCategoryNumber
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 30;
+	color:#ffffff;
+}
+
+
+.panelSecondaryTitle
+{
+	fontFamily:MyriadPro;
+	fontWeight:regular;
+	fontSize: 30;
+	color:#4a4a4a;
+}
+
+.panelSecondaryTitle
+{
+	fontFamily:MyriadPro;
+	fontWeight:regular;
+	fontSize: 30;
+	color:#4a4a4a;
+}
+
+.dataGrid
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 30;
+	color:#174f73;
+}
 	
+.panelBody
+{
+	fontFamily:MyriadPro;
+	color:#4a4a4a;
+	fontSize: 21;
+}
+
+.buttonText
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 28;
+	color:#ffffff;
+}
+
+
+
+
+
+

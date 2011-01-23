@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="450" height="300" xmlns:components="view.components.*">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*">
 	<s:layout>
 		<s:VerticalLayout/>
 	</s:layout>
@@ -55,44 +55,50 @@
 				//check the maximum isnt over the budget
 				//todo write code to check we are not going over the limit
 			}
-
+			
 			public function get budget():Number
 			{
 				return _budget;
 			}
-
+			
 			public function set budget(value:Number):void
 			{
 				_budget = value;
 				balanceIndicator.text  = "£"+_budget;
 				
 			}
-
+		
 			
 		]]>
 	</fx:Script>
 	
-	<s:Panel width="400" height="100%" horizontalCenter="0" verticalCenter="0" >
+	<s:Group horizontalCenter="0" verticalCenter="0" width="738" >
+		<mx:Image source="@Embed('../embed/supportPanel.png')" smoothBitmapContent="true" />
+		
+			<s:Label text="Remaining budget" styleName="supportPanelBudgetCopy"  textAlign="left" left="530" top="70"/>
+			<s:Label id="balanceIndicator" text="" styleName="supportPanelBudget"  textAlign="left" left="550" top="90"/>
+		
+		<s:Group  left="60" top="60" width="100%" >
+			<s:VGroup>
+				<s:HGroup>
+					<s:Label id="title" text="Support Options"  fontWeight="bold" styleName="supportPanelTitle" />
+					<s:Label id="turn" text="---" styleName="supportPanelTitleItalic"/>		
+				</s:HGroup>
+				<s:VGroup gap="11" >
+					
+					<mx:Spacer height="35"/>
+					
+					<components:SparesStepper id="spares" title="Spares" width="623" height="50" />
+					<components:CustomStepper id="reliability" title="Improve Reliability MTBF" unit="No" currVal="{reliablityVal}" values="{reliabilityValues}" width="623" height="50" />
+					<components:CustomStepper id="nff" title="Reduce NFF" unit="%" currVal="{nffVal}" values="{nffValues}" width="623" height="50" />
+					<components:CustomStepper id="turnaround" title="Reduce Repair Turnaround Time" unit="Days" currVal="{turnaroundVal}" values="{turnaroundValues}" width="623" height="50"/>
+					<components:GoButton id="submit"/>
+				</s:VGroup>
+			</s:VGroup>
+		</s:Group>
 		
 		
-		<s:HGroup left="10" top="10">
-			<s:Label id="title" text="Support Options"  fontWeight="bold" />
-			<s:Label id="turn" text="---" />		
-		</s:HGroup>
-		<s:Label id="balanceIndicator" text="" right="10" top="10"/>
-		<s:VGroup width="100%" height="100%" top="30" bottom="20" left="20" right="20">
-			
-			<mx:Spacer height="10"/>
-			
-			<components:SparesStepper id="spares" title="spares" />
-			<components:CustomStepper id="nff" title="nff" currVal="{nffVal}" values="{nffValues}" />
-			<components:CustomStepper id="turnaround" title="turnaround" currVal="{turnaroundVal}" values="{turnaroundValues}" />
-			<components:CustomStepper id="reliability" title="reliability" currVal="{reliablityVal}" values="{reliabilityValues}" />
-			<s:Button id="submit" label="go>>>" />
-		</s:VGroup>
-		
-		
-	</s:Panel>
+	</s:Group>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
