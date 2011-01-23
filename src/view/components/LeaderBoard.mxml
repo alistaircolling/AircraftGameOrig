@@ -18,6 +18,9 @@
 			
 			[Bindable]
 			public var dp:ArrayCollection; 
+			[Bindable]
+			public var title:String;
+			
 			
 			[Embed(source="../embed/fonts/MyriadPro-Bold.otf",
                     fontFamily="MyriadPro", fontWeight="bold",
@@ -51,7 +54,7 @@
 	</fx:Script>
 	<s:VGroup height="100%" horizontalAlign="center" horizontalCenter="0" >
 			
-		<s:Label text="Top 10" styleName="panelTitle"/>
+		<s:Label text="{title}" styleName="panelTitle"/>
 		<mx:Spacer height="10"/>
 		<mx:DataGrid id="list"
 					 

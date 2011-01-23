@@ -49,6 +49,22 @@ global
 	color:#4a4a4a;
 }
 
+.mainBudget
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 46;
+	color:#044047;
+}
+
+
+.gameID
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 30;
+	color:#ffffff;
+}
 
 .supportPanelTitle
 {

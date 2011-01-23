@@ -64,7 +64,8 @@
 			public function set budget(value:Number):void
 			{
 				_budget = value;
-				balanceIndicator.text  = "£"+_budget;
+				balanceIndicator.text  = "$"+_budget+"m";
+				
 				
 			}
 		
@@ -85,9 +86,7 @@
 					<s:Label id="turn" text="---" styleName="supportPanelTitleItalic"/>		
 				</s:HGroup>
 				<s:VGroup gap="11" >
-					
-					<mx:Spacer height="35"/>
-					
+					<mx:Spacer height="35"/>					
 					<components:SparesStepper id="spares" title="Spares" width="623" height="50" />
 					<components:CustomStepper id="reliability" title="Improve Reliability MTBF" unit="No" currVal="{reliablityVal}" values="{reliabilityValues}" width="623" height="50" />
 					<components:CustomStepper id="nff" title="Reduce NFF" unit="%" currVal="{nffVal}" values="{nffValues}" width="623" height="50" />

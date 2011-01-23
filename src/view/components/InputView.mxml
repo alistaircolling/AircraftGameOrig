@@ -50,13 +50,17 @@
 			
 		]]>
 	</fx:Script>
+	<s:Group bottom="50" left="50">
+		
+	<components:BudgetComponent id="budgetIndicator" />
+	</s:Group>
 	<s:Group horizontalCenter="0" verticalCenter="0">
-		<components:BudgetIndicator id="budgetIndicator" left="10" bottom="10"/>
 		<components:InputPanel id="inputPanel" verticalCenter="0" horizontalCenter="0"/>
 	</s:Group>
-	<components:LeaderBoard id="leaderBoard"
-							visible="true"
-							right="0"
-							top="100"
-							/>
+	<s:Group id="lbHolder" right="100" top="200">
+		<mx:Image source="@Embed('../embed/lbtop3.png')" smoothBitmapContent="true" />
+		<components:LeaderBoard id="leaderBoard" title="Top 3" horizontalCenter="0" top="50"
+								visible="true"
+								/>
+	</s:Group>
 </s:Group>

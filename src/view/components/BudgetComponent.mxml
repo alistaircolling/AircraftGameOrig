@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+		 creationComplete="group1_creationCompleteHandler(event)">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			private var _budget:Number;
+			
+			
+			
+			public function get budget():Number
+			{
+				return _budget;
+			}
+			
+			public function set budget(value:Number):void
+			{
+				_budget = value;
+				if (value>0){
+					positive.visible = true;
+					negative.visible = false;
+					
+				}else{
+					positive.visible = false;					
+					negative.visible = true;					
+				}
+				showCoins(_budget);
+				title.text = "$"+_budget;
+			}
+			
+			public function showCoins(n:Number):void{
+				
+				holder.removeAllElements();
+				var coins:uint = Math.round(n/2.5);
+				for (var i:uint = 0; i<coins; i++){
+					
+					var c:Coin = new Coin();
+					c.y = 0 - (i*15);
+					holder.addElement(c);
+					
+					
+				}
+				
+			}
+			
+
+			
+			
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				
+			}
+
+		]]>
+	</fx:Script>
+	<s:Group id="holder" horizontalCenter="0" y="-100"/>
+	<s:Group>
+		<mx:Image id="positive" source="@Embed('../embed/positive.png')" smoothBitmapContent="true"  horizontalCenter="0" verticalCenter="0"/>
+		<mx:Image id="negative" source="@Embed('../embed/negative.png')" smoothBitmapContent="true"  horizontalCenter="0" verticalCenter="0"/>
+		<s:Label id="title" styleName="mainBudget" horizontalCenter="0" verticalCenter="0" textAlign="center" />
+	</s:Group>
+</s:Group>

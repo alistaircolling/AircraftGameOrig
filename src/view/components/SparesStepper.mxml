@@ -36,7 +36,8 @@
 			protected function up_clickHandler(event:MouseEvent):void{
 				//check the upper limit of the budget
 				var maxSpares:uint = Math.floor(budget/costInc);
-				//if there is some budget left for spares increase the number
+				//if there is some budget left for spares increase 
+				trace("maxspares:"+maxSpares);
 				if (maxSpares>0){
 					
 					sparesCurr += sparesInc;
@@ -88,6 +89,7 @@
 			
 			private function updateBalance( n:Number ):void{
 				if (n!=0){
+					_budget += n;
 					var e:NumberEvent = new NumberEvent(NumberEvent.BALANCE_UPDATE,	n);
 					dispatchEvent(e);
 				}

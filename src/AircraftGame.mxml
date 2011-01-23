@@ -15,6 +15,7 @@
 			
 			import mx.events.AIREvent;
 			import mx.events.FlexEvent;
+			import mx.states.OverrideBase;
 			
 			import signals.ChangeState;
 
@@ -26,6 +27,7 @@
 			//	stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 				context = new ProjectContext(this, true);
 				updateState(ChangeState.INTRO_SCREEN);
+				
 			}
 			
 			
@@ -82,11 +84,13 @@
 		<s:State name="exitScreen" />
 	</s:states>
 	<mx:Image source="@Embed('../embed/selex-background.png')" width="1920" height="1080" smoothBitmapContent="true" /> 
+	<s:Group y="1050" x="1700" >
+		<s:Label id="gameID" text="GameID: --- " styleName="gameID"/>
+	</s:Group>
 	<components:InputView id="inputView" includeIn="enter, intro, resultsScreen" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
 	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen" visible="false" horizontalCenter="0"/>
 	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter" visible="false" horizontalCenter="0" verticalCenter="0"/>
 	<components:ExitView id="exitView" includeIn="finalScreen, exitScreen" visible="false" horizontalCenter="0" verticalCenter="0"/>
 	<s:TextArea id="statusLabel" fontSize="12" bottom="-100" left="5"  height="100" width="400" visible="false"/>
-	<s:Label id="gameID" text="GameID: --- " right="10" top="10" fontSize="20" fontWeight="bold" color="0xff0000"/>
 	<components:IntroView id="introView" includeIn="intro, exitScreen"  />
 </s:WindowedApplication>
