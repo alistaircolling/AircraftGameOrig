@@ -20,6 +20,7 @@
 			
 			protected function windowedapplication1_creationCompleteHandler(event:Event):void
 			{
+				stage.scaleMode = StageScaleMode.SHOW_ALL;
 			//	stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 				context = new ProjectContext(this, true);
 				updateState(ChangeState.INTRO_SCREEN);

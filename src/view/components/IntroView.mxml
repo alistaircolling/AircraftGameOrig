@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group  width="100%" height="100%" 
 		   xmlns:fx="http://ns.adobe.com/mxml/2009"
-		   xmlns:s="library://ns.adobe.com/flex/spark" xmlns:components="view.components.*">
+		   xmlns:s="library://ns.adobe.com/flex/spark" xmlns:components="view.components.*" xmlns:mx="library://ns.adobe.com/flex/mx">
 	<fx:Declarations>
 		<fx:String id="htmlTextAsHTML"><![CDATA[The Supreme Commander of the Air Force is frustrated as the fleet of aircraft are only flying at 65% availability and this is providing insufficient combat readiness. The Commander has challenged you to manage the fleet support. You must demonstrate cost savings and increase aircraft availability to 75%. You have been allocated a budget which you may spend on four different support service improvements.<br>Buying more spares<br>Improving reliability<br>Reducing NFF (No Fault Found) Rates<br>Reducing RTRT (Repair Turn Around Time)<br>The following simulation will allow you 3 turns to attempt to meet the Commander’s objectives. Each turn will represent two years and you be able to select different spending on service improvements during each turn.<br>You will be rewarded with bonus payments for meeting the availability target of 75%. However, you will face financial penalties if you fail to meet this target!<br>Your success will be determined by the availability of combat ready aircraft to the Commander and how effective your management has been. You will be judged by the remaining funds you have after the 6 year period. This value will be displayed as your final score.<br>Good Luck]]></fx:String>
 	</fx:Declarations>
@@ -11,16 +11,21 @@
 		]]>
 
 	</fx:Script>
+	<s:HGroup>
 	
-	<s:Panel width="700" height="500" horizontalCenter="0" verticalCenter="0"
-			 title="Welcome">
+	<s:Group horizontalCenter="0" verticalCenter="0" width="828" height="670">
+	<mx:Image source="@Embed('../embed/introPanel.png')" />
 		
 		<s:VGroup horizontalAlign="center" width="90%"  height="90%" horizontalCenter="0" verticalCenter="0">
+			<s:Label id="title" text="Welcome" fontSize="36" top=""/>
+			
 			<s:RichText id="introText" width="60%" height="80%" horizontalCenter="0"
 						textFlow="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}"/>
 			
 			<s:Button id="start" label="Go" left="10" bottom="10"/>
 		</s:VGroup>
+		
+	</s:Group>
 		<components:LeaderBoard id="leaderboardIntro" right="-60" top="10" />
-	</s:Panel>
+	</s:HGroup>
 </s:Group>
