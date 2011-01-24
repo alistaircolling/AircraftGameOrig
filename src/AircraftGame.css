@@ -162,6 +162,16 @@ global
 	color:#ffffff;
 }
 
+.legend
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontStyle:italic;
+	fontSize: 18;
+	color:#aeaeae;
+}
+
+
 
 
 

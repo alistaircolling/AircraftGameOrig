@@ -24,6 +24,7 @@
 			protected function windowedapplication1_creationCompleteHandler(event:Event):void
 			{
 				stage.scaleMode = StageScaleMode.SHOW_ALL;
+				
 			//	stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 				context = new ProjectContext(this, true);
 				updateState(ChangeState.INTRO_SCREEN);
@@ -38,30 +39,38 @@
 				//add any additional logic here
 				switch(currentState){
 					case ChangeState.INTRO_SCREEN:
-						introView.visible = true;
+						introView.visible = false;//testing
 						inputView.visible = false;
+						resultsView.visible = false;
+						lbHolder.visible = false;
+						finalView.visible = true;
 						break
 					
 					case ChangeState.ENTER_SCREEN:
 						inputView.visible = true;
 						resultsView.visible = false;
+						lbHolder.visible = true
+						lbHolder.visible = true;
 						
 						break
 					case ChangeState.RESULTS_SCREEN:
 						resultsView.visible = true;
 						inputView.visible = false;
 						finalView.visible = false;
+						lbHolder.visible = true;
 						break
 					case ChangeState.FINAL_SCREEN:
 						resultsView.visible = false;
 						inputView.visible = false;
 						finalView.visible = true;
 						exitView.visible = false;
+						lbHolder.visible = false;
 						break
 					case ChangeState.EXIT_SCREEN:
 						exitView.visible = true;
 						finalView.visible = false;
 						introView.visible = false;
+						lbHolder.visible = false;
 						break
 					default:						
 						break
@@ -88,9 +97,15 @@
 		<s:Label id="gameID" text="GameID: --- " styleName="gameID"/>
 	</s:Group>
 	<components:InputView id="inputView" includeIn="enter, intro, resultsScreen" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
-	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen" visible="false" horizontalCenter="0"/>
-	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter" visible="false" horizontalCenter="0" verticalCenter="0"/>
+	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen, intro" visible="false" />
+	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter, intro" visible="false" horizontalCenter="0" verticalCenter="0"/>
 	<components:ExitView id="exitView" includeIn="finalScreen, exitScreen" visible="false" horizontalCenter="0" verticalCenter="0"/>
 	<s:TextArea id="statusLabel" fontSize="12" bottom="-100" left="5"  height="100" width="400" visible="false"/>
 	<components:IntroView id="introView" includeIn="intro, exitScreen"  />
+	<s:Group id="lbHolder" right="-445" top="230" includeIn="intro, enter, resultsScreen, exitScreen, finalScreen">
+		<mx:Image source="@Embed('../embed/lbtop3.png')" smoothBitmapContent="true" />
+		<components:LeaderBoard id="leaderBoard" title="Top 3" horizontalCenter="0" top="50"
+								visible="true"
+								/>
+	</s:Group>
 </s:WindowedApplication>

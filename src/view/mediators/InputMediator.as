@@ -46,7 +46,7 @@ package view.mediators
 			userDataSet.add(setData);	
 			balanceSet.add(showBalance);
 			iterationChange.add(updateIteration);
-			leaderboardSet.add(updateLeaderBoard);
+			//leaderboardSet.add(updateLeaderBoard);
 			inputView.addEventListener(NumberEvent.BALANCE_UPDATE, updateBalance);//event triggered by steppers
 			inputView.inputPanel.submit.addEventListener(MouseEvent.CLICK, goClicked);
 			
@@ -57,7 +57,7 @@ package view.mediators
 			userDataSet.remove(setData);	
 			balanceSet.remove(showBalance);
 			iterationChange.remove(updateIteration);
-			leaderboardSet.remove(updateLeaderBoard);
+			//leaderboardSet.remove(updateLeaderBoard);
 			inputView.removeEventListener(NumberEvent.BALANCE_UPDATE, updateBalance);//event triggered by steppers
 			inputView.inputPanel.submit.removeEventListener(MouseEvent.CLICK, goClicked);
 			
@@ -85,13 +85,13 @@ package view.mediators
 			inputView.inputPanel.turn.text = "(Turn "+n.toString()+" of 3)";
 		}
 		
-		private function updateLeaderBoard( vo:LeaderBoardVO ):void{
+	/*	private function updateLeaderBoard( vo:LeaderBoardVO ):void{
 			
 			var top3:Array = vo.winners.source.slice(0,3);
 			var ac:ArrayCollection = new ArrayCollection(top3);
 			inputView.leaderBoard.dp = ac;
 			
-		}
+		}*/
 		
 		private function showBalance( n:Number ):void{
 			

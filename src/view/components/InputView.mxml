@@ -57,10 +57,10 @@
 	<s:Group horizontalCenter="0" verticalCenter="0">
 		<components:InputPanel id="inputPanel" verticalCenter="0" horizontalCenter="0"/>
 	</s:Group>
-	<s:Group id="lbHolder" right="100" top="200">
+	<!-- <s:Group id="lbHolder" right="100" top="200">
 		<mx:Image source="@Embed('../embed/lbtop3.png')" smoothBitmapContent="true" />
 		<components:LeaderBoard id="leaderBoard" title="Top 3" horizontalCenter="0" top="50"
 								visible="true"
 								/>
-	</s:Group>
+	</s:Group>  -->
 </s:Group>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1100" height="465"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1148" height="516"
 		 creationComplete="group1_creationCompleteHandler(event)">
 	<fx:Declarations>
-		<mx:SolidColorStroke id = "s1" color="blue" weight="2" />
-		<mx:SolidColorStroke id = "s2" color="red" weight="2"/>
+		<mx:SolidColorStroke id = "s1" color="#0a3753" weight="7" />
+		<mx:SolidColorStroke id = "s2" color="#0080bc" weight="7"/>
 		<mx:SolidColorStroke id = "s3" color="green" weight="2"/>
 		<mx:SolidColorStroke id = "blackStroke" color="black" weight="1" alpha=".4"/>
 		<mx:SolidColorStroke id = "whiteS" color="white" weight="0"/>
@@ -53,7 +53,7 @@
 			private function moveImage():void {
 				myMove.end();
 			//	myMove.xBy = 910/36;
-				myMove.xTo = ((910/72)*_currentMonth)-910
+				myMove.xTo = ((907/72)*_currentMonth)-907;
 				myMove.play();
 			}
 			
@@ -148,7 +148,7 @@
 			public function reset():void{
 				group1_creationCompleteHandler();
 				linechart.executeBindings(true);
-				rect.x = -910
+			//	rect.x = -910
 				//linechart.ini
 			}
 			
@@ -193,9 +193,9 @@
 	
 	<!--	<s:Group id="chart" width="800" height="600" mask="{rect}">  -->
 	<!-- < mx:Image source="@Embed('../embed/GRAPH.png')" /> -->
-	<s:Group id="chart" width="910" height="210" horizontalCenter="0" verticalCenter="0" mask="{rect}">
+	<s:Group id="chart" width="907" height="210" horizontalCenter="0" verticalCenter="0" mask="{rect}">
 		
-		<mx:LineChart id="linechart" color="0xffffff" height="210" width="910" backgroundElements="{[]}"
+		<mx:LineChart id="linechart" color="0xffffff" height="210" width="907" backgroundElements="{[]}"
 					  showDataTips="true" dataProvider="{chartData}" fill="{fill}" >
 			<mx:seriesFilters>
 				<fx:Array/>
@@ -233,13 +233,13 @@
 		</mx:LineChart>
 		
 		
-		<s:Group id="lines" width="910" height="210" />
-		<s:Group id="rect">
-			<s:Rect width="910" height="210" x="0" >
+		<s:Group id="lines" width="907" height="210" />
+		<s:Group id="rect" x="-907">
+			<s:Rect width="907" height="210" >
 				<s:fill>
 					<s:SolidColor color="0xAA2FC9" alpha="1"/>
 				</s:fill>
 			</s:Rect>
 		</s:Group>
 	</s:Group>
-</s:Panel>
+</s:Group>

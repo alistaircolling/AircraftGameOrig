@@ -3,7 +3,9 @@ package view.mediators
 	import flash.events.MouseEvent;
 	
 	import model.vo.ErrorVO;
+	import model.vo.LeaderBoardVO;
 	
+	import mx.collections.ArrayCollection;
 	import mx.controls.Alert;
 	import mx.core.Application;
 	
@@ -13,6 +15,7 @@ package view.mediators
 	import signals.ErrorReceived;
 	import signals.GameIDSet;
 	import signals.InitSocket;
+	import signals.LeaderBoardSet;
 	import signals.RequestGameID;
 	import signals.StartClicked;
 	import signals.StatusUpdate;
@@ -38,6 +41,8 @@ package view.mediators
 		public var requestID:RequestGameID;
 		[Inject]
 		public var initSocket:InitSocket;
+		[Inject]
+		public var lBSet:LeaderBoardSet;
 		
 		override public function onRegister():void{
 			trace("Project Mediator registered");
@@ -51,11 +56,20 @@ package view.mediators
 			changeState.add(updateState);
 			statusUpdate.add(showStatus);
 			gameIDSet.add(setGameID);
+			lBSet.add(leaderBoardSet);
 			requestID.dispatch();
 			initSocket.dispatch();
 		//	mainViewComponent.btn.addEventListener(MouseEvent.CLICK, buttonClickedListener);
 			//add listener for signal
 		//	textSetOnModel.add(onModelChanged);
+			
+		}
+		
+		private function leaderBoardSet( vo:LeaderBoardVO ):void{
+			
+			var top3:Array = vo.winners.source.slice(0,3);
+			var ac:ArrayCollection = new ArrayCollection(top3);
+			viewComp.leaderBoard.dp = ac;
 			
 		}
 		
