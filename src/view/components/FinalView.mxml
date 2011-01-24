@@ -3,32 +3,46 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1920" height="1080" xmlns:components="view.components.*">
 	<fx:Declarations>
+		<fx:String id="htmlTextAsHTML"><![CDATA[Congratulations, you have made the leader board.<br>Please enter your initials below.]]></fx:String>
 		<s:SolidColorStroke id="greyStroke" color="0xcccccc" weight="2"/>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<mx:Canvas width="100%" height="100%" backgroundAlpha=".8" backgroundColor="0x0"/>
-	<s:Panel horizontalCenter="0" verticalCenter="0" width="800" height="600">
-		<s:HGroup width="100%" height="100%">
-			<s:VGroup width="100%" height="100%">
-				<s:Label text="Your Score" fontWeight="bold" />
-				<mx:Spacer height="15"/>
-				<s:Line width="600" stroke="{greyStroke}" />
-				<mx:Spacer height="15"/>
-				<s:HGroup width="100%" height="100%">
-					<s:VGroup width="100%" height="100%">
-						<s:Label id="availability" text="Availability:-----"/>
-						<s:Label id="cost" text="Cost:-----"/>
-						<s:TextArea id="enterName" editable="true" width="40" height="20" /> 
+	<fx:Script>
+		<![CDATA[
+			import flashx.textLayout.conversion.TextConverter;
+		]]>
+	</fx:Script>
+	<mx:Canvas width="1920" height="1080" backgroundAlpha=".8" backgroundColor="0x0"/>
+	<s:Group id="panel" horizontalCenter="0" verticalCenter="0">
+		<mx:Image source="@Embed('../embed/introPanel.png')" smoothBitmapContent="true" />		
+		<s:HGroup x="55" y="50">
+			<s:VGroup  >
+				
+				<s:Label id="title" text="Your Score" width="300" styleName="panelTitle"/>
+				<mx:Spacer height="60"/>
+				<s:Group >
+					
+					<s:VGroup gap="15">
+						<s:HGroup>
+							<s:Label text="Average Availability = " styleName="finalCategory"/>
+							<s:Label id="availability" text="" styleName="finalValue"/>
+						</s:HGroup>
+						<s:HGroup>
+							<s:Label text="Change in Cost per Flying Hr = " styleName="finalCategory"/>
+							<s:Label id="cost" text="" styleName="finalValue"/>
+						</s:HGroup>
+						<s:Label id="finalScore" text="Final Score = " styleName="finalValue"/>
+						<mx:Spacer height="15"/>
+						<s:RichText id="message" styleName="finalMessage" text="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}" />
 					</s:VGroup>
-					<s:TextArea id="message" text="-------------"/>
-				</s:HGroup>
-			
-				<s:Button label="continue>>>>" id="continueBtn"/>
-						  
+				</s:Group>
+				
 			</s:VGroup>
-			<components:LeaderBoard id="leaderBoard" width="200" height="100%"/>
+			<mx:Spacer width="0"/>
 		</s:HGroup>
+		<components:LeaderBoard id="leaderBoard" width="262" title="Top 10" height="100%" top="50" right="22"/>
+		<components:CustomButton id="continueBtn" label="" left="55" bottom="55"/>
 		
-		
-	</s:Panel>
+	</s:Group>
+	
 </s:Group>

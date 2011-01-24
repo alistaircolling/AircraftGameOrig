@@ -126,7 +126,6 @@ global
 .panelSecondaryTitle
 {
 	fontFamily:MyriadPro;
-	fontWeight:regular;
 	fontSize: 30;
 	color:#4a4a4a;
 }
@@ -134,7 +133,6 @@ global
 .panelSecondaryTitle
 {
 	fontFamily:MyriadPro;
-	fontWeight:regular;
 	fontSize: 30;
 	color:#4a4a4a;
 }
@@ -169,6 +167,29 @@ global
 	fontStyle:italic;
 	fontSize: 18;
 	color:#aeaeae;
+}
+
+.finalCategory
+{
+	fontFamily:MyriadPro;
+	fontSize: 30;
+	color:#4a4a4a;
+}
+
+
+.finalValue
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 30;
+	color:#174f73;
+}
+
+.finalMessage
+{
+	fontFamily:MyriadPro;
+	fontSize: 21;
+	color:#4a4a4a;
 }
 
 

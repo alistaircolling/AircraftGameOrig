@@ -39,11 +39,10 @@
 				//add any additional logic here
 				switch(currentState){
 					case ChangeState.INTRO_SCREEN:
-						introView.visible = false;//testing
+						introView.visible = true;//testing
 						inputView.visible = false;
 						resultsView.visible = false;
 						lbHolder.visible = false;
-						finalView.visible = true;
 						break
 					
 					case ChangeState.ENTER_SCREEN:
@@ -98,7 +97,7 @@
 	</s:Group>
 	<components:InputView id="inputView" includeIn="enter, intro, resultsScreen" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
 	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen, intro" visible="false" />
-	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter, intro" visible="false" horizontalCenter="0" verticalCenter="0"/>
+	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter" visible="false" />
 	<components:ExitView id="exitView" includeIn="finalScreen, exitScreen" visible="false" horizontalCenter="0" verticalCenter="0"/>
 	<s:TextArea id="statusLabel" fontSize="12" bottom="-100" left="5"  height="100" width="400" visible="false"/>
 	<components:IntroView id="introView" includeIn="intro, exitScreen"  />

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="95" height="116" xmlns:components="view.components.*">
+
+	<fx:Script>
+		<![CDATA[
+			
+			private var _letters:Array = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+			private var _letterIndex:uint = 0;
+			[Bindable]
+			public var currentLetter:String = "A";
+			
+			protected function downBtn_clickHandler(event:MouseEvent):void
+			{
+				if (_letterIndex<=0){
+					
+					_letterIndex = _letters.length -1;
+				}else{
+					
+					_letterIndex --;
+				}
+				updateLetter();
+			}
+
+			protected function upBtn_clickHandler(event:MouseEvent):void
+			{
+				if (_letterIndex>=_letters.length-1){
+					
+					_letterIndex = 0;
+				}else{
+					_letterIndex++;
+				}
+				updateLetter();
+			}
+			
+			private function updateLetter():void{
+				
+				currentLetter = _letters[_letterIndex];
+				trace("index:"+_letterIndex+"  letter:"+currentLetter);
+				
+			}
+
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:VGroup gap="0">
+		<components:UpArrowLetterButton id="upBtn" click="upBtn_clickHandler(event)"/>
+		<s:Group>
+			<!--<s:Rect width="95" height="42" >
+				<s:fill>
+					<s:SolidColor color="0x474747" alpha="1"/>
+				</s:fill>
+			</s:Rect> -->
+			<mx:Image source="@Embed('../embed/letterBg.png')" smoothBitmapContent="true" />
+			<s:Label id="letter" styleName="supportPanelCategoryNumber" textAlign="center" horizontalCenter="0" verticalCenter="0" verticalAlign="middle" text="{currentLetter}"/>
+		</s:Group>
+		<components:UpArrowLetterButton id="downBtn" rotation="180" click="downBtn_clickHandler(event)"/>
+	</s:VGroup>
+</s:Group>

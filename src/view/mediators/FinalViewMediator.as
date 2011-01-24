@@ -37,6 +37,7 @@ package view.mediators
 		public var enterWinner:EnterWinner;
 		
 		private var _boardPosition:int;
+		private var _success:String = "Congratulations, you have made the leader board./r/nPlease enter your initials below."
 		
 		override public function onRegister():void{
 			
@@ -65,8 +66,9 @@ package view.mediators
 			//check to see this is the last iteration
 			if (vo.iteration == 3){
 				//set the availability and the cost
-				finalView.availability.text = "Availability: "+vo.avAvailability.toString();
-				finalView.cost.text = "£"+vo.finalScore; 
+				finalView.availability.text = vo.avAvailability.toString();
+				finalView.cost.text = "need to add cost";//vo.finalScore.toString();//need to update TODO
+				finalView.finalScore.text = vo.finalScore.toString();
 				
 				//check if the user has a high score
 				_boardPosition = -1;
@@ -86,18 +88,18 @@ package view.mediators
 				}
 			}
 			//clear entry field
-			finalView.enterName.text = "";
 			
 		}
 		
 		private function showEnterDetails(b:Boolean):void{
 			
 			if(b){
-				finalView.message.text = "Congratulations, you made the leader board. Please enter you initial below";
-			 	finalView.enterName.visible = true;	
+				finalView.message.text = _success;
+		//		finalView.message.text = "Congratulations, you made the leader board. Please enter you initial below";
+		//	 	finalView.enterName.visible = true;	
 			}else{
-				finalView.message.text = "";
-			 	finalView.enterName.visible = false;
+		//		finalView.message.text = "";
+		//	 	finalView.enterName.visible = false;
 			}
 			
 		}
@@ -106,7 +108,7 @@ package view.mediators
 		private function continueClicked( m:MouseEvent ):void{
 			trace("-------continue clicked");
 			if (_boardPosition>-1){
-				enterWinner.dispatch(finalView.enterName.text, _boardPosition);
+//				enterWinner.dispatch(finalView.enterName.text, _boardPosition);
 			}
 			changeState.dispatch(ChangeState.EXIT_SCREEN);
 			

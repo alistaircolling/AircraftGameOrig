@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group width="1920" height="1080"
-		  xmlns:fx="http://ns.adobe.com/mxml/2009"
-		  xmlns:s="library://ns.adobe.com/flex/spark" xmlns:components="view.components.*" xmlns:mx="library://ns.adobe.com/flex/mx">
+		 xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark" xmlns:components="view.components.*" xmlns:mx="library://ns.adobe.com/flex/mx">
 	
 	
 	<fx:Declarations>
@@ -12,16 +12,17 @@
 			import flashx.textLayout.conversion.TextConverter;
 			
 			/* override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{
-				graphics.clear();
-				graphics.lineStyle(5, 0xff0000);
-				graphics.drawRect(0,0,unscaledWidth, unscaledHeight);
-				
-				super.updateDisplayList(unscaledWidth, unscaledHeight);
+			graphics.clear();
+			graphics.lineStyle(5, 0xff0000);
+			graphics.drawRect(0,0,unscaledWidth, unscaledHeight);
+			
+			super.updateDisplayList(unscaledWidth, unscaledHeight);
 			}  */
 		]]>
 		
 	</fx:Script>
 	
+	<mx:Image source="@Embed('../embed/title.png')" smoothBitmapContent="true" horizontalCenter="0"/>		
 	<s:Group id="panel" horizontalCenter="0" verticalCenter="0">
 		<mx:Image source="@Embed('../embed/introPanel.png')" smoothBitmapContent="true" />		
 		<s:HGroup x="55" y="50">
