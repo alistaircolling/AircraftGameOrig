@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1920" height="1080" xmlns:components="view.components.*">
 	
 	<fx:Script>
 		<![CDATA[
+			import flashx.textLayout.conversion.TextConverter;
 			
-
 			protected function restartBtn_clickHandler(event:MouseEvent):void
 			{
 				trace("--restart clicked");
@@ -14,20 +14,21 @@
 				var e:Event = new Event("restartGame");
 				dispatchEvent(e);
 			}
-
+			
 		]]>
 	</fx:Script>
 	
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<fx:String id="htmlTextAsHTML"><![CDATA[The simulation game you have just played represents a very simplified version of reality. <br><br> When considering your management of the fleet in the real world you will have to contend with many more uncertainties and variables. The operating environment of any customer is dynamic and must remain responsive to the end user requirements. As a result no support solution can ever be ‘Off the Shelf’.<br><br>In order to manage resources efficiently and effectively you must take into consideration obsolescence, location, behaviours, engineering issues, supply chain management, environmental factors………<br><br>SELEX Galileo has a proven track record in providing Increased Availability and Cost Reduction through effective management and implementation of Service and Support Solutions. SELEX Galileo is able to provide a range of services to enable customers to derive the best performance and results from existing assets and resources.]]></fx:String>
 	</fx:Declarations>
-	<s:Panel width="800" height="300" title="Exit Slide Text" horizontalCenter="0" verticalCenter="0">
-		
-		<s:VGroup bottom="20" top="50" width="80%">
-			
-			<s:Label width="100%" text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat."/>
-			<s:Button id="restartBtn" label="restart" click="restartBtn_clickHandler(event)"/>
-		</s:VGroup>
-		
-	</s:Panel>
+	<mx:Canvas width="1920" height="1080" backgroundAlpha=".8" backgroundColor="0x0"/>
+	<s:Group horizontalCenter="0" verticalCenter="0">
+		<mx:Image source="@Embed('../embed/exitbg.png')" smoothBitmapContent="true" />	
+		<components:EndButton id="restartBtn" label="" click="restartBtn_clickHandler(event)" bottom="50" left="50"/>
+			 <s:VGroup top="60" left="60" gap="15">
+				 <s:Label id="title" text="Exit Text" styleName="panelTitle"/>
+				 <s:RichText lineBreak="toFit" width="740" styleName="exitBody" 
+							 textFlow="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}"/>
+			 </s:VGroup>
+	</s:Group>
 </s:Group>

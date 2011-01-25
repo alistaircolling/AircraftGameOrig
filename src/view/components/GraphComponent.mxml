@@ -148,7 +148,7 @@
 			public function reset():void{
 				group1_creationCompleteHandler();
 				linechart.executeBindings(true);
-			//	rect.x = -910
+				rect.x = -907;
 				//linechart.ini
 			}
 			

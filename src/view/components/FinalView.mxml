@@ -32,8 +32,13 @@
 							<s:Label id="cost" text="" styleName="finalValue"/>
 						</s:HGroup>
 						<s:Label id="finalScore" text="Final Score = " styleName="finalValue"/>
-						<mx:Spacer height="15"/>
-						<s:RichText id="message" styleName="finalMessage" text="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}" />
+						<s:RichText id="message" styleName="finalMessage" text="" width="490" />
+						<s:HGroup gap="30" id="enterInitials">
+							<mx:Spacer width="5"/>
+							<components:LetterStepper id="lS1"/>
+							<components:LetterStepper id="lS2"/>
+							<components:LetterStepper id="lS3"/>
+						</s:HGroup>
 					</s:VGroup>
 				</s:Group>
 				

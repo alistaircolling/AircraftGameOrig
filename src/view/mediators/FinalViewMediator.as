@@ -37,7 +37,9 @@ package view.mediators
 		public var enterWinner:EnterWinner;
 		
 		private var _boardPosition:int;
-		private var _success:String = "Congratulations, you have made the leader board./r/nPlease enter your initials below."
+		private var _success:String = "Congratulations, you have made the leader board." +
+			" Please enter your initials below."
+		private var _failure:String = "Well done! You didn't make the leader board unfortunately."  
 		
 		override public function onRegister():void{
 			
@@ -68,7 +70,7 @@ package view.mediators
 				//set the availability and the cost
 				finalView.availability.text = vo.avAvailability.toString();
 				finalView.cost.text = "need to add cost";//vo.finalScore.toString();//need to update TODO
-				finalView.finalScore.text = vo.finalScore.toString();
+				finalView.finalScore.text = "Final Score = "+vo.finalScore.toString();
 				
 				//check if the user has a high score
 				_boardPosition = -1;
@@ -95,20 +97,24 @@ package view.mediators
 			
 			if(b){
 				finalView.message.text = _success;
-		//		finalView.message.text = "Congratulations, you made the leader board. Please enter you initial below";
-		//	 	finalView.enterName.visible = true;	
+				finalView.enterInitials.visible = true;
+				//		finalView.message.text = "Congratulations, you made the leader board. Please enter you initial below";
+				//	 	finalView.enterName.visible = true;	
 			}else{
-		//		finalView.message.text = "";
-		//	 	finalView.enterName.visible = false;
+				finalView.message.text = _failure;
+				finalView.enterInitials.visible = false;
+				//	 	finalView.enterName.visible = false;
 			}
 			
 		}
 		
-	
+		
 		private function continueClicked( m:MouseEvent ):void{
 			trace("-------continue clicked");
 			if (_boardPosition>-1){
-//				enterWinner.dispatch(finalView.enterName.text, _boardPosition);
+				
+				var winnerInitials:String = finalView.lS1.currentLetter+finalView.lS2.currentLetter+finalView.lS3.currentLetter;
+				enterWinner.dispatch(winnerInitials, _boardPosition);
 			}
 			changeState.dispatch(ChangeState.EXIT_SCREEN);
 			
