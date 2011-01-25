@@ -3,6 +3,8 @@ package view.mediators
 	import events.ChangeStateEvent;
 	import events.PlanesEvent;
 	
+	import flash.events.Event;
+	
 	import model.vo.GraphResultsVO;
 	
 	import org.robotlegs.mvcs.Mediator;
@@ -11,6 +13,7 @@ package view.mediators
 	import signals.GraphDataSet;
 	import signals.IterationChange;
 	
+	import view.components.GraphComponent;
 	import view.components.ResultsView;
 	
 	public class ResultsMediator extends Mediator
@@ -24,6 +27,8 @@ package view.mediators
 		[Inject]
 		public var changeStateSignal:ChangeState;
 		
+		private var _animating:Boolean;
+		
 		override public function onRegister():void{
 			
 			graphDataSet.add(setData);
@@ -33,6 +38,11 @@ package view.mediators
 			changeStateSignal.add(updateState);
 			resultsView.graph.addEventListener(PlanesEvent.IN_AIR, updateInAir);
 			resultsView.graph.addEventListener(PlanesEvent.ON_GROUND, updateOnGround);
+			resultsView.graph.addEventListener(GraphComponent.FINISHED_ANIMATING, finishedAnimating);
+		}
+		private function finishedAnimating( e:Event):void{
+			trace("finished animating");
+			_animating = false;
 		}
 		
 		private function updateInAir( e:PlanesEvent ):void{
@@ -61,22 +71,31 @@ package view.mediators
 			changeStateSignal.remove(updateState);
 			resultsView.graph.removeEventListener(PlanesEvent.IN_AIR, updateInAir);
 			resultsView.graph.removeEventListener(PlanesEvent.ON_GROUND, updateOnGround);
+			resultsView.graph.removeEventListener(GraphComponent.FINISHED_ANIMATING, finishedAnimating);
 		}
 		
 		private function changeState( e:ChangeStateEvent ):void{
-			
-			changeStateSignal.dispatch(e.state);
+			if (!_animating){
+				
+				changeStateSignal.dispatch(e.state);
+				
+			}else{
+				
+				trace("unable to change sections as animating");
+				
+			}
 			
 		}
 		
 		private function setIteration( n:uint ):void{
-						
-				resultsView.iteration = n;
+			
+			resultsView.iteration = n;
 			
 		}
 		
 		private function setData( vo:GraphResultsVO ):void{
 			
+			_animating = true;
 			resultsView.setData(vo);
 			
 		}

@@ -3,7 +3,8 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx">
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Fade id="fadeIn" alphaFrom="0" alphaTo="1" duration=".6"/>
+		<s:Fade id="fadeOut" alphaFrom="1" alphaTo="0" duration=".6"/>
 	</fx:Declarations> 
 	<fx:Script>
 		<![CDATA[
@@ -12,7 +13,8 @@
 				
 				for (var i:uint = 0; i<numElements; i++){
 					var im:Image = getElementAt(i) as Image;
-					im.alpha = 0;
+					im.alpha = 0;	
+					
 				}
 				for (var j:uint = 0; j<numElements;j++){
 					var im:Image = getElementAt(j) as Image;
