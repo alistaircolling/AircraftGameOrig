@@ -7,37 +7,37 @@
 		<![CDATA[
 			
 			private var _letters:Array = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-			private var _letterIndex:uint = 0;
+			public var letterIndex:uint = 0;
 			[Bindable]
 			public var currentLetter:String = "A";
 			
 			protected function downBtn_clickHandler(event:MouseEvent):void
 			{
-				if (_letterIndex<=0){
+				if (letterIndex<=0){
 					
-					_letterIndex = _letters.length -1;
+					letterIndex = _letters.length -1;
 				}else{
 					
-					_letterIndex --;
+					letterIndex --;
 				}
 				updateLetter();
 			}
 
 			protected function upBtn_clickHandler(event:MouseEvent):void
 			{
-				if (_letterIndex>=_letters.length-1){
+				if (letterIndex>=_letters.length-1){
 					
-					_letterIndex = 0;
+					letterIndex = 0;
 				}else{
-					_letterIndex++;
+					letterIndex++;
 				}
 				updateLetter();
 			}
 			
 			private function updateLetter():void{
 				
-				currentLetter = _letters[_letterIndex];
-				trace("index:"+_letterIndex+"  letter:"+currentLetter);
+				currentLetter = _letters[letterIndex];
+				trace("index:"+letterIndex+"  letter:"+currentLetter);
 				
 			}
 

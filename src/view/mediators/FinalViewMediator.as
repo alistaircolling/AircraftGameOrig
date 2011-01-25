@@ -63,8 +63,19 @@ package view.mediators
 			finalView.leaderBoard.dp = vo.winners;
 		}
 		
-		private function setData( vo:ReceivedDataVO):void{
+		private function resetSteppers():void{
 			
+			finalView.lS1.currentLetter = "A";
+			finalView.lS2.currentLetter = "A";
+			finalView.lS3.currentLetter = "A";
+			finalView.lS1.letterIndex = 0;
+			finalView.lS2.letterIndex = 0;
+			finalView.lS3.letterIndex = 0;
+			
+		}
+		
+		private function setData( vo:ReceivedDataVO):void{
+			resetSteppers()
 			//check to see this is the last iteration
 			if (vo.iteration == 3){
 				//set the availability and the cost

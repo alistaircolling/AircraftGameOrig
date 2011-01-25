@@ -3,7 +3,8 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" 
 		 xmlns:components="view.components.*"
-		 width="1920" height="1080">
+		 width="1920" height="1080"
+		 >
 	
 	<fx:Script>
 		<![CDATA[
@@ -14,14 +15,25 @@
 			import signals.ChangeState;
 			
 			private var _iteration:uint;
+			private var _planes:Planes;
 			
 			public function setData( vo:GraphResultsVO ):void{
 				
 				//set on the graph component
 				graph.setData(vo);
+				//
 				
 			}
 			
+			public function showInAir( n:uint ):void{
+				inAir.showPlanes(n);
+			}
+			
+			public function showOnGround( n:uint ):void{
+				
+				onGround.showPlanes(n);
+				
+			}
 			
 			protected function continue_clickHandler(event:MouseEvent):void
 			{
@@ -58,6 +70,7 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	
 	<s:Group horizontalCenter="0" verticalCenter="100" width="1148" height="516">
 		<mx:Image source="@Embed('../embed/graph.png')" width="1148" height="516" smoothBitmapContent="true" />
 		<components:GraphComponent id="graph" y="13" x="-2"/>
@@ -69,6 +82,8 @@
 		<s:Label top="71" left="555" text="% Flown" styleName="legend"/>
 		<components:CustomButton id="continueBtn" right="55" top="52" click="continue_clickHandler(event)"/>
 	</s:Group>
+	<components:InAirPlanes id="inAir" x="510" top="20"/>
+	<components:OnGroundPlanes id="onGround" x="110" bottom="-10"/>
 	<!--	<s:VGroup width="800" height="600" horizontalAlign="center" horizontalCenter="0">
 	
 	<s:Group width="800" height="55" layoutDirection="ltr">

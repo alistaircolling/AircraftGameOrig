@@ -1,6 +1,7 @@
 package view.mediators
 {
 	import events.ChangeStateEvent;
+	import events.PlanesEvent;
 	
 	import model.vo.GraphResultsVO;
 	
@@ -30,9 +31,20 @@ package view.mediators
 			iterationChange.add(setIteration);
 			resultsView.addEventListener(ChangeState.ENTER_SCREEN, changeState);
 			changeStateSignal.add(updateState);
+			resultsView.graph.addEventListener(PlanesEvent.IN_AIR, updateInAir);
+			resultsView.graph.addEventListener(PlanesEvent.ON_GROUND, updateOnGround);
 		}
 		
-
+		private function updateInAir( e:PlanesEvent ):void{
+			resultsView.showInAir( e.num );
+		}
+		
+		private function updateOnGround( e:PlanesEvent ):void{
+			
+			resultsView.showOnGround( e.num );
+		}
+		
+		
 		private function updateState( s:String ):void{
 			
 			//triggered when going back to the start --  clear  the graph
@@ -47,6 +59,8 @@ package view.mediators
 			iterationChange.remove(setIteration);
 			resultsView.removeEventListener(ChangeState.ENTER_SCREEN, changeState);
 			changeStateSignal.remove(updateState);
+			resultsView.graph.removeEventListener(PlanesEvent.IN_AIR, updateInAir);
+			resultsView.graph.removeEventListener(PlanesEvent.ON_GROUND, updateOnGround);
 		}
 		
 		private function changeState( e:ChangeStateEvent ):void{
@@ -63,7 +77,7 @@ package view.mediators
 		
 		private function setData( vo:GraphResultsVO ):void{
 			
-			resultsView.graph.setData(vo);
+			resultsView.setData(vo);
 			
 		}
 	}

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations> 
+	<fx:Script>
+		<![CDATA[
+			
+			public function showPlanes( n:uint ):void{
+				
+				for (var i:uint = 0; i<numElements; i++){
+					var im:Image = getElementAt(i) as Image;
+					im.alpha = 0;
+				}
+				for (var j:uint = 0; j<numElements;j++){
+					var im:Image = getElementAt(j) as Image;
+					if (j<n){
+						im.alpha = 1;
+					}
+				}
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<mx:Image id="p0"
+			  x="0" y="114"
+			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
+	<mx:Image id="p1"
+			  x="316" y="236"
+			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
+	<mx:Image id="p2"
+			  x="236" y="114"
+			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
+	<mx:Image id="p3"
+			  x="160" y="16"
+			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
+	<mx:Image id="p4"
+			  x="578" y="244"
+			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
+	<mx:Image id="p5"
+			  x="480" y="114"
+			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
+	<mx:Image id="p6"
+			  x="396" y="0"
+			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
+	<mx:Image id="p7"
+			  x="724" y="153"
+			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
+	<mx:Image id="p8"
+			  x="645" y="39"
+			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
+	<mx:Image id="p9"
+			  x="851" y="79"
+			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
+	
+</s:Group>

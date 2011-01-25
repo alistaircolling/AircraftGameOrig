@@ -18,6 +18,8 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import events.PlanesEvent;
+			
 			import model.vo.GraphResultsVO;
 			
 			import mx.collections.ArrayCollection;
@@ -179,12 +181,14 @@
 			
 			private function showPlanesInAir( n:uint ):void{
 				trace("planes in air:"+n);
-				
+				var e:PlanesEvent = new PlanesEvent(PlanesEvent.IN_AIR, n);
+				dispatchEvent(e);
 			}
 			
 			private function showPlanesOnGround( n:uint ):void{
 				trace("planes on ground:"+n);
-				
+				var e:PlanesEvent = new PlanesEvent(PlanesEvent.ON_GROUND, n);
+				dispatchEvent(e);
 			}
 			
 			
