@@ -17,6 +17,7 @@ package view.mediators
 	import signals.DataSubmitted;
 	import signals.IterationChange;
 	import signals.LeaderBoardSet;
+	import signals.StatusUpdate;
 	import signals.UpdateBalance;
 	import signals.UserDataSet;
 	
@@ -40,6 +41,8 @@ package view.mediators
 		public var dataSubmitted:DataSubmitted;
 		[Inject]
 		public var userModel:UserDataModel;//used only to get the current iteration for submission in vo
+		[Inject]
+		public var statusUpdate:StatusUpdate;
 		
 		override public function onRegister():void{
 			trace("Input Mediator Registered");
@@ -67,7 +70,7 @@ package view.mediators
 			
 			//increase iteration first so it is correct for submission
 			
-			
+			statusUpdate.dispatch("go clicked");
 			//create a new VO
 			var vo:InputVO = new InputVO();
 			vo.nff = inputView.inputPanel.nff.currVal.theIndex.toString();
@@ -77,6 +80,7 @@ package view.mediators
 			var it:uint = userModel.iteration;
 			it++; //avoid updating the iteration on the model directly so a new iteration signal is not sent, this is set by the black box when data is returned anyway
 			vo.iteration = (it).toString();
+			statusUpdate.dispatch("vo created about to be submitted....");
 			dataSubmitted.dispatch(vo);
 			
 		}

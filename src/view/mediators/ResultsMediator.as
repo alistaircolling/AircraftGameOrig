@@ -2,6 +2,7 @@ package view.mediators
 {
 	import events.ChangeStateEvent;
 	import events.PlanesEvent;
+	import events.SocketEvent;
 	
 	import flash.events.Event;
 	
@@ -12,6 +13,7 @@ package view.mediators
 	import signals.ChangeState;
 	import signals.GraphDataSet;
 	import signals.IterationChange;
+	import signals.StatusUpdate;
 	
 	import view.components.GraphComponent;
 	import view.components.ResultsView;
@@ -26,11 +28,15 @@ package view.mediators
 		public var iterationChange:IterationChange;
 		[Inject]
 		public var changeStateSignal:ChangeState;
+		[Inject]
+		public var statusUpate:StatusUpdate;
 		
 		private var _animating:Boolean;
 		
 		override public function onRegister():void{
 			
+			statusUpate.dispatch("RESULTS MEDIATOR ADDED");
+			resultsView.addEventListener(SocketEvent.ANY, sockEvent);
 			graphDataSet.add(setData);
 			resultsView.graph.reset();
 			iterationChange.add(setIteration);
@@ -40,6 +46,13 @@ package view.mediators
 			resultsView.graph.addEventListener(PlanesEvent.ON_GROUND, updateOnGround);
 			resultsView.graph.addEventListener(GraphComponent.FINISHED_ANIMATING, finishedAnimating);
 		}
+		
+		private function sockEvent( e:SocketEvent ):void{
+			
+			statusUpate.dispatch(">>>"+e.msg);
+			
+		}
+		
 		private function finishedAnimating( e:Event):void{
 			trace("finished animating");
 			_animating = false;
@@ -65,6 +78,7 @@ package view.mediators
 		}
 		
 		override public function onRemove():void{
+			statusUpate.dispatch("RESULTS MEDIATOR REMOVEd");
 			graphDataSet.remove(setData);
 			iterationChange.remove(setIteration);
 			resultsView.removeEventListener(ChangeState.ENTER_SCREEN, changeState);
@@ -75,6 +89,8 @@ package view.mediators
 		}
 		
 		private function changeState( e:ChangeStateEvent ):void{
+			
+			statusUpate.dispatch("change state received in  results mediator:"+e.state+"  dispatching change state signal");
 			if (!_animating){
 				
 				changeStateSignal.dispatch(e.state);

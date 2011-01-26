@@ -83,7 +83,7 @@ package view.mediators
 		}
 		
 		private function updateState( s:String ):void{
-			
+			showStatus("update state in project mediator");
 			viewComp.updateState(s);
 		}
 		

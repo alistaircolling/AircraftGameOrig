@@ -29,6 +29,8 @@ package
 	import services.GameIDService;
 	import services.InitialXMLService;
 	import services.LeaderBoardService;
+	import services.socketUtils.CustomSocket;
+	import services.socketUtils.SocketConnector;
 	
 	import signals.BalanceSet;
 	import signals.BlackBoxDataReceived;
@@ -53,6 +55,8 @@ package
 	import signals.TextSetOnModel;
 	import signals.UpdateBalance;
 	import signals.UserDataSet;
+	
+	import utils.Logger;
 	
 	import view.components.ExitView;
 	import view.components.FinalView;
@@ -108,8 +112,7 @@ package
 			injector.mapSingleton(GraphDataSet);
 			injector.mapSingleton(RestartGame);
 			injector.mapSingleton(GameIDSet);
-			
-			
+			injector.mapSingleton(CustomSocket);
 
 			
 			//map signals   -maps signals to commands

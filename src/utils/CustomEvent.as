@@ -11,6 +11,7 @@ public class CustomEvent extends flash.events.Event {
 	public var responseStr:String;
 	public var isError:Boolean = false;
 	public static const SOCKET_CONNECT_ERROR:String = "socketConnectionError";
+	public static const SECURITY_ERROR:String = "securityError";
 	
 
 	public function CustomEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false, ... a:*) {

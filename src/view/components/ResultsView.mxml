@@ -9,13 +9,17 @@
 	<fx:Script>
 		<![CDATA[
 			import events.ChangeStateEvent;
+			import events.SocketEvent;
 			
 			import model.vo.GraphResultsVO;
 			
 			import signals.ChangeState;
+			import signals.StatusUpdate;
 			
 			private var _iteration:uint;
 			//	private var _planes:Planes;
+			[Inject]
+			public var statusUpdate:StatusUpdate;
 			
 			public function setData( vo:GraphResultsVO ):void{
 				
@@ -38,8 +42,8 @@
 			protected function continue_clickHandler(event:MouseEvent):void
 			{
 				//need to change the state to input
-				
-				
+				var sock:SocketEvent = new SocketEvent("continue clicked iteration:"+_iteration);
+				dispatchEvent(sock);
 				if (_iteration <3){
 					var e:ChangeStateEvent = new ChangeStateEvent(ChangeState.ENTER_SCREEN);	
 					dispatchEvent(e);

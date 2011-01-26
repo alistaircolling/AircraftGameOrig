@@ -1,6 +1,8 @@
 
 package services
 {
+	import events.SocketEvent;
+	
 	import flash.events.Event;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
@@ -64,23 +66,30 @@ package services
 		
 		public function init():void{
 			
-			//	return //remove - only for testing TODO
+				//return //remove - only for testing TODO
 			statusUpdate.dispatch("connecting to socket on ip:"+_ip+"  port:"+_port);
 			_attempts = 0;
 			_timer = new Timer(2000, 1);
-			_timer.addEventListener(TimerEvent.TIMER_COMPLETE, retryConnect);
+			//_timer.addEventListener(TimerEvent.TIMER_COMPLETE, retryConnect);
 			
 			_socket = new SocketConnector(_ip, Number(_port));
 			_socket.addEventListener(_socket.CONNECTED, connectedListener);
 			_socket.addEventListener(_socket.DATA_RECEIVED, dataReceivedListener);
 			_socket.addEventListener(CustomEvent.SOCKET_CONNECT_ERROR, socketError);
+			_socket.addEventListener(CustomEvent.SECURITY_ERROR, socketError);
+			_socket.networkConnection.messageSender.addEventListener(SocketEvent.ANY, socketTrace);
 			_socket.connect();  
 			
 		}
 		
+		private function socketTrace( e:SocketEvent ):void{
+			
+			statusUpdate.dispatch(e.msg);
+		}
+		
 		private function socketError( c:CustomEvent ):void{
 			
-			statusUpdate.dispatch("UNABLE TO CONNECT TO SOCKET, retrying..."+_attempts);
+			statusUpdate.dispatch(c.type+"--------UNABLE TO CONNECT TO SOCKET, retrying..."+_attempts);
 			if (_attempts<4){
 				_timer.start();
 			}
@@ -113,7 +122,7 @@ package services
 		
 		private function dataReceivedListener( e:CustomEvent ):void{
 			statusUpdate.dispatch( "msg received:"+e.responseStr+":");
-			
+			dataReceived(e.responseStr);
 		}
 	
 		private function write(str:String):void {

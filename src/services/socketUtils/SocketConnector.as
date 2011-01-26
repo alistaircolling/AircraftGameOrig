@@ -4,6 +4,8 @@ package services.socketUtils
 import flash.display.Sprite;
 import flash.events.*;
 
+import mx.controls.Alert;
+
 import utils.CustomEvent;
 
 	public class SocketConnector extends Sprite
@@ -12,7 +14,7 @@ import utils.CustomEvent;
 		private var port:Number;
 		public const DATA_RECEIVED:String = "dataReceived";
 		public const CONNECTED:String = "connected";
-		private var networkConnection:CustomSocket;
+		public var networkConnection:CustomSocket;
 		//public var messageSender:IEventDispatcher;
 		
 		
@@ -32,6 +34,8 @@ import utils.CustomEvent;
 			
 			networkConnection.connectIt();
 		}
+		
+		
 		public function createConnection():void
 		{
 			//create socket connection
@@ -40,6 +44,7 @@ import utils.CustomEvent;
 			networkConnection.messageSender.addEventListener(networkConnection.NEW_MSG, myListener);
 			networkConnection.messageSender.addEventListener(networkConnection.CONNECTED, connected);
 			networkConnection.messageSender.addEventListener(CustomEvent.SOCKET_CONNECT_ERROR, socketError);
+			networkConnection.messageSender.addEventListener(CustomEvent.SECURITY_ERROR, socketError);
 			
 		}
 		
