@@ -107,6 +107,8 @@ package view.mediators
 			var currBal:Number = inputView.inputPanel.budget;
 			var newBal:Number = currBal+n.value;
 			inputView.inputPanel.budget = Math.round(newBal*100)/100;
+			//update balance in spares
+			inputView.inputPanel.spares.budget = inputView.inputPanel.budget;
 			
 		}
 		

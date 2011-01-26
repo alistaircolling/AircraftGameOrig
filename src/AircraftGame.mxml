@@ -96,6 +96,11 @@
 
 
 
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				statusLabel.visible = !statusLabel.visible;;
+			}
+
 		]]>
 	</fx:Script>
 	
@@ -123,6 +128,7 @@
 		<components:LeaderBoard id="leaderBoard" title="Top 3" horizontalCenter="0" top="50"
 								visible="true"
 								/>
-	<s:TextArea id="statusLabel" fontSize="48"  left="5"  height="800" width="1000" includeInLayout="false" visible="false"/>
 	</s:Group>
+	<s:TextArea id="statusLabel" fontSize="36"  left="5"  height="800" width="1000" includeInLayout="false" visible="true"/>
+	<s:Button label="show status" x="1800" y="1000" click="button1_clickHandler(event)" visible="true"/>
 </s:WindowedApplication>

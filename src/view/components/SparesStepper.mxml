@@ -41,7 +41,7 @@
 				if (maxSpares>0){
 					sparesCurr += sparesInc;
 				}else{
-					
+					up.visible = false;
 					trace("no budget left for spares");
 				}
 				
@@ -58,9 +58,13 @@
 				_budget = value;
 				//every time the budget is set regenerate the vector for the stepper  --budget should be set after the vo
 				//if the value is negative then disable the spares buttons
-				if (_budget<0){
+				if (_budget<costInc){
 					up.visible = false;
 					down.visible = false;
+					//down.visible = false;
+				}else{
+					down.visible = true;
+					up.visible = true;
 				}
 				
 			}
@@ -130,6 +134,11 @@
 					up.visible = true;
 				}else{
 					up.visible = false;
+				}
+				if (_sparesCurr>_sparesInit){
+					down.visible = true;
+				}else{
+					down.visible = false;
 				}
 				
 				
