@@ -39,7 +39,7 @@ package view.mediators
 		private var _boardPosition:int;
 		private var _success:String = "Congratulations, you have made the leader board." +
 			" Please enter your initials below."
-		private var _failure:String = "Well done! You didn't make the leader board unfortunately."  
+		private var _failure:String = "";//Well done! You didn't make the leader board unfortunately."  
 		
 		override public function onRegister():void{
 			
@@ -79,9 +79,9 @@ package view.mediators
 			//check to see this is the last iteration
 			if (vo.iteration == 3){
 				//set the availability and the cost
-				finalView.availability.text = vo.avAvailability.toString();
-				finalView.cost.text = "need to add cost";//vo.finalScore.toString();//need to update TODO
-				finalView.finalScore.text = "Final Score = "+vo.finalScore.toString();
+				finalView.availability.text = vo.avAvailability.toString()+"%";
+				finalView.cost.text = vo.costPerFHr.toString();
+				finalView.finalScore.text = vo.finalScore.toString();
 				
 				//check if the user has a high score
 				_boardPosition = -1;

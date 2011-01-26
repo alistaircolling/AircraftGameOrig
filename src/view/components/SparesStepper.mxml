@@ -39,7 +39,6 @@
 				//if there is some budget left for spares increase 
 				trace("maxspares:"+maxSpares);
 				if (maxSpares>0){
-					
 					sparesCurr += sparesInc;
 				}else{
 					
@@ -58,6 +57,11 @@
 			{
 				_budget = value;
 				//every time the budget is set regenerate the vector for the stepper  --budget should be set after the vo
+				//if the value is negative then disable the spares buttons
+				if (_budget<0){
+					up.visible = false;
+					down.visible = false;
+				}
 				
 			}
 			
@@ -70,6 +74,8 @@
 			public function set sparesInit(value:Number):void
 			{
 				_sparesInit = value;
+				//make the  down button inv
+				down.visible = false;
 			}
 			
 			public function get sparesCurr():Number
@@ -79,11 +85,32 @@
 			
 			public function set sparesCurr(value:Number):void
 			{
-				//update the budget
-				var diff:Number = _sparesCurr - value;
+				//only update the difference if _sparesCurr is defined as it will error on the first load	
+				var diff:Number;
+				
+				if (!_sparesCurr){
+					diff = 0;
+				}else{
+					diff = _sparesCurr - value;
+				}
+				
 				//trace("spares diff:"+diff);
 				_sparesCurr = value;
 				valLabel.text = value.toString();
+				//check if this isnt the minimum
+				if (_sparesCurr>_sparesInit){
+					down.visible = true;
+				}else{
+					down.visible = false;
+				}
+				
+				var maxSpares:uint = Math.floor(budget/costInc);
+				if (maxSpares>0){
+					up.visible = true;
+				}else{
+					up.visible = false;
+				}
+				
 				updateBalance(diff*costInc);
 			}
 			
@@ -93,6 +120,19 @@
 					var e:NumberEvent = new NumberEvent(NumberEvent.BALANCE_UPDATE,	n);
 					dispatchEvent(e);
 				}
+				checkIfCanBuyMoreSpares(); //used to check once the budget is updated
+			}
+			
+			private function checkIfCanBuyMoreSpares():void{
+				
+				var maxSpares:uint = Math.floor(budget/costInc);
+				if (maxSpares>0){
+					up.visible = true;
+				}else{
+					up.visible = false;
+				}
+				
+				
 			}
 			
 		/* 	override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{

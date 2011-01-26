@@ -8,6 +8,7 @@ public class CustomEvent extends flash.events.Event {
   // public static const PHOTOS_LOADED:String = "photosLoaded";
   
 	public var arg:*;
+	public var responseStr:String;
 	public var isError:Boolean = false;
 	public static const SOCKET_CONNECT_ERROR:String = "socketConnectionError";
 	

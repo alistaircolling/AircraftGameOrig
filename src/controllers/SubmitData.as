@@ -19,7 +19,7 @@ package controllers
 		override public function execute():void{
 			
 			//add the iteration and game ID
-			vo.iteration = userModel.iteration.toString();
+			//vo.iteration = userModel.iteration.toString();   iteration is set in the input mediator
 			vo.gameID = userModel.gameID.toString();
 			blackBox.sendData(vo);
 			

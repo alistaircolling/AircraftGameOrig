@@ -57,7 +57,9 @@ import utils.CustomEvent;
 		private function myListener(e:Event):void
 		{
 			trace("event dispatched");
-			dispatchEvent(new CustomEvent(DATA_RECEIVED, false, false,networkConnection.responseMsg));
+			var c:CustomEvent = new CustomEvent(DATA_RECEIVED, false, false,networkConnection.responseMsg);
+			c.responseStr = networkConnection.responseMsg;
+			dispatchEvent(c);
 			
 		}
 

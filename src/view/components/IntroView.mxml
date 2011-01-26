@@ -5,7 +5,8 @@
 	
 	
 	<fx:Declarations>
-		<fx:String id="htmlTextAsHTML"><![CDATA[The <b>Supreme Commander of the Air Force</b> is frustrated as the fleet of aircraft are only flying at 65% availability and this is providing insufficient combat readiness. The Commander has challenged you to manage the fleet support. You must demonstrate cost savings and increase aircraft availability to 75%. You have been allocated a budget which you may spend on four different support service improvements.<br>Buying more spares<br>Improving reliability<br>Reducing NFF (No Fault Found) Rates<br>Reducing RTRT (Repair Turn Around Time)<br>The following simulation will allow you 3 turns to attempt to meet the Commander’s objectives. Each turn will represent two years and you be able to select different spending on service improvements during each turn.<br>You will be rewarded with bonus payments for meeting the availability target of 75%. However, you will face financial penalties if you fail to meet this target!<br>Your success will be determined by the availability of combat ready aircraft to the Commander and how effective your management has been. You will be judged by the remaining funds you have after the 6 year period. This value will be displayed as your final score.<br>Good Luck]]></fx:String>
+		<fx:String id="htmlTextAsHTML"><![CDATA[The <b>Supreme Commander of the Air Force</b> is <b>frustrated</b> as the fleet of aircraft are only flying at 65% availability and this is providing <b>insufficient combat readiness.</b> The Commander has challenged you to manage the fleet support. You must demonstrate <b>cost savings</b> and <b>increase aircraft availability</b> to 75%. You have been allocated a <b>budget</b> which you may spend on four different <b>support service improvements.<br>1. Buying more spares<br>2. Improving reliability<br>3. Reducing NFF (No Fault Found) Rates<br>4. Reducing RTRT (Repair Turn Around Time)<br></b>The following simulation will allow you <b>3 turns</b> to attempt to meet the Commander’s objectives. Each turn will represent two years and you be able to <b>select different spending on service improvements</b> during each turn.<br>You will be <b>rewarded</b> with bonus payments for meeting the <b>availability target</b> of 75%. However, you will face <b>financial penalties</b> if you <b>fail </b>to meet this target!<br>Your <b>success</b> will be determined by the <b>availability of combat ready aircraft</b> to the Commander and how <b>effective</b> your <b>management</b> has been. You will be <b>judged</b> by the <b>remaining funds</b> you have after the 6 year period. This value will be displayed as your <b>final score.</b><br>Good Luck
+]]></fx:String>
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
@@ -28,7 +29,7 @@
 		<s:HGroup x="55" y="50">
 			<s:VGroup  >
 				
-				<s:Label id="title" text="Welcome" width="300" styleName="panelTitle"/>
+				<s:Label id="title" text="The Challenge" width="300" styleName="panelTitle"/>
 				<mx:Spacer height="30"/>
 				<s:RichText id="introText" width="700" height="80%" horizontalCenter="0" styleName="panelBody" fontSize="18"
 							textFlow="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}"/>

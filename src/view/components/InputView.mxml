@@ -12,10 +12,22 @@
 			
 			public function setData( vo:ReceivedDataVO ):void{
 				
+				//set switches first so buttons know which buttons to display vos
+				inputPanel.nff.switchDirection = true;
+				inputPanel.turnaround.switchDirection = true;
+				inputPanel.reliability.switchDirection = false;
+				
+				
 				inputPanel.spares.sparesInc = 1;//hard coded for the moment - not passed in xml
 				inputPanel.spares.costInc = vo.sparesCostInc;
+				inputPanel.spares.sparesInit = vo.currentSpares;//initialize the value --set this first to make nuttons display correctly 
 				inputPanel.spares.sparesCurr = vo.currentSpares; 
-				inputPanel.spares.sparesInit = vo.currentSpares;//initialize the value 
+				
+				//set the initval objects to check we dont go below them
+				inputPanel.reliability.initVal = vo.currentReliability;
+				inputPanel.turnaround.initVal = vo.currentTuranaround;
+				inputPanel.nff.initVal = vo.currentNFF;
+				
 				inputPanel.reliablityVal = vo.currentReliability;
 				inputPanel.turnaroundVal = vo.currentTuranaround;
 				inputPanel.nffVal = vo.currentNFF;
@@ -26,13 +38,20 @@
 				inputPanel.nffValues = vo.nff;
 				//resetn current indices to 0
 				
+				
+				
+				
+				
 				inputPanel.nff.currIndex = 0;
 				inputPanel.turnaround.currIndex = 0;
 				inputPanel.reliability.currIndex = 0;
+				//set current values - not needed aas index is returned not the val
+				/* 
+				inputPanel.nff.currVal = vo.nff[0]
+				inputPanel.turnaround.currVal = vo.turnaround[0];
+				inputPanel.reliability.currVal = vo.reliability[0]; */
 				
-				inputPanel.nff.switchDirection = true;
-				inputPanel.turnaround.switchDirection = true;
-				inputPanel.reliability.switchDirection = false;
+				
 				
 				
 				//todo make a numeric stepper custom component that is passed the vector of input objects and adjusts its own display

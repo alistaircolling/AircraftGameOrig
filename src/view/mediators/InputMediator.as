@@ -71,11 +71,12 @@ package view.mediators
 			//create a new VO
 			var vo:InputVO = new InputVO();
 			vo.nff = inputView.inputPanel.nff.currVal.theIndex.toString();
-			//vo.spares = inputView.inputPanel.spares.currVal.theIndex;
 			vo.turnaround = inputView.inputPanel.turnaround.currVal.theIndex.toString();
 			vo.reliability = inputView.inputPanel.reliability.currVal.theIndex.toString();
 			vo.spares = (inputView.inputPanel.spares.sparesCurr - inputView.inputPanel.spares.sparesInit).toString();
-			vo.iteration = (Number(userModel.iteration++)).toString();
+			var it:uint = userModel.iteration;
+			it++; //avoid updating the iteration on the model directly so a new iteration signal is not sent, this is set by the black box when data is returned anyway
+			vo.iteration = (it).toString();
 			dataSubmitted.dispatch(vo);
 			
 		}

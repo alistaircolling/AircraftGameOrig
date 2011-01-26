@@ -20,6 +20,8 @@
 			[Bindable]
 			public var values:Vector.<InputObjectVO>;
 			
+			public var initVal:InputObjectVO;//used to set teh value at the start of the turn that you cant go below
+			
 			private var _switchDirection:Boolean;
 			//TODO check how values work e.g. what is the value that is displayed in the stepper? if it is the current value is that then duplicated as the expected amount the user will have again and automaticaly deducted from the budget- surely the blackbox would have done this already, if so what should the default setting be on the stepper?
 			
@@ -36,6 +38,38 @@
 				_currVal = value;
 				//set the value
 				valLabel.text = _currVal.value.toString();
+				//check if the current val is the top or bottom and hide the corresponding button
+				
+				if (_currVal.theIndex == initVal.theIndex){ //check that the index isn't the same as the initial one passed (ie the bottom value)
+					if (_switchDirection){
+						up.visible = false;
+						
+					}else{
+						down.visible = false;
+					}
+				}else{
+					if (_switchDirection){
+						up.visible = true;
+					}else{
+						down.visible = true;
+					}
+				}
+				//if this value has the same index as the last item in the vector then hide the up button (or down if switched)
+				if (_currVal.theIndex == (values[values.length-1] as InputObjectVO).theIndex){
+					if (_switchDirection){
+						down.visible = false;
+					}else{
+						up.visible = false;
+					}
+				}else{
+					if (_switchDirection){
+						down.visible = true;
+					}else{
+						up.visible = true;
+					}			
+					
+				}
+				
 				//set the index
 				//_currIndex = value.theIndex;  dont updtae the index as it should be set to 0 and is updated on clicks
 			}
@@ -46,6 +80,9 @@
 				if (_currIndex>0){
 					_currIndex--;
 					currVal = values[_currIndex];
+				}else{
+					
+					
 				}
 				var newCost:Number = (values[_currIndex] as InputObjectVO).cost;
 				updateBalance(oldCost - newCost);

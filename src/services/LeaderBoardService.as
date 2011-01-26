@@ -48,9 +48,9 @@ package services
 			var stream:FileStream = new FileStream();
 			stream.open(_dataFile, FileMode.READ);
 			_data = stream.readUTFBytes(stream.bytesAvailable);
-			statusUpdate.dispatch("data read yet?:"+_data);
+			//statusUpdate.dispatch("data read yet?:"+_data);
 			stream.close();
-			statusUpdate.dispatch("closed stream: data read yet?:"+_data);
+			//statusUpdate.dispatch("closed stream: data read yet?:"+_data);
 			
 			
 			

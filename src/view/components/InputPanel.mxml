@@ -64,11 +64,11 @@
 			public function set budget(value:Number):void
 			{
 				_budget = value;
-				balanceIndicator.text  = "$"+_budget+"m";
+				balanceIndicator.text  = _budget+"m";
 				
 				
 			}
-		
+			
 			
 		]]>
 	</fx:Script>
@@ -76,8 +76,14 @@
 	<s:Group horizontalCenter="0" verticalCenter="0" width="738" >
 		<mx:Image source="@Embed('../embed/supportPanel.png')" smoothBitmapContent="true" />
 		
-			<s:Label text="Remaining budget" styleName="supportPanelBudgetCopy"  textAlign="left" left="530" top="70"/>
-			<s:Label id="balanceIndicator" text="" styleName="supportPanelBudget"  textAlign="left" left="550" top="90"/>
+		<s:Label text="Remaining budget" styleName="supportPanelBudgetCopy"  textAlign="left" left="530" top="70"/>
+		<s:Group left="545" top="90">
+			
+			<s:HGroup>
+				<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" />
+				<s:Label id="balanceIndicator" text="" styleName="supportPanelBudget"  textAlign="left" />
+			</s:HGroup>
+		</s:Group>
 		
 		<s:Group  left="60" top="60" width="100%" >
 			<s:VGroup>

@@ -29,9 +29,14 @@
 						</s:HGroup>
 						<s:HGroup>
 							<s:Label text="Change in Cost per Flying Hr = " styleName="finalCategory"/>
+							<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" />		
 							<s:Label id="cost" text="" styleName="finalValue"/>
 						</s:HGroup>
-						<s:Label id="finalScore" text="Final Score = " styleName="finalValue"/>
+						<s:HGroup>
+							<s:Label  text="Final Score = " styleName="finalValue"/>
+							<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" />		
+							<s:Label id="finalScore" text="" styleName="finalValue"/>
+						</s:HGroup>
 						<s:RichText id="message" styleName="finalMessage" text="" width="490" />
 						<s:HGroup gap="30" id="enterInitials">
 							<mx:Spacer width="5"/>

@@ -15,7 +15,7 @@
 			import signals.ChangeState;
 			
 			private var _iteration:uint;
-			private var _planes:Planes;
+			//	private var _planes:Planes;
 			
 			public function setData( vo:GraphResultsVO ):void{
 				
@@ -78,12 +78,15 @@
 			<s:Label id="title" text="Results Graph"  fontWeight="bold" styleName="supportPanelTitle" />
 			<s:Label id="turn" text="---" styleName="supportPanelTitleItalic"/>		
 		</s:HGroup>
-		<s:Label top="71" left="418" text="$ Annual Tot" styleName="legend"/>
+		<s:Group  top="71" left="418">
+			<mx:Image source="@Embed('../embed/greyCurrSmall.png')" smoothBitmapContent="true" y="-2" />
+			<s:Label text=" Annual Tot" styleName="legend" x="18"/>
+		</s:Group>
 		<s:Label top="71" left="555" text="% Flown" styleName="legend"/>
 		<components:CustomButton id="continueBtn" right="55" top="52" click="continue_clickHandler(event)"/>
 	</s:Group>
 	<components:InAirPlanes id="inAir" x="510" top="20"/>
 	<components:OnGroundPlanes id="onGround" x="110" bottom="-10"/>
-
+	
 	
 </s:Group>

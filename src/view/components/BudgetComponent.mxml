@@ -31,7 +31,7 @@
 					negative.visible = true;					
 				}
 				showCoins(_budget);
-				title.text = "$"+_budget;
+				title.text = _budget.toString();
 			}
 			
 			public function showCoins(n:Number):void{
@@ -49,20 +49,23 @@
 				
 			}
 			
-
+			
 			
 			
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
 				
 			}
-
+			
 		]]>
 	</fx:Script>
 	<s:Group id="holder" horizontalCenter="0" y="-100"/>
 	<s:Group>
 		<mx:Image id="positive" source="@Embed('../embed/positive.png')" smoothBitmapContent="true"  horizontalCenter="0" verticalCenter="0"/>
 		<mx:Image id="negative" source="@Embed('../embed/negative.png')" smoothBitmapContent="true"  horizontalCenter="0" verticalCenter="0"/>
-		<s:Label id="title" styleName="mainBudget" horizontalCenter="0" verticalCenter="0" textAlign="center" />
+		<s:Group  horizontalCenter="-5" y="50">
+			<mx:Image source="@Embed('../embed/blueCurr48.png')" smoothBitmapContent="true" y="3" />
+			<s:Label id="title" styleName="mainBudget" textAlign="center" x="35"/>
+		</s:Group>
 	</s:Group>
 </s:Group>

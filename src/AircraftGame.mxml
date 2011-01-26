@@ -28,7 +28,25 @@
 			//	stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 				context = new ProjectContext(this, true);
 				updateState(ChangeState.INTRO_SCREEN);
+				addEventListener(KeyboardEvent.KEY_UP, keyHandler);
 				
+			}
+			
+			private function keyHandler( k:KeyboardEvent ):void{
+				
+				if (k.keyCode == 70){
+					toggleFullScreen();					
+				}
+				
+			}
+			
+			private function toggleFullScreen():void{
+				
+				if (stage.displayState == StageDisplayState.NORMAL){
+					stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+				}else{
+					stage.displayState = StageDisplayState.NORMAL;
+				}
 			}
 			
 			
@@ -98,13 +116,13 @@
 	<components:InputView id="inputView" includeIn="enter, intro, resultsScreen" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
 	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen, intro" visible="false" />
 	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter" visible="false" />
-	<components:ExitView id="exitView" includeIn="finalScreen, exitScreen" visible="false" />
-	<s:TextArea id="statusLabel" fontSize="12" bottom="-100" left="5"  height="100" width="400" visible="false"/>
+	<components:ExitView id="exitView" includeIn="finalScreen, exitScreen" visible="true" />
 	<components:IntroView id="introView" includeIn="intro, exitScreen"  />
-	<s:Group id="lbHolder" right="-445" top="230" includeIn="intro, enter, resultsScreen, exitScreen, finalScreen">
+	<s:Group id="lbHolder" x="1570" top="230" includeIn="intro, enter, resultsScreen, exitScreen, finalScreen">
 		<mx:Image source="@Embed('../embed/lbtop3.png')" smoothBitmapContent="true" />
 		<components:LeaderBoard id="leaderBoard" title="Top 3" horizontalCenter="0" top="50"
 								visible="true"
 								/>
+	<s:TextArea id="statusLabel" fontSize="48"  left="5"  height="800" width="1000" includeInLayout="false" visible="false"/>
 	</s:Group>
 </s:WindowedApplication>

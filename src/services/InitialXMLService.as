@@ -85,8 +85,8 @@ package services
 			//minimum values will be set on view components that the user is unable to go below and so are not referenced in the model
 			
 			userModel.iteration = 0;//incremented when the user presses go
+			userModel.budget = Number(xml.currentBudget); //moved from last so spares stepper updates correctly
 			userModel.vo = vo;
-			userModel.budget = Number(xml.currentBudget);
 			
 		}
 		
