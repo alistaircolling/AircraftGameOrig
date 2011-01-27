@@ -9,6 +9,8 @@
 		<![CDATA[
 			import model.vo.ReceivedDataVO;
 			
+			import utils.DataUtils;
+			
 			
 			public function setData( vo:ReceivedDataVO ):void{
 				
@@ -28,6 +30,9 @@
 				inputPanel.turnaround.initVal = vo.currentTuranaround;
 				inputPanel.nff.initVal = vo.currentNFF;
 				
+				
+				
+				
 				inputPanel.reliablityVal = vo.currentReliability;
 				inputPanel.turnaroundVal = vo.currentTuranaround;
 				inputPanel.nffVal = vo.currentNFF;
@@ -39,9 +44,6 @@
 				//resetn current indices to 0
 				
 				
-				
-				
-				
 				inputPanel.nff.currIndex = 0;
 				inputPanel.turnaround.currIndex = 0;
 				inputPanel.reliability.currIndex = 0;
@@ -51,7 +53,11 @@
 				inputPanel.turnaround.currVal = vo.turnaround[0];
 				inputPanel.reliability.currVal = vo.reliability[0]; */
 				
-				
+				//set the current values
+				//set the currvals so they are not null
+				inputPanel.reliability.currVal = vo.currentReliability;
+				inputPanel.turnaround.currVal = vo.currentTuranaround;
+				inputPanel.nff.currVal = vo.currentNFF;
 				
 				
 				//todo make a numeric stepper custom component that is passed the vector of input objects and adjusts its own display

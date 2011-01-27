@@ -32,7 +32,7 @@ import utils.CustomEvent;
 		
 		public function connect():void{
 			
-			networkConnection.connectIt();
+			//networkConnection.connectIt();
 		}
 		
 		

@@ -73,13 +73,27 @@ package view.mediators
 			statusUpdate.dispatch("go clicked");
 			//create a new VO
 			var vo:InputVO = new InputVO();
-			vo.nff = inputView.inputPanel.nff.currVal.theIndex.toString();
-			vo.turnaround = inputView.inputPanel.turnaround.currVal.theIndex.toString();
-			vo.reliability = inputView.inputPanel.reliability.currVal.theIndex.toString();
+			statusUpdate.dispatch("*");
+			vo.nff = "0";//inputView.inputPanel.nff.currVal.theIndex.toString();
+		/*	statusUpdate.dispatch("*");
+			statusUpdate.dispatch("-"+vo.turnaround);
+			statusUpdate.dispatch("-"+inputView.toString());
+			statusUpdate.dispatch("-"+inputView.inputPanel.toString());
+			statusUpdate.dispatch("-"+inputView.inputPanel.turnaround.toString());
+			statusUpdate.dispatch("-"+inputView.inputPanel.turnaround.currVal);
+			statusUpdate.dispatch("-"+inputView.inputPanel.turnaround.currVal.theIndex.toString());*/
+			vo.turnaround = "0";//inputView.inputPanel.turnaround.currVal.theIndex.toString();
+			statusUpdate.dispatch("*");
+			vo.reliability = "0";//inputView.inputPanel.reliability.currVal.theIndex.toString();
+			statusUpdate.dispatch("*");
 			vo.spares = (inputView.inputPanel.spares.sparesCurr - inputView.inputPanel.spares.sparesInit).toString();
+			statusUpdate.dispatch("*");
 			var it:uint = userModel.iteration;
+			statusUpdate.dispatch("*");
 			it++; //avoid updating the iteration on the model directly so a new iteration signal is not sent, this is set by the black box when data is returned anyway
+			statusUpdate.dispatch("*");
 			vo.iteration = (it).toString();
+			statusUpdate.dispatch("*");
 			statusUpdate.dispatch("vo created about to be submitted....");
 			dataSubmitted.dispatch(vo);
 			
