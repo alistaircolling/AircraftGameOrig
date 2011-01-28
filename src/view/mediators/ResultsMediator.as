@@ -56,6 +56,7 @@ package view.mediators
 		private function finishedAnimating( e:Event):void{
 			trace("finished animating");
 			_animating = false;
+			resultsView.continueBtn.visible = true;
 		}
 		
 		private function updateInAir( e:PlanesEvent ):void{
@@ -113,6 +114,7 @@ package view.mediators
 			
 			_animating = true;
 			resultsView.setData(vo);
+			resultsView.continueBtn.visible = false;
 			
 		}
 	}

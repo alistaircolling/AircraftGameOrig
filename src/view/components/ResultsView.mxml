@@ -75,7 +75,7 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	
-	<s:Group horizontalCenter="0" verticalCenter="100" width="1148" height="516">
+	<s:Group horizontalCenter="0" verticalCenter="155" width="1148" height="516">
 		<mx:Image source="@Embed('../embed/graph.png')" width="1148" height="516" smoothBitmapContent="true" />
 		<components:GraphComponent id="graph" y="13" x="-2"/>
 		<s:HGroup top="65" left="55">

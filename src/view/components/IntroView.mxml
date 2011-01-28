@@ -5,7 +5,7 @@
 	
 	
 	<fx:Declarations>
-		<fx:String id="htmlTextAsHTML"><![CDATA[The <b>Supreme Commander of the Air Force</b> is <b>frustrated</b> as the fleet of aircraft are only flying at 65% availability and this is providing <b>insufficient combat readiness.</b> The Commander has challenged you to manage the fleet support. You must demonstrate <b>cost savings</b> and <b>increase aircraft availability</b> to 75%. You have been allocated a <b>budget</b> which you may spend on four different <b>support service improvements.<br>1. Buying more spares<br>2. Improving reliability<br>3. Reducing NFF (No Fault Found) Rates<br>4. Reducing RTRT (Repair Turn Around Time)<br></b>The following simulation will allow you <b>3 turns</b> to attempt to meet the Commander’s objectives. Each turn will represent two years and you be able to <b>select different spending on service improvements</b> during each turn.<br>You will be <b>rewarded</b> with bonus payments for meeting the <b>availability target</b> of 75%. However, you will face <b>financial penalties</b> if you <b>fail </b>to meet this target!<br>Your <b>success</b> will be determined by the <b>availability of combat ready aircraft</b> to the Commander and how <b>effective</b> your <b>management</b> has been. You will be <b>judged</b> by the <b>remaining funds</b> you have after the 6 year period. This value will be displayed as your <b>final score.</b><br>Good Luck
+		<fx:String id="htmlTextAsHTML"><![CDATA[The <b>Supreme Commander of the Air Force</b> is <b>frustrated</b> as the fleet of aircraft are only flying at 65% availability and this is providing <b>insufficient combat readiness.</b> The Commander has challenged you to manage the fleet support. You must demonstrate <b>cost savings</b> and <b>increase aircraft availability</b> to 75%. You have been allocated a <b>budget</b> which you may spend on four different <b>support service improvements.<br><br>    1. Buying more spares<br>    2. Improving reliability<br>    3. Reducing NFF (No Fault Found) Rates<br>    4. Reducing RTRT (Repair Turn Around Time)<br><br></b>The following simulation will allow you <b>3 turns</b> to attempt to meet the Commander’s objectives. Each turn will represent two years and you be able to <b>select different spending on service improvements</b><br><br> during each turn.<br>You will be <b>rewarded</b> with bonus payments for meeting the <b>availability target</b> of 75%. However, you will face <b>financial penalties</b> if you <b>fail </b>to meet this target!<br><br>Your <b>success</b> will be determined by the <b>availability of combat ready aircraft</b> to the Commander and how <b>effective</b> your <b>management</b> has been. You will be <b>judged</b> by the <b>remaining funds</b> you have after the 6 year period. This value will be displayed as your <b>final score.</b><br><br>Good Luck
 ]]></fx:String>
 	</fx:Declarations>
 	<fx:Script>
@@ -24,21 +24,21 @@
 	</fx:Script>
 	
 	<mx:Image source="@Embed('../embed/title.png')" smoothBitmapContent="true" horizontalCenter="0"/>		
-	<s:Group id="panel" horizontalCenter="0" verticalCenter="0">
+	<s:Group id="panel" horizontalCenter="0" verticalCenter="60">
 		<mx:Image source="@Embed('../embed/introPanel.png')" smoothBitmapContent="true" />		
-		<s:HGroup x="55" y="50">
-			<s:VGroup  >
+				<s:RichText id="introText" width="970" height="80%" x="100" y="150" styleName="panelBody" fontSize="20"
+							textFlow="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}"/>
+		<s:HGroup x="60" y="60" width="100%">
+			<s:VGroup  width="100%">
 				
 				<s:Label id="title" text="The Challenge" width="300" styleName="panelTitle"/>
 				<mx:Spacer height="30"/>
-				<s:RichText id="introText" width="700" height="80%" horizontalCenter="0" styleName="panelBody" fontSize="18"
-							textFlow="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}"/>
 				
-				<components:GoButton id="startBtn" label="" left="10" bottom="10"/>
 			</s:VGroup>
 			<mx:Spacer width="0"/>
-			<components:LeaderBoard id="leaderboardIntro" width="262" title="Top 10" height="100%"/>
 		</s:HGroup>
+				<components:GoButton id="startBtn" label="" left="50" bottom="50"/>
+		<components:LeaderBoard id="leaderboardIntro" width="262" title="Top 10" height="100%" x="1230" y="60"/>
 		
 	</s:Group>
 </s:Group>

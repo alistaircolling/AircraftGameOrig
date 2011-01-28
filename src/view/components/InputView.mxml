@@ -79,7 +79,7 @@
 		
 	<components:BudgetComponent id="budgetIndicator" />
 	</s:Group>
-	<s:Group horizontalCenter="0" verticalCenter="0">
+	<s:Group horizontalCenter="0" verticalCenter="246" >
 		<components:InputPanel id="inputPanel" verticalCenter="0" horizontalCenter="0"/>
 	</s:Group>
 	<!-- <s:Group id="lbHolder" right="100" top="200">
