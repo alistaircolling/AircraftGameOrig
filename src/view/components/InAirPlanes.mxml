@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*">
 	<fx:Declarations>
 		<s:Fade id="fadeIn" alphaFrom="0" alphaTo="1" duration=".6"/>
 		<s:Fade id="fadeOut" alphaFrom="1" alphaTo="0" duration=".6"/>
@@ -11,51 +11,49 @@
 			
 			public function showPlanes( n:uint ):void{
 				
-				for (var i:uint = 0; i<numElements; i++){
-					var im:Image = getElementAt(i) as Image;
+				for (var i:uint = 1; i<=numElements; i++){
+					var im:InAirPlane = this["p"+i] as InAirPlane;
 					im.alpha = 0;	
 					
 				}
-				for (var j:uint = 0; j<numElements;j++){
-					var im:Image = getElementAt(j) as Image;
-					if (j<n){
-						im.alpha = 1;
-					}
+				for (var j:uint = 1; j<=n;j++){
+					var im:InAirPlane = this["p"+j] as InAirPlane;
+					im.alpha = 1;
 				}
 				
 			}
 			
 		]]>
 	</fx:Script>
-	<mx:Image id="p0"
+	<components:InAirPlane id="p1"
 			  x="0" y="114"
-			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p1"
+			 />
+	<components:InAirPlane id="p2"
 			  x="316" y="236"
-			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p2"
+			 />
+	<components:InAirPlane id="p9"
 			  x="236" y="114"
-			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p3"
+			 />
+	<components:InAirPlane id="p3"
 			  x="160" y="16"
-			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p4"
+			 />
+	<components:InAirPlane id="p8"
 			  x="578" y="244"
-			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p5"
+			 />
+	<components:InAirPlane id="p10"
 			  x="480" y="114"
-			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p6"
+			 />
+	<components:InAirPlane id="p4"
 			  x="396" y="0"
-			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p7"
+			 />
+	<components:InAirPlane id="p5"
 			  x="724" y="153"
-			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p8"
+			 />
+	<components:InAirPlane id="p7"
 			  x="645" y="39"
-			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p9"
+			 />
+	<components:InAirPlane id="p6"
 			  x="851" y="79"
-			  source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
+			 />
 	
 </s:Group>
