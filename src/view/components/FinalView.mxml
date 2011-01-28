@@ -14,7 +14,7 @@
 	</fx:Script>
 	<mx:Canvas width="1920" height="1080" backgroundAlpha=".8" backgroundColor="0x0"/>
 	<s:Group id="panel" horizontalCenter="0" verticalCenter="0">
-		<mx:Image source="@Embed('../embed/introPanel.png')" smoothBitmapContent="true" />		
+		<mx:Image source="@Embed('../embed/introPanelOld.png')" smoothBitmapContent="true" />		
 		<s:HGroup x="55" y="50">
 			<s:VGroup  >
 				

@@ -22,13 +22,20 @@
 		<fx:String id="htmlTextAsHTML"><![CDATA[The <b>simulation game</b> you have just played represents a <b>very simplified</b> version of <b>reality.</b> <br><br>When considering your management of the fleet in the <b>real world</b> you will have to contend with many <b>more uncertainties</b> and variables. The <b>operating environment</b> of any customer is <b>dynamic</b> and must remain responsive to the <b>end user requirements.</b> As a result <b>no support solution</b> can ever be <b>‘Off the Shelf’.</b><br><br> In order to <b>manage</b> resources efficiently and effectively you must take into consideration <b>obsolescence, location, behaviours, engineering issues, supply chain management, environmental factors………</b><br><br><b>SELEX Galileo</b> has a proven track record in providing <b>Increased Availability</b> and <b>Cost Reduction</b> through <b>effective management</b> and implementation of <b>Service and Support Solutions.</b> SELEX Galileo is able to provide a range of services to <b>enable customers</b> to derive the <b>best performance</b> and results from <b>existing assets</b> and resources.]]></fx:String>
 	</fx:Declarations>
 	<mx:Canvas width="1920" height="1080" backgroundAlpha=".8" backgroundColor="0x0"/>
-	<s:Group horizontalCenter="0" verticalCenter="0">
-		<mx:Image source="@Embed('../embed/exitbg.png')" smoothBitmapContent="true" />	
-		<components:EndButton id="restartBtn" label="" click="restartBtn_clickHandler(event)" bottom="25" left="50"/>
-			 <s:VGroup top="60" left="60" gap="8">
-				 <s:Label id="title" text="The Reality of Logistics" styleName="panelTitle"/>
-				 <s:RichText lineBreak="toFit" width="740" styleName="exitBody" 
-							 textFlow="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}"/>
-			 </s:VGroup>
+	
+	<s:Group id="panel" horizontalCenter="0" verticalCenter="60">
+		<mx:Image source="@Embed('../embed/introPanel.png')" smoothBitmapContent="true" />		
+		<s:RichText id="introText" width="1150" height="80%" x="100" y="150" styleName="panelBody" fontSize="20"
+					textFlow="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}"/>
+		<s:HGroup x="60" y="60" width="100%">
+			<s:VGroup  width="100%">
+				
+				<s:Label id="title" text="The Reality of Logistics" width="700" styleName="panelTitle"/>
+				<mx:Spacer height="30"/>
+				
+			</s:VGroup>
+			<mx:Spacer width="0"/>
+		</s:HGroup>
+		<components:EndButton id="restartBtn" label="" click="restartBtn_clickHandler(event)" bottom="50" left="50"/>
 	</s:Group>
 </s:Group>
