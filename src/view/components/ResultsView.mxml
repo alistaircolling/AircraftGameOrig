@@ -75,7 +75,7 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	
-	<s:Group horizontalCenter="0" verticalCenter="157" width="1148" height="516">
+	<s:Group horizontalCenter="0" verticalCenter="150" width="1148" height="516">
 		<mx:Image source="@Embed('../embed/graph.png')" width="1148" height="516" smoothBitmapContent="true" />
 		<components:GraphComponent id="graph" y="13" x="-2"/>
 		<s:HGroup top="65" left="55">
@@ -86,7 +86,7 @@
 			<mx:Image source="@Embed('../embed/greyCurrSmall.png')" smoothBitmapContent="true" y="-2" />
 			<s:Label text=" Annual Tot" styleName="legend" x="18"/>
 		</s:Group>
-		<s:Label top="71" left="555" text="% Flown" styleName="legend"/>
+		<s:Label top="71" left="650" text="% Flown" styleName="legend"/>
 		<components:CustomButton id="continueBtn" right="55" top="52" click="continue_clickHandler(event)"/>
 	</s:Group>
 	<components:InAirPlanes id="inAir" x="510" top="20"/>

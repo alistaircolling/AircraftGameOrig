@@ -29,8 +29,9 @@
 						</s:HGroup>
 						<s:HGroup>
 							<s:Label text="Change in Cost per Flying Hr = " styleName="finalCategory"/>
-							<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" />		
+							<!--<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" />-->		
 							<s:Label id="cost" text="" styleName="finalValue"/>
+							<s:Label text="%" styleName="finalCategory"/>
 						</s:HGroup>
 						<s:HGroup>
 							<s:Label  text="Final Score = " styleName="finalValue"/>
