@@ -75,46 +75,21 @@ package view.mediators
 			//return;
 			//create a new VO
 			var vo:InputVO = new InputVO();
-		//	statusUpdate.dispatch("*");
-			vo.nff = "0";//inputView.inputPanel.nff.currVal.theIndex.toString();
-		/*	statusUpdate.dispatch("*");
-			statusUpdate.dispatch("-"+vo.turnaround);
-			statusUpdate.dispatch("-"+inputView.toString());
-			statusUpdate.dispatch("-"+inputView.inputPanel.toString());
-			statusUpdate.dispatch("-"+inputView.inputPanel.turnaround.toString());
-			statusUpdate.dispatch("-"+inputView.inputPanel.turnaround.currVal);
-			statusUpdate.dispatch("-"+inputView.inputPanel.turnaround.currVal.theIndex.toString());*/
-			vo.turnaround = "0";//inputView.inputPanel.turnaround.currVal.theIndex.toString();
-		//	statusUpdate.dispatch("*");
-			vo.reliability = "0";//inputView.inputPanel.reliability.currVal.theIndex.toString();
-		//	statusUpdate.dispatch("*");
-			vo.spares = "5";(inputView.inputPanel.spares.sparesCurr - inputView.inputPanel.spares.sparesInit).toString();
-		//	statusUpdate.dispatch("*");
+			vo.nff = inputView.inputPanel.nff.currVal.theIndex.toString();
+			vo.turnaround = inputView.inputPanel.turnaround.currVal.theIndex.toString();
+			vo.reliability = inputView.inputPanel.reliability.currVal.theIndex.toString();
+			vo.spares = (inputView.inputPanel.spares.sparesCurr - inputView.inputPanel.spares.sparesInit).toString();
 			var it:uint = userModel.iteration;
-		//	statusUpdate.dispatch("*");
 			it++; //avoid updating the iteration on the model directly so a new iteration signal is not sent, this is set by the black box when data is returned anyway
-		//	statusUpdate.dispatch("*");
 			vo.iteration = (it).toString();
-		//	statusUpdate.dispatch("*");
 			statusUpdate.dispatch("vo created about to be submitted....");
-		
 			dataSubmitted.dispatch(vo);
-		
-			
 		}
 		
 		private function updateIteration( n:uint ):void{
 			n++;
 			inputView.inputPanel.turn.text = "(Turn "+n.toString()+" of 3)";
 		}
-		
-	/*	private function updateLeaderBoard( vo:LeaderBoardVO ):void{
-			
-			var top3:Array = vo.winners.source.slice(0,3);
-			var ac:ArrayCollection = new ArrayCollection(top3);
-			inputView.leaderBoard.dp = ac;
-			
-		}*/
 		
 		private function showBalance( n:Number ):void{
 			

@@ -37,16 +37,16 @@
 			public function showCoins(n:Number):void{
 				
 				holder.removeAllElements();
-				var coins:uint = Math.round(n/2.5);
-				for (var i:uint = 0; i<coins; i++){
-					
-					var c:Coin = new Coin();
-					c.y = 0 - (i*15);
-					holder.addElement(c);
-					
-					
+				if (n>=2.5){
+					var coins:uint = Math.round(n/2.5);
+					for (var i:uint = 0; i<coins; i++){
+						
+						var c:Coin = new Coin();
+						c.y = 0 - (i*15);
+						holder.addElement(c);
+						
+					}
 				}
-				
 			}
 			
 			

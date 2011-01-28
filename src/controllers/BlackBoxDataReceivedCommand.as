@@ -84,7 +84,7 @@ package controllers
 			 userModel.iteration = Number(xml..iteration);
 			 var theBudget:Number = Number(xml..currentBudget);
 			 if (theBudget<0){
-				 theBudget*=-1;
+				// theBudget*=-1;
 			 }
 			 userModel.budget = theBudget;//Number(xml..currentBudget);//set the budget last otherwise it is updated in the intropanel when the vo.spares values are updated
 			

@@ -71,8 +71,6 @@ package services
 			_timer.addEventListener(TimerEvent.TIMER_COMPLETE, dummyComplete);
 			_timer.start();
 			
-			
-			
 		}
 		
 		public function init():void{
@@ -80,17 +78,6 @@ package services
 			//return //remove - only for testing TODO
 			statusUpdate.dispatch("connecting to socket on ip:"+_ip+"  port:"+_port);
 			_attempts = 0;
-			_timer = new Timer(2000, 1);
-			//_timer.addEventListener(TimerEvent.TIMER_COMPLETE, retryConnect);
-			
-			/*_socket = new SocketConnector(_ip, Number(_port));
-			_socket.addEventListener(_socket.CONNECTED, connectedListener);
-			_socket.addEventListener(_socket.DATA_RECEIVED, dataReceivedListener);
-			_socket.addEventListener(CustomEvent.SOCKET_CONNECT_ERROR, socketError);
-			_socket.addEventListener(CustomEvent.SECURITY_ERROR, socketError);
-			_socket.networkConnection.messageSender.addEventListener(SocketEvent.ANY, socketTrace);
-			_socket.connect();  */
-			
 			
 			//create socket connection
 			_socket = new CustomSocket(_ip, Number(_port));
@@ -111,25 +98,7 @@ package services
 		{
 			
 			statusUpdate.dispatch("NEW MSG IN black box:"+_socket.responseMsg);
-			if (_iteration<3){//onoy dispatch the first one to seewhat is being returned
-				statusUpdate.dispatch("Iteration <2 so dispatching");
-				dataReceived(_socket.responseMsg);
-				
-				
-				//statusUpdate.dispatch( "msg received:"+e.responseStr+":");
-				//dataReceived(e.responseStr);
-				//add listener for data
-			/*	statusUpdate.dispatch("nullifying the socket and re-initialising");
-				destroy it
-				_socket.messageSender.removeEventListener(_socket.NEW_MSG, myListener);
-				_socket.messageSender.removeEventListener(_socket.CONNECTEDUP, connectedList);
-				_socket.messageSender.removeEventListener(SocketEvent.ANY, socketTrace);
-				_socket.messageSender = null;
-				init();*/
-			}else{
-				
-				statusUpdate.dispatch("Iteration 2 or more so not so dispatching");
-			}
+			dataReceived(_socket.responseMsg);
 			
 		}
 		
@@ -147,10 +116,6 @@ package services
 			_attempts ++;
 		}
 		
-		/*	private function retryConnect(t:TimerEvent):void{
-		
-		_socket.connect();
-		}*/
 		
 		public function sendData( vo:InputVO ):void{
 			
@@ -161,38 +126,10 @@ package services
 			
 			xmlStr = "";
 			var sendStr:String = xmlStr.concat('<requestParams><gameID>'+vo.gameID+'</gameID><iteration>'+vo.iteration+'</iteration><reliabilityStep>'+vo.reliability+'</reliabilityStep><nffStep>'+vo.nff+'</nffStep><turnaroundStep>'+vo.turnaround+'</turnaroundStep><sparesBought>'+vo.spares+'</sparesBought></requestParams>');
-			
-			
-			
-			//			xmlStr = '<?xml version="1.0" encoding="UTF-8" ?><requestParams><gameID>1234</gameID><iteration>2</iteration><reliabilityStep>2</reliabilityStep><nffStep>1</nffStep><turnaroundStep>5</turnaroundStep><sparesBought>0</sparesBought></requestParams>';
-			//	xmlStr = this["_send"+_iteration];
-			//var xml:XML = new XML(xmlStr);
-			
-			//var strToSend:String = xml.toString();
-			
-			
+
 			statusUpdate.dispatch("submitting to socket server......:"+sendStr+":");
 			
-			_storedSendString = sendStr;
-			
-			_sendTimer = new Timer(2000, 1);
-			_sendTimer.addEventListener(TimerEvent.TIMER_COMPLETE, timerLister);
-			_sendTimer.start();
-			
-			//	if (vo.iteration == "1" ){
-			
-			//	_socket.write(sendStr);
-			
-			//	}
-			
-			//}else{
-			/*	statusUpdate.dispatch("didnt submit as iteration 2");
-			var traceStr:String = "";
-			for (var k:String in vo){
-			traceStr += k+":"+vo[k].toString()+"\r";
-			}
-			statusUpdate.dispatch(traceStr);
-			}*/
+			_socket.write(sendStr);
 			
 		}
 		
@@ -210,25 +147,7 @@ package services
 			_timer.stop();
 			
 		}
-		
-		/*	private function dataReceivedListener( e:CustomEvent ):void{
-		statusUpdate.dispatch( "msg received:"+e.responseStr+":");
-		dataReceived(e.responseStr);
-		//add listener for data
-		statusUpdate.dispatch("nullifying the socket and re-initialising");
-		_socket.messageSender.removeEventListener(_socket.NEW_MSG, myListener);
-		_socket.messageSender.removeEventListener(_socket.CONNECTEDUP, connectedList);
-		_socket.messageSender.removeEventListener(SocketEvent.ANY, socketTrace);
-		_socket.messageSender = null;
-		init();
-		}*/
-		/*
-		private function write(str:String):void {
-		statusUpdate.dispatch( "-------------SENDING------");
-		statusUpdate.dispatch( "Sending to socket :"+str+":");
-		_socket.send(str);
-		}*/
-		
+	
 		
 		private function dummyComplete( t:TimerEvent ):void{
 			trace("dummy response");			
