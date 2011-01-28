@@ -54,7 +54,7 @@
 	</fx:Script>
 	<s:VGroup height="100%" horizontalAlign="center" horizontalCenter="0" >
 			
-		<s:Label text="{title}" styleName="panelTitle"/>
+		<s:Label id="topTitle" text="{title}" styleName="panelTitle"/>
 		<mx:Spacer height="10"/>
 		<mx:DataGrid id="list"
 					 

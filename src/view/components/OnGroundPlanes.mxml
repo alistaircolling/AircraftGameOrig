@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations> 
@@ -9,57 +9,47 @@
 		<![CDATA[
 			
 			public function showPlanes( n:uint ):void{
+				//3 on ground = hide #1,2,3,4,5,6,7,8,9
+				
+				var totToHide:int = numElements - n - 2;
 				
 				for (var i:uint = 0; i<numElements; i++){
-					var im:Image = getElementAt(i) as Image;
-					im.alpha = 0;
+					var im:GroundPlane = this["p"+i] as GroundPlane;
+					im.alpha = 1;
 				}
-				for (var j:uint = 0; j<numElements;j++){
-					var im:Image = getElementAt(j) as Image;
-					if (j<n){
-						im.alpha = 1;
-					}
+				//hide total minus 
+				for (var j:uint = 0; j<totToHide; j++){
+					var im:GroundPlane = this["p"+j] as GroundPlane;
+						im.alpha = 0;
 				}
 				
 			}
 			
 		]]>
 	</fx:Script>
-	<mx:Image id="p0"
-			  x="118" y="0"
-			  source="@Embed('../embed/groundPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p1"
-			  x="219" y="21"
-			  source="@Embed('../embed/groundPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p2"
-			  x="313" y="44"
-			  source="@Embed('../embed/groundPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p3"
-			  x="416" y="65"
-			  source="@Embed('../embed/groundPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p4"
-			  x="65" y="42"
-			  source="@Embed('../embed/groundPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p5"
-			  x="167" y="63"
-			  source="@Embed('../embed/groundPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p6"
-			  x="260" y="87"
-			  source="@Embed('../embed/groundPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p7"
-			  x="362" y="106"
-			  source="@Embed('../embed/groundPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p8"
-			  x="0" y="87"
-			  source="@Embed('../embed/groundPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p9"
-			  x="100" y="108"
-			  source="@Embed('../embed/groundPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p10"
-			  x="194" y="130"
-			  source="@Embed('../embed/groundPlane.png')" smoothBitmapContent="true" />
-	<mx:Image id="p11"
-			  x="297" y="152"
-			  source="@Embed('../embed/groundPlane.png')" smoothBitmapContent="true" />
+	<components:GroundPlane id="p0"
+			  x="118" y="0" />
+	<components:GroundPlane  id="p1"
+			  x="219" y="21" />
+	<components:GroundPlane  id="p2"
+			  x="313" y="44"/>
+	<components:GroundPlane  id="p3"
+			  x="416" y="65"/>
+	<components:GroundPlane  id="p4"
+			  x="65" y="42"/>
+	<components:GroundPlane  id="p5"
+			  x="167" y="63"/>
+	<components:GroundPlane  id="p6"
+			  x="260" y="87"/>
+	<components:GroundPlane  id="p7"
+			  x="362" y="106"/>
+	<components:GroundPlane  id="p8"
+			  x="0" y="87"/>
+	<components:GroundPlane  id="p9"
+			  x="100" y="108"/>
+	<components:GroundPlane  id="p10"
+			  x="194" y="130"/>
+	<components:GroundPlane  id="p11"
+			  x="297" y="152"/>
 	
 </s:Group>

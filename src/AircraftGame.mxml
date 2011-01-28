@@ -30,6 +30,8 @@
 				updateState(ChangeState.INTRO_SCREEN);
 				addEventListener(KeyboardEvent.KEY_UP, keyHandler);
 				
+				leaderBoard.topTitle.styleName = "topTitle";
+				
 			}
 			
 			private function keyHandler( k:KeyboardEvent ):void{
@@ -125,7 +127,7 @@
 	<components:IntroView id="introView" includeIn="intro, exitScreen"  />
 	<s:Group id="lbHolder" x="1570" top="230" includeIn="intro, enter, resultsScreen, exitScreen, finalScreen">
 		<mx:Image source="@Embed('../embed/lbtop3.png')" smoothBitmapContent="true" />
-		<components:LeaderBoard id="leaderBoard" title="Top 3" horizontalCenter="0" top="50"
+		<components:LeaderBoard id="leaderBoard" title="Leader board" horizontalCenter="0" top="50"
 								visible="true"
 								/>
 	</s:Group>

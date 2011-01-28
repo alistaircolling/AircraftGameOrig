@@ -41,6 +41,15 @@ global
 	advancedAntiAliasing: true;
 }
 
+.topTitle
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 30;
+	color:#4a4a4a;
+}
+
+
 .panelTitle
 {
 	fontFamily:MyriadPro;
