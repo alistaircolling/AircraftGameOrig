@@ -59,7 +59,7 @@ package controllers
 			
 			trace("black box data received command");
 			var vo:ReceivedDataVO = new ReceivedDataVO();
-			vo.currentReliability = DataUtils.getObjectForValue(userModel.vo.reliability, Number(xml..currentReliability));
+			vo.currentReliability = DataUtils.getObjectForValue(userModel.vo.reliability, 15);//Number(xml..currentReliability));
 			vo.currentNFF = DataUtils.getObjectForValue(userModel.vo.nff, xml..currentNFF);
 			vo.currentTuranaround = DataUtils.getObjectForValue(userModel.vo.turnaround, xml..currentTurnaround);
 			vo.currentSpares = Number(xml..currentSpares);
@@ -78,11 +78,15 @@ package controllers
 			vo.initialData = false;
 			//set on the model
 			
-			userModel.vo = vo;
+			 userModel.vo = vo;
 			
 			//set the iteration on the model
-			userModel.iteration = xml..iteration;
-			userModel.budget = Number(xml..currentBudget);//set the budget last otherwise it is updated in the intropanel when the vo.spares values are updated
+			 userModel.iteration = Number(xml..iteration);
+			 var theBudget:Number = Number(xml..currentBudget);
+			 if (theBudget<0){
+				 theBudget*=-1;
+			 }
+			 userModel.budget = theBudget;//Number(xml..currentBudget);//set the budget last otherwise it is updated in the intropanel when the vo.spares values are updated
 			
 		
 			

@@ -27,6 +27,7 @@ package controllers
 			//vo.iteration = userModel.iteration.toString();   iteration is set in the input mediator
 			vo.gameID = userModel.gameID.toString();
 			statusUpdate.dispatch("got game ID:"+vo.gameID);
+			
 			blackBox.sendData(vo);
 			
 		}

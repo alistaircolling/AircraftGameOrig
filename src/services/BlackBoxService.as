@@ -51,18 +51,20 @@ package services
 		private var _send3:String = ( <![CDATA[<?xml version="1.0" encoding="UTF-8" ?><requestParams><gameID>1234</gameID><iteration>3</iteration><reliabilityStep>2</reliabilityStep><nffStep>1</nffStep><turnaroundStep>5</turnaroundStep><sparesBought>2</sparesBought></requestParams>
 ]]> ).toString();
 		
+		private var _sendTimer:Timer;
+		private var _storedSendString:String;
 		
 		private var _attempts:uint;
 		
 		private var _iteration:uint; //only used during dummy runs
 		
-		public function sendData( vo:InputVO ):void{
+		public function sendDataX( vo:InputVO ):void{
 			//only used"_send in testing
 			trace("Sending data for iteration:"+vo.iteration);
 			_iteration = Number(vo.iteration);
 			
 			//create xml   TODO add socket connectivity
-			var xmlStr:String = "<?xml version='1.0' encoding='UTF-8' ?><requestParams><gameID>"+vo.gameID+"</gameID><iteration>"+vo.iteration+"</iteration><reliabilityStep>"+vo.reliability+"</reliabilityStep><nffStep>"+vo.nff+"</nffStep><turnaroundStep>"+vo.turnaround+"</turnaroundStep><sparesBought>"+vo.spares+"</sparesBought></requestParams>";
+			var xmlStr:String = '<?xml version="1.0" encoding="UTF-8" ?><requestParams><gameID>'+vo.gameID+'</gameID><iteration>'+vo.iteration+'</iteration><reliabilityStep>'+vo.reliability+'</reliabilityStep><nffStep>'+vo.nff+'</nffStep><turnaroundStep>'+vo.turnaround+'</turnaroundStep><sparesBought>'+vo.spares+'</sparesBought></requestParams>';
 			statusUpdate.dispatch("submitting to socket server......"+xmlStr);
 			
 			_timer = new Timer(400, 1);
@@ -75,7 +77,7 @@ package services
 		
 		public function init():void{
 			
-			return //remove - only for testing TODO
+			//return //remove - only for testing TODO
 			statusUpdate.dispatch("connecting to socket on ip:"+_ip+"  port:"+_port);
 			_attempts = 0;
 			_timer = new Timer(2000, 1);
@@ -94,12 +96,12 @@ package services
 			_socket = new CustomSocket(_ip, Number(_port));
 			//add listener for data
 			_socket.messageSender.addEventListener(_socket.NEW_MSG, myListener);
-			_socket.messageSender.addEventListener(_socket.CONNECTED, connected);
+			_socket.messageSender.addEventListener(_socket.CONNECTEDUP, connectedList);
 			_socket.messageSender.addEventListener(SocketEvent.ANY, socketTrace);
 			
 		}
 		
-		private function connected(e:Event):void
+		private function connectedList(e:Event):void
 		{
 			statusUpdate.dispatch("SOCKET SONNECTED IN BLACK BOX");
 			
@@ -109,7 +111,25 @@ package services
 		{
 			
 			statusUpdate.dispatch("NEW MSG IN black box:"+_socket.responseMsg);
-			dataReceived(_socket.responseMsg);
+			if (_iteration<3){//onoy dispatch the first one to seewhat is being returned
+				statusUpdate.dispatch("Iteration <2 so dispatching");
+				dataReceived(_socket.responseMsg);
+				
+				
+				//statusUpdate.dispatch( "msg received:"+e.responseStr+":");
+				//dataReceived(e.responseStr);
+				//add listener for data
+			/*	statusUpdate.dispatch("nullifying the socket and re-initialising");
+				destroy it
+				_socket.messageSender.removeEventListener(_socket.NEW_MSG, myListener);
+				_socket.messageSender.removeEventListener(_socket.CONNECTEDUP, connectedList);
+				_socket.messageSender.removeEventListener(SocketEvent.ANY, socketTrace);
+				_socket.messageSender = null;
+				init();*/
+			}else{
+				
+				statusUpdate.dispatch("Iteration 2 or more so not so dispatching");
+			}
 			
 		}
 		
@@ -127,28 +147,63 @@ package services
 			_attempts ++;
 		}
 		
-	/*	private function retryConnect(t:TimerEvent):void{
-			
-			_socket.connect();
+		/*	private function retryConnect(t:TimerEvent):void{
+		
+		_socket.connect();
 		}*/
 		
-		public function sendDataX( vo:InputVO ):void{
+		public function sendData( vo:InputVO ):void{
 			
 			_iteration = Number(vo.iteration);
-			
 			//create xml   TODO add socket connectivity
-			var xmlStr:String = "<?xml version='1.0' encoding='UTF-8' ?><requestParams><gameID>"+vo.gameID+"</gameID><iteration>"+vo.iteration+"</iteration><reliabilityStep>"+vo.reliability+"</reliabilityStep><nffStep>"+vo.nff+"</nffStep><turnaroundStep>"+vo.turnaround+"</turnaroundStep><sparesBought>"+vo.spares+"</sparesBought></requestParams>";
 			
-			//xmlStr = this["_send"+_iteration];
+			var xmlStr:String = '<?xml version="1.0" encoding="UTF-8" ?><requestParams><gameID>'+vo.gameID+'</gameID><iteration>'+vo.iteration+'</iteration><reliabilityStep>'+vo.reliability+'</reliabilityStep><nffStep>'+vo.nff+'</nffStep><turnaroundStep>'+vo.turnaround+'</turnaroundStep><sparesBought>'+vo.spares+'</sparesBought></requestParams>';
+			
+			xmlStr = "";
+			var sendStr:String = xmlStr.concat('<requestParams><gameID>'+vo.gameID+'</gameID><iteration>'+vo.iteration+'</iteration><reliabilityStep>'+vo.reliability+'</reliabilityStep><nffStep>'+vo.nff+'</nffStep><turnaroundStep>'+vo.turnaround+'</turnaroundStep><sparesBought>'+vo.spares+'</sparesBought></requestParams>');
 			
 			
 			
-			statusUpdate.dispatch("submitting to socket server......"+xmlStr);
-			_socket.write(xmlStr);
+			//			xmlStr = '<?xml version="1.0" encoding="UTF-8" ?><requestParams><gameID>1234</gameID><iteration>2</iteration><reliabilityStep>2</reliabilityStep><nffStep>1</nffStep><turnaroundStep>5</turnaroundStep><sparesBought>0</sparesBought></requestParams>';
+			//	xmlStr = this["_send"+_iteration];
+			//var xml:XML = new XML(xmlStr);
+			
+			//var strToSend:String = xml.toString();
+			
+			
+			statusUpdate.dispatch("submitting to socket server......:"+sendStr+":");
+			
+			_storedSendString = sendStr;
+			
+			_sendTimer = new Timer(2000, 1);
+			_sendTimer.addEventListener(TimerEvent.TIMER_COMPLETE, timerLister);
+			_sendTimer.start();
+			
+			//	if (vo.iteration == "1" ){
+			
+			//	_socket.write(sendStr);
+			
+			//	}
+			
+			//}else{
+			/*	statusUpdate.dispatch("didnt submit as iteration 2");
+			var traceStr:String = "";
+			for (var k:String in vo){
+			traceStr += k+":"+vo[k].toString()+"\r";
+			}
+			statusUpdate.dispatch(traceStr);
+			}*/
 			
 		}
 		
-		
+		private function timerLister( e:TimerEvent ):void{
+			_sendTimer.stop();
+			_sendTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, timerLister);
+			_sendTimer = null;
+			statusUpdate.dispatch("TIMER COMPLETE");
+			_socket.write(_storedSendString);
+			
+		}	
 		private function connectedListener( e:Event ):void{
 			
 			statusUpdate.dispatch( "!connected to the socket server");
@@ -156,15 +211,22 @@ package services
 			
 		}
 		
-		private function dataReceivedListener( e:CustomEvent ):void{
-			statusUpdate.dispatch( "msg received:"+e.responseStr+":");
-			dataReceived(e.responseStr);
-		}
-	/*
+		/*	private function dataReceivedListener( e:CustomEvent ):void{
+		statusUpdate.dispatch( "msg received:"+e.responseStr+":");
+		dataReceived(e.responseStr);
+		//add listener for data
+		statusUpdate.dispatch("nullifying the socket and re-initialising");
+		_socket.messageSender.removeEventListener(_socket.NEW_MSG, myListener);
+		_socket.messageSender.removeEventListener(_socket.CONNECTEDUP, connectedList);
+		_socket.messageSender.removeEventListener(SocketEvent.ANY, socketTrace);
+		_socket.messageSender = null;
+		init();
+		}*/
+		/*
 		private function write(str:String):void {
-			statusUpdate.dispatch( "-------------SENDING------");
-			statusUpdate.dispatch( "Sending to socket :"+str+":");
-			_socket.send(str);
+		statusUpdate.dispatch( "-------------SENDING------");
+		statusUpdate.dispatch( "Sending to socket :"+str+":");
+		_socket.send(str);
 		}*/
 		
 		

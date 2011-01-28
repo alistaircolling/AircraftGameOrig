@@ -64,7 +64,7 @@
 			public function set budget(value:Number):void
 			{
 				_budget = value;
-				balanceIndicator.text  = _budget+"m";
+				balanceIndicator.text  = _budget.toString()+"m";
 				
 				
 			}

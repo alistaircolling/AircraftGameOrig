@@ -46,6 +46,7 @@ package view.mediators
 		
 		override public function onRegister():void{
 			trace("Input Mediator Registered");
+			statusUpdate.dispatch("===== input mediator registered ===== ");
 			userDataSet.add(setData);	
 			balanceSet.add(showBalance);
 			iterationChange.add(updateIteration);
@@ -56,7 +57,7 @@ package view.mediators
 		}
 		
 		override public function onRemove():void{
-			
+			statusUpdate.dispatch("===== input mediator removed ===== ");
 			userDataSet.remove(setData);	
 			balanceSet.remove(showBalance);
 			iterationChange.remove(updateIteration);
@@ -70,10 +71,11 @@ package view.mediators
 			
 			//increase iteration first so it is correct for submission
 			
-			statusUpdate.dispatch("go clicked");
+			statusUpdate.dispatch("> > > > > go clicked");
+			//return;
 			//create a new VO
 			var vo:InputVO = new InputVO();
-			statusUpdate.dispatch("*");
+		//	statusUpdate.dispatch("*");
 			vo.nff = "0";//inputView.inputPanel.nff.currVal.theIndex.toString();
 		/*	statusUpdate.dispatch("*");
 			statusUpdate.dispatch("-"+vo.turnaround);
@@ -83,19 +85,21 @@ package view.mediators
 			statusUpdate.dispatch("-"+inputView.inputPanel.turnaround.currVal);
 			statusUpdate.dispatch("-"+inputView.inputPanel.turnaround.currVal.theIndex.toString());*/
 			vo.turnaround = "0";//inputView.inputPanel.turnaround.currVal.theIndex.toString();
-			statusUpdate.dispatch("*");
+		//	statusUpdate.dispatch("*");
 			vo.reliability = "0";//inputView.inputPanel.reliability.currVal.theIndex.toString();
-			statusUpdate.dispatch("*");
-			vo.spares = (inputView.inputPanel.spares.sparesCurr - inputView.inputPanel.spares.sparesInit).toString();
-			statusUpdate.dispatch("*");
+		//	statusUpdate.dispatch("*");
+			vo.spares = "5";(inputView.inputPanel.spares.sparesCurr - inputView.inputPanel.spares.sparesInit).toString();
+		//	statusUpdate.dispatch("*");
 			var it:uint = userModel.iteration;
-			statusUpdate.dispatch("*");
+		//	statusUpdate.dispatch("*");
 			it++; //avoid updating the iteration on the model directly so a new iteration signal is not sent, this is set by the black box when data is returned anyway
-			statusUpdate.dispatch("*");
+		//	statusUpdate.dispatch("*");
 			vo.iteration = (it).toString();
-			statusUpdate.dispatch("*");
+		//	statusUpdate.dispatch("*");
 			statusUpdate.dispatch("vo created about to be submitted....");
+		
 			dataSubmitted.dispatch(vo);
+		
 			
 		}
 		
