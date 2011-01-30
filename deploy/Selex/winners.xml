@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <winners>
-  <user name="RBU" score="10000"/>
-  <user name="TOM" score="9000"/>
-  <user name="ZZZ" score="58"/>
-  <user name="ABA" score="58"/>
-  <user name="AZA" score="58"/>
-  <user name="ZBZ" score="58"/>
-  <user name="ZBZ" score="58"/>
-  <user name="AZZ" score="58"/>
-  <user name="AAA" score="58"/>
-  <user name="AFA" score="58"/>
+  <user name="RBU" score="10"/>
+  <user name="TOM" score="9"/>
+  <user name="ZZZ" score="8"/>
+  <user name="ABA" score="7"/>
+  <user name="AZA" score="6"/>
+  <user name="ZBZ" score="5"/>
+  <user name="ZBZ" score="4"/>
+  <user name="AZZ" score="3"/>
+  <user name="AAA" score="2"/>
+  <user name="AFA" score="1"/>
 </winners>

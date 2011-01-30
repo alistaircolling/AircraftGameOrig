@@ -59,7 +59,7 @@ package controllers
 			
 			trace("black box data received command");
 			var vo:ReceivedDataVO = new ReceivedDataVO();
-			vo.currentReliability = DataUtils.getObjectForValue(userModel.vo.reliability, 15);//Number(xml..currentReliability));
+			vo.currentReliability = DataUtils.getObjectForValue(userModel.vo.reliability, Number(xml..currentReliability));
 			vo.currentNFF = DataUtils.getObjectForValue(userModel.vo.nff, xml..currentNFF);
 			vo.currentTuranaround = DataUtils.getObjectForValue(userModel.vo.turnaround, xml..currentTurnaround);
 			vo.currentSpares = Number(xml..currentSpares);
