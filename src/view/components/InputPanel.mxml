@@ -66,6 +66,14 @@
 				_budget = value;
 				balanceIndicator.text  = _budget.toString()+"m";
 				
+			}
+			
+			public function disableAllButtons(){
+				
+				spares.disable();
+				reliability.disable();
+				nff.disable();
+				turnaround.disable();
 				
 			}
 			

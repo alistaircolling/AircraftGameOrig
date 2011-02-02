@@ -17,7 +17,13 @@
 			private var _sparesInit:Number; //value passed at the start of each turn
 			private var _budget:Number; 
 			
-			
+			//hides both buttons so nothing can be pressed
+			public function disable():void{
+				
+				up.visible = false;
+				down.visible = false;
+				
+			}
 			
 			protected function down_clickHandler(event:MouseEvent):void{
 				//check that the value is not going below min

@@ -88,6 +88,13 @@
 				updateBalance(oldCost - newCost);
 			}
 			
+			public function disable():void{
+				
+				up.visible = false;
+				down.visible = false;
+				
+			}
+			
 			private function updateBalance( n:Number ):void{
 				if (n!=0){
 					var e:NumberEvent = new NumberEvent(NumberEvent.BALANCE_UPDATE,	n);

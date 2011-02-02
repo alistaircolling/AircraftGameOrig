@@ -69,6 +69,15 @@
 				budgetIndicator.budget = n;
 				inputPanel.spares.budget = n;
 				inputPanel.budget = n;
+				
+				//if the balance is negative disable all buttons
+				if (n<0){
+					
+					
+					
+				}
+				
+				
 			}
 			
 			
