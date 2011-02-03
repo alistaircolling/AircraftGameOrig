@@ -230,12 +230,14 @@
 			<mx:series>
 				<mx:LineSeries yField="percent" displayName="Percent" lineStroke="{s1}" dataProvider="{chartData}">
 					<mx:verticalAxis>
-						<mx:LinearAxis id="pcAxis" minimum="60" maximum="100"/>
+						<!--<mx:LinearAxis id="pcAxis" minimum="60" maximum="100"/>-->
+						<mx:LinearAxis id="pcAxis" minimum="50" maximum="100"/>
 					</mx:verticalAxis>
 				</mx:LineSeries>
 				<mx:LineSeries yField="monthT" displayName="Month Total" lineStroke="{s2}" dataProvider="{chartData}" >
 					<mx:verticalAxis >
-						<mx:LinearAxis id="monthAxis" minimum="-25" maximum="10" />
+						<!--<mx:LinearAxis id="monthAxis" minimum="-25" maximum="10" />-->
+						<mx:LinearAxis id="monthAxis" minimum="-8" maximum="8" />
 					</mx:verticalAxis>
 				</mx:LineSeries>
 			</mx:series>
