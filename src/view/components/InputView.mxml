@@ -75,7 +75,15 @@
 				
 				budgetIndicator.budget = n;
 				inputPanel.spares.budget = n;
+				//set balance on custom steppers
+				
+				inputPanel.spares.budget = n;
+				inputPanel.nff.budget = n;
+				inputPanel.turnaround.budget = n;
+				inputPanel.reliability.budget = n;
+				
 				inputPanel.budget = n;
+				
 				
 				//if the balance is negative disable all buttons
 				if (n<0){

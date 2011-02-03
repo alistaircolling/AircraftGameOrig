@@ -19,6 +19,7 @@
 			public var unit:String;
 			[Bindable]
 			public var values:Vector.<InputObjectVO>;
+			private var _budget:Number;//used to store the user's current balance so we can check if an incrment can be made
 			
 			public var initVal:InputObjectVO;//used to set teh value at the start of the turn that you cant go below
 			
@@ -76,6 +77,7 @@
 			
 			protected function down_clickHandler(event:MouseEvent):void
 			{
+				
 				var oldCost:Number = (values[_currIndex] as InputObjectVO).cost;
 				if (_currIndex>0){
 					_currIndex--;
@@ -107,15 +109,47 @@
 				return currVal.value.toString()
 			}
 			
+			private function checkBalanceIsAvailable():Boolean{
+				var retB:Boolean = false;
+				if (values != null){
+					var oldCost:Number = (values[_currIndex] as InputObjectVO).cost;
+					//new cost will be 1 iteration up
+					var newCost:Number = (values[_currIndex+1] as InputObjectVO).cost;
+					var diff:Number = newCost - oldCost;//will be negative
+					if(budget - diff>0){
+						retB = true;
+					}
+					
+				}else{
+					//we are in the initial stage so do not update the buttons to show if balance is available
+					retB = true;
+				}
+			
+				return retB;				
+			}
+			
 			protected function up_clickHandler(event:MouseEvent):void
 			{
-				var oldCost:Number = (values[_currIndex] as InputObjectVO).cost;
-				if (_currIndex<values.length-1){
-					_currIndex++;
-					currVal = values[_currIndex];
+				//check if the balance will not be negative
+				if (checkBalanceIsAvailable()){
+					var oldCost:Number = (values[_currIndex] as InputObjectVO).cost;
+					if (_currIndex<values.length-1){
+						_currIndex++;
+						currVal = values[_currIndex];
+					}
+					var newCost:Number = (values[_currIndex] as InputObjectVO).cost;
+					updateBalance(oldCost-newCost);
+					
+				}else{
+					//disable the up button if not switched
+					if (switchDirection){
+						down.visible = false
+					}else{
+						up.visible = false;
+					}
 				}
-				var newCost:Number = (values[_currIndex] as InputObjectVO).cost;
-				updateBalance(oldCost-newCost);
+				
+				
 			}
 			
 			public function get switchDirection():Boolean
@@ -145,6 +179,42 @@
 			{
 				_currIndex = value;
 			}
+
+			public function get budget():Number
+			{
+				return _budget;
+			}
+
+			public function set budget(value:Number):void
+			{
+				_budget = value;//need to check that the index has been updated
+				checkCanShowNextButton();
+			}
+			
+			//triggered every time the budget is updated to see if th enext button can be shown or not - if the budget does allow then it is made visibile
+			private function checkCanShowNextButton():void{
+				if (checkBalanceIsAvailable()){
+					if(switchDirection){
+						down.visible = true;						
+					}else{
+						up.visible = true;
+					}
+					
+					
+				}else{
+					//there is not balance available for another step
+					//disable the up button if not switched
+					if (switchDirection){
+						down.visible = false;
+					}else{
+						up.visible = false;
+					}
+					
+				}
+				
+				
+			}
+
 			
 			/* 	override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{
 			

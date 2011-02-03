@@ -105,8 +105,15 @@ package view.mediators
 			var newBal:Number = currBal+n.value;
 			//update balance in spares
 			inputView.inputPanel.spares.budget = inputView.inputPanel.budget;
-			//now set after the spares to override the spares automatically updating it			
-			inputView.inputPanel.budget = Math.round(newBal*100)/100;
+			//now set after the spares to override the spares automatically updating it		
+			var newBudget:Number = Math.round(newBal*100)/100;
+			inputView.inputPanel.budget = newBudget;
+			//update balance in other steppers
+			
+			inputView.inputPanel.nff.budget = newBudget;
+			inputView.inputPanel.turnaround.budget = newBudget;
+			inputView.inputPanel.reliability.budget = newBudget;
+			
 		}
 		
 		private function setData( vo:ReceivedDataVO ):void{
