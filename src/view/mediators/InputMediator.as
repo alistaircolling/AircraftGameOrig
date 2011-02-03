@@ -103,10 +103,14 @@ package view.mediators
 			//updateBal.dispatch(n.value);  only updates the view component now
 			var currBal:Number = inputView.inputPanel.budget;
 			var newBal:Number = currBal+n.value;
-			//update balance in spares
-			inputView.inputPanel.spares.budget = inputView.inputPanel.budget;
+			
 			//now set after the spares to override the spares automatically updating it		
 			var newBudget:Number = Math.round(newBal*100)/100;
+			
+			//update balance in spares
+			inputView.inputPanel.spares.budget = newBudget;//use new budget to the left  not>> inputView.inputPanel.budget;
+			
+			
 			inputView.inputPanel.budget = newBudget;
 			//update balance in other steppers
 			
