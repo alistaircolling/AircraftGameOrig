@@ -93,6 +93,13 @@
 				return _sparesCurr;
 			}
 			
+			//updates the spares on the initial turn iteration without updating balance (this is set by system rather than user interaction)
+			public function systemUpdateSpares( value:Number ):void{
+				_sparesCurr = value;
+				valLabel.text = value.toString();
+				checkIfCanBuyMoreSpares();
+			}
+			
 			public function set sparesCurr(value:Number):void
 			{
 				//only update the difference if _sparesCurr is defined as it will error on the first load	

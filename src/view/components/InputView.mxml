@@ -22,8 +22,15 @@
 				
 				inputPanel.spares.sparesInc = 1;//hard coded for the moment - not passed in xml
 				inputPanel.spares.costInc = vo.sparesCostInc;
-				inputPanel.spares.sparesInit = vo.currentSpares;//initialize the value --set this first to make nuttons display correctly 
-				inputPanel.spares.sparesCurr = vo.currentSpares; 
+				inputPanel.spares.sparesInit = vo.currentSpares;//initialize the value --set this first to make buttons display correctly 
+				
+				//reset the sparesCurr so it knows that this has been set but the black box, not updated by the user (and so does not update the budget)
+				if (vo.iteration==0){
+					inputPanel.spares.systemUpdateSpares(vo.currentSpares);
+				}else{
+					inputPanel.spares.sparesCurr = vo.currentSpares; 
+				}
+				
 				
 				//set the initval objects to check we dont go below them
 				inputPanel.reliability.initVal = vo.currentReliability;
@@ -72,9 +79,7 @@
 				
 				//if the balance is negative disable all buttons
 				if (n<0){
-					
-					
-					
+					inputPanel.disableAllButtons();
 				}
 				
 				
@@ -86,15 +91,15 @@
 	</fx:Script>
 	<s:Group bottom="50" left="50">
 		
-	<components:BudgetComponent id="budgetIndicator" />
+		<components:BudgetComponent id="budgetIndicator" />
 	</s:Group>
 	<s:Group horizontalCenter="0" verticalCenter="246" >
 		<components:InputPanel id="inputPanel" verticalCenter="0" horizontalCenter="0"/>
 	</s:Group>
 	<!-- <s:Group id="lbHolder" right="100" top="200">
-		<mx:Image source="@Embed('../embed/lbtop3.png')" smoothBitmapContent="true" />
-		<components:LeaderBoard id="leaderBoard" title="Top 3" horizontalCenter="0" top="50"
-								visible="true"
-								/>
+	<mx:Image source="@Embed('../embed/lbtop3.png')" smoothBitmapContent="true" />
+	<components:LeaderBoard id="leaderBoard" title="Top 3" horizontalCenter="0" top="50"
+	visible="true"
+	/>
 	</s:Group>  -->
 </s:Group>

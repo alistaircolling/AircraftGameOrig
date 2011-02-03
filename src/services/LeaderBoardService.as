@@ -66,12 +66,16 @@ package services
 		}
 		
 	
-		public function writeToXML( vo:UserVO, position:uint ):void{
-			
+		public function writeToXML( vo:UserVO, pos:uint ):void{
+			var newWinners:XML = new XML();
 			var nodeString:String = '<user name="'+vo.label+'" score="'+vo.score.toString()+'" />';
 			var winner:XML =  new XML(nodeString);
-			 _xml.replace(position, winner);
-			 
+			var nodeBefore:XML = _xml.children()[pos] as XML;
+			 //_xml.replace(position, winner);
+			_xml.insertChildBefore(nodeBefore, winner);
+			//remove last child
+			delete _xml.children()[10];
+			
 			var outputString:String  = '<?xml version="1.0" encoding="utf-8"?>\n';
 			outputString += _xml.toXMLString();
 			outputString = outputString.replace(/\n/g, File.lineEnding);

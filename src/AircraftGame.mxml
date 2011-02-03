@@ -118,7 +118,7 @@
 	</s:states>
 	<mx:Image source="@Embed('../embed/selex-background.png')" width="1920" height="1080" smoothBitmapContent="true" /> 
 	<s:Group y="1050" x="1700" >
-		<s:Label id="gameID" text="GameID: --- " styleName="gameID"/>
+		<s:Label id="gameID" text="GameID: --- " styleName="gameID" visible="false" includeInLayout="false"/>
 	</s:Group>
 	<components:InputView id="inputView" includeIn="enter, intro, resultsScreen" visible="false"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
 	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen, intro" visible="false" />
