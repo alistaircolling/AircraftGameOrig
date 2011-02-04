@@ -24,7 +24,7 @@
 					
 					<s:VGroup gap="15">
 						<s:HGroup>
-							<s:Label text="Average Availability = " styleName="finalCategory"/>
+							<s:Label text="Average % Flown = " styleName="finalCategory"/>
 							<s:Label id="availability" text="" styleName="finalValue"/>
 						</s:HGroup>
 						<s:HGroup>
@@ -35,7 +35,12 @@
 						</s:HGroup>
 						<s:HGroup>
 							<s:Label  text="Final Score = " styleName="finalValue"/>
-							<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" />		
+							<s:Group>
+								<s:Label  id="negativeLabel" text="-" styleName="finalValue" y="-1"/>
+							</s:Group>
+							<s:Group>
+								<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" y="1" />		
+							</s:Group>
 							<s:Label id="finalScore" text="" styleName="finalValue"/>
 						</s:HGroup>
 						<s:RichText id="message" styleName="finalMessage" text="" width="490" />

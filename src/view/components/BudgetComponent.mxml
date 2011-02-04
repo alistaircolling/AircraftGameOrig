@@ -10,6 +10,8 @@
 		<![CDATA[
 			import mx.events.FlexEvent;
 			
+			import utils.StringUtils;
+			
 			private var _budget:Number;
 			
 			
@@ -31,8 +33,19 @@
 					negative.visible = true;					
 				}
 				showCoins(_budget);
-				title.text = _budget.toString();
+				
+				var budgetString:String = _budget.toString();
+				//returns true if a minus exists
+				if (StringUtils.hasMinus(budgetString)){
+					negativeLabel.text = "-";
+					budgetString = budgetString.slice(1);
+				}else{
+					negativeLabel.text = "";
+				}
+				title.text = budgetString+"m";
 			}
+			
+			
 			
 			public function showCoins(n:Number):void{
 				
@@ -63,9 +76,16 @@
 	<s:Group>
 		<mx:Image id="positive" source="@Embed('../embed/positive.png')" smoothBitmapContent="true"  horizontalCenter="0" verticalCenter="0"/>
 		<mx:Image id="negative" source="@Embed('../embed/negative.png')" smoothBitmapContent="true"  horizontalCenter="0" verticalCenter="0"/>
-		<s:Group  horizontalCenter="-5" y="50">
-			<mx:Image source="@Embed('../embed/blueCurr48.png')" smoothBitmapContent="true" y="3" />
-			<s:Label id="title" styleName="mainBudget" textAlign="center" x="35"/>
-		</s:Group>
+		<s:HGroup horizontalCenter="0" y="50" gap="2">
+			<s:Group>
+				
+				<s:Label id="negativeLabel" styleName="mainBudget" text="" y="-3"/>
+			</s:Group>
+			<s:Group>
+				
+				<mx:Image source="@Embed('../embed/blueCurr48.png')" smoothBitmapContent="true" y="3" />
+			</s:Group>
+			<s:Label id="title" styleName="mainBudget" textAlign="center" />
+		</s:HGroup>
 	</s:Group>
 </s:Group>

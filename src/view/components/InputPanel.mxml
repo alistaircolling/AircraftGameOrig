@@ -16,6 +16,8 @@
 		<![CDATA[
 			import model.vo.InputObjectVO;
 			
+			import utils.StringUtils;
+			
 			[Bindable]
 			public var sparesInit:Number = -1;
 			[Bindable]
@@ -64,7 +66,17 @@
 			public function set budget(value:Number):void
 			{
 				_budget = value;
-				balanceIndicator.text  = _budget.toString()+"m";
+				
+				var budgetString:String = _budget.toString();
+				//returns true if a minus exists
+				if (StringUtils.hasMinus(budgetString)){
+					negativeLabel.text = "-";
+					budgetString = budgetString.slice(1);
+				}else{
+					negativeLabel.text = "";
+				}
+				
+				balanceIndicator.text  = budgetString+"m";
 				
 			}
 			
@@ -85,9 +97,12 @@
 		<mx:Image source="@Embed('../embed/supportPanel.png')" smoothBitmapContent="true" />
 		
 		<s:Label text="Remaining budget" styleName="supportPanelBudgetCopy"  textAlign="left" left="530" top="70"/>
-		<s:Group left="545" top="90">
+		<s:Group left="535" top="90" >
 			
-			<s:HGroup>
+			<s:HGroup horizontalCenter="0">
+				<s:Group >
+					<s:Label id="negativeLabel" styleName="supportPanelBudget" text="-" y="-3"/>
+				</s:Group>
 				<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" />
 				<s:Label id="balanceIndicator" text="" styleName="supportPanelBudget"  textAlign="left" />
 			</s:HGroup>
@@ -102,7 +117,7 @@
 				<s:VGroup gap="11" >
 					<mx:Spacer height="35"/>					
 					<components:SparesStepper id="spares" title="Spares" width="623" height="50" />
-					<components:CustomStepper id="reliability" title="Improve Reliability MTBF" unit="No" currVal="{reliablityVal}" values="{reliabilityValues}" width="623" height="50" />
+					<components:CustomStepper id="reliability" title="Improve Reliability MTBF" unit="Hrs" currVal="{reliablityVal}" values="{reliabilityValues}" width="623" height="50" />
 					<components:CustomStepper id="nff" title="Reduce NFF" unit="%" currVal="{nffVal}" values="{nffValues}" width="623" height="50" />
 					<components:CustomStepper id="turnaround" title="Reduce Repair Turnaround Time" unit="Days" currVal="{turnaroundVal}" values="{turnaroundValues}" width="623" height="50"/>
 					<components:GoButton id="submit"/>

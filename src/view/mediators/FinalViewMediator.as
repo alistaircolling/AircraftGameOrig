@@ -17,6 +17,8 @@ package view.mediators
 	import signals.RequestLeaderBoard;
 	import signals.UserDataSet;
 	
+	import utils.StringUtils;
+	
 	import view.components.FinalView;
 	
 	public class FinalViewMediator extends Mediator
@@ -81,7 +83,18 @@ package view.mediators
 				//set the availability and the cost
 				finalView.availability.text = vo.avAvailability.toString()+"%";
 				finalView.cost.text = vo.costPerFHr.toString();
-				finalView.finalScore.text = vo.finalScore.toString();
+				
+				//format strings for negative budget
+				var budgetString:String = vo.finalScore.toString();
+				//returns true if a minus exists
+				if (StringUtils.hasMinus(budgetString)){
+					finalView.negativeLabel.text = "-";
+					budgetString = budgetString.slice(1);
+				}else{
+					finalView.negativeLabel.text = "-";
+				}
+				
+				finalView.finalScore.text = budgetString+"m"; 
 				
 				//check if the user has a high score
 				_boardPosition = -1;

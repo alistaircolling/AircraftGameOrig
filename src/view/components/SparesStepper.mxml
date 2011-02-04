@@ -178,7 +178,7 @@
 		</s:Group>
 		<s:HGroup verticalAlign="middle" height="100%" x="28" y="5">
 			<s:Label text="{title}" styleName="supportPanelCategory" verticalCenter="0" verticalAlign="middle" height="100%"/>
-			<s:Label text="No" styleName="supportPanelCategoryItalic" verticalCenter="0" verticalAlign="middle"  height="100%"/>
+			<s:Label text="Number" styleName="supportPanelCategoryItalic" verticalCenter="0" verticalAlign="middle"  height="100%"/>
 		</s:HGroup>
 		<s:HGroup right="0" verticalAlign="middle" gap="0">
 			<components:DownArrowButton id="down" click="down_clickHandler(event)" />

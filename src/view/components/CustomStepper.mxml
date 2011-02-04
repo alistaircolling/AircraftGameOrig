@@ -114,11 +114,18 @@
 				if (values != null){
 					var oldCost:Number = (values[_currIndex] as InputObjectVO).cost;
 					//new cost will be 1 iteration up
-					var newCost:Number = (values[_currIndex+1] as InputObjectVO).cost;
-					var diff:Number = newCost - oldCost;//will be negative
-					if(budget - diff>0){
-						retB = true;
+					var newCost:Number; 
+					//check there is a higher index available
+					if (_currIndex+1>values.length-1){
+						retB = false;
+					}else{
+						newCost = (values[_currIndex+1] as InputObjectVO).cost;
+						var diff:Number = newCost - oldCost;//will be negative
+						if(budget - diff>0){
+							retB = true;
+						}
 					}
+					
 					
 				}else{
 					//we are in the initial stage so do not update the buttons to show if balance is available
