@@ -153,6 +153,23 @@ global
 	fontSize: 30;
 	color:#174f73;
 }
+
+.dataGridRenderer
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 26;
+	color:#174f73;
+}
+
+.dataGridRendererGrey
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 26;
+	color:#768c9b;
+}
+
 	
 .panelBody
 {
