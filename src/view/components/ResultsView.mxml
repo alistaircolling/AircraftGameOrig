@@ -77,7 +77,7 @@
 	
 	<s:Group horizontalCenter="0" verticalCenter="150" width="1148" height="516">
 		<mx:Image source="@Embed('../embed/graph.png')" width="1148" height="516" smoothBitmapContent="true" />
-		<components:GraphComponent id="graph" y="13" x="-2"/>
+		<components:GraphComponent id="graph" y="10" x="-2"/>
 		<s:HGroup top="65" left="55">
 			<s:Label id="title" text="Results Graph"  fontWeight="bold" styleName="supportPanelTitle" />
 			<s:Label id="turn" text="---" styleName="supportPanelTitleItalic"/>		

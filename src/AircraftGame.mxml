@@ -125,9 +125,9 @@
 	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter" visible="false" />
 	<components:ExitView id="exitView" includeIn="finalScreen, exitScreen" visible="true" />
 	<components:IntroView id="introView" includeIn="intro, exitScreen"  />
-	<s:Group id="lbHolder" x="1570" top="240" includeIn="intro, enter, resultsScreen, exitScreen, finalScreen">
+	<s:Group id="lbHolder" x="1568" top="267" includeIn="intro, enter, resultsScreen, exitScreen, finalScreen">
 		<mx:Image source="@Embed('../embed/lbtop3.png')" smoothBitmapContent="true" />
-		<components:LeaderBoard id="leaderBoard" title="Leader board" horizontalCenter="4" top="60"
+		<components:LeaderBoard id="leaderBoard" title="Leader board" horizontalCenter="-10" top="55" spacerHeight="43"
 								visible="true"
 								/>
 	</s:Group>

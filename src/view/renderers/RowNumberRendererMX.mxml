@@ -44,6 +44,7 @@
 
 		]]>
 	</fx:Script>
+	<mx:Image source="@Embed('../embed/scoreBg.png')" smoothBitmapContent="true" x="102" y="-13"/>
 	<s:Group height="42" width="208" >
 		<s:Label horizontalCenter="11" id="lblData" text="{(itemIndex+1)}" styleName="dataGridRenderer" textAlign="center" />
 		<s:Label horizontalCenter="60" text="{data.label}" styleName="dataGridRendererGrey"  textAlign="center" />

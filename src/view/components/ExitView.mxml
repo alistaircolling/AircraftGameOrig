@@ -21,7 +21,7 @@
 	<fx:Declarations>
 		<fx:String id="htmlTextAsHTML"><![CDATA[The <b>simulation game</b> you have just played represents a <b>very simplified</b> version of <b>reality.</b> <br><br>When considering your management of the fleet in the <b>real world</b> you will have to contend with many <b>more uncertainties</b> and variables. The <b>operating environment</b> of any customer is <b>dynamic</b> and must remain responsive to the <b>end user requirements.</b> As a result <b>no support solution</b> can ever be <b>‘Off the Shelf’.</b><br><br> In order to <b>manage</b> resources efficiently and effectively you must take into consideration <b>obsolescence, location, behaviours, engineering issues, supply chain management, environmental factors………</b><br><br><b>SELEX Galileo</b> has a proven track record in providing <b>Increased Availability</b> and <b>Cost Reduction</b> through <b>effective management</b> and implementation of <b>Service and Support Solutions.</b> SELEX Galileo is able to provide a range of services to <b>enable customers</b> to derive the <b>best performance</b> and results from <b>existing assets</b> and resources.]]></fx:String>
 	</fx:Declarations>
-	<mx:Canvas width="1920" height="1080" backgroundAlpha=".8" backgroundColor="0x0"/>
+	<mx:Canvas width="1920" height="1080" backgroundAlpha=".5" backgroundColor="0x0"/>
 	
 	<s:Group id="panel" horizontalCenter="0" verticalCenter="60">
 		<mx:Image source="@Embed('../embed/introPanel.png')" smoothBitmapContent="true" />		

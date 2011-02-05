@@ -69,6 +69,7 @@
     
 	<s:BitmapImage source="@Embed('../embed/continue.png')"
 				   source.down="@Embed('../embed/continueClick.png')"
+				   source.over="@Embed('../embed/continueClick.png')"
 				   left="0" right="0" top="0" bottom="0" smooth="true" />
     
     <!-- layer 8: text -->

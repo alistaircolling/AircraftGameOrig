@@ -24,25 +24,44 @@
 			public function set budget(value:Number):void
 			{
 				_budget = value;
-				if (value>0){
+				/* if (value>0){
 					positive.visible = true;
 					negative.visible = false;
 					
 				}else{
 					positive.visible = false;					
 					negative.visible = true;					
-				}
+				} */
 				showCoins(_budget);
 				
 				var budgetString:String = _budget.toString();
+				var hasMinus:Boolean = StringUtils.hasMinus(budgetString);
+				showPositiveCurrency(!hasMinus);
 				//returns true if a minus exists
-				if (StringUtils.hasMinus(budgetString)){
+				if (hasMinus){
 					negativeLabel.text = "-";
 					budgetString = budgetString.slice(1);
 				}else{
 					negativeLabel.text = "";
 				}
 				title.text = budgetString+"m";
+				
+			}
+			
+			private function showPositiveCurrency(b:Boolean):void{
+				posCurr.includeInLayout = b;
+				negCurr.includeInLayout = !b;
+				posCurr.visible = b;
+				negCurr.visible = !b;
+				positive.visible = b;
+				negative.visible = !b;
+				if(b){
+					title.styleName = "mainBudget";
+					negativeLabel.styleName = "mainBudget";
+				}else{
+					title.styleName = "mainBudgetNeg";
+					negativeLabel.styleName = "mainBudgetNeg";
+				}
 			}
 			
 			
@@ -83,7 +102,8 @@
 			</s:Group>
 			<s:Group>
 				
-				<mx:Image source="@Embed('../embed/blueCurr48.png')" smoothBitmapContent="true" y="3" />
+				<mx:Image id="negCurr" source="@Embed('../embed/whiteCurr48.png')" smoothBitmapContent="true" y="3" visible="false" includeInLayout="false"/>
+				<mx:Image id="posCurr" source="@Embed('../embed/blueCurr48.png')" smoothBitmapContent="true" y="3" />
 			</s:Group>
 			<s:Label id="title" styleName="mainBudget" textAlign="center" />
 		</s:HGroup>

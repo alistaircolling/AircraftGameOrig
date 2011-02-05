@@ -66,6 +66,14 @@ global
 	color:#044047;
 }
 
+.mainBudgetNeg
+{
+	fontFamily:MyriadPro;
+	fontWeight:bold;
+	fontSize: 46;
+	color:#ffffff;
+}
+
 
 .gameID
 {
