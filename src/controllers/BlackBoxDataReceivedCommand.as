@@ -88,8 +88,6 @@ package controllers
 			 }
 			 userModel.budget = theBudget;//Number(xml..currentBudget);//set the budget last otherwise it is updated in the intropanel when the vo.spares values are updated
 			
-		
-			
 			
 		}
 		

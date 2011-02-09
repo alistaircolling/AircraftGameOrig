@@ -12,7 +12,6 @@
 		<![CDATA[
 			
 			public function showPlanes( n:uint ):void{
-				
 				for (var i:uint = 1; i<=numElements; i++){
 					var im:InAirPlane = this["p"+i] as InAirPlane;
 					if (i<=n){
@@ -25,11 +24,9 @@
 						}
 					}
 				}
-				
 			}
 			
 			private function showPlane( pl:InAirPlane, b:Boolean ):void{
-				
 				if (b){
 					fadeIn.target = pl;
 					fadeIn.play();

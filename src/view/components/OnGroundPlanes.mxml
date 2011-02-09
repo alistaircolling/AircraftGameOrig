@@ -4,15 +4,15 @@
 		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*">
 	<fx:Declarations>
 		<s:Fade id="fadeIn" alphaTo="1" duration="300"/>
-		<s:Fade id="fadeOut" alphaFrom="1" alphaTo="0" duration="300"/>
+		<s:Fade id="fadeOut"  alphaTo="0" duration="300"/>
 	</fx:Declarations> 
 	<fx:Script>
 		<![CDATA[
 			
 			public function showPlanes( n:uint ):void{
-				for (var i:uint = 1; i<=numElements; i++){
+				for (var i:uint = 0; i<10; i++){
 					var im:GroundPlane = this["p"+i] as GroundPlane;
-					if (i<=n){
+				 	if (i<n){
 						if(im.alpha <1){
 							showPlane(im, true);
 						}
@@ -20,7 +20,7 @@
 						if (im.alpha>0){
 							showPlane(im, false);
 						}
-					}
+					} 
 				}
 			}
 			
@@ -36,29 +36,29 @@
 			
 		]]>
 	</fx:Script>
-	<components:GroundPlane id="p0"
+	<components:GroundPlane id="p9"
 			  x="118" y="0" />
-	<components:GroundPlane  id="p1"
-			  x="219" y="21" />
-	<components:GroundPlane  id="p2"
-			  x="313" y="44"/>
-	<components:GroundPlane  id="p3"
-			  x="416" y="65"/>
-	<components:GroundPlane  id="p4"
-			  x="65" y="42"/>
-	<components:GroundPlane  id="p5"
-			  x="167" y="63"/>
-	<components:GroundPlane  id="p6"
-			  x="260" y="87"/>
-	<components:GroundPlane  id="p7"
-			  x="362" y="106"/>
 	<components:GroundPlane  id="p8"
+			  x="219" y="21" />
+	<components:GroundPlane  id="p7"
+			  x="313" y="44"/>
+	<components:GroundPlane  id="p6"
+			  x="416" y="65"/>
+	<components:GroundPlane  id="p5"
+			  x="65" y="42"/>
+	<components:GroundPlane  id="p4"
+			  x="167" y="63"/>
+	<components:GroundPlane  id="p3"
+			  x="260" y="87"/>
+	<components:GroundPlane  id="p2"
+			  x="362" y="106"/>
+	<components:GroundPlane  id="p1"
 			  x="0" y="87"/>
-	<components:GroundPlane  id="p9"
+	<components:GroundPlane  id="p0"
 			  x="100" y="108"/>
-	<components:GroundPlane  id="p10"
+	<components:GroundPlane  id="pnon"
 			  x="194" y="130"/>
-	<components:GroundPlane  id="p11"
+	<components:GroundPlane  id="pnon2"
 			  x="297" y="152"/>
 	
 </s:Group>
