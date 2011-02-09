@@ -6,8 +6,8 @@ package controllers
 	import org.robotlegs.mvcs.SignalCommand;
 	
 	import services.LeaderBoardService;
-	
-	public class EnterWinnerCommand extends SignalCommand
+	//used to update the display as a user enters his name
+	public class UpdateWinnerCommand extends SignalCommand
 	{
 		[Inject]
 		public var lBService:LeaderBoardService;
@@ -16,7 +16,7 @@ package controllers
 		[Inject]
 		public var position:uint;
 		[Inject]
-		public var initials:String;
+		public var userVO:UserVO;
 		
 		override public function execute():void{
 			

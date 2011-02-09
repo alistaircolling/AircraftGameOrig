@@ -106,6 +106,10 @@ package view.mediators
 						_boardPosition = i;
 					} 
 				}
+				//create a new winners list with a blacnk winner containing only the score and the default letters
+				
+				
+				
 				if (_boardPosition>-1){
 					showEnterDetails(true);
 					trace(" we have a winner !!!!!  at pos:"+_boardPosition);

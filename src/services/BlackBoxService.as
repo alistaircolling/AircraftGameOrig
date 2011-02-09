@@ -56,6 +56,7 @@ package services
 		
 		private var _attempts:uint;
 		
+		
 		private var _iteration:uint; //only used during dummy runs
 		
 		public function sendDataX( vo:InputVO ):void{
@@ -85,7 +86,13 @@ package services
 			_socket.messageSender.addEventListener(_socket.NEW_MSG, myListener);
 			_socket.messageSender.addEventListener(_socket.CONNECTEDUP, connectedList);
 			_socket.messageSender.addEventListener(SocketEvent.ANY, socketTrace);
+			_socket.messageSender.addEventListener(SocketEvent.ERROR, errorHandler);
 			
+		}
+		
+		private function errorHandler( e:SocketEvent ):void{
+			
+			//TODO implement error event
 		}
 		
 		private function connectedList(e:Event):void
