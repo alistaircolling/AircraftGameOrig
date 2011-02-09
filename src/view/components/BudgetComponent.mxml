@@ -35,17 +35,7 @@
 				} */
 				showCoins(_budget);
 				
-				var budgetString:String = _budget.toString();
-				var hasMinus:Boolean = StringUtils.hasMinus(budgetString);
-				showPositiveCurrency(!hasMinus);
-				//returns true if a minus exists
-				if (hasMinus){
-					negativeLabel.text = "-";
-					budgetString = budgetString.slice(1);
-				}else{
-					negativeLabel.text = "";
-				}
-				title.text = budgetString+"m";
+				
 				
 			}
 			
@@ -82,7 +72,7 @@
 				}
 			}
 			
-			public function showCoinsAnim():void{
+			public function updateDisplay():void{
 				if (holder.numElements>0){
 					var targets:Array = [];
 					for (var i:uint = 0; i<holder.numElements; i++){
@@ -91,6 +81,19 @@
 					}
 					coinFall.play(targets);
 				}
+				
+				var budgetString:String = _budget.toString();
+				var hasMinus:Boolean = StringUtils.hasMinus(budgetString);
+				showPositiveCurrency(!hasMinus);
+				//returns true if a minus exists
+				if (hasMinus){
+					negativeLabel.text = "-";
+					budgetString = budgetString.slice(1);
+				}else{
+					negativeLabel.text = "";
+				}
+				title.text = budgetString+"m";
+				
 			}
 			
 			

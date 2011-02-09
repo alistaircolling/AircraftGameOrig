@@ -12,7 +12,7 @@
 			import flashx.textLayout.conversion.TextConverter;
 		]]>
 	</fx:Script>
-	<mx:Canvas width="1920" height="1080" backgroundAlpha=".5" backgroundColor="0x0"/>
+	<!--<mx:Canvas width="1920" height="1080" backgroundAlpha="0" backgroundColor="0x0"/> -->
 	<s:Group id="panel" horizontalCenter="0" verticalCenter="0">
 		<mx:Image source="@Embed('../embed/introPanelOld.png')" smoothBitmapContent="true" />		
 		<s:HGroup x="55" y="50">
@@ -36,7 +36,7 @@
 						<s:HGroup>
 							<s:Label  text="Final Score = " styleName="finalValue"/>
 							<s:Group>
-								<s:Label  id="negativeLabel" text="-" styleName="finalValue" y="-1"/>
+								<s:Label  id="negativeLabel" text="" styleName="finalValue" y="-1"/>
 							</s:Group>
 							<s:Group>
 								<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" y="1" />		

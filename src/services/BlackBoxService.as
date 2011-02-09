@@ -58,7 +58,7 @@ package services
 		
 		private var _iteration:uint; //only used during dummy runs
 		
-		public function sendData( vo:InputVO ):void{
+		public function sendDataX( vo:InputVO ):void{
 			//only used"_send in testing
 			trace("Sending data for iteration:"+vo.iteration);
 			_iteration = Number(vo.iteration);
@@ -75,7 +75,7 @@ package services
 		
 		public function init():void{
 			
-			return //remove - only for testing TODO
+		//	return //remove - only for testing TODO
 			statusUpdate.dispatch("connecting to socket on ip:"+_ip+"  port:"+_port);
 			_attempts = 0;
 			
@@ -117,7 +117,7 @@ package services
 		}
 		
 		
-		public function sendDataX( vo:InputVO ):void{
+		public function sendData( vo:InputVO ):void{
 			
 			_iteration = Number(vo.iteration);
 			//create xml   TODO add socket connectivity

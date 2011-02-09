@@ -11,8 +11,21 @@
 			
 			import utils.DataUtils;
 			
+			private var _receivedVO:ReceivedDataVO;
+			
+			
+	/* 		public function setDataX( vo:ReceivedDataVO ):void{
+				
+				_receivedVO = vo;
+				
+				if (_receivedVO.iteration == 1){
+					showData();
+				}
+			} */
 			
 			public function setData( vo:ReceivedDataVO ):void{
+				
+				_receivedVO = vo;
 				
 				//set switches first so buttons know which buttons to display vos
 				inputPanel.nff.switchDirection = true;
@@ -21,33 +34,33 @@
 				
 				
 				inputPanel.spares.sparesInc = 1;//hard coded for the moment - not passed in xml
-				inputPanel.spares.costInc = vo.sparesCostInc;
-				inputPanel.spares.sparesInit = vo.currentSpares;//initialize the value --set this first to make buttons display correctly 
+				inputPanel.spares.costInc = _receivedVO.sparesCostInc;
+				inputPanel.spares.sparesInit = _receivedVO.currentSpares;//initialize the value --set this first to make buttons display correctly 
 				
 				//reset the sparesCurr so it knows that this has been set but the black box, not updated by the user (and so does not update the budget)
-				if (vo.iteration==0){
-					inputPanel.spares.systemUpdateSpares(vo.currentSpares);
+				if (_receivedVO.iteration==0){
+					inputPanel.spares.systemUpdateSpares(_receivedVO.currentSpares);
 				}else{
-					inputPanel.spares.sparesCurr = vo.currentSpares; 
+					inputPanel.spares.sparesCurr = _receivedVO.currentSpares; 
 				}
 				
 				
 				//set the initval objects to check we dont go below them
-				inputPanel.reliability.initVal = vo.currentReliability;
-				inputPanel.turnaround.initVal = vo.currentTuranaround;
-				inputPanel.nff.initVal = vo.currentNFF;
+				inputPanel.reliability.initVal = _receivedVO.currentReliability;
+				inputPanel.turnaround.initVal = _receivedVO.currentTuranaround;
+				inputPanel.nff.initVal = _receivedVO.currentNFF;
 				
 				
 				
 				
-				inputPanel.reliablityVal = vo.currentReliability;
-				inputPanel.turnaroundVal = vo.currentTuranaround;
-				inputPanel.nffVal = vo.currentNFF;
+				inputPanel.reliablityVal = _receivedVO.currentReliability;
+				inputPanel.turnaroundVal = _receivedVO.currentTuranaround;
+				inputPanel.nffVal = _receivedVO.currentNFF;
 				
 				//set new vectors
-				inputPanel.reliabilityValues = vo.reliability;
-				inputPanel.turnaroundValues = vo.turnaround;
-				inputPanel.nffValues = vo.nff;
+				inputPanel.reliabilityValues = _receivedVO.reliability;
+				inputPanel.turnaroundValues = _receivedVO.turnaround;
+				inputPanel.nffValues = _receivedVO.nff;
 				//resetn current indices to 0
 				
 				
@@ -62,9 +75,9 @@
 				
 				//set the current values
 				//set the currvals so they are not null
-				inputPanel.reliability.currVal = vo.currentReliability;
-				inputPanel.turnaround.currVal = vo.currentTuranaround;
-				inputPanel.nff.currVal = vo.currentNFF;
+				inputPanel.reliability.currVal = _receivedVO.currentReliability;
+				inputPanel.turnaround.currVal = _receivedVO.currentTuranaround;
+				inputPanel.nff.currVal = _receivedVO.currentNFF;
 				
 				
 				//todo make a numeric stepper custom component that is passed the vector of input objects and adjusts its own display
@@ -93,10 +106,10 @@
 				
 			}
 			
-			public function showCoinsAnim():void{
+			public function updateDisplay():void{
 				
-				budgetIndicator.showCoinsAnim();
-				
+				budgetIndicator.updateDisplay();
+				//showData();
 			}
 			
 			

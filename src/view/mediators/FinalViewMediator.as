@@ -91,7 +91,7 @@ package view.mediators
 					finalView.negativeLabel.text = "-";
 					budgetString = budgetString.slice(1);
 				}else{
-					finalView.negativeLabel.text = "-";
+					finalView.negativeLabel.text = "";
 				}
 				
 				finalView.finalScore.text = budgetString+"m"; 
