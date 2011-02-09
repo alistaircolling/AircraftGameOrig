@@ -85,7 +85,26 @@ package services
 			stream.writeUTFBytes(outputString);
 		}
 		
+		//used to update the winners list while the user enters their details
+		public function updateWinnersListTemp( vo:UserVO, pos:uint ):void{
+			
+			var lbVO:LeaderBoardVO = lbModel.vo;
+			var winners:ArrayCollection = lbModel.vo.winners;
+			//replace the vo at the position
+			winners.addItemAt(vo, pos);
+			winners.removeItemAt(pos+1);
+			//set on temp vo
+			lbVO.winners = winners;
+			//set on model to dispatch event
+			lbModel.vo = lbVO;
+			
+		}
 		
+		//write the new winner to the model and also to the xml
+		public function writeNewWinner():void{
+			
+			//TODO
+		}
 		
 		private function handleServiceResult(s:String):void{
 			trace("leader board data received");

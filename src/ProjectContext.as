@@ -119,7 +119,8 @@ package
 			signalCommandMap.mapSignalClass(LoadXML, LoadLeaderBoardXML);
 			signalCommandMap.mapSignalClass(SettingsXMLLoaded, StoreSettingsXMLCommand);
 			signalCommandMap.mapSignalClass(SettingsUpdated, ServiceSetCommand);
-			signalCommandMap.mapSignalClass(StartClicked, StartClickedCommand);
+			signalCommandMap.mapSignalClass(StartClicked, StartClicke
+				dCommand);
 			signalCommandMap.mapSignalClass(UpdateBalance, UpdateBalanceCommand);
 			signalCommandMap.mapSignalClass(DataSubmitted, SubmitData);
 			signalCommandMap.mapSignalClass(BlackBoxDataReceived, BlackBoxDataReceivedCommand);
