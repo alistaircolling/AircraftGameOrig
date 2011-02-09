@@ -67,6 +67,7 @@
 					
 					case ChangeState.ENTER_SCREEN:
 						inputView.visible = true;
+						inputView.showCoinsAnim();
 						resultsView.visible = false;
 						lbHolder.visible = true
 						lbHolder.visible = true;

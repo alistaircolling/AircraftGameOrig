@@ -5,6 +5,7 @@
 		 creationComplete="group1_creationCompleteHandler(event)">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Move id="coinFall" duration="2000" yBy="2000" perElementOffset="400" startDelay="400" />
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
@@ -67,21 +68,30 @@
 			
 			
 			public function showCoins(n:Number):void{
-				
 				holder.removeAllElements();
+			//	var targets:Array = [];
 				if (n>=2.5){
-					var coins:uint = Math.round(n/2.5);
+					var coins:uint = Math.floor(n/2.5);
 					for (var i:uint = 0; i<coins; i++){
-						
 						var c:Coin = new Coin();
-						c.y = 0 - (i*15);
+						c.y = -2000 - (i*15);
 						holder.addElement(c);
-						
+				//		targets.push(c);
 					}
+				//	coinFall.play(targets); 
 				}
 			}
 			
-			
+			public function showCoinsAnim():void{
+				if (holder.numElements>0){
+					var targets:Array = [];
+					for (var i:uint = 0; i<holder.numElements; i++){
+						var c:Coin = holder.getElementAt(i) as Coin;
+						targets.push(c);
+					}
+					coinFall.play(targets);
+				}
+			}
 			
 			
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
@@ -91,7 +101,7 @@
 			
 		]]>
 	</fx:Script>
-	<s:Group id="holder" horizontalCenter="0" y="-100"/>
+	<s:Group id="holder" horizontalCenter="0" y="-80"/>
 	<s:Group>
 		<mx:Image id="positive" source="@Embed('../embed/positive.png')" smoothBitmapContent="true"  horizontalCenter="0" verticalCenter="0"/>
 		<mx:Image id="negative" source="@Embed('../embed/negative.png')" smoothBitmapContent="true"  horizontalCenter="0" verticalCenter="0"/>

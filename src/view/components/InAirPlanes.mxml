@@ -3,8 +3,10 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*">
 	<fx:Declarations>
-		<s:Fade id="fadeIn" alphaFrom="0" alphaTo="1" duration=".6"/>
-		<s:Fade id="fadeOut" alphaFrom="1" alphaTo="0" duration=".6"/>
+		<s:Fade id="fadeIn" alphaTo="1" duration="300"/>
+		<s:Fade id="fadeOut" alphaFrom="1" alphaTo="0" duration="300"/>
+	
+		
 	</fx:Declarations> 
 	<fx:Script>
 		<![CDATA[
@@ -13,14 +15,28 @@
 				
 				for (var i:uint = 1; i<=numElements; i++){
 					var im:InAirPlane = this["p"+i] as InAirPlane;
-					im.alpha = 0;	
-					
-				}
-				for (var j:uint = 1; j<=n;j++){
-					var im:InAirPlane = this["p"+j] as InAirPlane;
-					im.alpha = 1;
+					if (i<=n){
+						if(im.alpha <1){
+							showPlane(im, true);
+						}
+					}else{
+						if (im.alpha>0){
+							showPlane(im, false);
+						}
+					}
 				}
 				
+			}
+			
+			private function showPlane( pl:InAirPlane, b:Boolean ):void{
+				
+				if (b){
+					fadeIn.target = pl;
+					fadeIn.play();
+				}else{
+					fadeOut.target = pl;
+					fadeOut.play();
+				}
 			}
 			
 		]]>

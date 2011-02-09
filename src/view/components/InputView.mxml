@@ -93,6 +93,11 @@
 				
 			}
 			
+			public function showCoinsAnim():void{
+				
+				budgetIndicator.showCoinsAnim();
+				
+			}
 			
 			
 		]]>

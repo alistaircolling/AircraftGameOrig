@@ -3,26 +3,35 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*">
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Fade id="fadeIn" alphaTo="1" duration="300"/>
+		<s:Fade id="fadeOut" alphaFrom="1" alphaTo="0" duration="300"/>
 	</fx:Declarations> 
 	<fx:Script>
 		<![CDATA[
 			
 			public function showPlanes( n:uint ):void{
-				//3 on ground = hide #1,2,3,4,5,6,7,8,9
-				
-				var totToHide:int = numElements - n - 2;
-				
-				for (var i:uint = 0; i<numElements; i++){
+				for (var i:uint = 1; i<=numElements; i++){
 					var im:GroundPlane = this["p"+i] as GroundPlane;
-					im.alpha = 1;
+					if (i<=n){
+						if(im.alpha <1){
+							showPlane(im, true);
+						}
+					}else{
+						if (im.alpha>0){
+							showPlane(im, false);
+						}
+					}
 				}
-				//hide total minus 
-				for (var j:uint = 0; j<totToHide; j++){
-					var im:GroundPlane = this["p"+j] as GroundPlane;
-						im.alpha = 0;
+			}
+			
+			private function showPlane( pl:GroundPlane, b:Boolean ):void{
+				if (b){
+					fadeIn.target = pl;
+					fadeIn.play();
+				}else{
+					fadeOut.target = pl;
+					fadeOut.play();
 				}
-				
 			}
 			
 		]]>
