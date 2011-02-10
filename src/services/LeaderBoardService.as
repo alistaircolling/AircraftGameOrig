@@ -52,8 +52,6 @@ package services
 			stream.close();
 			//statusUpdate.dispatch("closed stream: data read yet?:"+_data);
 			
-			
-			
 			handleServiceResult(_data);
 			/*
 			var service:HTTPService = new HTTPService();

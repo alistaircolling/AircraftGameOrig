@@ -44,6 +44,14 @@
 				
 			}
 			
+			public function showTheError(s:String):void{
+				
+				//errorMsg.msg.text = s;
+				errorMsg.visible  = true;
+				setElementIndex(errorMsg, numElements-1);
+				
+			}
+			
 			private function toggleFullScreen():void{
 				
 				if (stage.displayState == StageDisplayState.NORMAL){
@@ -184,5 +192,5 @@
 	</s:Group>
 	<s:TextArea id="statusLabel" fontSize="24"  left="5"  height="600" width="1000" includeInLayout="false" visible="false"/>
 	<s:Button label="show status" x="1800" y="1000" click="button1_clickHandler(event)" visible="false"/>
-	
+	<components:ErrorMessage id="errorMsg" visible="false"/>
 </s:WindowedApplication>

@@ -43,6 +43,7 @@ package view.mediators
 		public var initSocket:InitSocket;
 		[Inject]
 		public var lBSet:LeaderBoardSet;
+	
 		
 		override public function onRegister():void{
 			trace("Project Mediator registered");
@@ -50,19 +51,27 @@ package view.mediators
 			addListeners();
 		}
 		
+		
+		
 		private function addListeners():void {
 			
-			errorReceived.add(showError);
+			//errorReceived.add(showError);
 			changeState.add(updateState);
 			statusUpdate.add(showStatus);
 			gameIDSet.add(setGameID);
 			lBSet.add(leaderBoardSet);
+			errorReceived.add(showErrorReceived);
 			requestID.dispatch();
 			initSocket.dispatch();
 		//	mainViewComponent.btn.addEventListener(MouseEvent.CLICK, buttonClickedListener);
 			//add listener for signal
 		//	textSetOnModel.add(onModelChanged);
 			
+		}
+		
+		private function showErrorReceived( s:String ):void{
+			
+			viewComp.showTheError(s);
 		}
 		
 		private function leaderBoardSet( vo:LeaderBoardVO ):void{

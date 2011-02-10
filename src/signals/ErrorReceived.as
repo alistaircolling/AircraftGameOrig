@@ -8,7 +8,7 @@ package signals
 	{
 		public function ErrorReceived()
 		{
-			super(ErrorVO);
+			super(String);
 		}
 	}
 }

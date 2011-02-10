@@ -8,7 +8,7 @@ package signals
 	{
 		public function EnterWinner()
 		{
-			super(String, uint); //user
+			super(); 
 		}
 	}
 }

@@ -12,6 +12,7 @@ package
 	import controllers.StoreSettingsXMLCommand;
 	import controllers.SubmitData;
 	import controllers.UpdateBalanceCommand;
+	import controllers.UpdateWinnerCommand;
 	
 	import flash.display.DisplayObjectContainer;
 	
@@ -54,6 +55,7 @@ package
 	import signals.StatusUpdate;
 	import signals.TextSetOnModel;
 	import signals.UpdateBalance;
+	import signals.UpdateWinner;
 	import signals.UserDataSet;
 	
 	import utils.Logger;
@@ -119,14 +121,14 @@ package
 			signalCommandMap.mapSignalClass(LoadXML, LoadLeaderBoardXML);
 			signalCommandMap.mapSignalClass(SettingsXMLLoaded, StoreSettingsXMLCommand);
 			signalCommandMap.mapSignalClass(SettingsUpdated, ServiceSetCommand);
-			signalCommandMap.mapSignalClass(StartClicked, StartClicke
-				dCommand);
+			signalCommandMap.mapSignalClass(StartClicked, StartClickedCommand);
 			signalCommandMap.mapSignalClass(UpdateBalance, UpdateBalanceCommand);
 			signalCommandMap.mapSignalClass(DataSubmitted, SubmitData);
 			signalCommandMap.mapSignalClass(BlackBoxDataReceived, BlackBoxDataReceivedCommand);
 			signalCommandMap.mapSignalClass(RestartGame, RestartCommand);
 			signalCommandMap.mapSignalClass(RequestLeaderBoard, RequestLeaderBoardCommand);
 			signalCommandMap.mapSignalClass(EnterWinner, EnterWinnerCommand);
+			signalCommandMap.mapSignalClass(UpdateWinner, UpdateWinnerCommand);
 			signalCommandMap.mapSignalClass(RequestGameID, RequestGameIDCommand);
 			signalCommandMap.mapSignalClass(InitSocket, InitSocketCommand);
 			
