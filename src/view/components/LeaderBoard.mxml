@@ -20,7 +20,7 @@
 			[Bindable]
 			public var dp:ArrayCollection; 
 			[Bindable]
-			public var title:String;
+			public var title:uint;
 			[Bindable]
 			public var spacerHeight:uint = 27;
 			
@@ -51,13 +51,31 @@
 			{
 				// TODO Auto-generated method stub
 				list.setStyle("fontFamily", "MyriadPro");
+				showImage(title);
+			}
+			
+			//0 shows leaderboard, 1 shows top 10
+			public function showImage( n:uint ):void{
+				var imToShow:Image;
+				switch(n){
+					case 0:
+						imToShow = leaderBoard;
+					break;
+					case 1:
+						imToShow = top10;
+					break;
+				}
+				imToShow.includeInLayout = true;
+				imToShow.visible = true;
 			}
 			
 		]]>
 	</fx:Script>
 	<s:VGroup height="100%"  left="25" gap="0" >
 		<s:Group>
-			<s:Label id="topTitle" text="{title}" styleName="panelTitle" x="-22"/>
+		<!--	<s:Label id="topTitle" text="{title}" styleName="panelTitle" x="-22"/> -->
+			<mx:Image id="leaderBoard" source="@Embed('../embed/leaderBoard.png')" smoothBitmapContent="true" includeInLayout="false" visible="false" x="-22"/>
+			<mx:Image id="top10" source="@Embed('../embed/top10.png')" smoothBitmapContent="true" includeInLayout="false" visible="false" x="-22"/>
 		</s:Group>
 		<mx:Spacer id="spacer" height="{spacerHeight}"/>
 		<s:Group>

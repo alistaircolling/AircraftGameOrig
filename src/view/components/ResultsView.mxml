@@ -114,9 +114,22 @@
 			public function set iteration(value:uint):void
 			{
 				_iteration = value;
-				turn.text = "(Turn "+value.toString()+" of 3)"; 
+				//turn.text = "(Turn "+value.toString()+" of 3)"; 
+				showTurn(_iteration);
 			}
-			
+
+			public function showTurn( n:uint ):void{
+				for (var i:uint = 0; i<turnImageHolder.numElements; i++){
+					var im:Image = turnImageHolder.getElementAt(i) as Image;
+					if (i==n-1){
+						im.includeInLayout = true;
+						im.visible = true;
+					}else{
+						im.includeInLayout = false;
+						im.visible = false;
+					}
+				}
+			}
 
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
@@ -133,9 +146,10 @@
 	<s:Group id="mainPanel" horizontalCenter="0" verticalCenter="150" width="1148" height="516">
 		<mx:Image source="@Embed('../embed/graph.png')" width="1148" height="516" smoothBitmapContent="true" />
 		<components:GraphComponent id="graph" y="10" x="-2"/>
-		<s:HGroup top="65" left="55">
-			<s:Label id="title" text="Results Graph"  fontWeight="bold" styleName="supportPanelTitle" />
-			<s:Label id="turn" text="---" styleName="supportPanelTitleItalic"/>		
+		<s:HGroup id="turnImageHolder" top="65" left="55">
+			<mx:Image id="turn1" source="@Embed('../embed/results1.png')" smoothBitmapContent="true" includeInLayout="true"/>
+			<mx:Image id="turn2" source="@Embed('../embed/results2.png')" smoothBitmapContent="true" includeInLayout="false" visible="false"/>
+			<mx:Image id="turn3" source="@Embed('../embed/results3.png')" smoothBitmapContent="true" includeInLayout="false" visible="false"/>
 		</s:HGroup>
 		<s:Group  top="71" left="418">
 			<mx:Image source="@Embed('../embed/greyCurrSmall.png')" smoothBitmapContent="true" y="-2" />

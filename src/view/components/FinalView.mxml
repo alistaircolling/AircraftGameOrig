@@ -18,7 +18,8 @@
 		<s:HGroup x="55" y="50">
 			<s:VGroup  >
 				
-				<s:Label id="title" text="Your Score" width="300" styleName="panelTitle"/>
+				<!-- <s:Label id="title" text="Your Score" width="300" styleName="panelTitle"/> -->
+				<mx:Image source="@Embed('../embed/yourResults.png')" smoothBitmapContent="true" />
 				<mx:Spacer height="60"/>
 				<s:Group >
 					
@@ -56,7 +57,7 @@
 			</s:VGroup>
 			<mx:Spacer width="0"/>
 		</s:HGroup>
-		<components:LeaderBoard id="leaderBoard" width="262" title="Top 10" height="100%" top="50" right="-5" spacerHeight="33"/>
+		<components:LeaderBoard id="leaderBoard" width="262" title="1" height="100%" top="50" right="-5" spacerHeight="33"/>
 		<components:CustomButton id="continueBtn" label="" left="55" bottom="55"/>
 		
 	</s:Group>

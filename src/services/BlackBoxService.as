@@ -83,7 +83,7 @@ package services
 			
 			_timer = new Timer(400, 1);
 			_timer.addEventListener(TimerEvent.TIMER_COMPLETE, dummyComplete);
-			//_timer.start();
+			_timer.start();
 			startWaitTimer(true);
 			
 		}
@@ -103,8 +103,14 @@ package services
 			_socket.messageSender.addEventListener(_socket.NEW_MSG, myListener);
 			_socket.messageSender.addEventListener(_socket.CONNECTEDUP, connectedList);
 			_socket.messageSender.addEventListener(SocketEvent.ANY, socketTrace);
-			_socket.messageSender.addEventListener(SocketEvent.ERROR, errorHandler);
 			
+		}
+		
+		private function disposeSocket():void{
+			_socket.messageSender.removeEventListener(_socket.NEW_MSG, myListener);
+			_socket.messageSender.removeEventListener(_socket.CONNECTEDUP, connectedList);
+			_socket.messageSender.removeEventListener(SocketEvent.ANY, socketTrace);
+			_socket = null;
 		}
 		
 		private function startWaitTimer( b:Boolean ):void{
@@ -115,12 +121,12 @@ package services
 					_checkReceived.start();
 				}
 			}else{
+				_attempts = 0;
 				if (!_checkReceived) return;
 				_checkReceived.stop();
 				_checkReceived.removeEventListener(TimerEvent.TIMER, notReceived);
 				_checkReceived = null;
 			}
-			
 		}
 		
 		private function notReceived( t:TimerEvent ):void{
@@ -130,9 +136,11 @@ package services
 				_attempts = 0;
 				startWaitTimer(false);
 				errorReceived.dispatch("There has been an error. Click to restart");
+				disposeSocket();
+				init();
 			}
 		}
-	
+		
 		
 		private function connectedList(e:Event):void
 		{
@@ -244,6 +252,8 @@ package services
 				}else{
 					//send signal to show error
 					errorReceived.dispatch("There has been an error. Click to restart");
+					disposeSocket();
+					init();
 				}
 			}else{
 				startWaitTimer(false);

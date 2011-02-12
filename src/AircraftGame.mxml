@@ -32,7 +32,7 @@
 				updateState(ChangeState.INTRO_SCREEN);
 				addEventListener(KeyboardEvent.KEY_UP, keyHandler);
 				
-				leaderBoard.topTitle.styleName = "topTitle";
+			//	leaderBoard.topTitle.styleName = "topTitle";
 				
 			}
 			
@@ -163,7 +163,7 @@
 	
 	<fx:Declarations>
 		<s:Fade id="fadeIn" alphaTo="1" duration="2000" effectStart="fadeIn_effectStartHandler(event)" startDelay="1000"/>
-		<s:Fade id="fadeOut"  alphaTo="0" duration="0" effectEnd="fadeOut_effectEndHandler(event)"/>
+		<s:Fade id="fadeOut"  alphaTo="0" duration="2000" effectEnd="fadeOut_effectEndHandler(event)"/>
 	</fx:Declarations>
 	<s:states>
 		<s:State name="intro" />
@@ -186,9 +186,7 @@
 	<components:IntroView id="introView" includeIn="intro, exitScreen, enter" alpha="0" />
 	<s:Group id="lbHolder" x="1568" top="267" includeIn="intro, enter, resultsScreen, exitScreen, finalScreen" alpha="0">
 		<mx:Image source="@Embed('../embed/lbtop3.png')" smoothBitmapContent="true" />
-		<components:LeaderBoard id="leaderBoard" title="Leader board" horizontalCenter="-10" top="55" spacerHeight="43"
-								
-								/>
+		<components:LeaderBoard id="leaderBoard" title="0" horizontalCenter="29" top="55" spacerHeight="43"/>
 	</s:Group>
 	<s:TextArea id="statusLabel" fontSize="24"  left="5"  height="600" width="1000" includeInLayout="false" visible="false"/>
 	<s:Button label="show status" x="1800" y="1000" click="button1_clickHandler(event)" visible="false"/>

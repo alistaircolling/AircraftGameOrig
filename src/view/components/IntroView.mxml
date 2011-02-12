@@ -31,14 +31,15 @@
 		<s:HGroup x="60" y="60" width="100%">
 			<s:VGroup  width="100%">
 				
-				<s:Label id="title" text="The Challenge" width="300" styleName="panelTitle"/>
+				<mx:Image source="@Embed('../embed/theChallenge.png')" smoothBitmapContent="true" />		
+			<!--	<s:Label id="title" text="The Challenge" width="300" styleName="panelTitle"/> -->
 				<mx:Spacer height="30"/>
 				
 			</s:VGroup>
 			<mx:Spacer width="0"/>
 		</s:HGroup>
 				<components:GoButton id="startBtn" label="" left="50" bottom="50"/>
-		<components:LeaderBoard id="leaderboardIntro" width="262" title="Top 10" height="100%" x="1230" y="60"/>
+		<components:LeaderBoard id="leaderboardIntro" width="262" title="1" height="100%" x="1230" y="60"/>
 		
 	</s:Group>
 </s:Group>

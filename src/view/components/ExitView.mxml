@@ -29,8 +29,8 @@
 					textFlow="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}"/>
 		<s:HGroup x="60" y="60" width="100%">
 			<s:VGroup  width="100%">
-				
-				<s:Label id="title" text="The Reality of Logistics" width="700" styleName="panelTitle"/>
+				<mx:Image source="@Embed('../embed/theReality.png')" smoothBitmapContent="true" />
+			<!--	<s:Label id="title" text="The Reality of Logistics" width="700" styleName="panelTitle"/> -->
 				<mx:Spacer height="30"/>
 				
 			</s:VGroup>

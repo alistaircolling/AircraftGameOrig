@@ -3,6 +3,8 @@ package view.mediators
 	import events.NumberEvent;
 	
 	import flash.events.MouseEvent;
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
 	
 	import model.UserDataModel;
 	import model.vo.InputVO;
@@ -11,6 +13,7 @@ package view.mediators
 	
 	import mx.collections.ArrayCollection;
 	
+	import org.osmf.events.TimeEvent;
 	import org.robotlegs.mvcs.Mediator;
 	
 	import signals.BalanceSet;
@@ -21,6 +24,7 @@ package view.mediators
 	import signals.UpdateBalance;
 	import signals.UserDataSet;
 	
+	import view.components.InputPanel;
 	import view.components.InputView;
 	
 	public class InputMediator extends Mediator
@@ -43,6 +47,13 @@ package view.mediators
 		public var userModel:UserDataModel;//used only to get the current iteration for submission in vo
 		[Inject]
 		public var statusUpdate:StatusUpdate;
+		private var _showTurnTimer:Timer
+		private var _showBalanceTimer:Timer
+		private var _showDataTimer:Timer
+		private static const _showTurnWait:uint = 5000; 
+		private var _iteration:uint;
+		private var _data:ReceivedDataVO;
+		private var _balance:Number;
 		
 		override public function onRegister():void{
 			trace("Input Mediator Registered");
@@ -88,14 +99,42 @@ package view.mediators
 		
 		private function updateIteration( n:uint ):void{
 			n++;
-			inputView.inputPanel.turn.text = "(Turn "+n.toString()+" of 3)";
+			_iteration = n;
+			if (n==1){
+				showTurn();
+			}else{
+				//inputView.inputPanel.turn.text = "(Turn "+n.toString()+" of 3)";
+				_showTurnTimer = new Timer(_showTurnWait, 1);
+				_showTurnTimer.addEventListener(TimerEvent.TIMER_COMPLETE, showTurn);
+				_showTurnTimer.start();
+			}
+		}
+		
+		private function showTurn( t:TimerEvent = null ):void{
+			inputView.inputPanel.showTurn(_iteration); 
+			if (!_showTurnTimer) return;
+			_showTurnTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, showTurn);
+			_showTurnTimer = null;
 		}
 		
 		private function showBalance( n:Number ):void{
+			_balance = n;
+			if(_iteration ==1){
+				showBalanceReal();
+			}else{
+				_showBalanceTimer = new Timer(_showTurnWait, 1);
+				_showBalanceTimer.addEventListener(TimerEvent.TIMER_COMPLETE, showBalanceReal);
+				_showBalanceTimer.start();
+			}
 			
-			inputView.showBalance(n);
 		}
 		
+		private function showBalanceReal( t:TimerEvent = null):void{
+			inputView.showBalance(_balance);
+			if (!_showBalanceTimer) return;
+			_showBalanceTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, showTurn);
+			_showBalanceTimer = null;
+		}
 		
 		//user has updated the balance
 		private function updateBalance( n:NumberEvent ):void{
@@ -120,9 +159,20 @@ package view.mediators
 			
 		}
 		
+		private function showDataReal(t:TimerEvent = null):void{
+			inputView.setData(_data);
+		}
+		
 		private function setData( vo:ReceivedDataVO ):void{
-			
-			inputView.setData(vo);
+			_data = vo;
+			_iteration = _data.iteration;
+			if (_iteration==0){
+				showDataReal();
+			}else{
+				_showDataTimer = new Timer(_showTurnWait, 1);
+				_showDataTimer.addEventListener(TimerEvent.TIMER_COMPLETE, showDataReal);
+				_showDataTimer.start();
+			}
 			
 		}
 	}

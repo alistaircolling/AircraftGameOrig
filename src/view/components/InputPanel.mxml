@@ -89,6 +89,19 @@
 				
 			}
 			
+			public function showTurn( n:uint ):void{
+				for (var i:uint = 0; i<turnImageHolder.numElements; i++){
+					var im:Image = turnImageHolder.getElementAt(i) as Image;
+					if (i==n-1){
+						im.includeInLayout = true;
+						im.visible = true;
+					}else{
+						im.includeInLayout = false;
+						im.visible = false;
+					}
+				}
+			}
+			
 			
 		]]>
 	</fx:Script>
@@ -110,9 +123,12 @@
 		
 		<s:Group  left="60" top="60" width="100%" >
 			<s:VGroup>
-				<s:HGroup>
-					<s:Label id="title" text="Support Options"  fontWeight="bold" styleName="supportPanelTitle" />
-					<s:Label id="turn" text="---" styleName="supportPanelTitleItalic"/>		
+				<s:HGroup id="turnImageHolder">
+					<!--<s:Label id="title" text="Support Options"  fontWeight="bold" styleName="supportPanelTitle" />-->
+					<mx:Image id="turn1" source="@Embed('../embed/support1.png')" smoothBitmapContent="true" includeInLayout="true"/>
+					<mx:Image id="turn2" source="@Embed('../embed/support2.png')" smoothBitmapContent="true" includeInLayout="false" visible="false"/>
+					<mx:Image id="turn3" source="@Embed('../embed/support3.png')" smoothBitmapContent="true" includeInLayout="false" visible="false"/>
+					<!-- <s:Label id="turn" text="" styleName="supportPanelTitleItalic"/> -->		
 				</s:HGroup>
 				<s:VGroup gap="11" >
 					<mx:Spacer height="35"/>					
