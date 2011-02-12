@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*">
 
 	<fx:Script>
 		<![CDATA[
+			import utils.CustomEvent;
 			protected function group1_clickHandler(event:MouseEvent):void
 			{
 				// TODO add restart signal here
 				trace("restart from error dialog");
 			}
+
+			protected function okbutton1_clickHandler(event:MouseEvent):void
+			{
+				visible = false;
+				var e:CustomEvent = new CustomEvent("restart", true);
+				dispatchEvent(e);
+			}
+
 		]]>
 	</fx:Script>
 
@@ -20,7 +29,9 @@
 		<mx:Canvas width="1920" height="1080" backgroundAlpha=".5" backgroundColor="0x0"/>
 	</s:Group>
 	<s:Group horizontalCenter="0" verticalCenter="0" click="group1_clickHandler(event)">
-		<mx:Image source="@Embed('../embed/lbtop3.png')" width="434" height="334" smoothBitmapContent="true" />
-		<s:Label id="msg" text="there has been an error"/>
+		<mx:Image source="@Embed('../embed/lbtop3.png')" smoothBitmapContent="true" x="0"/>
+		<s:Label id="msg" text="there has been an error......" horizontalCenter="0" top="120" styleName="errorText" width="230" textAlign="center"/>
+		<s:Label  text="Restart" horizontalCenter="0" top="60" styleName="errorTextBold" width="230" textAlign="center"/>
+		<components:OKButton click="okbutton1_clickHandler(event)" bottom="70" horizontalCenter="0"/>
 	</s:Group>
 </s:Group>

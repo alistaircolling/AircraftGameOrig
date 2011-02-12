@@ -46,7 +46,7 @@
 			
 			public function showTheError(s:String):void{
 				
-				//errorMsg.msg.text = s;
+				errorMsg.msg.text = s;
 				errorMsg.visible  = true;
 				setElementIndex(errorMsg, numElements-1);
 				

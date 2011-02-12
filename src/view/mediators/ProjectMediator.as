@@ -1,5 +1,7 @@
 package view.mediators
 {
+	import adobe.utils.CustomActions;
+	
 	import flash.events.MouseEvent;
 	
 	import model.vo.ErrorVO;
@@ -17,9 +19,12 @@ package view.mediators
 	import signals.InitSocket;
 	import signals.LeaderBoardSet;
 	import signals.RequestGameID;
+	import signals.RestartGame;
 	import signals.StartClicked;
 	import signals.StatusUpdate;
 	import signals.TextSetOnModel;
+	
+	import utils.CustomEvent;
 	
 	public class ProjectMediator extends Mediator
 	{
@@ -43,7 +48,9 @@ package view.mediators
 		public var initSocket:InitSocket;
 		[Inject]
 		public var lBSet:LeaderBoardSet;
-	
+		[Inject]
+		public var restartGame:RestartGame;
+		
 		
 		override public function onRegister():void{
 			trace("Project Mediator registered");
@@ -55,7 +62,6 @@ package view.mediators
 		
 		private function addListeners():void {
 			
-			//errorReceived.add(showError);
 			changeState.add(updateState);
 			statusUpdate.add(showStatus);
 			gameIDSet.add(setGameID);
@@ -63,9 +69,12 @@ package view.mediators
 			errorReceived.add(showErrorReceived);
 			requestID.dispatch();
 			initSocket.dispatch();
-		//	mainViewComponent.btn.addEventListener(MouseEvent.CLICK, buttonClickedListener);
-			//add listener for signal
-		//	textSetOnModel.add(onModelChanged);
+			viewComp.addEventListener("restart", restartGameListener);
+		}
+		
+		private function restartGameListener( e:CustomEvent ):void{
+			
+			restartGame.dispatch();
 			
 		}
 		
@@ -96,19 +105,6 @@ package view.mediators
 			viewComp.updateState(s);
 		}
 		
-		private function errorClosed():void{
-			
-			trace("error closed");
-			//todo add logic here to handle response depending on the sort of error
-		}
-		
-		private function showError( vo:ErrorVO ):void{
-			
-			//todo add alert code here
-			//todo possibly add a function / signal to be triggered when the user clicks ok,  depending on what the error message is
-			Alert.show(vo.msg, vo.title, 4, viewComp,  errorClosed);
-		}
-
 		
 		//be sure to pass the corect data type of 
 		public function onModelChanged(__s:String):void{
@@ -116,7 +112,6 @@ package view.mediators
 			//mainViewComponent.tIn.text = __s;//update the view
 			
 		}
-		
 		
 		private function buttonClickedListener(__m:MouseEvent):void { 
 			

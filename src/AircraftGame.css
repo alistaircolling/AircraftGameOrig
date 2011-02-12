@@ -232,6 +232,20 @@ global
 	fontSize: 20;
 	color:#4a4a4a;
 }
+.errorText
+{
+	fontFamily:MyriadPro;
+	fontSize: 20;
+	color:#000000;
+}
+
+.errorTextBold
+{
+	fontFamily:MyriadPro;
+	fontSize: 20;
+	fontWeight:bold;
+	color:#000000;
+}
 
 
 
