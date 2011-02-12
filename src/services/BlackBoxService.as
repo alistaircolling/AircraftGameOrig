@@ -47,7 +47,7 @@ package services
 		private var _timer:Timer;   //todo remove timer as this is for testing only
 		
 		private var _dummy1:String = ( <![CDATA[<?xml version="1.0" encoding="UTF-8" ?><resultParams><gameID>1234</gameID><iteration>1</iteration><currentReliability>15.6</currentReliability><currentNFF>40</currentNFF><currentTurnaround>21</currentTurnaround><currentSpares>125</currentSpares><currentBudget>-19.1</currentBudget><percentFlown>67.3,65.9,67.3,66.6,68.6,67.3,74.5,74.8,79.9,77.5,84.5,82.4,87.5,83.3,85.8,84.1,86.7,83.2,87.5,82.4,86.7,85.8,85.8,82.4</percentFlown><monthTotal>-7.5,-7.6,-7.5,-0.2,-0.0,-0.1,0.5,0.6,1.0,0.6,1.5,1.4,1.6,1.5,1.7,1.6,1.7,1.6,1.7,1.5,1.7,1.7,1.7,1.5</monthTotal><inAir>7,7,8,8,9,8,9,8</inAir><onGround>3,3,2,2,1,2,1,2</onGround></resultParams>]]> ).toString();
-	//	private var _dummy1:String = ( <![CDATA[<?xml version="1.0" encoding="UTF-8" ?><errors><error code="1" desc="Error:  Unable to  perform Initialisation.  Either initialisation files were not found or  they contained an error."/><error code="2" desc="Error: Incorrect number of  Input Parameters."/><error code="3" desc="Error: Incorrect Game  ID or Iteration  Number."/><error code="4" desc="Error:  Failed to Save Current Parameter Values."/><error code="5" desc="Error: Calculating Turn."/><error code="6" desc="Error:   Constructing  XML   Results  File."/></errors>]]> ).toString();
+		//	private var _dummy1:String = ( <![CDATA[<?xml version="1.0" encoding="UTF-8" ?><errors><error code="1" desc="Error:  Unable to  perform Initialisation.  Either initialisation files were not found or  they contained an error."/><error code="2" desc="Error: Incorrect number of  Input Parameters."/><error code="3" desc="Error: Incorrect Game  ID or Iteration  Number."/><error code="4" desc="Error:  Failed to Save Current Parameter Values."/><error code="5" desc="Error: Calculating Turn."/><error code="6" desc="Error:   Constructing  XML   Results  File."/></errors>]]> ).toString();
 		private var _dummy2:String = ( <![CDATA[<?xml version="1.0" encoding="UTF-8" ?><resultParams><gameID>1234</gameID><iteration>2</iteration><currentReliability>15.6</currentReliability><currentNFF>40</currentNFF><currentTurnaround>5</currentTurnaround><currentSpares>125</currentSpares><currentBudget>19.8</currentBudget><percentFlown>89.2,84.1,86.7,82.4,86.7,85.0,87.1,86.7,89.7,83.9,87.8,84.6,88.5,87.9,90.9,85.6,91.8,88.2,92.7,87.3,91.8,88.2,92.7,85.6</percentFlown><monthTotal>-7.9,-8.1,-8.0,-0.2,0.0,-0.0,0.1,0.0,0.1,-0.1,0.1,-0.0,0.1,0.1,2.5,2.3,2.5,2.4,2.6,2.4,2.5,2.4,2.6,2.3</monthTotal><inAir>9,8,9,8,9,9,9,9</inAir><onGround>1,2,1,2,1,1,1,1</onGround></resultParams>]]> ).toString();
 		private var _dummy3:String = ( <![CDATA[<?xml version="1.0" encoding="UTF-8" ?><resultParams><gameID>1234</gameID><iteration>3</iteration><currentReliability>15.6</currentReliability><currentNFF>40</currentNFF><currentTurnaround>5</currentTurnaround><currentSpares>127</currentSpares><currentBudget>58.0</currentBudget><percentFlown>90.0,87.3,89.1,89.1,90.9,86.5,90.2,87.5,91.1,85.7,92.9,85.7,92.0,88.4,90.2,89.3,92.0,89.3,92.9,89.3,92.0,86.6,92.9,89.3</percentFlown><monthTotal>1.4,1.3,1.3,1.6,1.7,1.5,1.7,1.5,1.7,1.4,1.7,1.4,1.7,1.6,1.7,1.6,1.7,1.6,1.7,1.6,1.7,1.5,1.7,1.6</monthTotal><inAir>9,9,9,9,9,9,9,9</inAir><onGround>1,1,1,1,1,1,1,1</onGround><averageAvailability>89.6</averageAvailability><costperFH>-30.4</costperFH></resultParams>]]> ).toString();
 		
@@ -73,7 +73,7 @@ package services
 			_iteration = Number(vo.iteration);
 			_tempSubmitVO = vo;
 			//reset the attempts as this is a new game
-		
+			
 			//only used"_send in testing
 			trace("Sending data for iteration:"+vo.iteration);
 			
@@ -108,11 +108,12 @@ package services
 		}
 		
 		private function startWaitTimer( b:Boolean ):void{
-			trace("start wait timer:"+b);
 			if (b){
-				_checkReceived = new Timer(_checkWait, 3);
-				_checkReceived.addEventListener(TimerEvent.TIMER, notReceived);
-				_checkReceived.start();
+				if (!_checkReceived){
+					_checkReceived = new Timer(_checkWait, 3);
+					_checkReceived.addEventListener(TimerEvent.TIMER, notReceived);
+					_checkReceived.start();
+				}
 			}else{
 				if (!_checkReceived) return;
 				_checkReceived.stop();
@@ -123,8 +124,7 @@ package services
 		}
 		
 		private function notReceived( t:TimerEvent ):void{
-			trace("no response received:"+_attempts);
-				_attempts ++;	
+			_attempts ++;	
 			if (_attempts<MAX_ATTEMPTS){
 			}else{
 				_attempts = 0;
@@ -132,11 +132,7 @@ package services
 				errorReceived.dispatch("There has been an error. Click to restart");
 			}
 		}
-		
-		private function errorHandler( e:SocketEvent ):void{
-			
-			//TODO implement error event
-		}
+	
 		
 		private function connectedList(e:Event):void
 		{
@@ -183,12 +179,12 @@ package services
 			_tempSubmitVO = vo;
 			_iteration = Number(vo.iteration);
 			//reset the attempts as this is a new game
-		
+			
 			//create xml   TODO add socket connectivity
 			var xmlStr:String = '<?xml version="1.0" encoding="UTF-8" ?><requestParams><gameID>'+vo.gameID+'</gameID><iteration>'+vo.iteration+'</iteration><reliabilityStep>'+vo.reliability+'</reliabilityStep><nffStep>'+vo.nff+'</nffStep><turnaroundStep>'+vo.turnaround+'</turnaroundStep><sparesBought>'+vo.spares+'</sparesBought></requestParams>';
 			xmlStr = "";
 			var sendStr:String = xmlStr.concat('<requestParams><gameID>'+vo.gameID+'</gameID><iteration>'+vo.iteration+'</iteration><reliabilityStep>'+vo.reliability+'</reliabilityStep><nffStep>'+vo.nff+'</nffStep><turnaroundStep>'+vo.turnaround+'</turnaroundStep><sparesBought>'+vo.spares+'</sparesBought></requestParams>');
-
+			
 			statusUpdate.dispatch("submitting to socket server......:"+sendStr+":");
 			
 			startWaitTimer(false);
@@ -210,7 +206,7 @@ package services
 			_timer.stop();
 			
 		}
-	
+		
 		
 		private function dummyComplete( t:TimerEvent ):void{
 			trace("dummy response");			
@@ -239,7 +235,6 @@ package services
 			var xml:XML = new XML(s);
 			//check if this is an error and retry 3 times
 			if(xml.name() == "errors"){
-				trace("error message received from server, attempts:"+_attempts);
 				if (_attempts < MAX_ATTEMPTS){
 					_attempts ++;
 					//resubmit
@@ -248,7 +243,6 @@ package services
 					
 				}else{
 					//send signal to show error
-					trace("show error as too many resubmissions");
 					errorReceived.dispatch("There has been an error. Click to restart");
 				}
 			}else{
