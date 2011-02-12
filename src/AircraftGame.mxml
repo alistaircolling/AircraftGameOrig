@@ -98,7 +98,8 @@
 						lbHolder.visible = true; */
 						showSection(resultsView, true);
 						showSection(inputView, false);
-						showSection(finalView, false);
+						//showSection(finalView, false);
+						finalView.visible = false;
 						showSection(lbHolder, true);
 						break
 					case ChangeState.FINAL_SCREEN:
@@ -135,10 +136,12 @@
 				if(b){
 					fadeIn.target = sect;
 					fadeIn.play();
+					
 				}else{
 					fadeOut.target = sect;
 					fadeOut.play();
 				}
+				sect.mouseEnabled = b;
 			}
 			
 			protected function button1_clickHandler(event:MouseEvent):void
@@ -158,12 +161,13 @@
 				(event.effectInstance.target as Group).visible = false;
 			}
 			
+			
 		]]>
 	</fx:Script>
 	
 	<fx:Declarations>
 		<s:Fade id="fadeIn" alphaTo="1" duration="2000" effectStart="fadeIn_effectStartHandler(event)" startDelay="1000"/>
-		<s:Fade id="fadeOut"  alphaTo="0" duration="2000" effectEnd="fadeOut_effectEndHandler(event)"/>
+		<s:Fade id="fadeOut"  alphaTo="0" duration="1500" effectEnd="fadeOut_effectEndHandler(event)"/>
 	</fx:Declarations>
 	<s:states>
 		<s:State name="intro" />
@@ -181,7 +185,7 @@
 	</s:Group>
 	<components:InputView id="inputView" includeIn="enter, intro, resultsScreen" alpha="0"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
 	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen, intro" alpha="0" />
-	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter" alpha="0"/>
+	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter, exitScreen" alpha="0"/>
 	<components:ExitView id="exitView" includeIn="finalScreen, exitScreen" alpha="0"/>
 	<components:IntroView id="introView" includeIn="intro, exitScreen, enter" alpha="0" />
 	<s:Group id="lbHolder" x="1568" top="267" includeIn="intro, enter, resultsScreen, exitScreen, finalScreen" alpha="0">

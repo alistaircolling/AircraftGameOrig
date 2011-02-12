@@ -14,6 +14,7 @@
 			
 			import model.vo.GraphResultsVO;
 			
+			import mx.events.EffectEvent;
 			import mx.events.FlexEvent;
 			
 			import signals.ChangeState;
@@ -39,7 +40,7 @@
 				_animTimer.start();
 				 
 				//set on the graph component
-			//	graph.setData(vo);
+				graph.setData(vo);
 				//
 				
 			}
@@ -53,15 +54,25 @@
 			
 			private function showPanels( b:Boolean ):void{
 				var alph:uint = 0;
-				if (b) alph = 1;
-					
-				mainPanel.alpha = alph;
+				if (b) {
+					alph = 1;
+					showSection(mainPanel, true);
+				}else{
+					mainPanel.alpha = alph;
+				}
 				inAir.alpha = alph;
 				onGround.alpha = alph;
-				
 			}
 			
-			
+			private function showSection( sect:Group, b:Boolean ):void{
+				if(b){
+					fadeIn.target = sect;
+					fadeIn.play();
+				}else{
+					fadeOut.target = sect;
+					fadeOut.play();
+				}
+			}
 			
 			private function addAnimation():void{
 				
@@ -74,8 +85,13 @@
 			private function animCompleted( e:Event ):void{
 				
 				showPanels(true);
-				graph.setData(_graphResults);
 				
+				//graph.setData(_graphResults);
+				
+			}
+			
+			private function fadeCompleted():void{
+				graph.setData(_graphResults);
 			}
 			
 			public function showInAir( n:uint ):void{
@@ -135,18 +151,36 @@
 			{
 				addAnimation();
 			}
+			
+			protected function fadeIn_effectStartHandler(event:EffectEvent):void
+			{
+				(event.effectInstance.target as Group).visible = true;
+			}
+			
+			
+			protected function fadeOut_effectEndHandler(event:EffectEvent):void
+			{
+				(event.effectInstance.target as Group).visible = false;
+			}
+
+
+			protected function fadeIn_effectEndHandler(event:EffectEvent):void
+			{
+				graph.showData();
+			}
 
 		]]>
 	</fx:Script>
 	
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Fade id="fadeIn" alphaTo="1" duration="2000" effectStart="fadeIn_effectStartHandler(event)" effectEnd="fadeIn_effectEndHandler(event)" startDelay="1000"/>
+		<s:Fade id="fadeOut"  alphaTo="0" duration="1500" effectEnd="fadeOut_effectEndHandler(event)"/>
 	</fx:Declarations>
 	<mx:UIComponent id="animHolder" horizontalCenter="0" verticalCenter="0" alpha="1"/>
 	<s:Group id="mainPanel" horizontalCenter="0" verticalCenter="150" width="1148" height="516">
 		<mx:Image source="@Embed('../embed/graph.png')" width="1148" height="516" smoothBitmapContent="true" />
 		<components:GraphComponent id="graph" y="10" x="-2"/>
-		<s:HGroup id="turnImageHolder" top="65" left="55">
+		<s:HGroup id="turnImageHolder" top="65" left="55" width="345" height="28">
 			<mx:Image id="turn1" source="@Embed('../embed/results1.png')" smoothBitmapContent="true" includeInLayout="true"/>
 			<mx:Image id="turn2" source="@Embed('../embed/results2.png')" smoothBitmapContent="true" includeInLayout="false" visible="false"/>
 			<mx:Image id="turn3" source="@Embed('../embed/results3.png')" smoothBitmapContent="true" includeInLayout="false" visible="false"/>

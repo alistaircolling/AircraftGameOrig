@@ -51,7 +51,7 @@
 			
 			private var _monthTA:Array = [-7.5,-7.6,-7.5,-0.2,-0.0,-0.1,0.5,0.6,1.0,0.6,1.5,1.4,1.6,1.5,1.7,1.6,1.7,1.6,1.7,1.5,1.7,1.7,1.7,1.5,-7.9,-8.1,-8.0,-0.2,0.0,-0.0,0.1,0.0,0.1,-0.1,0.1,-0.0,0.1,0.1,2.5,2.3,2.5,2.4,2.6,2.4,2.5,2.4,2.6,2.3,1.4,1.3,1.3,1.6,1.7,1.5,1.7,1.5,1.7,1.4,1.7,1.4,1.7,1.6,1.7,1.6,1.7,1.6,1.7,1.6,1.7,1.5,1.7,1.6];
 			private var _percentA:Array = [67.3,65.9,67.3,66.6,68.6,67.3,74.5,74.8,79.9,77.5,84.5,82.4,87.5,83.3,85.8,84.1,86.7,83.2,87.5,82.4,86.7,85.8,85.8,82.4, 89.2,84.1,86.7,82.4,86.7,85.0,87.1,86.7,89.7,83.9,87.8,84.6,88.5,87.9,90.9,85.6,91.8,88.2,92.7,87.3,91.8,88.2,92.7,85.6,90.0,87.3,89.1,89.1,90.9,86.5,90.2,87.5,91.1,85.7,92.9,85.7,92.0,88.4,90.2,89.3,92.0,89.3,92.9,89.3,92.0,86.6,92.9,89.3];
-
+			private var _graphData:GraphResultsVO;
 			public static const FINISHED_ANIMATING:String = "finishedAnimating";
 			
 			private function moveImage():void {
@@ -63,8 +63,13 @@
 			
 			public function setData( vo:GraphResultsVO ):void{
 				//set the data 
+				_graphData = vo;
 				trace("setting the data within the graph component");
-				addValuesToAC(vo);
+				
+			}
+			
+			public function showData():void{
+				addValuesToAC(_graphData);
 			}
 			
 			private function drawLine( val:Number ):void{
