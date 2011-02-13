@@ -73,14 +73,17 @@ package view.mediators
 			finalView.lS3.removeEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
 		}
 		
-		private function letterChangedListener( e:UpdateLetterEvent ):void{
+		private function letterChangedListener( e:UpdateLetterEvent  = null, initial:Boolean = false):void{
 			
 			_winnerName = getWinnerName();
 			trace("name is now:"+_winnerName);
 			var vo:UserVO = new UserVO();
 			vo.label = _winnerName;
 			vo.score = _score;
-			updateWinner.dispatch(vo, _boardPosition);
+			vo.highlight = true;
+			updateWinner.dispatch(vo, _boardPosition, initial);
+			//var element:* = finalView.leaderBoard.list.getChildAt(_boardPosition);
+			//finalView.leaderBoard.list.setChildIndex(element, finalView.leaderBoard.list.numChildren-1);
 		}
 		
 		private function getWinnerName():String{
@@ -100,8 +103,8 @@ package view.mediators
 			finalView.lS1.letterIndex = 0;
 			finalView.lS2.letterIndex = 0;
 			finalView.lS3.letterIndex = 0;
-			
 		}
+		
 		
 		private function setData( vo:ReceivedDataVO):void{
 			resetSteppers()
@@ -138,6 +141,8 @@ package view.mediators
 				if (_boardPosition>-1){
 					showEnterDetails(true);
 					trace(" we have a winner !!!!!  at pos:"+_boardPosition);
+					//dispatch init event to show highlight
+					letterChangedListener(null, true);
 				}else{
 					showEnterDetails(false);
 				}
@@ -166,7 +171,7 @@ package view.mediators
 			if (_boardPosition>-1){
 				
 				var winnerInitials:String = getWinnerName();
-				enterWinner.dispatch(winnerInitials, _boardPosition);
+				enterWinner.dispatch();
 			}
 			changeState.dispatch(ChangeState.EXIT_SCREEN);
 			

@@ -8,7 +8,7 @@ package signals
 	{
 		public function UpdateWinner()
 		{
-			super(UserVO, uint);
+			super(UserVO, uint, Boolean);
 		}
 	}
 }

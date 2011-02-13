@@ -63,16 +63,8 @@ package services
 			token.addResponder(responder);*/
 		}
 		
-	
-		public function writeToXML( vo:UserVO, pos:uint ):void{
-			var newWinners:XML = new XML();
-			var nodeString:String = '<user name="'+vo.label+'" score="'+vo.score.toString()+'" />';
-			var winner:XML =  new XML(nodeString);
-			var nodeBefore:XML = _xml.children()[pos] as XML;
-			 //_xml.replace(position, winner);
-			_xml.insertChildBefore(nodeBefore, winner);
-			//remove last child
-			delete _xml.children()[10];
+		
+		public function writeToXML():void{
 			
 			var outputString:String  = '<?xml version="1.0" encoding="utf-8"?>\n';
 			outputString += _xml.toXMLString();
@@ -84,16 +76,28 @@ package services
 		}
 		
 		//used to update the winners list while the user enters their details
-		public function updateWinnersListTemp( vo:UserVO, pos:uint ):void{
-			
+		public function updateWinnersListTemp( vo:UserVO, pos:uint, addToList:Boolean ):void{
+			trace("update:"+vo.label+"  pos:"+pos);
+			if (addToList){
+				pos
+			}
+			//if add to list
+			//first time, remove the item, the
 			var lbVO:LeaderBoardVO = lbModel.vo;
-		/*	var winners:ArrayCollection = lbModel.vo.winners;
-			//replace the vo at the position
-			winners.addItemAt(vo, pos);
-			winners.removeItemAt(pos+1);*/
-			//set on temp vo
 			lbVO.winners.addItemAt(vo, pos);
-			lbVO.winners.removeItemAt(pos+1);
+			//lbVO.winners.removeItemAt(pos+1);
+			var remInd:uint = pos+1;//replace the existing one
+			if( addToList ) {
+				remInd = lbVO.winners.length-1;	
+			} 
+			lbVO.winners.removeItemAt(remInd);
+			//update the xml
+			var nodeString:String = '<user name="'+vo.label+'" score="'+vo.score.toString()+'" />';
+			var winner:XML =  new XML(nodeString);
+			var nodeBefore:XML = _xml.children()[pos] as XML;
+			_xml.insertChildBefore(nodeBefore, winner);
+			//remove last child
+			delete _xml.children()[remInd];
 			//set on model to dispatch event
 			lbModel.vo = lbVO;
 			
@@ -118,6 +122,7 @@ package services
 				var userVO:UserVO = new UserVO();
 				userVO.label = user.@name;
 				userVO.score = Number(user.@score);
+				userVO.highlight = false;
 				winners[i] = userVO;
 			}
 			vo.winners = new ArrayCollection(winners);

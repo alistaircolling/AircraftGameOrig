@@ -1,5 +1,6 @@
 package controllers
 {
+	import model.LeaderBoardModel;
 	import model.UserDataModel;
 	import model.vo.UserVO;
 	
@@ -12,18 +13,13 @@ package controllers
 		[Inject]
 		public var lBService:LeaderBoardService;
 		[Inject]
+		public var lbModel:LeaderBoardModel;
+		[Inject]
 		public var userModel:UserDataModel;
-		[Inject]
-		public var position:uint;
-		[Inject]
-		public var initials:String;
 		
 		override public function execute():void{
 			
-			var vo:UserVO = new UserVO();
-			vo.label = initials.substr(0,3);
-			vo.score = userModel.vo.finalScore; 
-			lBService.writeToXML(vo, position);
+			lBService.writeToXML();
 			
 		}
 	}

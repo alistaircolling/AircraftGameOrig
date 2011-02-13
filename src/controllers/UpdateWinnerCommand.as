@@ -14,12 +14,14 @@ package controllers
 		[Inject]
 		public var userVO:UserVO;
 		[Inject]
+		public var addToList:Boolean;
+		[Inject]
 		public var lBService:LeaderBoardService;
 		
 		
 		override public function execute():void{
 			
-			lBService.updateWinnersListTemp(userVO, position);
+			lBService.updateWinnersListTemp(userVO, position, addToList);
 			
 		}
 	}

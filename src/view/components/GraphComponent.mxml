@@ -65,7 +65,6 @@
 				//set the data 
 				_graphData = vo;
 				addValuesToAC(_graphData);
-				trace("setting the data within the graph component");
 				
 			}
 			
@@ -102,51 +101,23 @@
 				for (var i:uint = 0; i<=topVal; i++){
 					
 					var j:uint = i; //used for the last value
-//					if (j>=endVal){
 					if (j>=endVal){
 						j= endVal-1;
 					}
-					trace("counter:"+_counter+"  i:"+i+" j:"+j);
 					var percentTotal:Number = Number(vo.percentFlown[j]);
 					var monthTotal:Number = Number(vo.monthTotal[j]);
 					_usedArray[_counter+j] = {month:i, percent:percentTotal, monthT:monthTotal};
 					
 				}
-				
-				
+
 				_inAir = vo.inAir;
 				_onGround = vo.onGround;
 				_vectPos = 0;
 				_counter += j+1;//move to the next index
-				
-				if (vo.monthTotal[0] == 1.4){
-					//check that the items match
-					var aLength:uint = chartData.source.length;
-					var checkA:Array = _usedArray.slice(0, aLength);
-					for (var k:uint = 0; k<checkA.length; k++){
-						var existing:Object = chartData.source[k];
-						var replacement:Object = _usedArray[k];
-						if (existing == replacement){
-						}else{
-						}
-						
-						
-					}
-				}
-				
-		/* 		var combinedA:Array = [];
-				var newItems:Array = _usedArray
-				combinedA = chartData.source.concat(_usedAr */
 				chartData.source = _usedArray;		
-				
-				
 				linechart.dataProvider = chartData;
 				linechart.executeBindings(true);
-				/* updatePlanes(_counter);
-				//animate the mask
-				moveImage(); */
 				trace("CHART DATA LENGTH:"+chartData.source.length);
-				
 				
 			}
 			
