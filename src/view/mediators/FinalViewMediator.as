@@ -1,5 +1,7 @@
 package view.mediators
 {
+	import events.UpdateLetterEvent;
+	
 	import flash.events.MouseEvent;
 	
 	import model.UserDataModel;
@@ -15,6 +17,7 @@ package view.mediators
 	import signals.EnterWinner;
 	import signals.LeaderBoardSet;
 	import signals.RequestLeaderBoard;
+	import signals.UpdateWinner;
 	import signals.UserDataSet;
 	
 	import utils.StringUtils;
@@ -37,11 +40,15 @@ package view.mediators
 		public var userModel:UserDataModel;
 		[Inject]
 		public var enterWinner:EnterWinner;
+		[Inject]
+		public var updateWinner:UpdateWinner;
 		
 		private var _boardPosition:int;
 		private var _success:String = "Congratulations, you have made the leader board." +
 			" Please enter your initials below."
 		private var _failure:String = "";//Well done! You didn't make the leader board unfortunately."  
+		private var _winnerName:String;
+		private var _score:Number;
 		
 		override public function onRegister():void{
 			
@@ -50,6 +57,9 @@ package view.mediators
 			userDataSet.add(setData);
 			leaderBoardSet.add(setLeaderBoard);
 			requestLeaderBoard.dispatch();
+			finalView.lS1.addEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
+			finalView.lS2.addEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
+			finalView.lS3.addEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
 		}
 		
 		override public function onRemove():void{
@@ -58,6 +68,23 @@ package view.mediators
 			finalView.continueBtn.removeEventListener(MouseEvent.CLICK, continueClicked);
 			userDataSet.remove(setData);
 			leaderBoardSet.remove(setLeaderBoard);
+			finalView.lS1.removeEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
+			finalView.lS2.removeEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
+			finalView.lS3.removeEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
+		}
+		
+		private function letterChangedListener( e:UpdateLetterEvent ):void{
+			
+			_winnerName = getWinnerName();
+			trace("name is now:"+_winnerName);
+			var vo:UserVO = new UserVO();
+			vo.label = _winnerName;
+			vo.score = _score;
+			updateWinner.dispatch(vo, _boardPosition);
+		}
+		
+		private function getWinnerName():String{
+			return finalView.lS1.currentLetter+finalView.lS2.currentLetter+finalView.lS3.currentLetter;
 		}
 		
 		private function setLeaderBoard( vo:LeaderBoardVO ):void{
@@ -95,7 +122,7 @@ package view.mediators
 				}
 				
 				finalView.finalScore.text = budgetString+"m"; 
-				
+				_score = vo.finalScore;
 				//check if the user has a high score
 				_boardPosition = -1;
 				var winners:ArrayCollection = finalView.leaderBoard.dp;
@@ -106,9 +133,7 @@ package view.mediators
 						_boardPosition = i;
 					} 
 				}
-				//create a new winners list with a blacnk winner containing only the score and the default letters
-				
-				
+				//create a new winners list with a blank winner containing only the score and the default letters
 				
 				if (_boardPosition>-1){
 					showEnterDetails(true);
@@ -133,7 +158,6 @@ package view.mediators
 				finalView.enterInitials.visible = false;
 				//	 	finalView.enterName.visible = false;
 			}
-			
 		}
 		
 		
@@ -141,7 +165,7 @@ package view.mediators
 			trace("-------continue clicked");
 			if (_boardPosition>-1){
 				
-				var winnerInitials:String = finalView.lS1.currentLetter+finalView.lS2.currentLetter+finalView.lS3.currentLetter;
+				var winnerInitials:String = getWinnerName();
 				enterWinner.dispatch(winnerInitials, _boardPosition);
 			}
 			changeState.dispatch(ChangeState.EXIT_SCREEN);

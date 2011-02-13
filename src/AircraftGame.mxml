@@ -34,6 +34,10 @@
 				
 			//	leaderBoard.topTitle.styleName = "topTitle";
 				
+				var sTransform:SoundTransform = new SoundTransform(1,0);
+				sTransform.volume = 0;
+				SoundMixer.soundTransform = sTransform;
+				
 			}
 			
 			private function keyHandler( k:KeyboardEvent ):void{

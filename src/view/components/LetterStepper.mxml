@@ -5,11 +5,13 @@
 
 	<fx:Script>
 		<![CDATA[
+			import events.UpdateLetterEvent;
 			
 			private var _letters:Array = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 			public var letterIndex:uint = 0;
 			[Bindable]
 			public var currentLetter:String = "A";
+			public var stepperID:uint;//used to identify which stepper has been changed
 			
 			protected function downBtn_clickHandler(event:MouseEvent):void
 			{
@@ -38,7 +40,8 @@
 				
 				currentLetter = _letters[letterIndex];
 				trace("index:"+letterIndex+"  letter:"+currentLetter);
-				
+				var e:UpdateLetterEvent = new UpdateLetterEvent(UpdateLetterEvent.LETTER_CHANGED, currentLetter, stepperID);
+				dispatchEvent(e);
 			}
 
 		]]>

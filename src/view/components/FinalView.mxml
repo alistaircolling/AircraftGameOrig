@@ -47,9 +47,9 @@
 						<s:RichText id="message" styleName="finalMessage" text="" width="490" />
 						<s:HGroup gap="30" id="enterInitials">
 							<mx:Spacer width="5"/>
-							<components:LetterStepper id="lS1"/>
-							<components:LetterStepper id="lS2"/>
-							<components:LetterStepper id="lS3"/>
+							<components:LetterStepper id="lS1" stepperID="0"/>
+							<components:LetterStepper id="lS2" stepperID="1"/>
+							<components:LetterStepper id="lS3" stepperID="2"/>
 						</s:HGroup>
 					</s:VGroup>
 				</s:Group>

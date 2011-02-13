@@ -87,12 +87,13 @@ package services
 		public function updateWinnersListTemp( vo:UserVO, pos:uint ):void{
 			
 			var lbVO:LeaderBoardVO = lbModel.vo;
-			var winners:ArrayCollection = lbModel.vo.winners;
+		/*	var winners:ArrayCollection = lbModel.vo.winners;
 			//replace the vo at the position
 			winners.addItemAt(vo, pos);
-			winners.removeItemAt(pos+1);
+			winners.removeItemAt(pos+1);*/
 			//set on temp vo
-			lbVO.winners = winners;
+			lbVO.winners.addItemAt(vo, pos);
+			lbVO.winners.removeItemAt(pos+1);
 			//set on model to dispatch event
 			lbModel.vo = lbVO;
 			

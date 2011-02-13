@@ -38,6 +38,7 @@
 
 			protected function mxdatagriditemrenderer1_dataChangeHandler(event:FlexEvent):void
 			{
+				if(!data) return;//do not render if there is no data
 				amount.text = getBudget();
 				negativeLabel.text = getMinus();
 			}
@@ -55,5 +56,7 @@
 		<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" />
 		<s:Label id="amount" styleName="dataGridRenderer" textAlign="center"/>
 	</s:HGroup>
+	<mx:Image source="@Embed('../embed/scoreHighlight.png')" smoothBitmapContent="true" x="102" y="-13"/>
+	
 	
 </s:MXDataGridItemRenderer>

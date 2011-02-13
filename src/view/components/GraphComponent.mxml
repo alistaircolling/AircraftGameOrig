@@ -11,7 +11,7 @@
 		<mx:SolidColorStroke id = "whiteS" color="white" weight="0"/>
 		<s:SolidColor id="fill" color="white" alpha="0"/>
 		<s:Move id="myMove" easer="{noEase}" 
-				target="{rect}" duration="250" effectEnd="myMove_effectEndHandler(event)" />
+				target="{rect}" duration="25" effectEnd="myMove_effectEndHandler(event)" />
 		<s:Power id="noEase"
 				 exponent="1"/> 
 		
@@ -56,7 +56,7 @@
 			
 			private function moveImage():void {
 				myMove.end();
-			//	myMove.xBy = 910/36;
+				//	myMove.xBy = 910/36;
 				myMove.xTo = ((907/72)*_currentMonth)-907;
 				myMove.play();
 			}
@@ -64,12 +64,17 @@
 			public function setData( vo:GraphResultsVO ):void{
 				//set the data 
 				_graphData = vo;
+				addValuesToAC(_graphData);
 				trace("setting the data within the graph component");
 				
 			}
 			
 			public function showData():void{
-				addValuesToAC(_graphData);
+				
+				updatePlanes(_counter);
+				//animate the mask
+				moveImage();
+				
 			}
 			
 			private function drawLine( val:Number ):void{
@@ -97,26 +102,50 @@
 				for (var i:uint = 0; i<=topVal; i++){
 					
 					var j:uint = i; //used for the last value
+//					if (j>=endVal){
 					if (j>=endVal){
 						j= endVal-1;
 					}
-					
+					trace("counter:"+_counter+"  i:"+i+" j:"+j);
 					var percentTotal:Number = Number(vo.percentFlown[j]);
 					var monthTotal:Number = Number(vo.monthTotal[j]);
 					_usedArray[_counter+j] = {month:i, percent:percentTotal, monthT:monthTotal};
 					
 				}
 				
+				
 				_inAir = vo.inAir;
 				_onGround = vo.onGround;
 				_vectPos = 0;
 				_counter += j+1;//move to the next index
-				chartData.source = _usedArray;					
+				
+				if (vo.monthTotal[0] == 1.4){
+					//check that the items match
+					var aLength:uint = chartData.source.length;
+					var checkA:Array = _usedArray.slice(0, aLength);
+					for (var k:uint = 0; k<checkA.length; k++){
+						var existing:Object = chartData.source[k];
+						var replacement:Object = _usedArray[k];
+						if (existing == replacement){
+						}else{
+						}
+						
+						
+					}
+				}
+				
+		/* 		var combinedA:Array = [];
+				var newItems:Array = _usedArray
+				combinedA = chartData.source.concat(_usedAr */
+				chartData.source = _usedArray;		
+				
+				
 				linechart.dataProvider = chartData;
 				linechart.executeBindings(true);
-				updatePlanes(_counter);
+				/* updatePlanes(_counter);
 				//animate the mask
-				moveImage();
+				moveImage(); */
+				trace("CHART DATA LENGTH:"+chartData.source.length);
 				
 				
 			}
@@ -149,7 +178,7 @@
 			{
 				//intiialised
 				_counter = 0;
-				_usedArray = new Array(71);
+				_usedArray = new Array(72);
 				chartData = new ArrayCollection();
 				_currentMonth = 0;
 			}
@@ -167,7 +196,7 @@
 					////drawLine( rect.x +910 );
 					updatePlanes(_currentMonth);
 				}
-		
+				
 				if (_currentMonth<_totalMonths){
 					_currentMonth ++;
 					moveImage();
@@ -182,8 +211,8 @@
 			}
 			
 			private function updatePlanes(n:uint):void{
-		//		trace("update planes:"+n);
-		//		trace("---- vectPos:"+_vectPos);
+				//		trace("update planes:"+n);
+				//		trace("---- vectPos:"+_vectPos);
 				showPlanesInAir(_inAir[_vectPos]);
 				showPlanesOnGround(_onGround[_vectPos]);
 				_vectPos++;
@@ -208,9 +237,9 @@
 	
 	<!--	<s:Group id="chart" width="800" height="600" mask="{rect}">  -->
 	<!-- < mx:Image source="@Embed('../embed/GRAPH.png')" /> -->
-	<s:Group id="chart" width="907" height="212" horizontalCenter="0" verticalCenter="5" mask="{rect}">
+	<s:Group id="chart" width="895" height="212" horizontalCenter="-6" verticalCenter="5" mask="{rect}">
 		
-		<mx:LineChart id="linechart" color="0xffffff" height="212" width="907" backgroundElements="{[]}"
+		<mx:LineChart id="linechart" color="0xffffff" height="212" width="895" backgroundElements="{[]}"
 					  showDataTips="true" dataProvider="{chartData}" fill="{fill}" >
 			<mx:seriesFilters>
 				<fx:Array/>
