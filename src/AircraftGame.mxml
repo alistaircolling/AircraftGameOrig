@@ -14,6 +14,7 @@
 			
 			import flashx.textLayout.events.StatusChangeEvent;
 			
+			import mx.core.UIComponent;
 			import mx.events.AIREvent;
 			import mx.events.EffectEvent;
 			import mx.events.FlexEvent;
@@ -22,6 +23,8 @@
 			import signals.ChangeState;
 			
 			private var context:ProjectContext;
+			
+			private var square:Sprite;
 			
 			protected function windowedapplication1_creationCompleteHandler(event:Event):void
 			{
@@ -32,12 +35,84 @@
 				updateState(ChangeState.INTRO_SCREEN);
 				addEventListener(KeyboardEvent.KEY_UP, keyHandler);
 				
-			//	leaderBoard.topTitle.styleName = "topTitle";
+				//	leaderBoard.topTitle.styleName = "topTitle";
 				
 				var sTransform:SoundTransform = new SoundTransform(1,0);
 				sTransform.volume = 0;
 				SoundMixer.soundTransform = sTransform;
+				createContextMenu();
+			}
+			
+			
+			private function createContextMenu():void{
+				square  = new Sprite();
+				square.graphics.beginFill(0x000000, 0);
+				square.graphics.drawRect(-4,-30,160,160);
+				square.graphics.endFill();
 				
+				var newComponent:UIComponent = new UIComponent();
+				
+				//must set the UI component to wrap the sprite - so set width and height
+				newComponent.width = 100;
+				newComponent.height = 100;
+				newComponent.alpha = 0;
+				newComponent.addChild(square);
+				myPanel.addChild(newComponent);
+				
+				var menuItem:ContextMenuItem = new ContextMenuItem("Quit");
+				menuItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT,quitApp);
+				
+				var customContextMenu:ContextMenu = new ContextMenu();
+				//hide the Flash menu
+				customContextMenu.hideBuiltInItems();
+				customContextMenu.customItems.push(menuItem);
+				square.contextMenu = customContextMenu;
+				addEventListener(Event.CLOSING, onExiting);
+				addEventListener(Event.ENTER_FRAME, oef);
+				
+			}
+			
+			private function oef( e:Event ):void{
+				removeEventListener(Event.ENTER_FRAME, oef);
+				myPanel.visible = true;				
+			}
+			
+			private function doCutCommand(event:ContextMenuEvent):void{trace("cut");}
+			private function doCopyCommand(event:ContextMenuEvent):void{trace("copy");}
+			private function doPasteCommand(event:ContextMenuEvent):void{trace("paste");}
+			
+			private function contMenuSelect(e:ContextMenuEvent):void{
+				trace("sda");
+			}
+			
+			private function quitApp( e:ContextMenuEvent ):void{
+				applicationExit();
+			}
+			
+			private function onExiting(exitingEvent:Event):void {
+				removeEventListener(Event.CLOSING, onExiting);
+				var winClosingEvent:Event;
+				for each (var win:NativeWindow in NativeApplication.nativeApplication.openedWindows) {
+					winClosingEvent = new Event(Event.CLOSING,false,true);
+					win.dispatchEvent(winClosingEvent);
+					if (!winClosingEvent.isDefaultPrevented()) {
+						win.close();
+					} else {
+						exitingEvent.preventDefault();
+					}
+				}
+				
+				if (!exitingEvent.isDefaultPrevented()) {
+					//perform cleanup
+				}
+			}
+			
+			public function applicationExit():void {
+				var exitingEvent:Event = new Event(Event.EXITING, false, true);
+				NativeApplication.nativeApplication.dispatchEvent(exitingEvent);
+				if (!exitingEvent.isDefaultPrevented()) {
+					NativeApplication.nativeApplication.exit();
+				}
 			}
 			
 			private function keyHandler( k:KeyboardEvent ):void{
@@ -165,7 +240,12 @@
 				(event.effectInstance.target as Group).visible = false;
 			}
 			
+			public function changeColor(event:ContextMenuEvent):void
+			{square.transform.colorTransform = getRandomColor();}
 			
+			public function getRandomColor():ColorTransform{
+				return new ColorTransform(Math.random(), Math.random(), Math.random(),1,(Math.random() * 512) - 255, (Math.random() * 512) -255, (Math.random() * 512) - 255, 0);
+			}
 		]]>
 	</fx:Script>
 	
@@ -199,4 +279,7 @@
 	<s:TextArea id="statusLabel" fontSize="24"  left="5"  height="600" width="1000" includeInLayout="false" visible="false"/>
 	<s:Button label="show status" x="1800" y="1000" click="button1_clickHandler(event)" visible="false"/>
 	<components:ErrorMessage id="errorMsg" visible="false"/>
+	<mx:Panel id="myPanel" x="1703" y="60" alpha="0" visible="false" /> 
+	<!-- <s:Group id="myPanel" x="1703" y="60" alpha="0"/> -->
+	
 </s:WindowedApplication>
