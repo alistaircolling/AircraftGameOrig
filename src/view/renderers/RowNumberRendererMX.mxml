@@ -59,9 +59,11 @@
 		<s:Label horizontalCenter="60" text="{data.label}" styleName="dataGridRendererGrey"  textAlign="center" />
 		
 	</s:Group>
-	<s:HGroup x="205">
+	<s:HGroup x="195">
 		<s:Label id="negativeLabel" styleName="dataGridRenderer" textAlign="center"/>
-		<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" />
+		<s:Group>
+		<mx:Image source="@Embed('../embed/leaderBoardCurrency.png')" smoothBitmapContent="true" top="2"/>
+		</s:Group>
 		<s:Label id="amount" styleName="dataGridRenderer" textAlign="center"/>
 	</s:HGroup>
 	<mx:Image id="editing" source="@Embed('../embed/scoreHighlight.png')" smoothBitmapContent="true" x="97" y="-19"/>
