@@ -44,14 +44,10 @@
 					inputPanel.spares.sparesCurr = _receivedVO.currentSpares; 
 				}
 				
-				
 				//set the initval objects to check we dont go below them
 				inputPanel.reliability.initVal = _receivedVO.currentReliability;
 				inputPanel.turnaround.initVal = _receivedVO.currentTuranaround;
 				inputPanel.nff.initVal = _receivedVO.currentNFF;
-				
-				
-				
 				
 				inputPanel.reliablityVal = _receivedVO.currentReliability;
 				inputPanel.turnaroundVal = _receivedVO.currentTuranaround;
@@ -62,7 +58,6 @@
 				inputPanel.turnaroundValues = _receivedVO.turnaround;
 				inputPanel.nffValues = _receivedVO.nff;
 				//resetn current indices to 0
-				
 				
 				inputPanel.nff.currIndex = 0;
 				inputPanel.turnaround.currIndex = 0;
@@ -78,10 +73,9 @@
 				inputPanel.reliability.currVal = _receivedVO.currentReliability;
 				inputPanel.turnaround.currVal = _receivedVO.currentTuranaround;
 				inputPanel.nff.currVal = _receivedVO.currentNFF;
-				
-				
-				//todo make a numeric stepper custom component that is passed the vector of input objects and adjusts its own display
-				//and also stores the cost of the current value
+
+				//set the % flown remaining
+				inputPanel.flownCurr.text = "% Flown Currently: "+_receivedVO.lastPercent.toString()+"%";
 			}
 			
 			public function showBalance( n:Number ):void{

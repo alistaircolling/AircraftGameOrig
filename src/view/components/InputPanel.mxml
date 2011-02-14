@@ -139,6 +139,7 @@
 					<components:GoButton id="submit"/>
 				</s:VGroup>
 			</s:VGroup>
+				<s:Label id="flownCurr" styleName="supportPanelCategory" text="% Flown Currently" paddingLeft="10" paddingTop="38"/>
 		</s:Group>
 		
 		

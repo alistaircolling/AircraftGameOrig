@@ -81,6 +81,7 @@ package services
 			vo.currentNFF = DataUtils.getObjectForValue( vo.nff, Number(xml.currentNFF));
 			vo.currentTuranaround = DataUtils.getObjectForValue( vo.turnaround, Number(xml.currentTurnaround));
 			
+			vo.lastPercent = 65;
 			vo.initialData = true;
 			//minimum values will be set on view components that the user is unable to go below and so are not referenced in the model
 			

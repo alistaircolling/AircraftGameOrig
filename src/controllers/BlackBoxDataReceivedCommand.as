@@ -1,5 +1,7 @@
 package controllers
 {
+	import flash.globalization.LastOperationStatus;
+	
 	import flashx.textLayout.operations.SplitParagraphOperation;
 	
 	import model.UserDataModel;
@@ -26,7 +28,7 @@ package controllers
 		
 		override public function execute():void{
 			
-														//SET THE GRAPH VO FIRST TO AVOID ITERATION SHOWING IN INPUT PANEL
+			//SET THE GRAPH VO FIRST TO AVOID ITERATION SHOWING IN INPUT PANEL
 			
 			//create the graphresult vo
 			var graphVO:GraphResultsVO = new GraphResultsVO();
@@ -65,6 +67,8 @@ package controllers
 			vo.currentSpares = Number(xml..currentSpares);
 			vo.sparesCostInc = userModel.vo.sparesCostInc;//already set and so retrieved
 			vo.iteration = Number(xml..iteration);
+			
+			vo.lastPercent = graphVO.percentFlown[graphVO.percentFlown.length-1];
 			if (vo.iteration == 3){
 				vo.avAvailability = xml..averageAvailability;
 				vo.finalScore = Number(xml..currentBudget);
@@ -78,15 +82,15 @@ package controllers
 			vo.initialData = false;
 			//set on the model
 			
-			 userModel.vo = vo;
+			userModel.vo = vo;
 			
 			//set the iteration on the model
-			 userModel.iteration = Number(xml..iteration);
-			 var theBudget:Number = Number(xml..currentBudget);
-			 if (theBudget<0){
+			userModel.iteration = Number(xml..iteration);
+			var theBudget:Number = Number(xml..currentBudget);
+			if (theBudget<0){
 				// theBudget*=-1;
-			 }
-			 userModel.budget = theBudget;//Number(xml..currentBudget);//set the budget last otherwise it is updated in the intropanel when the vo.spares values are updated
+			}
+			userModel.budget = theBudget;//Number(xml..currentBudget);//set the budget last otherwise it is updated in the intropanel when the vo.spares values are updated
 			
 			
 		}

@@ -24,6 +24,8 @@ package model.vo
 		
 		//tells us if this is the initial set of data or fmor black box (dictates which screen we go to )
 		public var initialData:Boolean;
+		//used to display on the input screen
+		public var lastPercent:Number;
 		
 	}
 }
