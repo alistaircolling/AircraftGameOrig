@@ -108,6 +108,7 @@ package view.mediators
 			
 			resultsView.iteration = n;
 			
+			
 		}
 		
 		private function setData( vo:GraphResultsVO ):void{

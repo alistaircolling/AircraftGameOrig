@@ -6,6 +6,7 @@ package view.mediators
 	
 	import model.vo.ErrorVO;
 	import model.vo.LeaderBoardVO;
+	import model.vo.ReceivedDataVO;
 	
 	import mx.collections.ArrayCollection;
 	import mx.controls.Alert;
@@ -23,6 +24,7 @@ package view.mediators
 	import signals.StartClicked;
 	import signals.StatusUpdate;
 	import signals.TextSetOnModel;
+	import signals.UserDataSet;
 	
 	import utils.CustomEvent;
 	
@@ -50,6 +52,8 @@ package view.mediators
 		public var lBSet:LeaderBoardSet;
 		[Inject]
 		public var restartGame:RestartGame;
+		[Inject]
+		public var userDataSet:UserDataSet;
 		
 		
 		override public function onRegister():void{
@@ -62,6 +66,7 @@ package view.mediators
 		
 		private function addListeners():void {
 			
+			userDataSet.add(showDebug);
 			changeState.add(updateState);
 			statusUpdate.add(showStatus);
 			gameIDSet.add(setGameID);
@@ -70,6 +75,13 @@ package view.mediators
 			requestID.dispatch();
 			initSocket.dispatch();
 			viewComp.addEventListener("restart", restartGameListener);
+		}
+		
+		private function showDebug( vo:ReceivedDataVO ):void{
+			
+			viewComp.statusLabel.visible = vo.debug;
+			userDataSet.removeAll();//remove after the first time the game is launched
+			
 		}
 		
 		private function restartGameListener( e:CustomEvent ):void{

@@ -115,8 +115,8 @@
 			</s:Group>
 			<s:Group>
 				
-				<mx:Image id="negCurr" source="@Embed('../embed/whiteCurr48.png')" smoothBitmapContent="true" y="3" visible="false" includeInLayout="false"/>
-				<mx:Image id="posCurr" source="@Embed('../embed/blueCurr48.png')" smoothBitmapContent="true" y="3" />
+				<mx:Image id="negCurr" source="@Embed('../embed/whiteCurr48.png')" smoothBitmapContent="true" y="4" visible="false" includeInLayout="false"/>
+				<mx:Image id="posCurr" source="@Embed('../embed/blueCurr48.png')" smoothBitmapContent="true" y="4" />
 			</s:Group>
 			<s:Label id="title" styleName="mainBudget" textAlign="center" />
 		</s:HGroup>

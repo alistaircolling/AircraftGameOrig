@@ -57,11 +57,13 @@
 				if (b) {
 					alph = 1;
 					showSection(mainPanel, true);
+					fadeInPlanes.play([inAir, onGround]);
 				}else{
 					mainPanel.alpha = alph;
+					inAir.alpha = alph;
+					onGround.alpha = alph;
 				}
-				inAir.alpha = alph;
-				onGround.alpha = alph;
+				
 			}
 			
 			private function showSection( sect:Group, b:Boolean ):void{
@@ -82,12 +84,17 @@
 				
 			}
 			
+			private function showPanelsWait(t:TimerEvent):void{
+				_animTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, startAnim);
+				_animTimer = null;
+				showPanels(true);
+			}
+			
 			private function animCompleted( e:Event ):void{
 				
-				showPanels(true);
-				
-				//graph.setData(_graphResults);
-				
+				_animTimer = new Timer(1500, 1);
+				_animTimer.addEventListener(TimerEvent.TIMER_COMPLETE, showPanelsWait);
+				_animTimer.start();
 			}
 			
 			private function fadeCompleted():void{
@@ -132,6 +139,10 @@
 				_iteration = value;
 				//turn.text = "(Turn "+value.toString()+" of 3)"; 
 				showTurn(_iteration);
+				
+				if (_iteration==1){
+					graph.initPlanes();
+				}
 			}
 
 			public function showTurn( n:uint ):void{
@@ -174,8 +185,11 @@
 	
 	<fx:Declarations>
 		<s:Fade id="fadeIn" alphaTo="1" duration="2000" effectStart="fadeIn_effectStartHandler(event)" effectEnd="fadeIn_effectEndHandler(event)" startDelay="1000"/>
+		<s:Fade id="fadeInPlanes" alphaTo="1" duration="2000" effectStart="fadeIn_effectStartHandler(event)" startDelay="1000"/>
 		<s:Fade id="fadeOut"  alphaTo="0" duration="1500" effectEnd="fadeOut_effectEndHandler(event)"/>
 	</fx:Declarations>
+	<components:InAirPlanes id="inAir" x="510" top="20"/>
+	<components:OnGroundPlanes id="onGround" x="110" bottom="-10"/>
 	<mx:UIComponent id="animHolder" horizontalCenter="0" verticalCenter="0" alpha="1"/>
 	<s:Group id="mainPanel" horizontalCenter="0" verticalCenter="150" width="1148" height="516">
 		<mx:Image source="@Embed('../embed/graph.png')" width="1148" height="516" smoothBitmapContent="true" />
@@ -192,8 +206,7 @@
 		<s:Label top="71" left="650" text="% Flown" styleName="legend"/>
 		<components:CustomButton id="continueBtn" right="55" top="52" click="continue_clickHandler(event)"/>
 	</s:Group>
-	<components:InAirPlanes id="inAir" x="510" top="20"/>
-	<components:OnGroundPlanes id="onGround" x="110" bottom="-10"/>
+	
 	
 	
 </s:Group>

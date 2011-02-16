@@ -11,7 +11,7 @@
 		<mx:SolidColorStroke id = "whiteS" color="white" weight="0"/>
 		<s:SolidColor id="fill" color="white" alpha="0"/>
 		<s:Move id="myMove" easer="{noEase}" 
-				target="{rect}" duration="25" effectEnd="myMove_effectEndHandler(event)" />
+				target="{rect}" duration="250" effectEnd="myMove_effectEndHandler(event)" />
 		<s:Power id="noEase"
 				 exponent="1"/> 
 		
@@ -55,9 +55,14 @@
 			public static const FINISHED_ANIMATING:String = "finishedAnimating";
 			
 			private function moveImage():void {
-				myMove.end();
+				if (myMove.isPlaying){
+					myMove.end();//just added
+				} 
+				
 				//	myMove.xBy = 910/36;
-				myMove.xTo = ((907/72)*_currentMonth)-907;
+				var moveVal:Number = ((907/72)*(_currentMonth-1))-907;
+				trace("MOVE IMAGE, CURR MONTH:"+_currentMonth+"  XVAL:"+moveVal);
+				myMove.xTo = moveVal;
 				myMove.play();
 			}
 			
@@ -69,9 +74,9 @@
 			}
 			
 			public function showData():void{
-				
-				updatePlanes(_counter);
-				//animate the mask
+				_vectPos = 0;
+				//update the planes for month 0
+				//updatePlanes(_vectPos); //Dont trigger intiially as the plane vales we dont have for month 0
 				moveImage();
 				
 			}
@@ -88,24 +93,26 @@
 			}
 			
 			private function addValuesToAC( vo:GraphResultsVO ):void{
-				
+				trace("================   ADDING VALUES ====== ");
 				// add the new values to the array cllection then animate from the current position
 				var currArray:Array = [];
-				var endVal:uint = vo.monthTotal.length;//values after this are set to a line
+				var endVal:uint = vo.monthTotal.length;//values after this are set to a line  ADDED 1 FOR THE 0 MONTH
 				var topVal:uint = 12*6;// 6 years (come in 3 goes)
 				
 				var firstDate:Date = new Date();
 				firstDate.setDate(firstDate.getDate()-100);
-				_totalMonths = _counter+endVal;
+				_totalMonths = _counter+endVal+1;//added for the extra 1st month
 				//	trace("counter starting round at:"+_counter);
-				for (var i:uint = 0; i<=topVal; i++){
+//				for (var i:uint = 0; i<=topVal; i++){
+				
+				for (var i:uint = 1; i<=topVal; i++){
 					
 					var j:uint = i; //used for the last value
-					if (j>=endVal){
-						j= endVal-1;
+					if (j>endVal){
+						j= endVal;
 					}
-					var percentTotal:Number = Number(vo.percentFlown[j]);
-					var monthTotal:Number = Number(vo.monthTotal[j]);
+					var percentTotal:Number = Number(vo.percentFlown[j-1]);
+					var monthTotal:Number = Number(vo.monthTotal[j-1]);
 					_usedArray[_counter+j] = {month:i, percent:percentTotal, monthT:monthTotal};
 					
 				}
@@ -113,12 +120,10 @@
 				_inAir = vo.inAir;
 				_onGround = vo.onGround;
 				_vectPos = 0;
-				_counter += j+1;//move to the next index
+				_counter += j;//move to the next index
 				chartData.source = _usedArray;		
 				linechart.dataProvider = chartData;
 				linechart.executeBindings(true);
-				trace("CHART DATA LENGTH:"+chartData.source.length);
-				
 			}
 			
 			private function traceAllMonthVals():void{
@@ -149,9 +154,24 @@
 			{
 				//intiialised
 				_counter = 0;
-				_usedArray = new Array(72);
+				_usedArray = new Array(73);//one extra for start values
+				addInitialValsToArray();
 				chartData = new ArrayCollection();
 				_currentMonth = 0;
+				//init the planes
+				
+			}
+			
+			//shows the default amount of planes (used the very first time the graph shows)
+			public function initPlanes():void{
+				showPlanesInAir(10);
+				showPlanesOnGround(10);
+			}
+			
+			//these are for month 0
+			private function addInitialValsToArray():void{
+				
+				_usedArray[0] = {month:0, percent:75, monthT:0};//these values will presumable be confirmed by client, they have been approximated
 			}
 			
 			public function reset():void{
@@ -162,10 +182,13 @@
 			}
 			
 			protected function myMove_effectEndHandler(event:EffectEvent):void{
+				trace(">> effect end, curr month:"+_currentMonth);
 				//add the planes at quarters
-				if (_currentMonth%4 == 0){
+				if (_currentMonth%3 == 0){
 					////drawLine( rect.x +910 );
-					updatePlanes(_currentMonth);
+					if (_currentMonth>0){
+						updatePlanes(_currentMonth); //make sure this is not retriggeredas the first index of the planes vectors are shown before the anima starts
+					}
 				}
 				
 				if (_currentMonth<_totalMonths){
@@ -184,6 +207,7 @@
 			private function updatePlanes(n:uint):void{
 				//		trace("update planes:"+n);
 				//		trace("---- vectPos:"+_vectPos);
+				trace(" ========= update planes:"+n+"  vector pos:"+_vectPos+" curr month:"+_currentMonth);
 				showPlanesInAir(_inAir[_vectPos]);
 				showPlanesOnGround(_onGround[_vectPos]);
 				_vectPos++;
@@ -191,13 +215,13 @@
 			}
 			
 			private function showPlanesInAir( n:uint ):void{
-				trace("planes in air:"+n);
+		//		trace("planes in air:"+n);
 				var e:PlanesEvent = new PlanesEvent(PlanesEvent.IN_AIR, n);
 				dispatchEvent(e);
 			}
 			
 			private function showPlanesOnGround( n:uint ):void{
-				trace("planes on ground:"+n);
+	//			trace("planes on ground:"+n);
 				var e:PlanesEvent = new PlanesEvent(PlanesEvent.ON_GROUND, n);
 				dispatchEvent(e);
 			}
@@ -208,9 +232,9 @@
 	
 	<!--	<s:Group id="chart" width="800" height="600" mask="{rect}">  -->
 	<!-- < mx:Image source="@Embed('../embed/GRAPH.png')" /> -->
-	<s:Group id="chart" width="895" height="212" horizontalCenter="-6" verticalCenter="5" mask="{rect}">
+	<s:Group id="chart" width="907" height="212" horizontalCenter="0" verticalCenter="5" mask="{rect}" >
 		
-		<mx:LineChart id="linechart" color="0xffffff" height="212" width="895" backgroundElements="{[]}"
+		<mx:LineChart id="linechart" color="0xffffff" height="212" width="907" backgroundElements="{[]}"
 					  showDataTips="true" dataProvider="{chartData}" fill="{fill}" >
 			<mx:seriesFilters>
 				<fx:Array/>
@@ -222,7 +246,7 @@
 					categoryField="Month" 
 					/>
 			</mx:horizontalAxis>
-			
+
 			<mx:horizontalAxisRenderers>
 				<mx:AxisRenderer axis="{a1}" minorTickPlacement="none" tickPlacement="none" labelGap="0" showLabels="false" showLine="false"/>
 			</mx:horizontalAxisRenderers>
@@ -239,7 +263,7 @@
 						<mx:LinearAxis id="pcAxis" minimum="50" maximum="100"/>
 					</mx:verticalAxis>
 				</mx:LineSeries>
-				<mx:LineSeries yField="monthT" displayName="Monthly Profit/Loss" lineStroke="{s2}" dataProvider="{chartData}" >
+				<mx:LineSeries yField="monthT" displayName="Monthly Profit/Loss Bm" lineStroke="{s2}" dataProvider="{chartData}" >
 					<mx:verticalAxis >
 						<!--<mx:LinearAxis id="monthAxis" minimum="-25" maximum="10" />-->
 						<mx:LinearAxis id="monthAxis" minimum="-8.1" maximum="8" />
@@ -250,11 +274,11 @@
 		</mx:LineChart>
 		
 		
-		<s:Group id="lines" width="907" height="212" />
-		<s:Group id="rect" x="-907">
+		<s:Group id="lines" width="907" height="212" visible="true" />
+		<s:Group id="rect" x="-907" visible="true">
 			<s:Rect width="907" height="210" >
 				<s:fill>
-					<s:SolidColor color="0xAA2FC9" alpha="1" />
+					<s:SolidColor color="0xAA2FC9" alpha="1"  />
 				</s:fill>
 			</s:Rect>
 		</s:Group>

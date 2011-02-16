@@ -44,6 +44,7 @@ package controllers
 			var inAir:Vector.<Number>;
 			var inAirVals:String = xml..inAir.valueOf();
 			var inA:Array = inAirVals.split(",");
+			
 			inAir = DataUtils.convertArrayToVector(inA);
 			var onGround:Vector.<Number>;
 			var onGVals:String = xml..onGround.valueOf();

@@ -116,7 +116,10 @@
 				<s:Group >
 					<s:Label id="negativeLabel" styleName="supportPanelBudget" text="-" y="-3"/>
 				</s:Group>
-				<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" />
+				<!--<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" />-->
+				<s:Group>
+					<mx:Image source="@Embed('../embed/supportBlatt.png')" smoothBitmapContent="true" y="2"/>
+				</s:Group>
 				<s:Label id="balanceIndicator" text="" styleName="supportPanelBudget"  textAlign="left" />
 			</s:HGroup>
 		</s:Group>
@@ -139,7 +142,7 @@
 					<components:GoButton id="submit"/>
 				</s:VGroup>
 			</s:VGroup>
-				<s:Label id="flownCurr" styleName="supportPanelCategory" text="% Flown Currently" paddingLeft="3" paddingTop="38"/>
+			<s:Label id="flownCurr" styleName="supportPanelCategory" text="% Flown Currently" paddingLeft="3" paddingTop="38"/>
 		</s:Group>
 		
 		

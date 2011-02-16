@@ -26,6 +26,8 @@ package model.vo
 		public var initialData:Boolean;
 		//used to display on the input screen
 		public var lastPercent:Number;
+		//used to display the debug window
+		public var debug:Boolean;
 		
 	}
 }

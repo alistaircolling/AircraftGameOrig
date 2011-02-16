@@ -39,7 +39,6 @@
 			protected function mxdatagriditemrenderer1_dataChangeHandler(event:FlexEvent):void
 			{
 				if(!data) return;//do not render if there is no data
-				trace("depth:"+depth);
 				amount.text = getBudget();
 				negativeLabel.text = getMinus();
 				var vo:UserVO = data as UserVO;

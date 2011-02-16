@@ -10,6 +10,7 @@
 		<![CDATA[
 			
 			public function showPlanes( n:uint ):void{
+				trace("======SHOW ON GROUND PLANES:"+n);
 				for (var i:uint = 0; i<10; i++){
 					var im:GroundPlane = this["p"+i] as GroundPlane;
 				 	if (i<n){

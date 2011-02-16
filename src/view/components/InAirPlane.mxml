@@ -11,16 +11,18 @@
 			[Bindable]
 			public var title:String;
 			
+			public var planeImage:String;
 			
 			
 
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
-				//lab.text = id;
+				plane.source = 	"../embed/"+planeImage;
+				
 			}
 
 		]]>
 	</fx:Script>
-	<mx:Image source="@Embed('../embed/skyPlane.png')" smoothBitmapContent="true" />
+	<mx:Image id="plane" smoothBitmapContent="true" />
 	<s:Label id="lab" text="{id}"/>
 </s:Group>

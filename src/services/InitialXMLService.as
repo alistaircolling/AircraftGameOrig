@@ -63,7 +63,7 @@ package services
 			trace("initialise xml received");
 			var xml:XML = new XML(s);
 			var vo:ReceivedDataVO = new ReceivedDataVO();
-			
+			vo.debug = xml.debug=="true";
 			//set lookup tables
 			var reliabList:XMLList = xml.reliability;
 			vo.reliability = DataUtils.returnVectorFromList( reliabList[0], Number(xml.currentReliability) );

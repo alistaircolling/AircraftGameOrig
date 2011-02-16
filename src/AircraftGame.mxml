@@ -37,10 +37,10 @@
 				
 				//	leaderBoard.topTitle.styleName = "topTitle";
 				
-				var sTransform:SoundTransform = new SoundTransform(1,0);
+		/* 		var sTransform:SoundTransform = new SoundTransform(1,0);
 				sTransform.volume = 0;
 				SoundMixer.soundTransform = sTransform;
-				createContextMenu();
+				createContextMenu(); */
 			}
 			
 			
@@ -124,11 +124,11 @@
 			}
 			
 			public function showTheError(s:String):void{
-				
-				errorMsg.msg.text = s;
-				errorMsg.visible  = true;
-				setElementIndex(errorMsg, numElements-1);
-				
+				if (!errorMsg.visible){
+					errorMsg.msg.text = s;
+					errorMsg.visible  = true;
+					setElementIndex(errorMsg, numElements-1);
+				}
 			}
 			
 			private function toggleFullScreen():void{
@@ -167,7 +167,9 @@
 						showSection(inputView, true);
 						showSection(resultsView, false);
 						showSection(lbHolder, true);
-						setElementIndex(inputView, numElements-1);
+						finalView.visible = false;
+						finalView.alpha = 0;
+						setElementIndex(inputView, numElements-2);
 						inputView.updateDisplay();
 						break
 					case ChangeState.RESULTS_SCREEN:
@@ -175,10 +177,11 @@
 						inputView.visible = false;
 						finalView.visible = false;
 						lbHolder.visible = true; */
+						exitView.visible = false;
+						exitView.alpha = 0;
 						showSection(resultsView, true);
 						showSection(inputView, false);
 						//showSection(finalView, false);
-						finalView.visible = false;
 						showSection(lbHolder, true);
 						break
 					case ChangeState.FINAL_SCREEN:
@@ -187,6 +190,7 @@
 						finalView.visible = true;
 						exitView.visible = false;
 						lbHolder.visible = false; */
+						trace("results view vis:"+resultsView.visible+"  alpha:"+resultsView.alpha);
 						showSection(resultsView, false);
 						showSection(lbHolder, false);
 						showSection(inputView, false);
@@ -212,6 +216,7 @@
 			}
 			
 			private function showSection( sect:Group, b:Boolean ):void{
+				trace("SHOW SECTION:"+sect.name+"  yes?:"+b);
 				if(b){
 					fadeIn.target = sect;
 					fadeIn.play();
@@ -270,16 +275,16 @@
 	<components:InputView id="inputView" includeIn="enter, intro, resultsScreen" alpha="0"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
 	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen, intro" alpha="0" />
 	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter, exitScreen" alpha="0"/>
-	<components:ExitView id="exitView" includeIn="finalScreen, exitScreen" alpha="0"/>
+	<components:ExitView id="exitView" includeIn="finalScreen, exitScreen, resultsScreen" alpha="0"/>
 	<components:IntroView id="introView" includeIn="intro, exitScreen, enter" alpha="0" />
 	<s:Group id="lbHolder" x="1568" top="267" includeIn="intro, enter, resultsScreen, exitScreen, finalScreen" alpha="0">
 		<mx:Image source="@Embed('../embed/lbtop3.png')" smoothBitmapContent="true" />
 		<components:LeaderBoard id="leaderBoard" title="0" horizontalCenter="29" top="55" spacerHeight="43"/>
 	</s:Group>
-	<s:TextArea id="statusLabel" fontSize="24"  left="5"  height="600" width="1000" includeInLayout="false" visible="false"/>
 	<s:Button label="show status" x="1800" y="1000" click="button1_clickHandler(event)" visible="false"/>
 	<components:ErrorMessage id="errorMsg" visible="false"/>
 	<mx:Panel id="myPanel" x="1703" y="60" alpha="0" visible="false" /> 
+	<s:TextArea id="statusLabel" fontSize="24"  left="5"  height="600" width="1000" includeInLayout="false" visible="false"/>
 	<!-- <s:Group id="myPanel" x="1703" y="60" alpha="0"/> -->
 	
 </s:WindowedApplication>

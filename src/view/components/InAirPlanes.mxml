@@ -12,6 +12,7 @@
 		<![CDATA[
 			
 			public function showPlanes( n:uint ):void{
+				trace("======SHOW IN AIR PLANES:"+n);
 				for (var i:uint = 1; i<=numElements; i++){
 					var im:InAirPlane = this["p"+i] as InAirPlane;
 					if (i<=n){
@@ -38,34 +39,34 @@
 			
 		]]>
 	</fx:Script>
-	<components:InAirPlane id="p1"
+	<components:InAirPlane id="p1" planeImage="SkyPlane1.png"
 			  x="0" y="114"
 			 />
-	<components:InAirPlane id="p2"
+	<components:InAirPlane id="p2" planeImage="SkyPlane2.png"
 			  x="316" y="236"
 			 />
-	<components:InAirPlane id="p9"
-			  x="236" y="114"
+	<components:InAirPlane id="p9" planeImage="SkyPlane3.png"
+			  x="240" y="124"
 			 />
-	<components:InAirPlane id="p3"
+	<components:InAirPlane id="p3" planeImage="SkyPlane4.png"
 			  x="160" y="16"
 			 />
-	<components:InAirPlane id="p8"
+	<components:InAirPlane id="p8" planeImage="SkyPlane5.png"
 			  x="578" y="244"
 			 />
-	<components:InAirPlane id="p10"
-			  x="480" y="114"
+	<components:InAirPlane id="p10" planeImage="SkyPlane6.png"
+			  x="485" y="105"
 			 />
-	<components:InAirPlane id="p4"
+	<components:InAirPlane id="p4" planeImage="SkyPlane7.png"
 			  x="396" y="0"
 			 />
-	<components:InAirPlane id="p5"
+	<components:InAirPlane id="p5" planeImage="SkyPlane8.png"
 			  x="724" y="153"
 			 />
-	<components:InAirPlane id="p7"
+	<components:InAirPlane id="p7" planeImage="SkyPlane9.png"
 			  x="645" y="39"
 			 />
-	<components:InAirPlane id="p6"
+	<components:InAirPlane id="p6" planeImage="SkyPlane10.png"
 			  x="851" y="79"
 			 />
 	
