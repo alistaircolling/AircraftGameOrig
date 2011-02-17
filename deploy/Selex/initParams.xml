@@ -33,4 +33,5 @@
 	<currentTurnaround>45</currentTurnaround> 
 	<currentSpares>120</currentSpares> 
 	<currentBudget>17</currentBudget>
+	<debug>true</debug>
 </initParams>

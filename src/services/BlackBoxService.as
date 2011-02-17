@@ -92,7 +92,7 @@ package services
 			_attempts = 0;
 			initResubmission();
 			
-		//	return //remove - only for testing TODO
+			//return //remove - only for testing TODO
 			statusUpdate.dispatch("connecting to socket on ip:"+_ip+"  port:"+_port);
 			
 			
@@ -166,7 +166,7 @@ package services
 		
 		private function socketTrace( e:SocketEvent ):void{
 			
-			if (e.msg== SocketEvent.ERROR){
+				if (e.msg== SocketEvent.ERROR){
 				_attempts = 0;
 				startWaitTimer(false);
 				errorReceived.dispatch("Black box is not running. Restart both applications");

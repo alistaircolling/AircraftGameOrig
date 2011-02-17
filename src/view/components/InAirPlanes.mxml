@@ -14,7 +14,7 @@
 			public function showPlanes( n:uint ):void{
 				trace("======SHOW IN AIR PLANES:"+n);
 				for (var i:uint = 1; i<=numElements; i++){
-					var im:InAirPlane = this["p"+i] as InAirPlane;
+					var im:* = this["p"+i];
 					if (i<=n){
 						if(im.alpha <1){
 							showPlane(im, true);
@@ -27,7 +27,7 @@
 				}
 			}
 			
-			private function showPlane( pl:InAirPlane, b:Boolean ):void{
+			private function showPlane( pl:*, b:Boolean ):void{
 				if (b){
 					fadeIn.target = pl;
 					fadeIn.play();
@@ -39,34 +39,34 @@
 			
 		]]>
 	</fx:Script>
-	<components:InAirPlane id="p1" planeImage="SkyPlane1.png"
+	<components:InAirPlane1 id="p1" planeImage="@Embed('../embed/SkyPlane1.png')"
 			  x="0" y="114"
 			 />
-	<components:InAirPlane id="p2" planeImage="SkyPlane2.png"
+	<components:InAirPlane2 id="p2" planeImage="@Embed('../embed/SkyPlane2.png')"
 			  x="316" y="236"
 			 />
-	<components:InAirPlane id="p9" planeImage="SkyPlane3.png"
+	<components:InAirPlane3 id="p9" planeImage="@Embed('../embed/SkyPlane3.png')"
 			  x="240" y="124"
 			 />
-	<components:InAirPlane id="p3" planeImage="SkyPlane4.png"
+	<components:InAirPlane4 id="p3" planeImage="@Embed('../embed/SkyPlane4.png')"
 			  x="160" y="16"
 			 />
-	<components:InAirPlane id="p8" planeImage="SkyPlane5.png"
+	<components:InAirPlane5 id="p8" planeImage="@Embed('../embed/SkyPlane5.png')"
 			  x="578" y="244"
 			 />
-	<components:InAirPlane id="p10" planeImage="SkyPlane6.png"
+	<components:InAirPlane6 id="p10" planeImage="@Embed('../embed/SkyPlane6.png')"
 			  x="485" y="105"
 			 />
-	<components:InAirPlane id="p4" planeImage="SkyPlane7.png"
+	<components:InAirPlane7 id="p4" planeImage="@Embed('../embed/SkyPlane6.png')"
 			  x="396" y="0"
 			 />
-	<components:InAirPlane id="p5" planeImage="SkyPlane8.png"
+	<components:InAirPlane8 id="p5" planeImage="@Embed('../embed/SkyPlane8.png')"
 			  x="724" y="153"
 			 />
-	<components:InAirPlane id="p7" planeImage="SkyPlane9.png"
+	<components:InAirPlane9 id="p7" planeImage="@Embed('../embed/SkyPlane9.png')"
 			  x="645" y="39"
 			 />
-	<components:InAirPlane id="p6" planeImage="SkyPlane10.png"
+	<components:InAirPlane10 id="p6" planeImage="@Embed('../embed/SkyPlane10.png')"
 			  x="851" y="79"
 			 />
 	

@@ -17,7 +17,7 @@
 
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
-				plane.source = 	"../embed/"+planeImage;
+				//plane.source = 	"../embed/"+planeImage;
 				
 			}
 
