@@ -69,7 +69,7 @@ package services
 		
 		private var _iteration:uint; //only used during dummy runs
 		
-		public function sendDataX( vo:InputVO ):void{
+		public function sendData( vo:InputVO ):void{
 			_iteration = Number(vo.iteration);
 			_tempSubmitVO = vo;
 			
@@ -92,7 +92,7 @@ package services
 			_attempts = 0;
 			initResubmission();
 			
-			//return //remove - only for testing TODO
+			return //remove - only for testing TODO
 			statusUpdate.dispatch("connecting to socket on ip:"+_ip+"  port:"+_port);
 			
 			
@@ -201,7 +201,7 @@ package services
 		}
 		
 		
-		public function sendData( vo:InputVO ):void{
+		public function sendDataX( vo:InputVO ):void{
 			_tempSubmitVO = vo;
 			_iteration = Number(vo.iteration);
 			//reset the attempts as this is a new game

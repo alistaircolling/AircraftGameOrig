@@ -10,15 +10,32 @@
 		<mx:SolidColorStroke id = "blackStroke" color="black" weight="1" alpha=".4"/>
 		<mx:SolidColorStroke id = "whiteS" color="white" weight="0"/>
 		<s:SolidColor id="fill" color="white" alpha="0"/>
+		<s:SolidColor id="fill2" color="white" alpha=".5"/>
 		<s:Move id="myMove" easer="{noEase}" 
 				target="{rect}" duration="250" effectEnd="myMove_effectEndHandler(event)" />
 		<s:Power id="noEase"
 				 exponent="1"/> 
 		
+		
+		<s:ArrayCollection id="arrColl">
+			<s:source>
+				<fx:Array>
+					<fx:Object name="R Winn" obp=".353" slg=".445" avg=".300" />
+					<fx:Object name="P Feliz" obp=".290" slg=".418" avg=".253" />
+					<fx:Object name="O Vizquel" obp=".305" slg=".316" avg=".246" />
+					<fx:Object name="B Molina" obp=".298" slg=".433" avg=".276" />
+					<fx:Object name="R Durham" obp=".295" slg=".343" avg=".218" />
+				</fx:Array>
+			</s:source>
+		</s:ArrayCollection>
+		
+		
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
 			import events.PlanesEvent;
+			
+			import flashx.textLayout.utils.CharacterUtil;
 			
 			import model.vo.GraphResultsVO;
 			
@@ -33,6 +50,8 @@
 			
 			[Bindable]
 			private var chartData:ArrayCollection;
+			[Bindable]
+			private var chartDataBars:ArrayCollection;
 			
 			[Bindable]
 			private var monthTData:ArrayCollection;
@@ -53,6 +72,7 @@
 			private var _percentA:Array = [67.3,65.9,67.3,66.6,68.6,67.3,74.5,74.8,79.9,77.5,84.5,82.4,87.5,83.3,85.8,84.1,86.7,83.2,87.5,82.4,86.7,85.8,85.8,82.4, 89.2,84.1,86.7,82.4,86.7,85.0,87.1,86.7,89.7,83.9,87.8,84.6,88.5,87.9,90.9,85.6,91.8,88.2,92.7,87.3,91.8,88.2,92.7,85.6,90.0,87.3,89.1,89.1,90.9,86.5,90.2,87.5,91.1,85.7,92.9,85.7,92.0,88.4,90.2,89.3,92.0,89.3,92.9,89.3,92.0,86.6,92.9,89.3];
 			private var _graphData:GraphResultsVO;
 			public static const FINISHED_ANIMATING:String = "finishedAnimating";
+			
 			
 			private function moveImage():void {
 				if (myMove.isPlaying){
@@ -124,6 +144,10 @@
 				chartData.source = _usedArray;		
 				linechart.dataProvider = chartData;
 				linechart.executeBindings(true);
+			
+				columnChart.dataProvider = chartData;
+				columnChart.executeBindings(true);
+				
 			}
 			
 			private function traceAllMonthVals():void{
@@ -157,6 +181,7 @@
 				_usedArray = new Array(73);//one extra for start values
 				addInitialValsToArray();
 				chartData = new ArrayCollection();
+				chartDataBars = new ArrayCollection();
 				_currentMonth = 0;
 				//init the planes
 				
@@ -272,6 +297,57 @@
 			</mx:series>
 			
 		</mx:LineChart>
+		
+		
+		
+	
+		
+		<mx:ColumnChart id="columnChart"
+						backgroundElements="{[]}"
+						showDataTips="true"
+						dataProvider="{chartData}"
+						
+						fill="{fill2}"
+						width="907"
+						height="212">
+			
+			<mx:horizontalAxis>
+				<mx:CategoryAxis id="ca"
+								 categoryField="month" />
+			</mx:horizontalAxis>
+			
+			<mx:verticalAxis>
+				<mx:LinearAxis id="yAxis" 
+					baseAtZero="false"
+							   minimum="-8.1"
+							   maximum="8"
+							   
+							    />
+			</mx:verticalAxis>
+			
+			<mx:horizontalAxisRenderers>
+				<mx:AxisRenderer axis="{ca}"
+								 canDropLabels="true"
+								 tickPlacement="none" labelGap="0" showLabels="false" showLine="false"/>
+			</mx:horizontalAxisRenderers>
+			<mx:verticalAxisRenderers>
+				<mx:AxisRenderer axis="{yAxis}" placement="left" tickPlacement="none" labelGap="0" showLabels="false" showLine="false"/>
+			</mx:verticalAxisRenderers>
+			
+			
+			<mx:series>
+				<mx:ColumnSeries id="columnSeries" dataProvider="{chartData}"
+								 xField="month"
+								 yField="monthT"
+								 displayName="Month TOOOO" />
+			
+			</mx:series>
+			
+			<mx:seriesFilters>
+				<fx:Array />
+			</mx:seriesFilters>
+			
+		</mx:ColumnChart>
 		
 		
 		<s:Group id="lines" width="907" height="212" visible="true" />
