@@ -164,6 +164,7 @@ package view.mediators
 		}
 		
 		private function setData( vo:ReceivedDataVO ):void{
+			trace("user data set heard in input mediator");
 			_data = vo;
 			_iteration = _data.iteration;
 			if (_iteration==0){

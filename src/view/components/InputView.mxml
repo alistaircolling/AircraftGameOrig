@@ -35,6 +35,7 @@
 				
 				inputPanel.spares.sparesInc = 1;//hard coded for the moment - not passed in xml
 				inputPanel.spares.costInc = _receivedVO.sparesCostInc;
+				trace(" === setting sparesINit on spares stepper from input view === ");
 				inputPanel.spares.sparesInit = _receivedVO.currentSpares;//initialize the value --set this first to make buttons display correctly 
 				
 				//reset the sparesCurr so it knows that this has been set but the black box, not updated by the user (and so does not update the budget)
@@ -88,9 +89,7 @@
 				inputPanel.nff.budget = n;
 				inputPanel.turnaround.budget = n;
 				inputPanel.reliability.budget = n;
-				
 				inputPanel.budget = n;
-				
 				
 				//if the balance is negative disable all buttons
 				if (n<0){

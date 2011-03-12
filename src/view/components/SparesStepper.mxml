@@ -72,7 +72,7 @@
 					down.visible = true;
 					up.visible = true;
 				}
-				
+				checkIfCanBuyMoreSpares();
 			}
 			
 			public function get sparesInit():Number
@@ -95,6 +95,7 @@
 			
 			//updates the spares on the initial turn iteration without updating balance (this is set by system rather than user interaction)
 			public function systemUpdateSpares( value:Number ):void{
+				trace("--------- system update spares");
 				_sparesCurr = value;
 				valLabel.text = value.toString();
 				checkIfCanBuyMoreSpares();
@@ -141,7 +142,8 @@
 			}
 			
 			private function checkIfCanBuyMoreSpares():void{
-				
+				trace(" - - -  check if can buy more spares - - - ");
+				trace("_sparesCur:"+_sparesCurr+"  _sparesInit:"+_sparesInit);
 				var maxSpares:uint = Math.floor(budget/costInc);
 				if (maxSpares>0){
 					up.visible = true;
