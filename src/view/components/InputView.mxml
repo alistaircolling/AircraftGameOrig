@@ -75,7 +75,7 @@
 				inputPanel.nff.currVal = _receivedVO.currentNFF;
 
 				//set the % flown remaining
-				inputPanel.flownCurr.text = "% Flown Currently: "+_receivedVO.lastPercent.toString()+"%";
+				inputPanel.flownCurr.text = "Current % Flown: "+_receivedVO.lastPercent.toString()+"%";
 			}
 			
 			public function showBalance( n:Number ):void{

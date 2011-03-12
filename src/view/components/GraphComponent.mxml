@@ -164,7 +164,7 @@
 			
 			//shows the default amount of planes (used the very first time the graph shows)
 			public function initPlanes():void{
-				showPlanesInAir(10);
+				showPlanesInAir(0);
 				showPlanesOnGround(10);
 			}
 			

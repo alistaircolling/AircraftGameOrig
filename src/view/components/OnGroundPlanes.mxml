@@ -37,29 +37,29 @@
 			
 		]]>
 	</fx:Script>
-	<components:GroundPlane id="p9"
+	<components:GroundPlane id="p9" alpha="0"
 			  x="118" y="0" />
-	<components:GroundPlane  id="p8"
+	<components:GroundPlane  id="p8" alpha="0"
 			  x="219" y="21" />
-	<components:GroundPlane  id="p7"
+	<components:GroundPlane  id="p7" alpha="0"
 			  x="313" y="44"/>
-	<components:GroundPlane  id="p6"
+	<components:GroundPlane  id="p6" alpha="0"
 			  x="416" y="65"/>
-	<components:GroundPlane  id="p5"
+	<components:GroundPlane  id="p5" alpha="0"
 			  x="65" y="42"/>
-	<components:GroundPlane  id="p4"
+	<components:GroundPlane  id="p4" alpha="0"
 			  x="167" y="63"/>
-	<components:GroundPlane  id="p3"
+	<components:GroundPlane  id="p3" alpha="0"
 			  x="260" y="87"/>
-	<components:GroundPlane  id="p2"
+	<components:GroundPlane  id="p2" alpha="0"
 			  x="362" y="106"/>
-	<components:GroundPlane  id="p1"
+	<components:GroundPlane  id="p1" alpha="0"
 			  x="0" y="87"/>
-	<components:GroundPlane  id="p0"
+	<components:GroundPlane  id="p0" alpha="0"
 			  x="100" y="108"/>
-	<components:GroundPlane  id="pnon"
+	<components:GroundPlane  id="pnon" alpha="0"
 			  x="194" y="130"/>
-	<components:GroundPlane  id="pnon2"
+	<components:GroundPlane  id="pnon2" alpha="0"
 			  x="297" y="152"/>
 	
 </s:Group>

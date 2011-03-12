@@ -26,7 +26,7 @@
 	<mx:Image source="@Embed('../embed/title.png')" smoothBitmapContent="true" horizontalCenter="0"/>		
 	<s:Group id="panel" horizontalCenter="0" verticalCenter="60">
 		<mx:Image source="@Embed('../embed/introPanel.png')" smoothBitmapContent="true" />		
-				<s:RichText id="introText" width="970" height="80%" x="100" y="150" styleName="panelBody" fontSize="20"
+				<s:RichText id="introText" width="970" height="80%" x="100" y="150" styleName="panelBody" fontSize="21"
 							textFlow="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}"/>
 		<s:HGroup x="60" y="60" width="100%">
 			<s:VGroup  width="100%">

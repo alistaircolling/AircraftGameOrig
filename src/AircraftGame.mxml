@@ -37,10 +37,10 @@
 				
 				//	leaderBoard.topTitle.styleName = "topTitle";
 				
-		/* 		var sTransform:SoundTransform = new SoundTransform(1,0);
-				sTransform.volume = 0;
-				SoundMixer.soundTransform = sTransform;
-				createContextMenu(); */
+				//var sTransform:SoundTransform = new SoundTransform(1,0);
+				//sTransform.volume = 0;
+				//SoundMixer.soundTransform = sTransform;
+				createContextMenu(); 
 			}
 			
 			

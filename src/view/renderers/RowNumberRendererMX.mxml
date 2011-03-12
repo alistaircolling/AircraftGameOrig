@@ -58,7 +58,7 @@
 		<s:Label horizontalCenter="60" text="{data.label}" styleName="dataGridRendererGrey"  textAlign="center" />
 		
 	</s:Group>
-	<s:HGroup x="195">
+	<s:HGroup x="195" gap="2">
 		<s:Label id="negativeLabel" styleName="dataGridRenderer" textAlign="center"/>
 		<s:Group>
 		<mx:Image source="@Embed('../embed/leaderBoardCurrency.png')" smoothBitmapContent="true" top="2"/>

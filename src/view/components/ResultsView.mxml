@@ -35,7 +35,7 @@
 				showPanels(false);
 				_graphResults = vo;
 				
-				_animTimer = new Timer(1500, 1);
+				_animTimer = new Timer(800, 1);
 				_animTimer.addEventListener(TimerEvent.TIMER_COMPLETE, startAnim);
 				_animTimer.start();
 				 
@@ -92,7 +92,7 @@
 			
 			private function animCompleted( e:Event ):void{
 				
-				_animTimer = new Timer(1500, 1);
+				_animTimer = new Timer(100, 1);
 				_animTimer.addEventListener(TimerEvent.TIMER_COMPLETE, showPanelsWait);
 				_animTimer.start();
 			}
@@ -121,11 +121,9 @@
 					dispatchEvent(e);
 				}else{
 					var f:ChangeStateEvent = new ChangeStateEvent(ChangeState.ENTER_SCREEN);
-					f.state = "finalScreen";
-					
+					f.state = "finalScreen";					
 					dispatchEvent(f);
-				}
-				
+				}				
 			}
 			
 			
