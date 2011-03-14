@@ -5,29 +5,19 @@
 		 creationComplete="group1_creationCompleteHandler(event)">
 	<fx:Declarations>
 		<mx:SolidColorStroke id = "s1" color="#0a3753" weight="4" />
-		<mx:SolidColorStroke id = "s2" color="#0080bc" weight="4"/>
+		<mx:SolidColorStroke id = "s2" color="#0080bc" weight="4" alpha="0"/>
 		<mx:SolidColorStroke id = "s3" color="green" weight="2"/>
 		<mx:SolidColorStroke id = "blackStroke" color="black" weight="1" alpha=".4"/>
 		<mx:SolidColorStroke id = "whiteS" color="white" weight="0"/>
 		<s:SolidColor id="fill" color="white" alpha="0"/>
-		<s:SolidColor id="fill2" color="white" alpha=".5"/>
+		<s:SolidColor id="fill2" color="red" alpha=".5"/>
 		<s:Move id="myMove" easer="{noEase}" 
 				target="{rect}" duration="250" effectEnd="myMove_effectEndHandler(event)" />
 		<s:Power id="noEase"
 				 exponent="1"/> 
 		
+		<mx:SolidColor id="blueGraph" color="#0080bc" alpha="1"/>
 		
-		<s:ArrayCollection id="arrColl">
-			<s:source>
-				<fx:Array>
-					<fx:Object name="R Winn" obp=".353" slg=".445" avg=".300" />
-					<fx:Object name="P Feliz" obp=".290" slg=".418" avg=".253" />
-					<fx:Object name="O Vizquel" obp=".305" slg=".316" avg=".246" />
-					<fx:Object name="B Molina" obp=".298" slg=".433" avg=".276" />
-					<fx:Object name="R Durham" obp=".295" slg=".343" avg=".218" />
-				</fx:Array>
-			</s:source>
-		</s:ArrayCollection>
 		
 		
 	</fx:Declarations>
@@ -133,9 +123,10 @@
 					}
 					var percentTotal:Number = Number(vo.percentFlown[j-1]);
 					var monthTotal:Number = Number(vo.monthTotal[j-1]);
-					_usedArray[_counter+j] = {month:i, percent:percentTotal, monthT:monthTotal};
-					
+					_usedArray[_counter+j] = {month:_counter+j, percent:percentTotal, monthT:monthTotal};
+					trace("i:"+i);
 				}
+				
 
 				_inAir = vo.inAir;
 				_onGround = vo.onGround;
@@ -144,11 +135,11 @@
 				chartData.source = _usedArray;		
 				linechart.dataProvider = chartData;
 				linechart.executeBindings(true);
-			
+	
 				columnChart.dataProvider = chartData;
 				columnChart.executeBindings(true);
-				
 			}
+			
 			
 			private function traceAllMonthVals():void{
 				trace("trace all values ------------------------");
@@ -307,9 +298,10 @@
 						showDataTips="true"
 						dataProvider="{chartData}"
 						
-						fill="{fill2}"
-						width="907"
-						height="212">
+						fill="{fill}"
+						width="917"
+						height="212"
+						x="-10">
 			
 			<mx:horizontalAxis>
 				<mx:CategoryAxis id="ca"
@@ -339,7 +331,7 @@
 				<mx:ColumnSeries id="columnSeries" dataProvider="{chartData}"
 								 xField="month"
 								 yField="monthT"
-								 displayName="Month TOOOO" />
+								 fill="{blueGraph}"/>
 			
 			</mx:series>
 			
