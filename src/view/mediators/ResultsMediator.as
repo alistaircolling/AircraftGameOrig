@@ -11,6 +11,7 @@ package view.mediators
 	import org.robotlegs.mvcs.Mediator;
 	
 	import signals.ChangeState;
+	import signals.GameTypeSet;
 	import signals.GraphDataSet;
 	import signals.IterationChange;
 	import signals.StatusUpdate;
@@ -30,6 +31,8 @@ package view.mediators
 		public var changeStateSignal:ChangeState;
 		[Inject]
 		public var statusUpate:StatusUpdate;
+		[Inject]
+		public var gameTypeSet:GameTypeSet;
 		
 		private var _animating:Boolean;
 		
@@ -42,9 +45,11 @@ package view.mediators
 			iterationChange.add(setIteration);
 			resultsView.addEventListener(ChangeState.ENTER_SCREEN, changeState);
 			changeStateSignal.add(updateState);
+			gameTypeSet.add(gameTypeSetListener);
 			resultsView.graph.addEventListener(PlanesEvent.IN_AIR, updateInAir);
 			resultsView.graph.addEventListener(PlanesEvent.ON_GROUND, updateOnGround);
 			resultsView.graph.addEventListener(GraphComponent.FINISHED_ANIMATING, finishedAnimating);
+			
 		}
 		
 		private function sockEvent( e:SocketEvent ):void{
@@ -83,11 +88,15 @@ package view.mediators
 			iterationChange.remove(setIteration);
 			resultsView.removeEventListener(ChangeState.ENTER_SCREEN, changeState);
 			changeStateSignal.remove(updateState);
+			gameTypeSet.remove(gameTypeSetListener);
 			resultsView.graph.removeEventListener(PlanesEvent.IN_AIR, updateInAir);
 			resultsView.graph.removeEventListener(PlanesEvent.ON_GROUND, updateOnGround);
 			resultsView.graph.removeEventListener(GraphComponent.FINISHED_ANIMATING, finishedAnimating);
 		}
-		
+	
+		private function gameTypeSetListener(type:String):void{
+			resultsView.setAnimation(type);
+		}
 		private function changeState( e:ChangeStateEvent ):void{
 			
 			statusUpate.dispatch("change state received in  results mediator:"+e.state+"  dispatching change state signal");
