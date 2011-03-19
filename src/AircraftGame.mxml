@@ -151,7 +151,7 @@
 				//add any additional logic here
 				switch(currentState){
 					case ChangeState.INTRO_SCREEN:
-	
+						
 						showSection(blackout, false);
 						showSection(introView, true);
 						showSection(inputView, false);
@@ -188,11 +188,13 @@
 						showSection(exitView, false);
 						showSection(lbHolder, false);
 						showSection(blackout, true);
+						exitView.playVideo(false);
 						break
 					
 					case ChangeState.EXIT_SCREEN://has video
-	
+						
 						showSection(exitView, true);
+						exitView.playVideo(true);
 						showSection(finalView, false);
 						showSection(introView, false);
 						showSection(lbHolder, false);

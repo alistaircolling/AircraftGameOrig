@@ -7,7 +7,14 @@
 		<![CDATA[
 			import flashx.textLayout.conversion.TextConverter;
 			
-			
+			public function playVideo(b:Boolean):void{
+				if(b){
+					vidplayer.stop();
+					vidplayer.play();
+				}else{
+					vidplayer.stop();
+				}
+			}
 			
 		]]>
 	</fx:Script>
@@ -24,12 +31,11 @@
 		<s:HGroup x="60" y="60" width="100%">
 			<s:VGroup  width="100%">
 				<mx:Image source="@Embed('../embed/theReality.png')" smoothBitmapContent="true" />
-			<!--	<s:Label id="title" text="The Reality of Logistics" width="700" styleName="panelTitle"/> -->
 				<mx:Spacer height="30"/>
-				
 			</s:VGroup>
 			<mx:Spacer width="0"/>
 		</s:HGroup>
-		<components:ContinueButton id="continueButton" label="" bottom="50" left="50"/>
+		<s:VideoDisplay id="vidplayer" height="240" width="500" source="vid.flv" autoPlay="false" bottom="65" left="50"/>
+		<components:ContinueButton id="continueButton" label="" bottom="90" left="50"/>
 	</s:Group>
 </s:Group>
