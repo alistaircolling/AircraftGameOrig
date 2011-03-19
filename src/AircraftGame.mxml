@@ -136,7 +136,6 @@
 			}
 			
 			private function toggleFullScreen( e:ContextMenuEvent = null ):void{
-				
 				if (stage.displayState == StageDisplayState.NORMAL){
 					stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 				}else{
