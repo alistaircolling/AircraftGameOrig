@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1920" height="1080" xmlns:components="view.components.*">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1920" height="1080" xmlns:components="view.components.*" xmlns:skins="view.skins.*">
 	<fx:Declarations>
 		<fx:String id="htmlTextAsHTML"><![CDATA[Congratulations, you have made the leader board.<br>Please enter your initials below.]]></fx:String>
 		<s:SolidColorStroke id="greyStroke" color="0xcccccc" weight="2"/>
@@ -58,7 +58,7 @@
 			<mx:Spacer width="0"/>
 		</s:HGroup>
 		<components:LeaderBoard id="leaderBoard" width="262" title="1" height="100%" top="50" right="-5" spacerHeight="33"/>
-		<components:CustomButton id="continueBtn" label="" left="55" bottom="55"/>
+		<components:EndButton id="continueBtn" label="" left="55" bottom="55"/>
 		
 	</s:Group>
 	

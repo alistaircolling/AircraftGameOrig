@@ -2,6 +2,7 @@ package view.mediators
 {
 	import events.UpdateLetterEvent;
 	
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import model.UserDataModel;
@@ -17,6 +18,7 @@ package view.mediators
 	import signals.EnterWinner;
 	import signals.LeaderBoardSet;
 	import signals.RequestLeaderBoard;
+	import signals.RestartGame;
 	import signals.UpdateWinner;
 	import signals.UserDataSet;
 	
@@ -42,6 +44,8 @@ package view.mediators
 		public var enterWinner:EnterWinner;
 		[Inject]
 		public var updateWinner:UpdateWinner;
+		[Inject]
+		public var restartGame:RestartGame;
 		
 		private var _boardPosition:int;
 		private var _success:String = "Congratulations, you have made the leader board." +
@@ -167,13 +171,16 @@ package view.mediators
 		
 		
 		private function continueClicked( m:MouseEvent ):void{
+			
 			trace("-------continue clicked");
 			if (_boardPosition>-1){
 				
 				var winnerInitials:String = getWinnerName();
 				enterWinner.dispatch();
 			}
-			changeState.dispatch(ChangeState.EXIT_SCREEN);
+			
+			trace("--restart clicked");
+			restartGame.dispatch();
 			
 		}
 	}

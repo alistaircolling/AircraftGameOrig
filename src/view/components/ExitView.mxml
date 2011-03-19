@@ -7,13 +7,7 @@
 		<![CDATA[
 			import flashx.textLayout.conversion.TextConverter;
 			
-			protected function restartBtn_clickHandler(event:MouseEvent):void
-			{
-				trace("--restart clicked");
-				// TODO Auto-generated method stub
-				var e:Event = new Event("restartGame");
-				dispatchEvent(e);
-			}
+			
 			
 		]]>
 	</fx:Script>
@@ -36,6 +30,6 @@
 			</s:VGroup>
 			<mx:Spacer width="0"/>
 		</s:HGroup>
-		<components:EndButton id="restartBtn" label="" click="restartBtn_clickHandler(event)" bottom="50" left="50"/>
+		<components:ContinueButton id="continueButton" label="" bottom="50" left="50"/>
 	</s:Group>
 </s:Group>

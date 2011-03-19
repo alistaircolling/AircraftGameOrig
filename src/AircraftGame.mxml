@@ -151,10 +151,7 @@
 				//add any additional logic here
 				switch(currentState){
 					case ChangeState.INTRO_SCREEN:
-						/* introView.visible = true;//testing
-						inputView.visible = false;
-						resultsView.visible = false;
-						lbHolder.visible = false; */
+	
 						showSection(blackout, false);
 						showSection(introView, true);
 						showSection(inputView, false);
@@ -163,9 +160,7 @@
 						break
 					
 					case ChangeState.ENTER_SCREEN:
-						//	inputView.visible = true;
-						//	resultsView.visible = false;
-						//	lbHolder.visible = true
+		
 						showSection(introView, false);
 						showSection(inputView, true);
 						showSection(resultsView, false);
@@ -176,24 +171,16 @@
 						inputView.updateDisplay();
 						break
 					case ChangeState.RESULTS_SCREEN:
-						/* resultsView.visible = true;
-						inputView.visible = false;
-						finalView.visible = false;
-						lbHolder.visible = true; */
+	
 						exitView.visible = false;
 						exitView.alpha = 0;
 						showSection(resultsView, true);
 						showSection(inputView, false);
-						//showSection(finalView, false);
 						showSection(lbHolder, true);
 						break
-					case ChangeState.FINAL_SCREEN:
-						/* 	resultsView.visible = false;
-						inputView.visible = false;
-						finalView.visible = true;
-						exitView.visible = false;
-						lbHolder.visible = false; */
-						trace("results view vis:"+resultsView.visible+"  alpha:"+resultsView.alpha);
+					case ChangeState.FINAL_SCREEN: //has results
+				
+						showSection(introView, false);
 						showSection(resultsView, false);
 						showSection(lbHolder, false);
 						showSection(inputView, false);
@@ -201,18 +188,17 @@
 						showSection(exitView, false);
 						showSection(lbHolder, false);
 						showSection(blackout, true);
-						
 						break
-					case ChangeState.EXIT_SCREEN:
-						/* 	exitView.visible = true;
-						finalView.visible = false;
-						introView.visible = false;
-						lbHolder.visible = false; */
+					
+					case ChangeState.EXIT_SCREEN://has video
+	
 						showSection(exitView, true);
 						showSection(finalView, false);
 						showSection(introView, false);
 						showSection(lbHolder, false);
+						showSection(resultsView, false);
 						break
+					
 					default:						
 						break
 				}
@@ -276,7 +262,7 @@
 		<s:Label id="gameID" text="GameID: --- " styleName="gameID" visible="false" includeInLayout="false"/>
 	</s:Group>
 	<components:InputView id="inputView" includeIn="enter, intro, resultsScreen" alpha="0"/> <!-- input wont show correctly as it isnt visible when the data is first recived need to fix TODO -->
-	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen, intro" alpha="0" />
+	<components:ResultsView id="resultsView" includeIn="resultsScreen, enter, finalScreen, intro, exitScreen" alpha="0" />
 	<components:FinalView id="finalView" includeIn="resultsScreen, finalScreen, enter, exitScreen" alpha="0"/>
 	<components:ExitView id="exitView" includeIn="finalScreen, exitScreen, resultsScreen" alpha="0"/>
 	<components:IntroView id="introView" includeIn="intro, exitScreen, enter" alpha="0" />

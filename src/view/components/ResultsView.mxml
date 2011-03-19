@@ -121,7 +121,7 @@
 					dispatchEvent(e);
 				}else{
 					var f:ChangeStateEvent = new ChangeStateEvent(ChangeState.ENTER_SCREEN);
-					f.state = "finalScreen";					
+					f.state = ChangeState.EXIT_SCREEN;				
 					dispatchEvent(f);
 				}				
 			}

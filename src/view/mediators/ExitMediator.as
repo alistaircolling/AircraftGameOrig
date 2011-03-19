@@ -15,22 +15,21 @@ package view.mediators
 		[Inject]
 		public var exitView:ExitView;
 		[Inject]
-		public var restartGame:RestartGame;
+		public var changeState:ChangeState;
 		
 		override public function onRegister():void{
 			
-			exitView.addEventListener("restartGame", restartGameListener);
+			exitView.continueButton.addEventListener(MouseEvent.CLICK, continueClickedListener);
 		}
 		
 		override public function onRemove():void{
-			
-			exitView.removeEventListener("restartGame", restartGameListener);
+			exitView.continueButton.removeEventListener(MouseEvent.CLICK, continueClickedListener);
 		}
 		
-		private function restartGameListener( m:Event ):void{
-			
-			restartGame.dispatch();
+		private function continueClickedListener( m:MouseEvent):void{
+			changeState.dispatch(ChangeState.FINAL_SCREEN);
 		}
+		
 		
 	}
 }
