@@ -123,8 +123,8 @@
 					}
 					var percentTotal:Number = Number(vo.percentFlown[j-1]);
 					var monthTotal:Number = Number(vo.monthTotal[j-1]);
+					
 					_usedArray[_counter+j] = {month:_counter+j, percent:percentTotal, monthT:monthTotal};
-					trace("i:"+i);
 				}
 				
 

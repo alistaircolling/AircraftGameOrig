@@ -197,10 +197,14 @@
 			<mx:Image id="turn2" source="@Embed('../embed/results2.png')" smoothBitmapContent="true" includeInLayout="false" visible="false"/>
 			<mx:Image id="turn3" source="@Embed('../embed/results3.png')" smoothBitmapContent="true" includeInLayout="false" visible="false"/>
 		</s:HGroup>
-		<s:Group  top="71" left="418">
-			<mx:Image source="@Embed('../embed/greyCurrSmall.png')" smoothBitmapContent="true" y="-2" />
-			<s:Label text=" Annual Tot" styleName="legend" x="18"/>
-		</s:Group>
+		<s:HGroup  top="71" left="414" gap="0">
+			<s:Label text=" Monthly Profit / Loss " styleName="legend" />
+				<mx:Spacer width="3"/>
+			<s:Group>
+			<mx:Image source="@Embed('../embed/greyCurrSmall.png')" smoothBitmapContent="true" y="-2" scaleX=".9" scaleY=".9" />
+			</s:Group>
+			<s:Label text="m" styleName="legend" />
+		</s:HGroup>
 		<s:Label top="71" left="650" text="% Flown" styleName="legend"/>
 		<components:CustomButton id="continueBtn" right="55" top="52" click="continue_clickHandler(event)"/>
 	</s:Group>
