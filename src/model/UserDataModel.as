@@ -11,6 +11,7 @@ package model
 	import signals.GraphDataSet;
 	import signals.IterationChange;
 	import signals.StageSet;
+	import signals.UserDataSetLive;
 	import signals.UserDataSet;
 	
 	import spark.components.mediaClasses.VolumeBar;
@@ -31,6 +32,8 @@ package model
 		public var graphDataSet:GraphDataSet;
 		[Inject]
 		public var gameIDSet:GameIDSet;
+		[Inject]
+		public var testSignal:UserDataSetLive;
 		
 		private var _gameID:Number;
 		
@@ -86,7 +89,8 @@ package model
 			}
 			//dispatch after so the mediator is instantiated
 			userDataSet.dispatch(_vo);
-			
+			testSignal.dispatch(_vo);
+				
 		}
 
 		public function get budget():Number

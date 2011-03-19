@@ -21,6 +21,7 @@ package view.mediators
 	import signals.IterationChange;
 	import signals.LeaderBoardSet;
 	import signals.StatusUpdate;
+	import signals.UserDataSetLive;
 	import signals.UpdateBalance;
 	import signals.UserDataSet;
 	
@@ -47,6 +48,10 @@ package view.mediators
 		public var userModel:UserDataModel;//used only to get the current iteration for submission in vo
 		[Inject]
 		public var statusUpdate:StatusUpdate;
+		[Inject]
+		public var userDataLiveSet:UserDataSetLive;
+		
+		
 		private var _showTurnTimer:Timer
 		private var _showBalanceTimer:Timer
 		private var _showDataTimer:Timer
@@ -58,9 +63,10 @@ package view.mediators
 		override public function onRegister():void{
 			trace("===== input mediator registered ===== ");
 			statusUpdate.dispatch("===== input mediator registered ===== ");
-			userDataSet.add(setData);	
+		//	userDataSet.add(setData);	
 			balanceSet.add(showBalance);
 			iterationChange.add(updateIteration);
+			userDataLiveSet.add(liveDataReceived);
 			//leaderboardSet.add(updateLeaderBoard);
 			inputView.addEventListener(NumberEvent.BALANCE_UPDATE, updateBalance);//event triggered by steppers
 			inputView.inputPanel.submit.addEventListener(MouseEvent.CLICK, goClicked);
@@ -68,15 +74,22 @@ package view.mediators
 		}
 		
 		override public function onRemove():void{
+			userDataLiveSet.add(liveDataReceived);
 			trace("===== input mediator removed ===== ");
 			statusUpdate.dispatch("===== input mediator removed ===== ");
-			userDataSet.remove(setData);	
+		//	userDataSet.remove(setData);	
+			userDataLiveSet.remove(liveDataReceived);
 			balanceSet.remove(showBalance);
 			iterationChange.remove(updateIteration);
 			//leaderboardSet.remove(updateLeaderBoard);
 			inputView.removeEventListener(NumberEvent.BALANCE_UPDATE, updateBalance);//event triggered by steppers
 			inputView.inputPanel.submit.removeEventListener(MouseEvent.CLICK, goClicked);
 			
+		}
+		private function liveDataReceived( vo:ReceivedDataVO ):void{
+			trace("==== === === === == == = = RECEVIVED VO ");
+			//this fn is used as the userdataset command was not being heard and so a new signal was created 
+			setData(vo);
 		}
 		
 		private function goClicked( m:MouseEvent ):void{

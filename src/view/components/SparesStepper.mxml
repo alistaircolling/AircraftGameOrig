@@ -159,16 +159,6 @@
 				
 			}
 			
-		/* 	override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{
-				
-				graphics.clear();
-				graphics.lineStyle(1, 0xff0000);
-				graphics.drawRect(0,0,unscaledWidth, unscaledHeight);
-				super.updateDisplayList(unscaledWidth, unscaledHeight);
-			} */
-			
-			
-			
 		]]>
 	</fx:Script>
 	<fx:Declarations>

@@ -62,10 +62,14 @@
 				var menuItem:ContextMenuItem = new ContextMenuItem("Quit");
 				menuItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT,quitApp);
 				
+				var fSItem:ContextMenuItem = new ContextMenuItem("Fullscreen");
+				fSItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, toggleFullScreen);
+				
 				var customContextMenu:ContextMenu = new ContextMenu();
 				//hide the Flash menu
 				customContextMenu.hideBuiltInItems();
 				customContextMenu.customItems.push(menuItem);
+				customContextMenu.customItems.push(fSItem);
 				square.contextMenu = customContextMenu;
 				addEventListener(Event.CLOSING, onExiting);
 				addEventListener(Event.ENTER_FRAME, oef);
@@ -131,7 +135,7 @@
 				}
 			}
 			
-			private function toggleFullScreen():void{
+			private function toggleFullScreen( e:ContextMenuEvent = null ):void{
 				
 				if (stage.displayState == StageDisplayState.NORMAL){
 					stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
