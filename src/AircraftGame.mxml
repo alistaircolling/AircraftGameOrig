@@ -256,7 +256,8 @@
 		<s:State name="finalScreen" />
 		<s:State name="exitScreen" />
 	</s:states>
-	<mx:Image source="@Embed('../embed/selex-background.png')" width="1920" height="1080" smoothBitmapContent="true" />
+	<mx:Image id="heliBackground" source="@Embed('../embed/heli-background.png')" width="1920" height="1080" smoothBitmapContent="true" />
+	<mx:Image id="planeBackground" source="@Embed('../embed/selex-background.png')" width="1920" height="1080" smoothBitmapContent="true" />
 	<s:Group id="blackout" >
 		<mx:Canvas width="1920" height="1080" backgroundAlpha=".5" backgroundColor="0x0"/>
 	</s:Group>

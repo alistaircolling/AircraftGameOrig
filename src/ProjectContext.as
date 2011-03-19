@@ -2,6 +2,7 @@ package
 {
 	import controllers.BlackBoxDataReceivedCommand;
 	import controllers.EnterWinnerCommand;
+	import controllers.GameTypeSelectedCommand;
 	import controllers.InitSocketCommand;
 	import controllers.LoadLeaderBoardXML;
 	import controllers.RequestGameIDCommand;
@@ -40,6 +41,8 @@ package
 	import signals.EnterWinner;
 	import signals.ErrorReceived;
 	import signals.GameIDSet;
+	import signals.GameTypeSelected;
+	import signals.GameTypeSet;
 	import signals.GraphDataSet;
 	import signals.InitSocket;
 	import signals.IterationChange;
@@ -53,11 +56,11 @@ package
 	import signals.StageSet;
 	import signals.StartClicked;
 	import signals.StatusUpdate;
-	import signals.UserDataSetLive;
 	import signals.TextSetOnModel;
 	import signals.UpdateBalance;
 	import signals.UpdateWinner;
 	import signals.UserDataSet;
+	import signals.UserDataSetLive;
 	
 	import utils.Logger;
 	
@@ -117,6 +120,7 @@ package
 			injector.mapSingleton(GameIDSet);
 			injector.mapSingleton(CustomSocket);
 			injector.mapSingleton(UserDataSetLive);
+			injector.mapSingleton(GameTypeSet);
 
 			
 			//map signals   -maps signals to commands
@@ -133,6 +137,7 @@ package
 			signalCommandMap.mapSignalClass(UpdateWinner, UpdateWinnerCommand);
 			signalCommandMap.mapSignalClass(RequestGameID, RequestGameIDCommand);
 			signalCommandMap.mapSignalClass(InitSocket, InitSocketCommand);
+			signalCommandMap.mapSignalClass(GameTypeSelected, GameTypeSelectedCommand);
 			
 			
 			//map mediators

@@ -17,6 +17,7 @@ package view.mediators
 	import signals.ChangeState;
 	import signals.ErrorReceived;
 	import signals.GameIDSet;
+	import signals.GameTypeSet;
 	import signals.InitSocket;
 	import signals.LeaderBoardSet;
 	import signals.RequestGameID;
@@ -54,6 +55,8 @@ package view.mediators
 		public var restartGame:RestartGame;
 		[Inject]
 		public var userDataSet:UserDataSet;
+		[Inject]
+		public var gameTypeSet:GameTypeSet;
 		
 		
 		override public function onRegister():void{
@@ -71,10 +74,24 @@ package view.mediators
 			statusUpdate.add(showStatus);
 			gameIDSet.add(setGameID);
 			lBSet.add(leaderBoardSet);
+			gameTypeSet.add(gameTypeSetListener);
 			errorReceived.add(showErrorReceived);
 			requestID.dispatch();
 			initSocket.dispatch();
 			viewComp.addEventListener("restart", restartGameListener);
+		}
+		
+		private function gameTypeSetListener( s:String ):void{
+			switch(s){
+				case "plane":
+					viewComp.heliBackground.visible = false;
+					viewComp.planeBackground.visible = true;
+					break
+				case "heli":
+					viewComp.heliBackground.visible = true;
+					viewComp.planeBackground.visible = false;
+					break
+			}
 		}
 		
 		private function showDebug( vo:ReceivedDataVO ):void{

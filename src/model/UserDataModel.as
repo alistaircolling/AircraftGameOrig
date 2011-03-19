@@ -8,11 +8,12 @@ package model
 	import signals.BalanceSet;
 	import signals.ChangeState;
 	import signals.GameIDSet;
+	import signals.GameTypeSet;
 	import signals.GraphDataSet;
 	import signals.IterationChange;
 	import signals.StageSet;
-	import signals.UserDataSetLive;
 	import signals.UserDataSet;
+	import signals.UserDataSetLive;
 	
 	import spark.components.mediaClasses.VolumeBar;
 	
@@ -34,6 +35,8 @@ package model
 		public var gameIDSet:GameIDSet;
 		[Inject]
 		public var testSignal:UserDataSetLive;
+		[Inject]
+		public var gameTypeSet:GameTypeSet;
 		
 		private var _gameID:Number;
 		
@@ -41,6 +44,8 @@ package model
 		
 		private var _budget:Number;
 		private var _iteration:int;
+		
+		private var _gameType:String = "plane";
 		
 		private var _vo:ReceivedDataVO;
 		private var _stage:int; /* -1 intro, 
@@ -141,6 +146,17 @@ package model
 			_gameID = value;
 			gameIDSet.dispatch(_gameID);
 			
+		}
+
+		public function get gameType():String
+		{
+			return _gameType;
+		}
+
+		public function set gameType(value:String):void
+		{
+			_gameType = value;
+			gameTypeSet.dispatch(_gameType);
 		}
 
 

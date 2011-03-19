@@ -9,6 +9,7 @@ package view.mediators
 	
 	import org.robotlegs.mvcs.Mediator;
 	
+	import signals.GameTypeSelected;
 	import signals.LeaderBoardSet;
 	import signals.LoadXML;
 	import signals.StartClicked;
@@ -31,6 +32,8 @@ package view.mediators
 		public var loadXML:LoadXML;
 		[Inject]
 		public var update:StatusUpdate;
+		[Inject]
+		public var gameTypeSelected:GameTypeSelected;
 		
 		override public function onRegister():void{
 			trace("Intro Mediator registered");
@@ -43,7 +46,8 @@ package view.mediators
 		
 		override public function onRemove():void{
 			
-			introView.startBtn.removeEventListener(MouseEvent.CLICK, buttonClickedListener);
+			introView.planeButton.removeEventListener(MouseEvent.CLICK, planeClicked);
+			introView.heliButton.removeEventListener(MouseEvent.CLICK, heliClicked);
 			//add listener for signal
 			textSetOnModel.add(onModelChanged);
 			leaderBoardSet.add(updateLeaderBoard);
@@ -53,7 +57,8 @@ package view.mediators
 		private function addListeners():void{
 			trace("add intro mediator listeners");
 			
-			introView.startBtn.addEventListener(MouseEvent.CLICK, buttonClickedListener);
+			introView.planeButton.addEventListener(MouseEvent.CLICK, planeClicked);
+			introView.heliButton.addEventListener(MouseEvent.CLICK, heliClicked);
 			
 			//add listener for signal
 			textSetOnModel.add(onModelChanged);
@@ -73,15 +78,17 @@ package view.mediators
 			
 		}
 		
-		private function buttonClickedListener(__m:MouseEvent):void{ 
+		private function planeClicked( m:MouseEvent ):void{
 			
-			//get data from this box
-			
-		//	var __s:String = (viewComponent as IntroView).textA.text 	
-			
-			//send signal
+			gameTypeSelected.dispatch("plane");
 			startClicked.dispatch();
-			
 		}
+		private function heliClicked( m:MouseEvent ):void{
+			
+			gameTypeSelected.dispatch("heli");
+			startClicked.dispatch();
+		}
+		
+	
 	}
 }
