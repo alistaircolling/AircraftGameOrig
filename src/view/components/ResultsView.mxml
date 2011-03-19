@@ -21,7 +21,7 @@
 			import signals.StatusUpdate;
 			
 			private var _iteration:uint;
-			private var _takeOff:Takeoff;
+			private var _planeAnim:Takeoff;
 			//	private var _planes:Planes;
 			[Inject]
 			public var statusUpdate:StatusUpdate;
@@ -48,7 +48,7 @@
 			private function startAnim( t:TimerEvent = null ):void{
 				_animTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, startAnim);
 				_animTimer = null;
-				_takeOff.gotoAndPlay(2);				
+				_planeAnim.gotoAndPlay(2);				
 				
 			}
 			
@@ -76,11 +76,24 @@
 				}
 			}
 			
-			private function addAnimation():void{
+			private function addAnimation(type:String):void{
 				
-				_takeOff = new Takeoff();
-				animHolder.addChild(_takeOff);
-				_takeOff.addEventListener(Event.COMPLETE, animCompleted);
+				//remove previous if it exists
+				while(animHolder.numChildren>0) {
+					animHolder.removeChildAt(0);
+				}
+				switch(s){
+					case "plane":
+					
+						break
+					case "heli":
+					
+						break
+				}
+				
+				_planeAnim = new Takeoff();
+				animHolder.addChild(_planeAnim);
+				_planeAnim.addEventListener(Event.COMPLETE, animCompleted);
 				
 			}
 			
@@ -158,7 +171,7 @@
 
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
-				addAnimation();
+				//addAnimation();
 			}
 			
 			protected function fadeIn_effectStartHandler(event:EffectEvent):void
