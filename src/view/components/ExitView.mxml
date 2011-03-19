@@ -35,7 +35,7 @@
 			</s:VGroup>
 			<mx:Spacer width="0"/>
 		</s:HGroup>
-		<s:VideoDisplay id="vidplayer" height="240" width="500" source="vid.flv" autoPlay="false" bottom="65" left="50"/>
-		<components:ContinueButton id="continueButton" label="" bottom="90" left="50"/>
+		<s:VideoDisplay id="vidplayer" height="240" width="500" source="vid.flv" autoPlay="false" bottom="95" left="50"/>
+		<components:ContinueButton id="continueButton" label="" bottom="50" left="50"/>
 	</s:Group>
 </s:Group>
