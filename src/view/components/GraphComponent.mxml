@@ -34,6 +34,7 @@
 			import mx.events.EffectEvent;
 			import mx.events.FlexEvent;
 			import mx.olap.aggregators.CountAggregator;
+			import mx.utils.NameUtil;
 			
 			import spark.effects.easing.Linear;
 			import spark.primitives.Line;
@@ -63,21 +64,22 @@
 			private var _graphData:GraphResultsVO;
 			public static const FINISHED_ANIMATING:String = "finishedAnimating";
 			
+			private static const MIN_MONTH:Number = -8.1;
+			private static const MAX_MONTH:Number = 8;
+			private static const MIN_PERC:Number = 50;
+			private static const MAX_PERC:Number = 100;
+			
 			
 			private function moveImage():void {
 				if (myMove.isPlaying){
 					myMove.end();//just added
 				} 
-				
-				//	myMove.xBy = 910/36;
 				var moveVal:Number = ((907/72)*(_currentMonth-1))-907;
-				trace("MOVE IMAGE, CURR MONTH:"+_currentMonth+"  XVAL:"+moveVal);
 				myMove.xTo = moveVal;
 				myMove.play();
 			}
 			
 			public function setData( vo:GraphResultsVO ):void{
-				//set the data 
 				_graphData = vo;
 				addValuesToAC(_graphData);
 				
@@ -85,10 +87,7 @@
 			
 			public function showData():void{
 				_vectPos = 0;
-				//update the planes for month 0
-				//updatePlanes(_vectPos); //Dont trigger intiially as the plane vales we dont have for month 0
 				moveImage();
-				
 			}
 			
 			private function drawLine( val:Number ):void{
@@ -103,7 +102,6 @@
 			}
 			
 			private function addValuesToAC( vo:GraphResultsVO ):void{
-				trace("================   ADDING VALUES ====== ");
 				// add the new values to the array cllection then animate from the current position
 				var currArray:Array = [];
 				var endVal:uint = vo.monthTotal.length;//values after this are set to a line  ADDED 1 FOR THE 0 MONTH
@@ -112,8 +110,6 @@
 				var firstDate:Date = new Date();
 				firstDate.setDate(firstDate.getDate()-100);
 				_totalMonths = _counter+endVal+1;//added for the extra 1st month
-				//	trace("counter starting round at:"+_counter);
-//				for (var i:uint = 0; i<=topVal; i++){
 				
 				for (var i:uint = 1; i<=topVal; i++){
 					
@@ -123,6 +119,8 @@
 					}
 					var percentTotal:Number = Number(vo.percentFlown[j-1]);
 					var monthTotal:Number = Number(vo.monthTotal[j-1]);
+					percentTotal = makeInRange(percentTotal, MIN_PERC, MAX_PERC);
+					monthTotal = makeInRange(monthTotal, MIN_MONTH, MAX_MONTH);
 					
 					_usedArray[_counter+j] = {month:_counter+j, percent:percentTotal, monthT:monthTotal};
 				}
@@ -140,6 +138,16 @@
 				columnChart.executeBindings(true);
 			}
 			
+			private function makeInRange( val:Number, min:Number, max:Number):Number{
+				if (val<min) {
+					return min;	
+				}
+				if (val>max) {
+					return max;	
+				}else{
+					return val;
+				}
+			}
 			
 			private function traceAllMonthVals():void{
 				trace("trace all values ------------------------");
@@ -198,7 +206,6 @@
 			}
 			
 			protected function myMove_effectEndHandler(event:EffectEvent):void{
-				trace(">> effect end, curr month:"+_currentMonth);
 				//add the planes at quarters
 				if (_currentMonth%3 == 0){
 					////drawLine( rect.x +910 );
@@ -221,13 +228,9 @@
 			}
 			
 			private function updatePlanes(n:uint):void{
-				//		trace("update planes:"+n);
-				//		trace("---- vectPos:"+_vectPos);
-				trace(" ========= update planes:"+n+"  vector pos:"+_vectPos+" curr month:"+_currentMonth);
 				showPlanesInAir(_inAir[_vectPos]);
 				showPlanesOnGround(_onGround[_vectPos]);
 				_vectPos++;
-				
 			}
 			
 			private function showPlanesInAir( n:uint ):void{

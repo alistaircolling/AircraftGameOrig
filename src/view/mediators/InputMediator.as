@@ -56,7 +56,7 @@ package view.mediators
 		private var _balance:Number;
 		
 		override public function onRegister():void{
-			trace("Input Mediator Registered");
+			trace("===== input mediator registered ===== ");
 			statusUpdate.dispatch("===== input mediator registered ===== ");
 			userDataSet.add(setData);	
 			balanceSet.add(showBalance);
@@ -68,6 +68,7 @@ package view.mediators
 		}
 		
 		override public function onRemove():void{
+			trace("===== input mediator removed ===== ");
 			statusUpdate.dispatch("===== input mediator removed ===== ");
 			userDataSet.remove(setData);	
 			balanceSet.remove(showBalance);

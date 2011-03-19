@@ -54,7 +54,6 @@ package view.mediators
 		}
 		
 		private function finishedAnimating( e:Event):void{
-			trace("finished animating");
 			_animating = false;
 			resultsView.continueBtn.visible = true;
 		}
@@ -97,18 +96,12 @@ package view.mediators
 				changeStateSignal.dispatch(e.state);
 				
 			}else{
-				
 				trace("unable to change sections as animating");
-				
 			}
-			
 		}
 		
 		private function setIteration( n:uint ):void{
-			
 			resultsView.iteration = n;
-			
-			
 		}
 		
 		private function setData( vo:GraphResultsVO ):void{
