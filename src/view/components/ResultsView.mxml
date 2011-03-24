@@ -86,9 +86,13 @@
 				switch(type){
 					case "plane":
 						_currentAnim = new Takeoff();
+						_currentAnim.x = 0;
+						_currentAnim.y = 0;
 						break
 					case "heli":
 						_currentAnim = new HeliTakeoff();
+						_currentAnim.x = 0-(1920/2);
+						_currentAnim.y = 0-(1080/2);
 						break
 				}
 				animHolder.addChild(_currentAnim);
