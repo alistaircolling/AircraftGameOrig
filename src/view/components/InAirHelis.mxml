@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*"
+		 creationComplete="group1_creationCompleteHandler(event)">
 	<fx:Declarations>
 		<s:Fade id="fadeIn" alphaTo="1" duration="300"/>
 		<s:Fade id="fadeOut" alphaFrom="1" alphaTo="0" duration="300"/>
@@ -10,11 +11,15 @@
 	</fx:Declarations> 
 	<fx:Script>
 		<![CDATA[
+			import mx.events.FlexEvent;
+			private var _inAir:InAirHelisClip;
 			
 			public function showPlanes( n:uint ):void{
 				trace("======SHOW IN AIR PLANES:"+n);
-				for (var i:uint = 1; i<=numElements; i++){
-					var im:* = this["p"+i];
+				for (var i:uint = 1; i<=10; i++){
+					//var im:* = this["p"+i];
+					var im:* = _inAir.getChildByName("h"+i);
+					
 					if (i<=n){
 						if(im.alpha <1){
 							showPlane(im, true);
@@ -37,37 +42,16 @@
 				}
 			}
 			
+
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				_inAir = new InAirHelisClip();
+				holder.rawChildren.addChild(_inAir);
+			}
+
 		]]>
 	</fx:Script>
-	<components:InAirPlane1 id="p1" planeImage="@Embed('../embed/SkyPlane1.png')" alpha="0"
-			  x="0" y="114" 
-			 />
-	<components:InAirPlane2 id="p2" planeImage="@Embed('../embed/SkyPlane2.png')" alpha="0"
-			  x="316" y="236"
-			 />
-	<components:InAirPlane3 id="p9" planeImage="@Embed('../embed/SkyPlane3.png')" alpha="0"
-			  x="240" y="124"
-			 />
-	<components:InAirPlane4 id="p3" planeImage="@Embed('../embed/SkyPlane4.png')" alpha="0"
-			  x="160" y="16"
-			 />
-	<components:InAirPlane5 id="p8" planeImage="@Embed('../embed/SkyPlane5.png')" alpha="0"
-			  x="578" y="244"
-			 />
-	<components:InAirPlane6 id="p10" planeImage="@Embed('../embed/SkyPlane6.png')" alpha="0"
-			  x="485" y="105"
-			 />
-	<components:InAirPlane7 id="p4" planeImage="@Embed('../embed/SkyPlane6.png')" alpha="0"
-			  x="396" y="0"
-			 />
-	<components:InAirPlane8 id="p5" planeImage="@Embed('../embed/SkyPlane8.png')" alpha="0"
-			  x="724" y="153"
-			 />
-	<components:InAirPlane9 id="p7" planeImage="@Embed('../embed/SkyPlane9.png')" alpha="0"
-			  x="645" y="39"
-			 />
-	<components:InAirPlane10 id="p6" planeImage="@Embed('../embed/SkyPlane10.png')" alpha="0"
-			  x="851" y="79"
-			 />
+	<mx:Canvas id="holder"/>	
+	
 	
 </s:Group>

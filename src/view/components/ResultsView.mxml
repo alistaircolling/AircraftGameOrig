@@ -22,6 +22,10 @@
 			
 			private var _iteration:uint;
 			private var _currentAnim:MovieClip;
+			
+			private var inAir:*;
+			private var onGround:*;
+			
 			//	private var _planes:Planes;
 			[Inject]
 			public var statusUpdate:StatusUpdate;
@@ -57,6 +61,7 @@
 				if (b) {
 					alph = 1;
 					showSection(mainPanel, true);
+					
 					fadeInPlanes.play([inAir, onGround]);
 				}else{
 					mainPanel.alpha = alph;
@@ -88,15 +93,29 @@
 						_currentAnim = new Takeoff();
 						_currentAnim.x = 0;
 						_currentAnim.y = 0;
+						inAir = inAirPlanes;
+						onGround = onGroundPlanes;
+						
 						break
 					case "heli":
 						_currentAnim = new HeliTakeoff();
 						_currentAnim.x = 0-(1920/2);
 						_currentAnim.y = 0-(1080/2);
+						inAir = inAirHelis;
+						onGround = onGroundHelis;
 						break
 				}
+				
+				inAirPlanes.visible = false;
+				onGroundPlanes.visible = false;
+				inAirHelis.visible = false;
+				onGroundHelis.visible = false;
+				inAir.visible = true;
+				onGround.visible = true;
+				
 				animHolder.addChild(_currentAnim);
 				_currentAnim.addEventListener(Event.COMPLETE, animCompleted);
+				
 			}
 			
 			private function showPanelsWait(t:TimerEvent):void{
@@ -121,9 +140,7 @@
 			}
 			
 			public function showOnGround( n:uint ):void{
-				
 				onGround.showPlanes(n);
-				
 			}
 			
 			protected function continue_clickHandler(event:MouseEvent):void
@@ -201,8 +218,10 @@
 		<s:Fade id="fadeInPlanes" alphaTo="1" duration="2000" effectStart="fadeIn_effectStartHandler(event)" startDelay="1000"/>
 		<s:Fade id="fadeOut"  alphaTo="0" duration="1500" effectEnd="fadeOut_effectEndHandler(event)"/>
 	</fx:Declarations>
-	<components:InAirPlanes id="inAir" x="510" top="20"/>
-	<components:OnGroundPlanes id="onGround" x="110" bottom="-10"/>
+	<components:InAirHelis id="inAirHelis"/>
+	<components:OnGroundHelis id="onGroundHelis"/>
+	<components:InAirPlanes id="inAirPlanes" x="510" top="20"/>
+	<components:OnGroundPlanes id="onGroundPlanes" x="110" bottom="-10"/>
 	<mx:UIComponent id="animHolder" horizontalCenter="0" verticalCenter="0" alpha="1"/>
 	<s:Group id="mainPanel" horizontalCenter="0" verticalCenter="150" width="1148" height="516">
 		<mx:Image source="@Embed('../embed/graph.png')" width="1148" height="516" smoothBitmapContent="true" />

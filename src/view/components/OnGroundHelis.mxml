@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*"
+		 creationComplete="group1_creationCompleteHandler(event)">
 	<fx:Declarations>
 		<s:Fade id="fadeIn" alphaTo="1" duration="300"/>
 		<s:Fade id="fadeOut"  alphaTo="0" duration="300"/>
 	</fx:Declarations> 
 	<fx:Script>
 		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			private var _onGround:HeliGroundClip;
 			
 			public function showPlanes( n:uint ):void{
 				trace("======SHOW ON GROUND PLANES:"+n);
 				for (var i:uint = 0; i<10; i++){
-					var im:GroundPlane = this["p"+i] as GroundPlane;
+					//var im:* = this["p"+i];
+					var im:* = _onGround.getChildByName("p"+i);
 				 	if (i<n){
 						if(im.alpha <1){
 							showPlane(im, true);
@@ -25,7 +30,7 @@
 				}
 			}
 			
-			private function showPlane( pl:GroundPlane, b:Boolean ):void{
+			private function showPlane( pl:*, b:Boolean ):void{
 				if (b){
 					fadeIn.target = pl;
 					fadeIn.play();
@@ -35,31 +40,17 @@
 				}
 			}
 			
+
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				_onGround = new HeliGroundClip();
+				holder.rawChildren.addChild(_onGround);
+				
+			}
+
 		]]>
 	</fx:Script>
-	<components:GroundPlane id="p9" alpha="0"
-			  x="118" y="0" />
-	<components:GroundPlane  id="p8" alpha="0"
-			  x="219" y="21" />
-	<components:GroundPlane  id="p7" alpha="0"
-			  x="313" y="44"/>
-	<components:GroundPlane  id="p6" alpha="0"
-			  x="416" y="65"/>
-	<components:GroundPlane  id="p5" alpha="0"
-			  x="65" y="42"/>
-	<components:GroundPlane  id="p4" alpha="0"
-			  x="167" y="63"/>
-	<components:GroundPlane  id="p3" alpha="0"
-			  x="260" y="87"/>
-	<components:GroundPlane  id="p2" alpha="0"
-			  x="362" y="106"/>
-	<components:GroundPlane  id="p1" alpha="0"
-			  x="0" y="87"/>
-	<components:GroundPlane  id="p0" alpha="0"
-			  x="100" y="108"/>
-	<components:GroundPlane  id="pnon" alpha="0"
-			  x="194" y="130"/>
-	<components:GroundPlane  id="pnon2" alpha="0"
-			  x="297" y="152"/>
+	<mx:Canvas id="holder"/>
+	
 	
 </s:Group>

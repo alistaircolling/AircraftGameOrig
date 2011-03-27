@@ -7,6 +7,8 @@
 		<![CDATA[
 			import flashx.textLayout.conversion.TextConverter;
 			
+			private var _timer:Timer;
+			
 			public function playVideo(b:Boolean):void{
 				if(b){
 					vidplayer.stop();
@@ -14,6 +16,31 @@
 				}else{
 					vidplayer.stop();
 				}
+			}
+			
+			public function userEntered():void{
+				_timer = new Timer(300000, 1);
+				_timer.addEventListener(TimerEvent.TIMER_COMPLETE, noUserInteraction);
+				_timer.start();
+				
+			}
+			
+			public function userLeft():void{
+				killTimer();
+				vidplayer.loop = false;
+				vidplayer.stop();
+			}
+			
+			private function killTimer():void{
+				_timer.stop();
+				_timer.removeEventListener(TimerEvent.TIMER_COMPLETE, noUserInteraction);
+				_timer = null;
+			}
+			
+			private function noUserInteraction():void{
+				killTimer();	
+				vidplayer.loop = true;
+				vidplayer.play();
 			}
 			
 		]]>
@@ -26,8 +53,6 @@
 	
 	<s:Group id="panel" horizontalCenter="0" verticalCenter="60">
 		<mx:Image source="@Embed('../embed/exitPanel.png')" smoothBitmapContent="true" />		
-		<s:RichText id="introText" width="1080" height="80%" x="100" y="150" styleName="panelBody" fontSize="20"
-					textFlow="{TextConverter.importToFlow(htmlTextAsHTML, TextConverter.TEXT_FIELD_HTML_FORMAT)}"/>
 		<s:HGroup x="60" y="60" width="100%">
 			<s:VGroup  width="100%">
 				<mx:Image source="@Embed('../embed/theReality.png')" smoothBitmapContent="true" />
@@ -35,7 +60,7 @@
 			</s:VGroup>
 			<mx:Spacer width="0"/>
 		</s:HGroup>
-		<s:VideoDisplay id="vidplayer" height="240" width="500" source="vid.flv" autoPlay="false" bottom="95" left="50"/>
+		<s:VideoPlayer id="vidplayer" height="380" width="680" source="vid.flv" autoPlay="false" horizontalCenter="0" verticalCenter="0" loop="false"/>
 		<components:ContinueButton id="continueButton" label="" bottom="50" left="50"/>
 	</s:Group>
 </s:Group>

@@ -39,8 +39,8 @@
 			<mx:Spacer width="0"/>
 		</s:HGroup>
 		<s:HGroup left="50" bottom="50">
-				<components:GoButton id="planeButton" label="" />
-				<components:GoButton id="heliButton" label="" />
+				<components:FixedWingButton id="planeButton" label="" />
+				<components:RotaryWingButton id="heliButton" label="" />
 		</s:HGroup>
 		<components:LeaderBoard id="leaderboardIntro" width="262" title="1" height="100%" x="1230" y="60"/>
 		

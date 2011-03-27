@@ -27,6 +27,7 @@ package view.mediators
 		}
 		
 		private function continueClickedListener( m:MouseEvent):void{
+			exitView.userLeft();
 			changeState.dispatch(ChangeState.FINAL_SCREEN);
 		}
 		

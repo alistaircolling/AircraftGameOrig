@@ -189,10 +189,12 @@
 						showSection(lbHolder, false);
 						showSection(blackout, true);
 						exitView.playVideo(false);
+						
+						
 						break
 					
 					case ChangeState.EXIT_SCREEN://has video
-						
+						exitView.userEntered();
 						showSection(exitView, true);
 						exitView.playVideo(true);
 						showSection(finalView, false);
