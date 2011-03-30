@@ -40,6 +40,7 @@ package
 	import signals.DataSubmitted;
 	import signals.EnterWinner;
 	import signals.ErrorReceived;
+	import signals.ForceShowHighlight;
 	import signals.GameIDSet;
 	import signals.GameTypeSelected;
 	import signals.GameTypeSet;
@@ -62,6 +63,7 @@ package
 	import signals.UpdateWinner;
 	import signals.UserDataSet;
 	import signals.UserDataSetLive;
+	import signals.WaitSetByXML;
 	
 	import utils.Logger;
 	
@@ -123,6 +125,8 @@ package
 			injector.mapSingleton(UserDataSetLive);
 			injector.mapSingleton(GameTypeSet);
 			injector.mapSingleton(ShowWinnerHighlight);
+			injector.mapSingleton(WaitSetByXML);
+			injector.mapSingleton(ForceShowHighlight);
 
 			
 			//map signals   -maps signals to commands

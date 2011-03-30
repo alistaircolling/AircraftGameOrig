@@ -16,6 +16,7 @@ package view.mediators
 	
 	import signals.ChangeState;
 	import signals.EnterWinner;
+	import signals.ForceShowHighlight;
 	import signals.GameTypeSet;
 	import signals.LeaderBoardSet;
 	import signals.RequestLeaderBoard;
@@ -52,6 +53,8 @@ package view.mediators
 		public var showWinnerHighlight:ShowWinnerHighlight; 
 		[Inject]
 		public var gameTypeSet:GameTypeSet;
+		[Inject]
+		public var forceHighlight:ForceShowHighlight;
 		
 		private var _boardPosition:int;
 		private var _success:String = "Congratulations, you have made the leader board." +
@@ -66,21 +69,23 @@ package view.mediators
 			finalView.continueBtn.addEventListener(MouseEvent.CLICK, continueClicked);
 			userDataSet.add(setData);
 			leaderBoardSet.add(setLeaderBoard);
+			forceHighlight.add(showWinnerHlight);
 			gameTypeSet.add(onGameTypeSet);
 			requestLeaderBoard.dispatch();
 			finalView.lS1.addEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
 			finalView.lS2.addEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
 			finalView.lS3.addEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
-			showWinnerHighlight.add(showWinnerHlight);
+		//	showWinnerHighlight.add(showWinnerHlight);
 			onGameTypeSet(userModel.gameType);
 		}
 		
 		override public function onRemove():void{
 			
-			showWinnerHighlight.remove(showWinnerHlight);
+		//	showWinnerHighlight.remove(showWinnerHlight);
 			trace("finalview unregistered");
 			finalView.continueBtn.removeEventListener(MouseEvent.CLICK, continueClicked);
 			userDataSet.remove(setData);
+			forceHighlight.remove(showWinnerHlight);
 			gameTypeSet.remove(onGameTypeSet);
 			leaderBoardSet.remove(setLeaderBoard);
 			finalView.lS1.removeEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
@@ -102,9 +107,11 @@ package view.mediators
 		}
 		
 		//triggered when we enter the final screen
-		private function showWinnerHlight():void{
-			
-			letterChangedListener(null, true);
+		public function showWinnerHlight():void{
+			//_boardPosition = -1;//set to force highlight, position not yet calculated
+			if (_boardPosition>-1){//only show if there is a position
+				letterChangedListener(null, true);
+			}
 			
 		}
 		
@@ -175,6 +182,7 @@ package view.mediators
 				
 				if (_boardPosition>-1){
 					showEnterDetails(true);
+					//showWinnerHlight();//force the highlight to show before buttons clicked  NO LONGER USED AS THIS SHOWS TOO EARLY
 					trace(" we have a winner !!!!!  at pos:"+_boardPosition);
 					//dispatch init event to show highlight
 					//letterChangedListener(null, true);

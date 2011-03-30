@@ -8,7 +8,7 @@ package signals
 	{
 		public function UpdateWinner()
 		{
-			super(UserVO, uint, Boolean);
+			super(UserVO, int, Boolean);//changed from int as ws errorring
 		}
 	}
 }

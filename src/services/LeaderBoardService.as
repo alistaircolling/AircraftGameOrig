@@ -77,6 +77,8 @@ package services
 		
 		//used to update the winners list while the user enters their details
 		public function updateWinnersListTemp( vo:UserVO, pos:uint, addToList:Boolean ):void{
+			//added to avoid error
+			//if (pos<0) return;
 			trace("update:"+vo.label+"  pos:"+pos);
 			if (addToList){
 				pos

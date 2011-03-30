@@ -14,6 +14,7 @@ package services
 	import mx.rpc.http.HTTPService;
 	
 	import signals.ErrorReceived;
+	import signals.WaitSetByXML;
 	
 	import utils.DataUtils;
 
@@ -23,6 +24,9 @@ package services
 		public var userModel:UserDataModel;
 		[Inject]
 		public var errorReceived:ErrorReceived;
+		[Inject]
+		public var waitSet:WaitSetByXML;
+		
 		private var _data:String;
 		private var _dataFile:File;
 		private var _gameID:Number;
@@ -61,6 +65,8 @@ package services
 		
 		private function handleServiceResult(s:String):void{
 			trace("initialise xml received");
+			 
+			
 			var xml:XML = new XML(s);
 			var vo:ReceivedDataVO = new ReceivedDataVO();
 			vo.debug = xml.debug=="true";
@@ -88,6 +94,11 @@ package services
 			userModel.iteration = 0;//incremented when the user presses go
 			userModel.budget = Number(xml.currentBudget); //moved from last so spares stepper updates correctly
 			userModel.vo = vo;
+			
+			
+			//wait received
+			var waitMilliseconds:int = Number(xml.waitTime)*1000;
+			waitSet.dispatch(waitMilliseconds);
 			
 		}
 		

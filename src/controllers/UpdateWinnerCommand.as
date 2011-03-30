@@ -10,7 +10,7 @@ package controllers
 	public class UpdateWinnerCommand extends SignalCommand
 	{
 		[Inject]
-		public var position:uint;
+		public var position:int;
 		[Inject]
 		public var userVO:UserVO;
 		[Inject]

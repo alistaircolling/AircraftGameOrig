@@ -15,6 +15,7 @@ package view.mediators
 	import signals.StartClicked;
 	import signals.StatusUpdate;
 	import signals.TextSetOnModel;
+	import signals.WaitSetByXML;
 	
 	import view.components.IntroView;
 	
@@ -34,6 +35,8 @@ package view.mediators
 		public var update:StatusUpdate;
 		[Inject]
 		public var gameTypeSelected:GameTypeSelected;
+		[Inject]
+		public var waitSet:WaitSetByXML;
 		
 		override public function onRegister():void{
 			trace("Intro Mediator registered");
@@ -48,15 +51,18 @@ package view.mediators
 			
 			introView.planeButton.removeEventListener(MouseEvent.CLICK, planeClicked);
 			introView.heliButton.removeEventListener(MouseEvent.CLICK, heliClicked);
+			introView.continueButton.removeEventListener(MouseEvent.CLICK, videoContinueClicked);
 			//add listener for signal
 			textSetOnModel.add(onModelChanged);
 			leaderBoardSet.add(updateLeaderBoard);
+			waitSet.remove(onWaitSet);
 			
 		}
 		
 		private function addListeners():void{
 			trace("add intro mediator listeners");
-			
+			waitSet.add(onWaitSet);
+			introView.continueButton.addEventListener(MouseEvent.CLICK, videoContinueClicked);
 			introView.planeButton.addEventListener(MouseEvent.CLICK, planeClicked);
 			introView.heliButton.addEventListener(MouseEvent.CLICK, heliClicked);
 			
@@ -64,11 +70,18 @@ package view.mediators
 			textSetOnModel.add(onModelChanged);
 			leaderBoardSet.add(updateLeaderBoard);
 		}
-		
+		//milliseconds wait set
+		private function onWaitSet(n:int):void{
+			introView.interactionWait = n;
+			
+		}
+		private function videoContinueClicked( m:MouseEvent ):void{
+			
+			introView.showVideo(false);		
+			introView.startTimer(true);
+		}
 		private function updateLeaderBoard( vo:LeaderBoardVO ):void{
-			
 			introView.leaderboardIntro.dp = vo.winners;
-			
 		}
 		
 		//be sure to pass the corect data type of the signal
@@ -79,14 +92,14 @@ package view.mediators
 		}
 		
 		private function planeClicked( m:MouseEvent ):void{
-			
-			gameTypeSelected.dispatch("plane");
-			startClicked.dispatch();
+				introView.startTimer(false);
+				gameTypeSelected.dispatch("plane");
+				startClicked.dispatch();
 		}
 		private function heliClicked( m:MouseEvent ):void{
-			
-			gameTypeSelected.dispatch("heli");
-			startClicked.dispatch();
+				introView.startTimer(false);
+				gameTypeSelected.dispatch("heli");
+				startClicked.dispatch();
 		}
 		
 	

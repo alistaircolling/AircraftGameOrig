@@ -154,6 +154,7 @@
 						
 						showSection(blackout, false);
 						showSection(introView, true);
+						introView.startTimer(true);//used to track user interaction and show video
 						showSection(inputView, false);
 						showSection(resultsView, false);
 						showSection(lbHolder, false);
@@ -174,9 +175,11 @@
 	
 						exitView.visible = false;
 						exitView.alpha = 0;
-						showSection(resultsView, true);
-						//resultsView.alpha = 1;
-						//resultsView.mouseEnabled = true;
+					//	showSection(resultsView, true);
+						//this is so the planes helis dont fade in
+						resultsView.alpha = 1;
+						resultsView.visible = true;
+						resultsView.mouseEnabled = true;
 						
 						showSection(inputView, false);
 						showSection(lbHolder, true);

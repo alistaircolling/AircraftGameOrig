@@ -8,6 +8,7 @@ package view.mediators
 	import org.robotlegs.mvcs.Mediator;
 	
 	import signals.ChangeState;
+	import signals.ForceShowHighlight;
 	import signals.GameTypeSet;
 	import signals.RestartGame;
 	
@@ -23,6 +24,8 @@ package view.mediators
 		public var gameTypeSet:GameTypeSet;
 		[Inject]
 		public var userModel:UserDataModel;
+		[Inject]
+		public var forceHighlight:ForceShowHighlight;
 		
 		override public function onRegister():void{
 			
@@ -52,6 +55,7 @@ package view.mediators
 		private function continueClickedListener( m:MouseEvent):void{
 			exitView.userLeft();
 			changeState.dispatch(ChangeState.FINAL_SCREEN);
+			forceHighlight.dispatch();
 		}
 		
 		

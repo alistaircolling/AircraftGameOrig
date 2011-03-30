@@ -50,9 +50,6 @@
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
 				vidplayer.fullScreenButton.visible = false;
-			
-			
-				
 			}
 
 		]]>

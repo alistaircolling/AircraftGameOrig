@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group width="1920" height="1080"
-		 xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:fx="http://ns.adobe.com/mxml/2009" creationComplete="group1_creationCompleteHandler(event)"
 		 xmlns:s="library://ns.adobe.com/flex/spark" xmlns:components="view.components.*" xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:skins="view.skins.*">
 	
 	
@@ -12,6 +12,9 @@
 		<![CDATA[
 			import flashx.textLayout.conversion.TextConverter;
 			
+			import mx.events.FlexEvent;
+			private var _timer:Timer;
+			public var interactionWait:uint = 20000;
 			/* override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{
 			graphics.clear();
 			graphics.lineStyle(5, 0xff0000);
@@ -19,6 +22,53 @@
 			
 			super.updateDisplayList(unscaledWidth, unscaledHeight);
 			}  */
+			
+			//triggered when the intero screen shows
+			public function startTimer(b:Boolean):void{
+				
+				if (_timer){
+					_timer.stop();
+					_timer.removeEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete);
+					_timer = null;
+				}
+				
+				if (b){
+					_timer = new Timer(interactionWait, 1);
+					_timer.addEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete);
+					_timer.start();
+				}
+			}
+			
+			private function onTimerComplete(t:TimerEvent):void{
+				startTimer(false);
+				showVideo(true);
+			}
+			
+			public function showVideo(b:Boolean):void{
+				if(b){
+					vidplayer.visible = true;
+					introText.visible = false;
+					continueButton.visible = true;
+					planeButton.visible = false;
+					heliButton.visible = false;
+					vidplayer.stop();
+					vidplayer.play();
+				}else{
+					startTimer(false);
+					planeButton.visible = true;
+					heliButton.visible = true;
+					continueButton.visible = false;
+					vidplayer.stop();
+					vidplayer.visible = false;
+					introText.visible = true;
+					
+				}
+			}
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				vidplayer.fullScreenButton.visible = false;
+			}
+			
 		]]>
 		
 	</fx:Script>
@@ -43,7 +93,10 @@
 				<components:FixedWingButton id="planeButton" label="" />
 				<components:RotaryWingButton id="heliButton" label="" />
 		</s:HGroup>
+		<s:HGroup left="50" bottom="50" gap="30">
+			<components:ContinueButton id="continueButton" label="" visible="false"/>
+		</s:HGroup>
 		<components:LeaderBoard id="leaderboardIntro" width="262" title="1" height="100%" x="1230" y="60"/>
-		
+		<s:VideoPlayer id="vidplayer" visible="false" height="380" width="680" source="vid.flv" autoPlay="false" horizontalCenter="-120" verticalCenter="0" loop="true"/>
 	</s:Group>
 </s:Group>
