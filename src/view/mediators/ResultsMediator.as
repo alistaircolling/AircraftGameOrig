@@ -5,6 +5,8 @@ package view.mediators
 	import events.SocketEvent;
 	
 	import flash.events.Event;
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
 	
 	import model.vo.GraphResultsVO;
 	
@@ -14,6 +16,7 @@ package view.mediators
 	import signals.GameTypeSet;
 	import signals.GraphDataSet;
 	import signals.IterationChange;
+	import signals.ShowWinnerHighlight;
 	import signals.StatusUpdate;
 	
 	import view.components.GraphComponent;
@@ -33,8 +36,11 @@ package view.mediators
 		public var statusUpate:StatusUpdate;
 		[Inject]
 		public var gameTypeSet:GameTypeSet;
+		[Inject]
+		public var showWinnerHighlight:ShowWinnerHighlight; 
 		
 		private var _animating:Boolean;
+		private var _showWinnerTimer:Timer;
 		
 		override public function onRegister():void{
 			
@@ -49,7 +55,7 @@ package view.mediators
 			resultsView.graph.addEventListener(PlanesEvent.IN_AIR, updateInAir);
 			resultsView.graph.addEventListener(PlanesEvent.ON_GROUND, updateOnGround);
 			resultsView.graph.addEventListener(GraphComponent.FINISHED_ANIMATING, finishedAnimating);
-			
+				
 		}
 		
 		private function sockEvent( e:SocketEvent ):void{
@@ -77,10 +83,10 @@ package view.mediators
 			
 			//triggered when going back to the start --  clear  the graph
 			if (s == ChangeState.INTRO_SCREEN){
-				
 				resultsView.graph.reset();
 			}
 		}
+		
 		
 		override public function onRemove():void{
 			statusUpate.dispatch("RESULTS MEDIATOR REMOVEd");
@@ -107,6 +113,18 @@ package view.mediators
 			}else{
 				trace("unable to change sections as animating");
 			}
+			if(e.state == ChangeState.EXIT_SCREEN){
+				_showWinnerTimer = new Timer(3000, 1);
+				_showWinnerTimer.addEventListener(TimerEvent.TIMER_COMPLETE, showWin);
+				_showWinnerTimer.start();
+			}
+		}
+		
+		private function showWin(t:TimerEvent):void{
+			_showWinnerTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, showWin);
+			_showWinnerTimer = null;
+			showWinnerHighlight.dispatch();
+			
 		}
 		
 		private function setIteration( n:uint ):void{

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1920" height="1080" xmlns:components="view.components.*">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1920" height="1080" xmlns:components="view.components.*"
+		 creationComplete="group1_creationCompleteHandler(event)">
 	
 	<fx:Script>
 		<![CDATA[
 			import flashx.textLayout.conversion.TextConverter;
+			
+			import mx.events.FlexEvent;
 			
 			private var _timer:Timer;
 			
@@ -43,6 +46,15 @@
 				vidplayer.play();
 			}
 			
+
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				vidplayer.fullScreenButton.visible = false;
+			
+			
+				
+			}
+
 		]]>
 	</fx:Script>
 	
@@ -52,7 +64,8 @@
 	<mx:Canvas width="1920" height="1080" backgroundAlpha="0" backgroundColor="0x0"/>
 	
 	<s:Group id="panel" horizontalCenter="0" verticalCenter="60">
-		<mx:Image source="@Embed('../embed/exitPanel.png')" smoothBitmapContent="true" />		
+		<mx:Image id="planePanel" source="@Embed('../embed/exitPanel.png')" smoothBitmapContent="true" visible="false"/>		
+		<mx:Image id="heliPanel" source="@Embed('../embed/exitPanel-heli.png')" smoothBitmapContent="true" visible="false" />		
 		<s:HGroup x="60" y="60" width="100%">
 			<s:VGroup  width="100%">
 				<mx:Image source="@Embed('../embed/theReality.png')" smoothBitmapContent="true" />

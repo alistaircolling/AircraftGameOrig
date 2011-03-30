@@ -16,9 +16,11 @@ package view.mediators
 	
 	import signals.ChangeState;
 	import signals.EnterWinner;
+	import signals.GameTypeSet;
 	import signals.LeaderBoardSet;
 	import signals.RequestLeaderBoard;
 	import signals.RestartGame;
+	import signals.ShowWinnerHighlight;
 	import signals.UpdateWinner;
 	import signals.UserDataSet;
 	
@@ -46,6 +48,10 @@ package view.mediators
 		public var updateWinner:UpdateWinner;
 		[Inject]
 		public var restartGame:RestartGame;
+		[Inject]
+		public var showWinnerHighlight:ShowWinnerHighlight; 
+		[Inject]
+		public var gameTypeSet:GameTypeSet;
 		
 		private var _boardPosition:int;
 		private var _success:String = "Congratulations, you have made the leader board." +
@@ -60,21 +66,46 @@ package view.mediators
 			finalView.continueBtn.addEventListener(MouseEvent.CLICK, continueClicked);
 			userDataSet.add(setData);
 			leaderBoardSet.add(setLeaderBoard);
+			gameTypeSet.add(onGameTypeSet);
 			requestLeaderBoard.dispatch();
 			finalView.lS1.addEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
 			finalView.lS2.addEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
 			finalView.lS3.addEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
+			showWinnerHighlight.add(showWinnerHlight);
+			onGameTypeSet(userModel.gameType);
 		}
 		
 		override public function onRemove():void{
 			
+			showWinnerHighlight.remove(showWinnerHlight);
 			trace("finalview unregistered");
 			finalView.continueBtn.removeEventListener(MouseEvent.CLICK, continueClicked);
 			userDataSet.remove(setData);
+			gameTypeSet.remove(onGameTypeSet);
 			leaderBoardSet.remove(setLeaderBoard);
 			finalView.lS1.removeEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
 			finalView.lS2.removeEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
 			finalView.lS3.removeEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
+		}
+		
+		private function onGameTypeSet(s:String):void{
+			switch(s){
+				case "plane":
+					finalView.planePanel.visible = true;
+					finalView.heliPanel.visible = false;
+					break
+				case "heli":
+					finalView.planePanel.visible = false;
+					finalView.heliPanel.visible = true;
+					break
+			}	
+		}
+		
+		//triggered when we enter the final screen
+		private function showWinnerHlight():void{
+			
+			letterChangedListener(null, true);
+			
 		}
 		
 		private function letterChangedListener( e:UpdateLetterEvent  = null, initial:Boolean = false):void{
@@ -146,7 +177,7 @@ package view.mediators
 					showEnterDetails(true);
 					trace(" we have a winner !!!!!  at pos:"+_boardPosition);
 					//dispatch init event to show highlight
-					letterChangedListener(null, true);
+					//letterChangedListener(null, true);
 				}else{
 					showEnterDetails(false);
 				}

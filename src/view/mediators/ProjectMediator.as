@@ -86,10 +86,14 @@ package view.mediators
 				case "plane":
 					viewComp.heliBackground.visible = false;
 					viewComp.planeBackground.visible = true;
+					viewComp.introView.introPanelHeli.visible = false;
+					viewComp.introView.introPanelPlane.visible = true;
 					break
 				case "heli":
 					viewComp.heliBackground.visible = true;
 					viewComp.planeBackground.visible = false;
+					viewComp.introView.introPanelHeli.visible = true;
+					viewComp.introView.introPanelPlane.visible = false;
 					break
 			}
 		}

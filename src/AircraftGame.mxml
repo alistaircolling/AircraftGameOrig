@@ -167,7 +167,7 @@
 						showSection(lbHolder, true);
 						finalView.visible = false;
 						finalView.alpha = 0;
-						setElementIndex(inputView, numElements-2);
+						setElementIndex(inputView, numElements-3);
 						inputView.updateDisplay();
 						break
 					case ChangeState.RESULTS_SCREEN:
@@ -175,6 +175,9 @@
 						exitView.visible = false;
 						exitView.alpha = 0;
 						showSection(resultsView, true);
+						//resultsView.alpha = 1;
+						//resultsView.mouseEnabled = true;
+						
 						showSection(inputView, false);
 						showSection(lbHolder, true);
 						break
@@ -195,6 +198,7 @@
 					
 					case ChangeState.EXIT_SCREEN://has video
 						exitView.userEntered();
+						showSection(blackout, true);
 						showSection(exitView, true);
 						exitView.playVideo(true);
 						showSection(finalView, false);

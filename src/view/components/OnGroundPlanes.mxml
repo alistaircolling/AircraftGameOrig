@@ -23,6 +23,8 @@
 						}
 					} 
 				}
+				perm1.alpha = 1;
+				perm2.alpha = 1;
 			}
 			
 			private function showPlane( pl:GroundPlane, b:Boolean ):void{
@@ -57,9 +59,9 @@
 			  x="0" y="87"/>
 	<components:GroundPlane  id="p0" alpha="0"
 			  x="100" y="108"/>
-	<components:GroundPlane  id="pnon" alpha="0"
+	<components:GroundPlane  id="perm1" alpha="0"
 			  x="194" y="130"/>
-	<components:GroundPlane  id="pnon2" alpha="0"
+	<components:GroundPlane  id="perm2" alpha="0"
 			  x="297" y="152"/>
 	
 </s:Group>

@@ -63,11 +63,9 @@ package view.mediators
 		override public function onRegister():void{
 			trace("===== input mediator registered ===== ");
 			statusUpdate.dispatch("===== input mediator registered ===== ");
-		//	userDataSet.add(setData);	
 			balanceSet.add(showBalance);
 			iterationChange.add(updateIteration);
 			userDataLiveSet.add(liveDataReceived);
-			//leaderboardSet.add(updateLeaderBoard);
 			inputView.addEventListener(NumberEvent.BALANCE_UPDATE, updateBalance);//event triggered by steppers
 			inputView.inputPanel.submit.addEventListener(MouseEvent.CLICK, goClicked);
 			
@@ -77,11 +75,9 @@ package view.mediators
 			userDataLiveSet.add(liveDataReceived);
 			trace("===== input mediator removed ===== ");
 			statusUpdate.dispatch("===== input mediator removed ===== ");
-		//	userDataSet.remove(setData);	
 			userDataLiveSet.remove(liveDataReceived);
 			balanceSet.remove(showBalance);
 			iterationChange.remove(updateIteration);
-			//leaderboardSet.remove(updateLeaderBoard);
 			inputView.removeEventListener(NumberEvent.BALANCE_UPDATE, updateBalance);//event triggered by steppers
 			inputView.inputPanel.submit.removeEventListener(MouseEvent.CLICK, goClicked);
 			
@@ -93,9 +89,7 @@ package view.mediators
 		}
 		
 		private function goClicked( m:MouseEvent ):void{
-			
 			//increase iteration first so it is correct for submission
-			
 			statusUpdate.dispatch("> > > > > go clicked");
 			//return;
 			//create a new VO
@@ -104,6 +98,7 @@ package view.mediators
 			vo.turnaround = inputView.inputPanel.turnaround.currVal.theIndex.toString();
 			vo.reliability = inputView.inputPanel.reliability.currVal.theIndex.toString();
 			vo.spares = (inputView.inputPanel.spares.sparesCurr - inputView.inputPanel.spares.sparesInit).toString();
+			trace("SPARES SUBMITTED:"+vo.spares);
 			var it:uint = userModel.iteration;
 			it++; //avoid updating the iteration on the model directly so a new iteration signal is not sent, this is set by the black box when data is returned anyway
 			vo.iteration = (it).toString();

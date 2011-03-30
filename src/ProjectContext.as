@@ -53,6 +53,7 @@ package
 	import signals.RestartGame;
 	import signals.SettingsUpdated;
 	import signals.SettingsXMLLoaded;
+	import signals.ShowWinnerHighlight;
 	import signals.StageSet;
 	import signals.StartClicked;
 	import signals.StatusUpdate;
@@ -121,6 +122,7 @@ package
 			injector.mapSingleton(CustomSocket);
 			injector.mapSingleton(UserDataSetLive);
 			injector.mapSingleton(GameTypeSet);
+			injector.mapSingleton(ShowWinnerHighlight);
 
 			
 			//map signals   -maps signals to commands
