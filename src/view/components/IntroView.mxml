@@ -12,7 +12,11 @@
 		<![CDATA[
 			import flashx.textLayout.conversion.TextConverter;
 			
+			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
+			import mx.graphics.SolidColor;
+			
+			import spark.primitives.Rect;
 			private var _timer:Timer;
 			public var interactionWait:uint = 20000;
 			/* override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{
@@ -66,7 +70,13 @@
 			}
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
-				vidplayer.fullScreenButton.visible = false;
+				vidplayer.fullScreenButton.enabled = false;
+				
+//				vidplayer.fullScreenButton.graphics.clear();
+//				vidplayer.fullScreenButton.graphics.beginFill(0xffffff);
+//				vidplayer.fullScreenButton.graphics.drawRect(0,0,vidplayer.fullScreenButton.width, vidplayer.fullScreenButton.height);
+//				vidplayer.fullScreenButton.enabled = false;
+				
 			}
 			
 		]]>
@@ -97,6 +107,6 @@
 			<components:ContinueButton id="continueButton" label="" visible="false"/>
 		</s:HGroup>
 		<components:LeaderBoard id="leaderboardIntro" width="262" title="1" height="100%" x="1230" y="60"/>
-		<s:VideoPlayer id="vidplayer" visible="false" height="380" width="680" source="vid.flv" autoPlay="false" horizontalCenter="-120" verticalCenter="0" loop="true"/>
+		<s:VideoPlayer id="vidplayer" visible="false" height="544" width="929"  source="vid.flv" autoPlay="false" horizontalCenter="-120" verticalCenter="0" loop="true"/>
 	</s:Group>
 </s:Group>
