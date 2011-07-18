@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="400" height="300" creationComplete="group1_creationCompleteHandler(event)">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			[Embed(source="../../../embed/music.mp3")]
+			public var soundClass:Class;
+			public var smallSound : Sound;
+			private static const START_VOL:Number = .2;
+			public var vol : Number;;
+			private var newVol:Number;
+			public var trans : SoundTransform;
+			
+			public var chan : SoundChannel = new SoundChannel();
+			
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				vol = START_VOL;
+				smallSound = new soundClass() as Sound;
+				trans = new SoundTransform(START_VOL);
+				chan = smallSound.play(0,0,trans);
+				chan.addEventListener(Event.SOUND_COMPLETE, onSoundComplete);
+			}
+			
+			private function onSoundComplete(e:Event):void{
+				//chan.addEventListener(Event.SOUND_COMPLETE, onSoundComplete);
+				
+				chan = smallSound.play(0,0,trans);
+				
+			}
+			
+			
+			public function setVolume(n:uint):void {
+				newVol = n/100;
+				addEventListener(Event.ENTER_FRAME, fadeVolume);
+				
+			}
+			
+			public function fadeVolume( e:Event ):void{
+				if ( vol>newVol-.01 && vol<newVol+.01){
+					removeEventListener(Event.ENTER_FRAME, fadeVolume);
+				}
+				
+				if (vol<newVol){
+					vol += .01;
+				}
+				if (vol>newVol){
+					vol -= .01;
+				}
+				trace("fading:"+vol);				
+				trans = new SoundTransform(vol);
+				chan.soundTransform = trans;
+				
+			}
+
+		
+
+		]]>
+	</fx:Script>
+</s:Group>

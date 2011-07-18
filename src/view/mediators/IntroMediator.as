@@ -87,7 +87,6 @@ package view.mediators
 		//be sure to pass the corect data type of the signal
 		public function onModelChanged(__s:String):void{
 			
-		//	(viewComponent as IntroView).textA.text = __s;
 			
 		}
 		

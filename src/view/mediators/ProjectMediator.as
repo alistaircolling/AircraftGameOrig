@@ -142,7 +142,6 @@ package view.mediators
 		//be sure to pass the corect data type of 
 		public function onModelChanged(__s:String):void{
 			
-			//mainViewComponent.tIn.text = __s;//update the view
 			
 		}
 		

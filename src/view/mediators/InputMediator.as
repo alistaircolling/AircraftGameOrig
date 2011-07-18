@@ -112,7 +112,6 @@ package view.mediators
 			if (n==1){
 				showTurn();
 			}else{
-				//inputView.inputPanel.turn.text = "(Turn "+n.toString()+" of 3)";
 				_showTurnTimer = new Timer(_showTurnWait, 1);
 				_showTurnTimer.addEventListener(TimerEvent.TIMER_COMPLETE, showTurn);
 				_showTurnTimer.start();
@@ -148,7 +147,6 @@ package view.mediators
 		//user has updated the balance
 		private function updateBalance( n:NumberEvent ):void{
 			
-			//updateBal.dispatch(n.value);  only updates the view component now
 			var currBal:Number = inputView.inputPanel.budget;
 			var newBal:Number = currBal+n.value;
 			

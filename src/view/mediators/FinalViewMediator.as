@@ -75,13 +75,11 @@ package view.mediators
 			finalView.lS1.addEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
 			finalView.lS2.addEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
 			finalView.lS3.addEventListener(UpdateLetterEvent.LETTER_CHANGED, letterChangedListener);
-		//	showWinnerHighlight.add(showWinnerHlight);
 			onGameTypeSet(userModel.gameType);
 		}
 		
 		override public function onRemove():void{
 			
-		//	showWinnerHighlight.remove(showWinnerHlight);
 			trace("finalview unregistered");
 			finalView.continueBtn.removeEventListener(MouseEvent.CLICK, continueClicked);
 			userDataSet.remove(setData);
@@ -108,7 +106,6 @@ package view.mediators
 		
 		//triggered when we enter the final screen
 		public function showWinnerHlight():void{
-			//_boardPosition = -1;//set to force highlight, position not yet calculated
 			if (_boardPosition>-1){//only show if there is a position
 				letterChangedListener(null, true);
 			}
@@ -124,8 +121,6 @@ package view.mediators
 			vo.score = _score;
 			vo.highlight = true;
 			updateWinner.dispatch(vo, _boardPosition, initial);
-			//var element:* = finalView.leaderBoard.list.getChildAt(_boardPosition);
-			//finalView.leaderBoard.list.setChildIndex(element, finalView.leaderBoard.list.numChildren-1);
 		}
 		
 		private function getWinnerName():String{
@@ -182,7 +177,6 @@ package view.mediators
 				
 				if (_boardPosition>-1){
 					showEnterDetails(true);
-					//showWinnerHlight();//force the highlight to show before buttons clicked  NO LONGER USED AS THIS SHOWS TOO EARLY
 					trace(" we have a winner !!!!!  at pos:"+_boardPosition);
 					//dispatch init event to show highlight
 					//letterChangedListener(null, true);
@@ -199,12 +193,9 @@ package view.mediators
 			if(b){
 				finalView.message.text = _success;
 				finalView.enterInitials.visible = true;
-				//		finalView.message.text = "Congratulations, you made the leader board. Please enter you initial below";
-				//	 	finalView.enterName.visible = true;	
 			}else{
 				finalView.message.text = _failure;
 				finalView.enterInitials.visible = false;
-				//	 	finalView.enterName.visible = false;
 			}
 		}
 		

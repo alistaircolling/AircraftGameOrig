@@ -16,6 +16,7 @@ package view.mediators
 	import signals.GameTypeSet;
 	import signals.GraphDataSet;
 	import signals.IterationChange;
+	import signals.MusicVolumeSet;
 	import signals.ShowWinnerHighlight;
 	import signals.StatusUpdate;
 	
@@ -38,6 +39,8 @@ package view.mediators
 		public var gameTypeSet:GameTypeSet;
 		[Inject]
 		public var showWinnerHighlight:ShowWinnerHighlight; 
+		[Inject]
+		public var musicVolSet:MusicVolumeSet; 
 		
 		private var _animating:Boolean;
 		private var _showWinnerTimer:Timer;
@@ -55,7 +58,15 @@ package view.mediators
 			resultsView.graph.addEventListener(PlanesEvent.IN_AIR, updateInAir);
 			resultsView.graph.addEventListener(PlanesEvent.ON_GROUND, updateOnGround);
 			resultsView.graph.addEventListener(GraphComponent.FINISHED_ANIMATING, finishedAnimating);
+			
+			resultsView.addEventListener(ResultsView.ANIM_COMPLETED, animCompleted);
 				
+		}
+		
+		private function animCompleted(e:Event):void{
+			
+			musicVolSet.dispatch(50);
+			
 		}
 		
 		private function sockEvent( e:SocketEvent ):void{
