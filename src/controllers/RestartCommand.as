@@ -27,7 +27,6 @@ package controllers
 			//update the xml file
 			gameIDService.updateID( userModel.gameID );
 			
-			//userModel.iteration = 0;
 			changeState.dispatch(ChangeState.INTRO_SCREEN);
 			
 			

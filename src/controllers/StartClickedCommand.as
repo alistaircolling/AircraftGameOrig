@@ -14,8 +14,6 @@ package controllers
 	public class StartClickedCommand extends SignalCommand
 	{
 	
-		//[Inject]
-		//public var blackBoxService:BlackBoxService;
 		[Inject]
 		public var leaderBoardService:LeaderBoardService;
 		[Inject]
@@ -28,7 +26,6 @@ package controllers
 		override public function execute():void{
 			
 			trace("start clicked command, loading intial XML.....");
-		//	blackBoxService.requestInitialData();
 			leaderBoardService.requestData();
 			initXMLService.loadXML("data/initParams.xml");
 		

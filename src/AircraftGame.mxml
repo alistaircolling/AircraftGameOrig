@@ -4,7 +4,7 @@
 					   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="view.components.*" xmlns:local="*"
 					   addedToStage="windowedapplication1_creationCompleteHandler(event)"
 					   showStatusBar="false"
-					   width="1920" height="1080"
+					   width="1920" height="1080" xmlns:audio="view.audio.*"
 					   >
 	<fx:Style source="AircraftGame.css"/>
 	<fx:Script>
@@ -30,16 +30,9 @@
 			{
 				stage.scaleMode = StageScaleMode.SHOW_ALL;
 				
-				//	stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 				context = new ProjectContext(this, true);
 				updateState(ChangeState.INTRO_SCREEN);
 				addEventListener(KeyboardEvent.KEY_UP, keyHandler);
-				
-				//	leaderBoard.topTitle.styleName = "topTitle";
-				
-				//var sTransform:SoundTransform = new SoundTransform(1,0);
-				//sTransform.volume = 0;
-				//SoundMixer.soundTransform = sTransform;
 				createContextMenu(); 
 			}
 			
@@ -65,11 +58,15 @@
 				var fSItem:ContextMenuItem = new ContextMenuItem("Fullscreen");
 				fSItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, toggleFullScreen);
 				
+				var muteItwm:ContextMenuItem = new ContextMenuItem("Toggle Mute");
+				muteItwm.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, toggleMute);
+				
 				var customContextMenu:ContextMenu = new ContextMenu();
 				//hide the Flash menu
 				customContextMenu.hideBuiltInItems();
 				customContextMenu.customItems.push(menuItem);
 				customContextMenu.customItems.push(fSItem);
+				customContextMenu.customItems.push(muteItwm);
 				square.contextMenu = customContextMenu;
 				addEventListener(Event.CLOSING, onExiting);
 				addEventListener(Event.ENTER_FRAME, oef);
@@ -135,6 +132,12 @@
 				}
 			}
 			
+			private function toggleMute( e:ContextMenuEvent = null ):void{
+				
+				var event:Event = new Event("toggleMute");
+				dispatchEvent(event);
+			}
+			
 			private function toggleFullScreen( e:ContextMenuEvent = null ):void{
 				if (stage.displayState == StageDisplayState.NORMAL){
 					stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
@@ -148,6 +151,26 @@
 				
 				currentState = s;
 				trace("changing state to:"+s);
+				if (!myPanel.parent){
+					trace("!no parent for panel!");
+					//used to re-add panel as it is being removed on state change for some reason  //HACK
+					addElement(myPanel);
+				}
+				if (!music.parent){
+					trace("!no parent for music!");
+					//used to re-add panel as it is being removed on state change for some reason  //HACK
+					addElement(music);
+				}
+				
+				//check music has a listener
+				
+				if (!music.chan.hasEventListener(Event.SOUND_COMPLETE)){
+					music.reAddListener();
+					trace("adding listener for music loop");
+				}
+				
+				trace("MUSIC POS:"+music.chan.position);
+				
 				//add any additional logic here
 				switch(currentState){
 					case ChangeState.INTRO_SCREEN:
@@ -200,6 +223,7 @@
 						break
 					
 					case ChangeState.EXIT_SCREEN://has video
+						
 						exitView.userEntered();
 						showSection(blackout, true);
 						showSection(exitView, true);
@@ -213,10 +237,24 @@
 					default:						
 						break
 				}
+				trace("panel vis:"+myPanel.visible);
+				trace("panel depth:"+myPanel.depth);
+			}
+			
+			
+			private function makeSurePanelDisplays():void{
+				
+				if(!myPanel.parent){
+					
+					
+				}
+				
 			}
 			
 			private function showSection( sect:Group, b:Boolean ):void{
 				trace("SHOW SECTION:"+sect.name+"  yes?:"+b);
+				makeSurePanelDisplays();
+				
 				if(b){
 					fadeIn.target = sect;
 					fadeIn.play();
@@ -251,6 +289,11 @@
 			public function getRandomColor():ColorTransform{
 				return new ColorTransform(Math.random(), Math.random(), Math.random(),1,(Math.random() * 512) - 255, (Math.random() * 512) -255, (Math.random() * 512) - 255, 0);
 			}
+			
+			private function onRemoved(e:Event):void{
+				
+				trace("removed panel!");
+			}
 		]]>
 	</fx:Script>
 	
@@ -284,8 +327,8 @@
 	</s:Group>
 	<s:Button label="show status" x="1800" y="1000" click="button1_clickHandler(event)" visible="false"/>
 	<components:ErrorMessage id="errorMsg" visible="false"/>
-	<mx:Panel id="myPanel" x="1703" y="60" alpha="0" visible="false" /> 
+	<mx:Panel id="myPanel" x="1703" y="60" alpha="0" visible="true" removedFromStage="onRemoved(event)" remove="onRemoved(event)" removed="onRemoved(event)"/> 
 	<s:TextArea id="statusLabel" fontSize="24"  left="5"  height="600" width="1000" includeInLayout="false" visible="false"/>
 	<!-- <s:Group id="myPanel" x="1703" y="60" alpha="0"/> -->
-	
+	<audio:BackgroundMusic id="music"/>
 </s:WindowedApplication>

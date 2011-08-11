@@ -48,19 +48,9 @@ package services
 			var stream:FileStream = new FileStream();
 			stream.open(_dataFile, FileMode.READ);
 			_data = stream.readUTFBytes(stream.bytesAvailable);
-			//statusUpdate.dispatch("data read yet?:"+_data);
 			stream.close();
-			//statusUpdate.dispatch("closed stream: data read yet?:"+_data);
-			
 			handleServiceResult(_data);
-			/*
-			var service:HTTPService = new HTTPService();
-			var responder:mx.rpc.Responder = new Responder(handleServiceResult, handleServiceFault);
-			var token:AsyncToken;
-			service.resultFormat = "e4x";
-			service.url = _xmlFile;
-			token = service.send();
-			token.addResponder(responder);*/
+			
 		}
 		
 		
@@ -78,7 +68,6 @@ package services
 		//used to update the winners list while the user enters their details
 		public function updateWinnersListTemp( vo:UserVO, pos:uint, addToList:Boolean ):void{
 			//added to avoid error
-			//if (pos<0) return;
 			trace("update:"+vo.label+"  pos:"+pos);
 			if (addToList){
 				pos
@@ -87,7 +76,6 @@ package services
 			//first time, remove the item, the
 			var lbVO:LeaderBoardVO = lbModel.vo;
 			lbVO.winners.addItemAt(vo, pos);
-			//lbVO.winners.removeItemAt(pos+1);
 			var remInd:uint = pos+1;//replace the existing one
 			if( addToList ) {
 				remInd = lbVO.winners.length-1;	
@@ -118,7 +106,6 @@ package services
 			var winnersList:XMLList = _xml.user;
 			var vo:LeaderBoardVO = new LeaderBoardVO();
 			var winners:Array = [];
-			//TODO add params here
 			for(var i:uint = 0; i< winnersList.length(); i++){
 				var user:XML = winnersList[i];
 				var userVO:UserVO = new UserVO();
@@ -156,7 +143,6 @@ package services
 			//find out where the new user should be placed
 			var insert:int = returnWinnersPosition(vo);
 			var lBVO:LeaderBoardVO = lbModel.vo;
-			//lBVO.winners.splice( insert, 1, vo );
 			lbModel.vo = lBVO;
 			
 		}

@@ -49,6 +49,7 @@ package
 	import signals.IterationChange;
 	import signals.LeaderBoardSet;
 	import signals.LoadXML;
+	import signals.MusicVolumeSet;
 	import signals.RequestGameID;
 	import signals.RequestLeaderBoard;
 	import signals.RestartGame;
@@ -67,12 +68,14 @@ package
 	
 	import utils.Logger;
 	
+	import view.audio.BackgroundMusic;
 	import view.components.ExitView;
 	import view.components.FinalView;
 	import view.components.InputView;
 	import view.components.IntroView;
 	import view.components.LeaderBoard;
 	import view.components.ResultsView;
+	import view.mediators.BackgroundMusicMediator;
 	import view.mediators.ExitMediator;
 	import view.mediators.FinalViewMediator;
 	import view.mediators.InputMediator;
@@ -127,6 +130,7 @@ package
 			injector.mapSingleton(ShowWinnerHighlight);
 			injector.mapSingleton(WaitSetByXML);
 			injector.mapSingleton(ForceShowHighlight);
+			injector.mapSingleton(MusicVolumeSet);
 
 			
 			//map signals   -maps signals to commands
@@ -154,6 +158,7 @@ package
 			mediatorMap.mapView(ResultsView, ResultsMediator);
 			mediatorMap.mapView(FinalView, FinalViewMediator);
 			mediatorMap.mapView(ExitView, ExitMediator);
+			mediatorMap.mapView(BackgroundMusic, BackgroundMusicMediator);
 			
 			
 			

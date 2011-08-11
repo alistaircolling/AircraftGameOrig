@@ -15,6 +15,8 @@
 			public var vol : Number;;
 			private var newVol:Number;
 			public var trans : SoundTransform;
+			private var _muted:Boolean = false;
+			
 			
 			public var chan : SoundChannel = new SoundChannel();
 			
@@ -25,18 +27,49 @@
 				trans = new SoundTransform(START_VOL);
 				chan = smallSound.play(0,0,trans);
 				chan.addEventListener(Event.SOUND_COMPLETE, onSoundComplete);
+				chan.addEventListener(Event.UNLOAD, onUnload);
+				chan.addEventListener(Event.OPEN, onOpen);
+				
+			}
+			
+			public function onOpen(e:Event):void{
+				trace("open!");
+			}
+			public function onUnload(e:Event):void{
+				trace("unload!");
+			}
+			
+			public function reAddListener():void{
+				chan.addEventListener(Event.SOUND_COMPLETE, onSoundComplete);
+				
 			}
 			
 			private function onSoundComplete(e:Event):void{
 				//chan.addEventListener(Event.SOUND_COMPLETE, onSoundComplete);
-				
+				trace("sound complete================");
 				chan = smallSound.play(0,0,trans);
+				reAddListener();
 				
 			}
 			
 			
-			public function setVolume(n:uint):void {
-				newVol = n/100;
+			public function setVolume(n:int):void {
+				//toggling
+				trace("newvol:"+newVol);
+				if(n<0){
+					_muted =!_muted;
+					
+					if(newVol<=0){
+						newVol = START_VOL;
+					}else{
+						newVol = 0;
+					}
+				}else{
+					if (!_muted){
+					newVol = n/100;
+					}
+				}
+				
 				addEventListener(Event.ENTER_FRAME, fadeVolume);
 				
 			}
@@ -52,7 +85,7 @@
 				if (vol>newVol){
 					vol -= .01;
 				}
-				trace("fading:"+vol);				
+			//	trace("fading:"+vol);				
 				trans = new SoundTransform(vol);
 				chan.soundTransform = trans;
 				

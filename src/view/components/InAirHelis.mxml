@@ -15,9 +15,8 @@
 			private var _inAir:InAirHelisClip;
 			
 			public function showPlanes( n:uint ):void{
-				trace("======SHOW IN AIR PLANES:"+n);
+			//	trace("======SHOW IN AIR PLANES:"+n);
 				for (var i:uint = 1; i<=10; i++){
-					//var im:* = this["p"+i];
 					var im:* = _inAir.getChildByName("h"+i);
 					
 					if (i<=n){

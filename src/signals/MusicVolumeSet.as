@@ -6,7 +6,7 @@ package signals
 	{
 		public function MusicVolumeSet()
 		{
-			super(uint);
+			super(int);
 		}
 	}
 }

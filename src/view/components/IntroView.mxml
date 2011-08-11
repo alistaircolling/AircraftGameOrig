@@ -19,13 +19,6 @@
 			import spark.primitives.Rect;
 			private var _timer:Timer;
 			public var interactionWait:uint = 20000;
-			/* override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{
-			graphics.clear();
-			graphics.lineStyle(5, 0xff0000);
-			graphics.drawRect(0,0,unscaledWidth, unscaledHeight);
-			
-			super.updateDisplayList(unscaledWidth, unscaledHeight);
-			}  */
 			
 			//triggered when the intero screen shows
 			public function startTimer(b:Boolean):void{
@@ -71,11 +64,6 @@
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
 				vidplayer.fullScreenButton.enabled = false;
-				
-//				vidplayer.fullScreenButton.graphics.clear();
-//				vidplayer.fullScreenButton.graphics.beginFill(0xffffff);
-//				vidplayer.fullScreenButton.graphics.drawRect(0,0,vidplayer.fullScreenButton.width, vidplayer.fullScreenButton.height);
-//				vidplayer.fullScreenButton.enabled = false;
 				
 			}
 			

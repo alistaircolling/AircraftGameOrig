@@ -12,7 +12,7 @@
 		<![CDATA[
 			
 			public function showPlanes( n:uint ):void{
-				trace("======SHOW IN AIR PLANES:"+n);
+		//		trace("======SHOW IN AIR PLANES:"+n);
 				for (var i:uint = 1; i<=numElements; i++){
 					var im:* = this["p"+i];
 					if (i<=n){

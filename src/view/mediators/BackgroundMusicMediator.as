@@ -27,11 +27,15 @@ package view.mediators
 		
 		private function onStateChanged( s:String):void{
 			//always set to 20 (is triggered when anim completes)
-				onMusicVolumeSet(20);
+				if (s!=ChangeState.EXIT_SCREEN){
+					onMusicVolumeSet(20);
+				}else{
+					trace("NO change in volume as this is the exit screen");
+				}
 		
 		}
 		
-		private function onMusicVolumeSet( n:uint):void{
+		private function onMusicVolumeSet( n:int):void{
 			
 			backgroundMusic.setVolume(n);
 		}

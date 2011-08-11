@@ -87,10 +87,6 @@ package model
 				
 				changeState.dispatch(ChangeState.ENTER_SCREEN); //
 				
-			}else{
-				
-				//changeState.dispatch(ChangeState.ENTER_SCREEN); //todo remove this as for testing to see if vals are correct
-//				changeState.dispatch(ChangeState.RESULTS_SCREEN); //  WILLBE TRIGGERED WHEN GRAPH RESULTS HAVE BEEN RECEIVED
 			}
 			//dispatch after so the mediator is instantiated
 			userDataSet.dispatch(_vo);
@@ -128,9 +124,11 @@ package model
 
 		public function set graphVO(value:GraphResultsVO):void
 		{
-			_graphVO = value;
 			
+			_graphVO = value;
+		
 			changeState.dispatch(ChangeState.RESULTS_SCREEN);
+			
 			graphDataSet.dispatch(_graphVO);
 			
 			

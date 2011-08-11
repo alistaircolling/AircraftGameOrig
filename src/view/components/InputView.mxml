@@ -13,15 +13,7 @@
 			
 			private var _receivedVO:ReceivedDataVO;
 			
-			
-	/* 		public function setDataX( vo:ReceivedDataVO ):void{
-				
-				_receivedVO = vo;
-				
-				if (_receivedVO.iteration == 1){
-					showData();
-				}
-			} */
+		
 			
 			public function setData( vo:ReceivedDataVO ):void{
 				
@@ -63,14 +55,7 @@
 				inputPanel.nff.currIndex = 0;
 				inputPanel.turnaround.currIndex = 0;
 				inputPanel.reliability.currIndex = 0;
-				//set current values - not needed aas index is returned not the val
-				/* 
-				inputPanel.nff.currVal = vo.nff[0]
-				inputPanel.turnaround.currVal = vo.turnaround[0];
-				inputPanel.reliability.currVal = vo.reliability[0]; */
-				
-				//set the current values
-				//set the currvals so they are not null
+
 				inputPanel.reliability.currVal = _receivedVO.currentReliability;
 				inputPanel.turnaround.currVal = _receivedVO.currentTuranaround;
 				inputPanel.nff.currVal = _receivedVO.currentNFF;
@@ -102,7 +87,6 @@
 			public function updateDisplay():void{
 				
 				budgetIndicator.updateDisplay();
-				//showData();
 			}
 			
 			

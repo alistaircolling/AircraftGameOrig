@@ -23,5 +23,6 @@ package view.sound
 			public function playCoin():void{
 				smallSound.play();
 			}
+			
 		}
 }

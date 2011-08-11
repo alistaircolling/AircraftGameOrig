@@ -1,16 +1,12 @@
 package view.mediators
 {
-	import adobe.utils.CustomActions;
-	
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
-	import model.vo.ErrorVO;
 	import model.vo.LeaderBoardVO;
 	import model.vo.ReceivedDataVO;
 	
 	import mx.collections.ArrayCollection;
-	import mx.controls.Alert;
-	import mx.core.Application;
 	
 	import org.robotlegs.mvcs.Mediator;
 	
@@ -20,6 +16,7 @@ package view.mediators
 	import signals.GameTypeSet;
 	import signals.InitSocket;
 	import signals.LeaderBoardSet;
+	import signals.MusicVolumeSet;
 	import signals.RequestGameID;
 	import signals.RestartGame;
 	import signals.StartClicked;
@@ -57,7 +54,8 @@ package view.mediators
 		public var userDataSet:UserDataSet;
 		[Inject]
 		public var gameTypeSet:GameTypeSet;
-		
+		[Inject]
+		public var musicVolSet:MusicVolumeSet;
 		
 		override public function onRegister():void{
 			trace("Project Mediator registered");
@@ -79,6 +77,14 @@ package view.mediators
 			requestID.dispatch();
 			initSocket.dispatch();
 			viewComp.addEventListener("restart", restartGameListener);
+			viewComp.addEventListener("toggleMute", toggleMuteListener);
+			
+		}
+		
+		private function toggleMuteListener(e:Event):void{
+			
+			musicVolSet.dispatch(-1);
+			
 		}
 		
 		private function gameTypeSetListener( s:String ):void{

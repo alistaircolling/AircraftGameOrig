@@ -67,7 +67,6 @@
 				if (_budget<costInc){
 					up.visible = false;
 					down.visible = false;
-					//down.visible = false;
 				}else{
 					down.visible = true;
 					up.visible = true;
@@ -111,8 +110,6 @@
 				}else{
 					diff = _sparesCurr - value;
 				}
-				
-				//trace("spares diff:"+diff);
 				_sparesCurr = value;
 				valLabel.text = value.toString();
 				//check if this isnt the minimum

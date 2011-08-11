@@ -13,7 +13,6 @@ package controllers
 		[Inject]
 		public var leaderBoard:LeaderBoardService;
 		
-		//todo make this also load initial settings xml if necessary (not initial params)
 		
 		override public function execute():void{
 			leaderBoard.requestData();

@@ -3,9 +3,6 @@ import flash.events.Event;
                                   
 public class CustomEvent extends flash.events.Event {
 	
-   // public static const APP_STATUS:String = "ready"; 
-   // public static const APP_STATUS:String = "fallen	"; 
-  // public static const PHOTOS_LOADED:String = "photosLoaded";
   
 	public var arg:*;
 	public var responseStr:String;

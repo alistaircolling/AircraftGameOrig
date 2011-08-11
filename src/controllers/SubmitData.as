@@ -24,7 +24,6 @@ package controllers
 			
 			statusUpdate.dispatch("submit data command");
 			//add the iteration and game ID
-			//vo.iteration = userModel.iteration.toString();   iteration is set in the input mediator
 			vo.gameID = userModel.gameID.toString();
 			statusUpdate.dispatch("got game ID:"+vo.gameID);
 			

@@ -8,7 +8,6 @@
 			import utils.CustomEvent;
 			protected function group1_clickHandler(event:MouseEvent):void
 			{
-				// TODO add restart signal here
 				trace("restart from error dialog");
 			}
 

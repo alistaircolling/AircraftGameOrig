@@ -28,6 +28,8 @@ package controllers
 		
 		override public function execute():void{
 			
+		
+			
 			//SET THE GRAPH VO FIRST TO AVOID ITERATION SHOWING IN INPUT PANEL
 			
 			//create the graphresult vo
@@ -56,9 +58,11 @@ package controllers
 			graphVO.onGround = onGround;
 			graphVO.percentFlown = pcFlown;
 			
+			
+		
 			//set graph vo
 			userModel.graphVO = graphVO;
-			
+		
 			
 			trace("black box data received command");
 			var vo:ReceivedDataVO = new ReceivedDataVO();
@@ -71,6 +75,7 @@ package controllers
 			
 			vo.lastPercent = graphVO.percentFlown[graphVO.percentFlown.length-1];
 			if (vo.iteration == 3){
+				
 				vo.avAvailability = xml..averageAvailability;
 				vo.finalScore = Number(xml..currentBudget);
 				vo.costPerFHr = Number(xml..costperFH);
@@ -88,10 +93,8 @@ package controllers
 			//set the iteration on the model
 			userModel.iteration = Number(xml..iteration);
 			var theBudget:Number = Number(xml..currentBudget);
-			if (theBudget<0){
-				// theBudget*=-1;
-			}
-			userModel.budget = theBudget;//Number(xml..currentBudget);//set the budget last otherwise it is updated in the intropanel when the vo.spares values are updated
+			
+			userModel.budget = theBudget;
 			
 			
 		}

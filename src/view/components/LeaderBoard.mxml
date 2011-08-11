@@ -30,26 +30,16 @@
                     embedAsCFF="false")]
 			private const MyriadProEmbed:Class;
 			
-			
-			
-			/* 	 override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{
-			graphics.clear();
-			graphics.lineStyle(5, 0xff0000);
-			graphics.drawRect(0,0,unscaledWidth, unscaledHeight);
-			
-			super.updateDisplayList(unscaledWidth, unscaledHeight);
-			}   */
+		
 			
 			protected function list_clickHandler(event:MouseEvent):void
 			{
-				// TODO Auto-generated method stub
 				var t:Number = 10;
 			}
 			
 			
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
-				// TODO Auto-generated method stub
 				list.setStyle("fontFamily", "MyriadPro");
 				showImage(title);
 			}

@@ -5,15 +5,22 @@
 		 creationComplete="group1_creationCompleteHandler(event)">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
-		<s:Move id="coinFall" duration="2000" yBy="2000" perElementOffset="400" startDelay="400" />
+		<s:Move id="coinFall" duration="2000" yBy="2000" perElementOffset="400" startDelay="400" effectEnd="coinFall_effectEndHandler(event)" />
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import com.greensock.TweenMax;
+			
+			import mx.events.EffectEvent;
 			import mx.events.FlexEvent;
 			
 			import utils.StringUtils;
 			
+			import view.sound.CoinSound;
+			
 			private var _budget:Number;
+			
+			public var sound:CoinSound;
 			
 			
 			
@@ -25,18 +32,7 @@
 			public function set budget(value:Number):void
 			{
 				_budget = value;
-				/* if (value>0){
-					positive.visible = true;
-					negative.visible = false;
-					
-				}else{
-					positive.visible = false;					
-					negative.visible = true;					
-				} */
 				showCoins(_budget);
-				
-				
-				
 			}
 			
 			private function showPositiveCurrency(b:Boolean):void{
@@ -58,28 +54,44 @@
 			
 			
 			public function showCoins(n:Number):void{
-				holder.removeAllElements();
-			//	var targets:Array = [];
+				//holder.removeAllElements();
+				while(holder.numChildren>0){
+					holder.removeChildAt(0);
+				}
+				
+				
 				if (n>=2.5){
 					var coins:uint = Math.floor(n/2.5);
 					for (var i:uint = 0; i<coins; i++){
-						var c:Coin = new Coin();
+						/*var c:Coin = new Coin();
 						c.y = -2000 - (i*15);
-						holder.addElement(c);
-				//		targets.push(c);
+						holder.addElement(c);*/
+						var c:CoinSprite = new CoinSprite();
+					//	c.y = -2000 - (i*15);
+						c.y = 0-(i*15);
+						holder.addChild(c);
 					}
-				//	coinFall.play(targets); 
 				}
 			}
 			
 			public function updateDisplay():void{
-				if (holder.numElements>0){
+//				if (holder.numElements>0){
+//					var targets:Array = [];
+//					for (var i:uint = 0; i<holder.numElements; i++){
+//						var c:Coin = holder.getElementAt(i) as Coin;
+//						targets.push(c);
+//					}
+//					coinFall.play(targets);
+//				}
+				if (holder.numChildren>0){
 					var targets:Array = [];
-					for (var i:uint = 0; i<holder.numElements; i++){
-						var c:Coin = holder.getElementAt(i) as Coin;
+					for (var i:uint = 0; i<holder.numChildren; i++){
+						var c:CoinSprite = holder.getChildAt(i) as CoinSprite;
 						targets.push(c);
+						
+						TweenMax.from(c, 2, {y:c.y-2000, delay:i*.4, onComplete:playSound});
 					}
-					coinFall.play(targets);
+				//	coinFall.play(targets);
 				}
 				
 				var budgetString:String = _budget.toString();
@@ -99,12 +111,25 @@
 			
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
+				sound = new CoinSound();
 				
 			}
 			
+			private function playSound():void{
+				
+				sound.playCoin();
+				
+			}
+
+			protected function coinFall_effectEndHandler(event:EffectEvent):void
+			{
+				
+				sound.playCoin();
+			}
+
 		]]>
 	</fx:Script>
-	<s:Group id="holder" horizontalCenter="0" y="-80"/>
+	<mx:UIComponent id="holder" horizontalCenter="0" y="-80" />
 	<s:Group>
 		<mx:Image id="positive" source="@Embed('../embed/positive.png')" smoothBitmapContent="true"  horizontalCenter="0" verticalCenter="0"/>
 		<mx:Image id="negative" source="@Embed('../embed/negative.png')" smoothBitmapContent="true"  horizontalCenter="0" verticalCenter="0"/>

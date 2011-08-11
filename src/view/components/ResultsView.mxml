@@ -18,10 +18,11 @@
 			import mx.events.FlexEvent;
 			
 			import signals.ChangeState;
+			import signals.MusicVolumeSet;
 			import signals.StatusUpdate;
 			
 			private var _iteration:uint;
-			private var _currentAnim:MovieClip;
+			public var _currentAnim:MovieClip;
 			
 			private var inAir:*;
 			private var onGround:*;
@@ -29,6 +30,9 @@
 			//	private var _planes:Planes;
 			[Inject]
 			public var statusUpdate:StatusUpdate;
+			
+			public static const ANIM_COMPLETED:String = "animCompleted";
+			
 			//used to store the graph data until the anim has finished
 			private var _graphResults:GraphResultsVO;
 			
@@ -122,6 +126,8 @@
 				_animTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, startAnim);
 				_animTimer = null;
 				showPanels(true);
+				
+				
 			}
 			
 			private function animCompleted( e:Event ):void{
@@ -129,6 +135,9 @@
 				_animTimer = new Timer(100, 1);
 				_animTimer.addEventListener(TimerEvent.TIMER_COMPLETE, showPanelsWait);
 				_animTimer.start();
+				
+				var e:Event = new Event(ANIM_COMPLETED);
+				dispatchEvent(e);
 			}
 			
 			private function fadeCompleted():void{
@@ -167,7 +176,6 @@
 			public function set iteration(value:uint):void
 			{
 				_iteration = value;
-				//turn.text = "(Turn "+value.toString()+" of 3)"; 
 				showTurn(_iteration);
 				
 				if (_iteration==1){
@@ -190,7 +198,6 @@
 
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
-				//addAnimation();
 			}
 			
 			protected function fadeIn_effectStartHandler(event:EffectEvent):void

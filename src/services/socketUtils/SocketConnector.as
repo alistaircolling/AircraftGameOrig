@@ -15,7 +15,6 @@ import utils.CustomEvent;
 		public const DATA_RECEIVED:String = "dataReceived";
 		public const CONNECTED:String = "connected";
 		public var networkConnection:CustomSocket;
-		//public var messageSender:IEventDispatcher;
 		
 		
 		public function SocketConnector(ipAddress:String, p:Number)

@@ -42,20 +42,16 @@
 			[Bindable]
 			public var turnaroundValues:Vector.<InputObjectVO>;
 			
-			//TODO add function to calculate spares based on the minimum and max value (based on budget)
 			
 			
 			private var _budget:Number;
 			
 			protected function go_clickHandler(event:MouseEvent):void
 			{
-				// TODO Auto-generated method stub
 			}
 			
 			protected function spares_clickHandler(event:MouseEvent):void
 			{
-				//check the maximum isnt over the budget
-				//todo write code to check we are not going over the limit
 			}
 			
 			public function get budget():Number

@@ -21,10 +21,9 @@
 			public var values:Vector.<InputObjectVO>;
 			private var _budget:Number;//used to store the user's current balance so we can check if an incrment can be made
 			
-			public var initVal:InputObjectVO;//used to set teh value at the start of the turn that you cant go below
+			public var initVal:InputObjectVO;//used to set the value at the start of the turn that you cant go below
 			
 			private var _switchDirection:Boolean;
-			//TODO check how values work e.g. what is the value that is displayed in the stepper? if it is the current value is that then duplicated as the expected amount the user will have again and automaticaly deducted from the budget- surely the blackbox would have done this already, if so what should the default setting be on the stepper?
 			
 			private var _currIndex:uint; //used to store the index of the stepper
 			
@@ -71,8 +70,6 @@
 					
 				}
 				
-				//set the index
-				//_currIndex = value.theIndex;  dont updtae the index as it should be set to 0 and is updated on clicks
 			}
 			
 			protected function down_clickHandler(event:MouseEvent):void
@@ -194,7 +191,7 @@
 
 			public function set budget(value:Number):void
 			{
-				_budget = value;//need to check that the index has been updated
+				_budget = value;
 				checkCanShowNextButton();
 			}
 			
@@ -222,14 +219,6 @@
 				
 			}
 
-			
-			/* 	override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{
-			
-			graphics.clear();
-			graphics.lineStyle(1, 0xff0000);
-			graphics.drawRect(0,0,unscaledWidth, unscaledHeight);
-			super.updateDisplayList(unscaledWidth, unscaledHeight);
-			} */
 			
 			
 		]]>

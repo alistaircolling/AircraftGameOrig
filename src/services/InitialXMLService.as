@@ -36,14 +36,6 @@ package services
 		public function loadXML(__s:String=null):void
 		{
 			
-/*			var directory:File = File.documentsDirectory;
-			_dataFile = directory.resolvePath("Selex"+File.separator+"initParams.xml");
-			var stream:FileStream = new FileStream();
-			stream.open(_dataFile, FileMode.READ);
-			*/
-			//load the game id first
-		
-			
 			//load inti params			
 			_data = xmlFile("Selex"+File.separator+"initParams.xml");
 			handleServiceResult(_data);

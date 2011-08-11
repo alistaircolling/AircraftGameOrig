@@ -103,6 +103,7 @@ package view.mediators
 			it++; //avoid updating the iteration on the model directly so a new iteration signal is not sent, this is set by the black box when data is returned anyway
 			vo.iteration = (it).toString();
 			statusUpdate.dispatch("vo created about to be submitted....");
+			
 			dataSubmitted.dispatch(vo);
 		}
 		

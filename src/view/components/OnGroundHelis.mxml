@@ -14,21 +14,18 @@
 			private var _onGround:HeliGroundClip;
 			
 			public function showPlanes( n:uint ):void{
-				trace("======SHOW ON GROUND PLANES:"+n);
+			//	trace("======SHOW ON GROUND PLANES:"+n);
 				for (var i:uint = 0; i<10; i++){
-					//var im:* = this["p"+i];
-					trace("--i---"+i);
+			//		trace("--i---"+i);
 					var im:* = _onGround.getChildByName("p"+i);
 				 	if (i<n){
 						if(im.alpha <1){
 							showPlane(im, true);
 						}
 					}else{
-						trace("checking alpha:"+i+"  alpha:"+im.alpha);
-					//	if (im.alpha>0){
+			//			trace("checking alpha:"+i+"  alpha:"+im.alpha);
 							showPlane(im, false);
-							trace("hiding plane:"+i+"  im:"+im.name);
-					//	}
+			//				trace("hiding plane:"+i+"  im:"+im.name);
 					} 
 				}
 			}

@@ -13,6 +13,7 @@
 		<s:SolidColor id="fill2" color="red" alpha=".5"/>
 		<s:Move id="myMove" easer="{noEase}" 
 				target="{rect}" duration="250" effectEnd="myMove_effectEndHandler(event)" />
+		<!-- duration was 250 -->
 		<s:Power id="noEase"
 				 exponent="1"/> 
 		
@@ -125,7 +126,7 @@
 					_usedArray[_counter+j] = {month:_counter+j, percent:percentTotal, monthT:monthTotal};
 				}
 				
-
+				
 				_inAir = vo.inAir;
 				_onGround = vo.onGround;
 				_vectPos = 0;
@@ -133,7 +134,7 @@
 				chartData.source = _usedArray;		
 				linechart.dataProvider = chartData;
 				linechart.executeBindings(true);
-	
+				
 				columnChart.dataProvider = chartData;
 				columnChart.executeBindings(true);
 			}
@@ -234,13 +235,13 @@
 			}
 			
 			private function showPlanesInAir( n:uint ):void{
-		//		trace("planes in air:"+n);
+				//		trace("planes in air:"+n);
 				var e:PlanesEvent = new PlanesEvent(PlanesEvent.IN_AIR, n);
 				dispatchEvent(e);
 			}
 			
 			private function showPlanesOnGround( n:uint ):void{
-	//			trace("planes on ground:"+n);
+				//			trace("planes on ground:"+n);
 				var e:PlanesEvent = new PlanesEvent(PlanesEvent.ON_GROUND, n);
 				dispatchEvent(e);
 			}
@@ -254,7 +255,7 @@
 	<s:Group id="chart" width="907" height="212" horizontalCenter="0" verticalCenter="5" mask="{rect}" >
 		
 		<mx:LineChart id="linechart" color="0xffffff" height="212" width="907" backgroundElements="{[]}"
-					  showDataTips="true" dataProvider="{chartData}" fill="{fill}" >
+					  showDataTips="true" dataProvider="{chartData}" fill="{fill}" depth="{parent.numChildren-1}">
 			<mx:seriesFilters>
 				<fx:Array/>
 			</mx:seriesFilters>
@@ -265,7 +266,7 @@
 					categoryField="Month" 
 					/>
 			</mx:horizontalAxis>
-
+			
 			<mx:horizontalAxisRenderers>
 				<mx:AxisRenderer axis="{a1}" minorTickPlacement="none" tickPlacement="none" labelGap="0" showLabels="false" showLine="false"/>
 			</mx:horizontalAxisRenderers>
@@ -294,7 +295,7 @@
 		
 		
 		
-	
+		
 		
 		<mx:ColumnChart id="columnChart"
 						backgroundElements="{[]}"
@@ -313,11 +314,11 @@
 			
 			<mx:verticalAxis>
 				<mx:LinearAxis id="yAxis" 
-					baseAtZero="false"
+							   baseAtZero="false"
 							   minimum="-8.1"
 							   maximum="8"
 							   
-							    />
+							   />
 			</mx:verticalAxis>
 			
 			<mx:horizontalAxisRenderers>
@@ -335,7 +336,7 @@
 								 xField="month"
 								 yField="monthT"
 								 fill="{blueGraph}"/>
-			
+				
 			</mx:series>
 			
 			<mx:seriesFilters>
