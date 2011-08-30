@@ -6,6 +6,7 @@
 		 >
 	<fx:Script>
 		<![CDATA[
+			import events.LeverEvent;
 			import events.NumberEvent;
 			
 			[Bindable]
@@ -16,6 +17,8 @@
 			private var _sparesCurr:Number; 
 			private var _sparesInit:Number; //value passed at the start of each turn
 			private var _budget:Number; 
+			
+			public var vidId:uint;
 			
 			//hides both buttons so nothing can be pressed
 			public function disable():void{
@@ -156,12 +159,21 @@
 				
 			}
 			
+			
+			protected function infoButton_clickHandler(event:MouseEvent):void
+			{
+				var e:LeverEvent = new LeverEvent(LeverEvent.CLICKED);
+				e.vidID = vidId;
+				dispatchEvent(e);
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<s:Group width="100%" height="100%" >
+		<components:InformationButton id="infoButton" x="-60" click="infoButton_clickHandler(event)"/>
 		<s:Group x="365" height="100%" y="5" >
 			<s:Label id="valLabel" text="---" styleName="supportPanelCategoryNumber" textAlign="center"  verticalCenter="0" verticalAlign="middle" height="100%" />
 		</s:Group>

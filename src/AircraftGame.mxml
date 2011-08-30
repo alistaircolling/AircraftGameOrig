@@ -39,16 +39,16 @@
 			
 			private function createContextMenu():void{
 				square  = new Sprite();
-				square.graphics.beginFill(0x000000, 0);
-				square.graphics.drawRect(-4,-30,160,160);
+				square.graphics.beginFill(0x000000, 0.4);
+				square.graphics.drawRect(-4,-30,80,80);
 				square.graphics.endFill();
 				
 				var newComponent:UIComponent = new UIComponent();
 				
 				//must set the UI component to wrap the sprite - so set width and height
-				newComponent.width = 100;
-				newComponent.height = 100;
-				newComponent.alpha = 0;
+				newComponent.width = 80;
+				newComponent.height = 60;
+				newComponent.alpha = .5;
 				newComponent.addChild(square);
 				myPanel.addChild(newComponent);
 				
@@ -327,7 +327,7 @@
 	</s:Group>
 	<s:Button label="show status" x="1800" y="1000" click="button1_clickHandler(event)" visible="false"/>
 	<components:ErrorMessage id="errorMsg" visible="false"/>
-	<mx:Panel id="myPanel" x="1703" y="60" alpha="0" visible="true" removedFromStage="onRemoved(event)" remove="onRemoved(event)" removed="onRemoved(event)"/> 
+	<mx:Panel id="myPanel" x="1780"  y="60" alpha="0" visible="true" removedFromStage="onRemoved(event)" remove="onRemoved(event)" removed="onRemoved(event)"/> 
 	<s:TextArea id="statusLabel" fontSize="24"  left="5"  height="600" width="1000" includeInLayout="false" visible="false"/>
 	<!-- <s:Group id="myPanel" x="1703" y="60" alpha="0"/> -->
 	<audio:BackgroundMusic id="music"/>

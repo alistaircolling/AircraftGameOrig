@@ -22,7 +22,9 @@
 			
 			public var sound:CoinSound;
 			
+			private var coinsTimer:Timer;
 			
+			private var coinCounter:uint = 0;
 			
 			public function get budget():Number
 			{
@@ -62,6 +64,7 @@
 				
 				if (n>=2.5){
 					var coins:uint = Math.floor(n/2.5);
+					coinCounter = 0;
 					for (var i:uint = 0; i<coins; i++){
 						/*var c:Coin = new Coin();
 						c.y = -2000 - (i*15);
@@ -69,9 +72,22 @@
 						var c:CoinSprite = new CoinSprite();
 					//	c.y = -2000 - (i*15);
 						c.y = 0-(i*15);
-						holder.addChild(c);
+						//holder.addChild(c);
+						trace("adding coin");
+						var coinMC:CoinMC = new CoinMC();
+						coinMC.y = 0-(i*15);
+						coinMC.x = 0-(coinMC.width*.5);
+						holder.addChild(coinMC);
+						//coinMC.play();
 					}
 				}
+			}
+			
+			private function onCoinsTimer(t:TimerEvent):void{
+				trace("timer");
+				var coin:CoinMC = holder.getChildAt(coinCounter) as CoinMC;
+				coin.gotoAndPlay(2);
+				coinCounter++;
 			}
 			
 			public function updateDisplay():void{
@@ -83,16 +99,30 @@
 //					}
 //					coinFall.play(targets);
 //				}
-				if (holder.numChildren>0){
-					var targets:Array = [];
-					for (var i:uint = 0; i<holder.numChildren; i++){
-						var c:CoinSprite = holder.getChildAt(i) as CoinSprite;
-						targets.push(c);
-						
-						TweenMax.from(c, 2, {y:c.y-2000, delay:i*.4, onComplete:playSound});
-					}
-				//	coinFall.play(targets);
+				if (coinsTimer){
+					coinsTimer.stop();
+					coinsTimer.removeEventListener(TimerEvent.TIMER, onCoinsTimer);
+					coinsTimer= null;
 				}
+				if(holder.numChildren>0){
+					coinsTimer = new Timer(1000, holder.numChildren);
+					coinsTimer.addEventListener(TimerEvent.TIMER, onCoinsTimer);
+					coinsTimer.start();
+				}
+				
+//				if (holder.numChildren>0){
+//					
+//					var targets:Array = [];
+//					for (var i:uint = 0; i<holder.numChildren; i++){
+//						var c:CoinMC = holder.getChildAt(i) as CoinMC;
+//						//targets.push(c);
+//						trace("playing coin");
+//						c.gotoAndPlay(2);
+//						//TweenMax.from(c, 2, {y:c.y-2000, delay:i*.4, onComplete:playSound});
+//						
+//					}
+//				//	coinFall.play(targets);
+//				}
 				
 				var budgetString:String = _budget.toString();
 				var hasMinus:Boolean = StringUtils.hasMinus(budgetString);
@@ -129,7 +159,7 @@
 
 		]]>
 	</fx:Script>
-	<mx:UIComponent id="holder" horizontalCenter="0" y="-80" />
+	<mx:UIComponent id="holder" horizontalCenter="0" y="-2080" />
 	<s:Group>
 		<mx:Image id="positive" source="@Embed('../embed/positive.png')" smoothBitmapContent="true"  horizontalCenter="0" verticalCenter="0"/>
 		<mx:Image id="negative" source="@Embed('../embed/negative.png')" smoothBitmapContent="true"  horizontalCenter="0" verticalCenter="0"/>

@@ -1,5 +1,6 @@
 package view.mediators
 {
+	import events.LeverEvent;
 	import events.NumberEvent;
 	
 	import flash.events.MouseEvent;
@@ -21,9 +22,9 @@ package view.mediators
 	import signals.IterationChange;
 	import signals.LeaderBoardSet;
 	import signals.StatusUpdate;
-	import signals.UserDataSetLive;
 	import signals.UpdateBalance;
 	import signals.UserDataSet;
+	import signals.UserDataSetLive;
 	
 	import view.components.InputPanel;
 	import view.components.InputView;
@@ -68,6 +69,9 @@ package view.mediators
 			userDataLiveSet.add(liveDataReceived);
 			inputView.addEventListener(NumberEvent.BALANCE_UPDATE, updateBalance);//event triggered by steppers
 			inputView.inputPanel.submit.addEventListener(MouseEvent.CLICK, goClicked);
+			inputView.addEventListener(LeverEvent.CLICKED, videoClicked);//event triggered by steppers
+			inputView.addEventListener(LeverEvent.HIDE_VIDEO, hideVideo);//event triggered by steppers
+			
 			
 		}
 		
@@ -78,10 +82,22 @@ package view.mediators
 			userDataLiveSet.remove(liveDataReceived);
 			balanceSet.remove(showBalance);
 			iterationChange.remove(updateIteration);
+			inputView.removeEventListener(LeverEvent.CLICKED, videoClicked);//event triggered by steppers
 			inputView.removeEventListener(NumberEvent.BALANCE_UPDATE, updateBalance);//event triggered by steppers
 			inputView.inputPanel.submit.removeEventListener(MouseEvent.CLICK, goClicked);
+			inputView.removeEventListener(LeverEvent.HIDE_VIDEO, hideVideo);//event triggered by steppers
 			
 		}
+		
+		private function videoClicked(e:LeverEvent):void{
+			trace("vid selected:"+e.vidID);
+			inputView.inputPanel.showVideo(e.vidID);
+		}
+		private function hideVideo(e:LeverEvent):void{
+			trace("vid selected:"+e.vidID);
+			inputView.inputPanel.hideVideo();
+		}
+		
 		private function liveDataReceived( vo:ReceivedDataVO ):void{
 			trace("==== === === === == == = = RECEVIVED VO ");
 			//this fn is used as the userdataset command was not being heard and so a new signal was created 
@@ -91,6 +107,9 @@ package view.mediators
 		private function goClicked( m:MouseEvent ):void{
 			//increase iteration first so it is correct for submission
 			statusUpdate.dispatch("> > > > > go clicked");
+			//stop the video if it has been started
+			inputView.inputPanel.supportVideo.myVid.stop();
+			inputView.inputPanel.hideVideo();
 			//return;
 			//create a new VO
 			var vo:InputVO = new InputVO();

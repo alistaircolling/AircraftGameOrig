@@ -8,6 +8,7 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import events.LeverEvent;
 			import events.NumberEvent;
 			
 			import model.vo.InputObjectVO;
@@ -23,6 +24,7 @@
 			
 			public var initVal:InputObjectVO;//used to set the value at the start of the turn that you cant go below
 			
+			public var vidId:uint;
 			private var _switchDirection:Boolean;
 			
 			private var _currIndex:uint; //used to store the index of the stepper
@@ -221,12 +223,21 @@
 
 			
 			
+
+			protected function infoButton_clickHandler(event:MouseEvent):void
+			{
+				var e:LeverEvent = new LeverEvent(LeverEvent.CLICKED);
+				e.vidID = vidId;
+				dispatchEvent(e);
+			}
+
 		]]>
 		
 		
 		
 	</fx:Script>
 	<s:Group width="100%" verticalCenter="0" height="100%">
+			<components:InformationButton id="infoButton" x="-60" y="3" click="infoButton_clickHandler(event)"/>
 		<s:Group x="365" height="100%" y="5" >
 			<s:Label id="valLabel" text="---" styleName="supportPanelCategoryNumber" textAlign="center" horizontalCenter="0" verticalCenter="0" verticalAlign="middle" />
 		</s:Group>

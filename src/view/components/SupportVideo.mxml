@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="351" height="426" xmlns:skins="view.skins.*" xmlns:components="view.components.*" >
+
+	<fx:Script>
+		<![CDATA[
+			import events.LeverEvent;
+			
+			import view.skins.ArrowButtonSkin;
+			protected function btn_clickHandler(event:MouseEvent):void
+			{
+				trace("close video button clicked");
+				var e:LeverEvent = new LeverEvent(LeverEvent.HIDE_VIDEO);
+				dispatchEvent(e);
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Group top="18">
+		
+	<mx:Image source="@Embed('../embed/videoBackground.png')" smoothBitmapContent="true" />
+		<s:VideoDisplay id="myVid"  height="319" width="319" source="lever1.flv"  autoPlay="false" top="67" left="15"/>
+		
+		<s:Button skinClass="view.skins.ArrowButtonSkin" id="btn" right="13" top="10" width="40" height="40" click="btn_clickHandler(event)" alpha="1" useHandCursor="true" buttonMode="true"/>
+	</s:Group>
+</s:Group>

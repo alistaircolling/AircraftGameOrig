@@ -7,14 +7,18 @@
 	</s:layout>
 	
 	
-	<fx:Script>
+	<fx:Declarations>
 		
-	</fx:Script>
-	
+		<s:Move id="videoShow" duration="1000" yTo="-419" effectEnd="videoShow_effectEndHandler(event)" />
+		<s:Move id="videoHide" duration="1000" yTo="0" effectEnd="videoHide_effectEndHandler(event)"/>
+		
+	</fx:Declarations>
 	
 	<fx:Script>
 		<![CDATA[
 			import model.vo.InputObjectVO;
+			
+			import mx.events.EffectEvent;
 			
 			import utils.StringUtils;
 			
@@ -42,6 +46,7 @@
 			[Bindable]
 			public var turnaroundValues:Vector.<InputObjectVO>;
 			
+			private var vidToPlay:uint;
 			
 			
 			private var _budget:Number;
@@ -98,25 +103,66 @@
 				}
 			}
 			
+			public function showVideo(num:uint):void{
+				vidToPlay = num;
+				videoShow.play([supportVideo]);
+			}
+			public function hideVideo():void{
+				videoHide.play([supportVideo]);
+				supportVideo.myVid.stop();
+			}
 			
+			
+
+			protected function videoShow_effectEndHandler(event:EffectEvent):void
+			{
+				switch(vidToPlay){
+					case 0:
+						supportVideo.myVid.source = "lever1.flv";
+						break
+					case 1:
+						supportVideo.myVid.source = "lever2.flv";
+						break
+					case 2:
+						supportVideo.myVid.source = "lever3.flv";
+						break
+					case 3:
+						supportVideo.myVid.source = "lever4.flv";
+						break
+				}
+				supportVideo.myVid.play();
+				supportVideo.myVid.visible = true;
+			}
+
+
+			protected function videoHide_effectEndHandler(event:EffectEvent):void
+			{
+				// TODO Auto-generated method stub
+				supportVideo.myVid.visible = false;
+			}
+
 		]]>
 	</fx:Script>
-	
 	<s:Group horizontalCenter="0" verticalCenter="0" width="738" >
+		<s:Group id="supportVidGroup" top="8" right="167">
+			<components:SupportVideo id="supportVideo" />
+		</s:Group>
 		<mx:Image source="@Embed('../embed/supportPanel.png')" smoothBitmapContent="true" />
 		
-		<s:Label text="Remaining budget" styleName="supportPanelBudgetCopy"  textAlign="left" left="530" top="70"/>
+		<s:Label text="Remaining budget" styleName="supportPanelBudgetCopy"  textAlign="left" left="580" top="70"/>
 		<s:Group left="535" top="90" >
 			
 			<s:HGroup horizontalCenter="0">
 				<s:Group >
-					<s:Label id="negativeLabel" styleName="supportPanelBudget" text="-" y="-3"/>
+					<s:Label id="negativeLabel" styleName="supportPanelBudget" text="-" y="-3" x="45"/>
 				</s:Group>
 				<!--<mx:Image source="@Embed('../embed/blueCurr30.png')" smoothBitmapContent="true" />-->
 				<s:Group>
-					<mx:Image source="@Embed('../embed/supportBlatt.png')" smoothBitmapContent="true" y="2"/>
+					<mx:Image source="@Embed('../embed/supportBlatt.png')" smoothBitmapContent="true" y="2" x="0"/>
 				</s:Group>
-				<s:Label id="balanceIndicator" text="" styleName="supportPanelBudget"  textAlign="left" />
+				<s:Group>
+					<s:Label id="balanceIndicator" text="" styleName="supportPanelBudget"  textAlign="left" left="5" />
+				</s:Group>
 			</s:HGroup>
 		</s:Group>
 		
@@ -129,14 +175,16 @@
 					<mx:Image id="turn3" source="@Embed('../embed/support3.png')" smoothBitmapContent="true" includeInLayout="false" visible="false"/>
 					<!-- <s:Label id="turn" text="" styleName="supportPanelTitleItalic"/> -->		
 				</s:HGroup>
-				<s:VGroup gap="11" >
-					<mx:Spacer height="35"/>					
-					<components:SparesStepper id="spares" title="Spares" width="623" height="50" />
-					<components:CustomStepper id="reliability" title="Improve Reliability MTBF" unit="Hrs" currVal="{reliablityVal}" values="{reliabilityValues}" width="623" height="50" />
-					<components:CustomStepper id="nff" title="Reduce NFF" unit="%" currVal="{nffVal}" values="{nffValues}" width="623" height="50" />
-					<components:CustomStepper id="turnaround" title="Reduce Repair Turnaround Time" unit="Days" currVal="{turnaroundVal}" values="{turnaroundValues}" width="623" height="50"/>
+				<s:Group left="65">
+				<s:VGroup gap="10" left="54">
+					<mx:Spacer height="29" left="54"/>					
+					<components:SparesStepper id="spares" title="Spares" width="623" height="50" vidId="0"/>
+					<components:CustomStepper id="reliability" title="Improve Reliability MTBF" unit="Hrs" currVal="{reliablityVal}" values="{reliabilityValues}" width="623" height="50" vidId="1"/>
+					<components:CustomStepper id="nff" title="Reduce NFF" unit="%" currVal="{nffVal}" values="{nffValues}" width="623" height="48" vidId="2"/>
+					<components:CustomStepper id="turnaround" title="Reduce Repair Turnaround Time" unit="Days" currVal="{turnaroundVal}" values="{turnaroundValues}" width="623" height="48" vidId="3" />
 					<components:GoButton id="submit"/>
 				</s:VGroup>
+				</s:Group>
 			</s:VGroup>
 			<s:Label id="flownCurr" styleName="supportPanelCategory" text="Current % Flown:" paddingLeft="3" paddingTop="38"/>
 		</s:Group>
