@@ -20,6 +20,8 @@
 			private var _timer:Timer;
 			public var interactionWait:uint = 20000;
 			
+			public static const SHOW_PREVIEW_VIDEO:String = "showPreviewVideo";
+			
 			//triggered when the intero screen shows
 			public function startTimer(b:Boolean):void{
 				
@@ -48,6 +50,7 @@
 					continueButton.visible = true;
 					planeButton.visible = false;
 					heliButton.visible = false;
+					previewVidBtn.visible = false;
 					vidplayer.stop();
 					vidplayer.play();
 				}else{
@@ -58,6 +61,7 @@
 					vidplayer.stop();
 					vidplayer.visible = false;
 					introText.visible = true;
+					previewVidBtn.visible = true;
 					
 				}
 			}
@@ -67,6 +71,14 @@
 				
 			}
 			
+
+			protected function previewVidBtn_clickHandler(event:MouseEvent):void
+			{
+				var e:Event = new Event(SHOW_PREVIEW_VIDEO, true);
+				dispatchEvent(e);
+				startTimer(false);
+			}
+
 		]]>
 		
 	</fx:Script>
@@ -90,6 +102,7 @@
 		<s:HGroup left="50" bottom="50" gap="30">
 				<components:FixedWingButton id="planeButton" label="" />
 				<components:RotaryWingButton id="heliButton" label="" />
+				<s:Button id="previewVidBtn" click="previewVidBtn_clickHandler(event)"/>
 		</s:HGroup>
 		<s:HGroup left="50" bottom="50" gap="30">
 			<components:ContinueButton id="continueButton" label="" visible="false"/>

@@ -26,6 +26,9 @@ package view.mediators
 	
 	import utils.CustomEvent;
 	
+	import view.components.InputPanel;
+	import view.components.IntroView;
+	
 	public class ProjectMediator extends Mediator
 	{
 		[Inject]
@@ -78,6 +81,22 @@ package view.mediators
 			initSocket.dispatch();
 			viewComp.addEventListener("restart", restartGameListener);
 			viewComp.addEventListener("toggleMute", toggleMuteListener);
+			viewComp.addEventListener(IntroView.SHOW_PREVIEW_VIDEO, onShowPreviewVideo);
+			viewComp.closePreviewVid.addEventListener(MouseEvent.CLICK, onClosePreviewVid);
+		}
+		
+		private function onClosePreviewVid(m:MouseEvent):void{
+			trace("close preview vid");
+			viewComp.previewVideo.stop();
+			viewComp.previewVid.visible = false;
+			viewComp.introView.startTimer(true);
+			
+		}
+		
+		private function onShowPreviewVideo(e:Event):void{
+			trace("show preview vid");
+			viewComp.previewVideo.play();
+			viewComp.previewVid.visible = true;
 			
 		}
 		

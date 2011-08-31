@@ -331,4 +331,8 @@
 	<s:TextArea id="statusLabel" fontSize="24"  left="5"  height="600" width="1000" includeInLayout="false" visible="false"/>
 	<!-- <s:Group id="myPanel" x="1703" y="60" alpha="0"/> -->
 	<audio:BackgroundMusic id="music"/>
+	<s:Group id="previewVid" visible="false">
+		<s:VideoPlayer id="previewVideo" width="1920" height="1080" source="previewVid.flv"/>
+		<s:Button id="closePreviewVid" />
+	</s:Group>
 </s:WindowedApplication>
