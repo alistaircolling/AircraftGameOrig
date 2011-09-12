@@ -332,7 +332,7 @@
 	<!-- <s:Group id="myPanel" x="1703" y="60" alpha="0"/> -->
 	<audio:BackgroundMusic id="music"/>
 	<s:Group id="previewVid" visible="false" width="1920" height="1080" >
-		<s:VideoPlayer id="previewVideo" width="1920" height="1080" source="previewVid.flv"/>
+		<s:VideoDisplay id="previewVideo" width="1920" height="1080" source="previewVid.flv"/>
 		<components:ContinueButton id="closePreviewVid" bottom="20" right="40"/>
 	</s:Group>
 </s:WindowedApplication>

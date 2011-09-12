@@ -3,7 +3,7 @@
 						 xmlns:s="library://ns.adobe.com/flex/spark" 
 						 xmlns:mx="library://ns.adobe.com/flex/mx" 
 						 xmlns:components="view.components.*"
-						 skinClass="view.skins.PrevVidSkin>
+						 skinClass="view.skins.PrevVidSkin">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>

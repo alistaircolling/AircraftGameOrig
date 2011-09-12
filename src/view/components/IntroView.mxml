@@ -105,7 +105,7 @@
 				<components:RotaryWingButton id="heliButton" label="" />
 		</s:HGroup>
 		<s:HGroup left="50" bottom="50" gap="30">
-			<components:ContinueButton id="continueButton" label="" visible="false" skinClass=""/>
+			<components:ContinueButton id="continueButton" label="" visible="false" />
 		</s:HGroup>
 		<components:LeaderBoard id="leaderboardIntro" width="262" title="1" height="100%" x="1230" y="60"/>
 		<s:VideoPlayer id="vidplayer" visible="false" height="544" width="929"  source="vid.flv" autoPlay="false" horizontalCenter="-120" verticalCenter="0" loop="true"/>
